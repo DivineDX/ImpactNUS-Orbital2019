@@ -7,7 +7,7 @@ class Bulletin extends Component{
 	render() {
 		return ( //acts as a card list here
 			<div>
-                <h1>Bulletin</h1>
+                <h1 className = 'tc center baskerville fw1 ph3 ph0-l'>Bulletin</h1>
 				{Data.map((data, id) => {
 					return <Card
 							key = {id}

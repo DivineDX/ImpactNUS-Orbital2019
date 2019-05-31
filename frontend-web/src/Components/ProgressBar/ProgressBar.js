@@ -3,7 +3,7 @@ import React from 'react';
 const ProgressBar = () => {
     return ( 
         <div>
-            <p>Progress Bar</p>
+            <p>Progress Bar (WIP)</p>
         </div>
     )
 }
