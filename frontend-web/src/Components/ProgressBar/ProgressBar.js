@@ -1,10 +1,15 @@
 import React from 'react'; 
+import "./ProgressBar.css";
 
-const ProgressBar = () => {
+const test = ({ numSupporters, targetNum }) => { //Destructuring right here
+    }
+
+const ProgressBar = (props) => {
     return ( 
-        <div>
-            <p>Progress Bar (WIP)</p>
-        </div>
+    <div className="meter animate">
+        <span>
+        </span>
+    </div>
     )
 }
 
