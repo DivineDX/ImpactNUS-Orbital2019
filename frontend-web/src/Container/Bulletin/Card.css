@@ -1,0 +1,7 @@
+.container {
+    height: 250px;
+}
+
+.imageContainer {
+    object-fit: cover;
+}
