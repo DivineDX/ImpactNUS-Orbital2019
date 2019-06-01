@@ -9,6 +9,8 @@ const NavBar = () => {
             </a>
             <div className = "flex items-center pa3 fw9">
                 <a className="link dib dim mr3 mr4-ns" href="#0">Bulletin</a>
+                <a className="link dib dim mr3 mr4-ns" href="#0">My Feed</a>
+                <a className="link dib dim mr3 mr4-ns" href="#0">My Dashboard</a>
             </div>
             <div className="wrap">
                 <div className="search">
