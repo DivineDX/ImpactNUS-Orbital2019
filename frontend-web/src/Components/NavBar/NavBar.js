@@ -3,13 +3,12 @@ import "./NavBar.css";
 
 const NavBar = () => {
     return (
-        <nav className="black flex bb bg-red">
+        <nav id="BGColour">
             <a id = "Logo" className="link no-underline flex items-center pa2 br" href="#0">
             DIAGNUS
             </a>
             <div className = "flex items-center pa3 fw9">
-                <a className="link dib dim mr3 mr4-ns" href="#0">Petitions</a>
-                <a className="link dib dim mr3 mr4-ns" href="#0">Campaigns</a>
+                <a className="link dib dim mr3 mr4-ns" href="#0">Bulletin</a>
             </div>
             <div className="wrap">
                 <div className="search">

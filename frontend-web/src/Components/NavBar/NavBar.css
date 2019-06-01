@@ -13,8 +13,15 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+#BGColour {
+  display: inline-flex;
+  background-color: rgb(250, 250, 250);
+  position: fixed;
+  width: 100%;
+}
+
 body{
-  background: #f2f2f2;
+  background: rgb(250, 250, 250)  ;
   font-family: 'Open Sans', sans-serif;
 }
 
