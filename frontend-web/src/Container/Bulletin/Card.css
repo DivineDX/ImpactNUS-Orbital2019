@@ -1,7 +1,16 @@
-.container {
-    height: 250px;
-}
+/* @media screen and (min-width: 30em){
+    .container {
+        height: 375px;
+    }
+} */
 
-.imageContainer {
-    object-fit: cover;
+/* For small screens */
+/* .container {
+    height: 350px;
+} */
+
+@media only screen and (min-width: 768px) {
+    .container {
+        height: 350px;
+    }
 }

@@ -43,8 +43,8 @@ export const Data = [
         description: "Mauris at faucibus ligula. Vestibulum feugiat velit non aliquet euismod. In varius lorem sit amet commodo convallis. Phasellus magna odio, accumsan vitae felis eu, gravida pulvinar ante. Phasellus porttitor purus quis augue consectetur tristique. In massa purus, pharetra vel mattis id, laoreet eget felis. Proin pharetra mauris ligula, ac tempor diam fringilla nec. Integer sit amet leo nec dolor accumsan pulvinar in at felis. In quis orci non arcu semper porta vel id lacus. Proin sollicitudin mauris dolor, nec faucibus nunc blandit nec. Duis nec venenatis diam. Nullam iaculis pretium magna, vitae dignissim massa pharetra non. Vivamus iaculis iaculis tempor. Mauris rutrum pellentesque risus sed interdum. Praesent iaculis bibendum placerat. Integer condimentum eros non turpis placerat semper.",
         organizer: "RC4",
         image: "https://seo-hacker.com/wp-content/uploads/2018/04/Elements-of-a-Viral-Social-Media-Campaign-1024x768.jpg",
-        numSupporters: 150,
-        targetNum: 200,
+        numSupporters: 420,
+        targetNum: 700,
         numLikes: 300,
     },
     {  
@@ -56,7 +56,7 @@ export const Data = [
         organizer: "Glen",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpjT_DHspqCI2JptaUg_L4fXlzHgoasHjIvbFljRckf_U2aVZOuA",
         numSupporters: 150,
-        targetNum: 200,
+        targetNum: 250,
         numLikes: 300,
     },
     {  
@@ -68,7 +68,7 @@ export const Data = [
         organizer: "Jane",
         image: "https://images.jg-cdn.com/image/60d60f4f-13d4-42f0-a96e-152772ed195c.jpg?template=FundraisingPageHeroImageM",
         numSupporters: 150,
-        targetNum: 200,
+        targetNum: 1000,
         numLikes: 300,
     },
 ]

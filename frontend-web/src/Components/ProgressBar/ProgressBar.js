@@ -1,16 +1,21 @@
 import React from 'react'; 
 import "./ProgressBar.css";
+import Filler from './Filler';
 
-const test = ({ numSupporters, targetNum }) => { //Destructuring right here
+const ProgressBar = ({numSupporters, targetNum}) => {
+    let percentage = (numSupporters / targetNum) * 100;
+    if(percentage >= 100) {
+        percentage = 100;
     }
-
-const ProgressBar = (props) => {
     return ( 
-    <div className="meter animate">
-        <span>
-        </span>
-    </div>
-    )
+        // <div className="meter animate">
+        //     <span style = {{width: `${percentage}%`}}></span>
+        // </div>
+
+        <div className = "progress-bar">
+            <Filler percentage = {percentage}/>
+        </div>
+    );
 }
 
 export default ProgressBar;
