@@ -3,7 +3,7 @@ import "./NavBar.css";
 
 const NavBar = () => {
     return (
-        <nav id="BGColour">
+        <nav className = "bb">
             <a id = "Logo" className="link no-underline flex items-center pa2 br" href="#0">
                 DIAGNUS
             </a>

@@ -13,8 +13,10 @@ class App extends Component{
 		return (
 			<div>
 				<NavBar/>
-				<BannerPage/>
-				<Bulletin/>
+				<div className = "body">
+					<BannerPage/>
+					<Bulletin/>
+				</div>
 			</div>
     	);
   }
