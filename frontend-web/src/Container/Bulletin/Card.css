@@ -1,16 +1,41 @@
-/* @media screen and (min-width: 30em){
-    .container {
-        height: 375px;
-    }
-} */
+/* For  */
 
-/* For small screens */
-/* .container {
+.card-container {
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
     height: 350px;
-} */
+}
 
-@media only screen and (min-width: 768px) {
-    .container {
-        height: 350px;
+/* Small/Mobile Screens */
+@media(min-width: 700px) {
+    section {
+        /* Responsive padding - 15% for sides */
+        padding: 0% 15%;
+    }
+    .card-container {
+        height: 400px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .img_wrap {
+        width: 30%;
+        padding-right: 1rem;
+    }
+
+    .text_wrap {
+        width: 70%;
+        padding-left: 1rem;
+    }
+
+    img {
+        height: 300px;
+        width: 30%;
     }
 }
