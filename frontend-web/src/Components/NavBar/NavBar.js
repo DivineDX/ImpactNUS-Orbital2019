@@ -1,5 +1,6 @@
 import React from 'react';
 import "./NavBar.css";
+import LoginModal from "../../Container/Modal/LoginModal";
 
 const NavBar = () => {
     return (
@@ -22,7 +23,7 @@ const NavBar = () => {
                 </div>
             </div>
             <div className="flex-grow pa3 flex items-center ml7">
-                <a id= "Login" className="dib bg-animate hover-bg-orange no-underline pv2 ph4 br-pill ba" href="#0">Login</a>
+                <div id= "Login"><LoginModal/></div>
             </div>
         </nav>
     );

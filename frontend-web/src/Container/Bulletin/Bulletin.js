@@ -3,7 +3,6 @@ import {Data} from '../../Data/Data';
 import Card from './Card';
 
 class Bulletin extends Component{
-
 	render() {
 		return ( //acts as a card list here
 			<div>

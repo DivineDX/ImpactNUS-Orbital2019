@@ -1,25 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Modal from 'react-modal';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import BannerPage from './Components/BannerPage/BannerPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 
-class App extends Component{
+Modal.setAppElement('#root');
 
-	componentDidMount() {
-	}
-
+class App extends Component {
+	
 	render() {
 		return (
 			<div>
 				<NavBar/>
-				<div className = "body">
-					<BannerPage/>
-					<Bulletin/>
+				<div className="body">
+					<BannerPage />
+					<Bulletin />
 				</div>
 			</div>
-    	);
-  }
+		);
+	}
 }
 
 export default App;
