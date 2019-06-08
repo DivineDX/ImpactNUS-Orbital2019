@@ -1,10 +1,10 @@
 import React from 'react';
 import "./NavBar.css";
-import LoginModal from "../../Container/Modal/LoginModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 const NavBar = () => {
     return (
-        <nav className = "bb">
+        <div className = "bb menu">
             <a id = "Logo" className="link no-underline flex items-center pa2 br" href="#0">
                 DIAGNUS
             </a>
@@ -25,7 +25,7 @@ const NavBar = () => {
             <div className="flex-grow pa3 flex items-center ml7">
                 <div id= "Login"><LoginModal/></div>
             </div>
-        </nav>
+        </div>
     );
 }
 

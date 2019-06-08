@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import BannerPage from './Components/BannerPage/BannerPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 
-Modal.setAppElement('#root');
+const adminLogin = { //what we will use to test login
+	username: 'admin',
+	password: '123',
+}
 
 class App extends Component {
-	
+	constructor() {
+		super();
+		this.state = {
+			route: 'home',
+			isSignedIn: false, //default is not signed in
+		}
+	}
 	render() {
 		return (
 			<div>

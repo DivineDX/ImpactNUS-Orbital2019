@@ -17,7 +17,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-nav {
+.menu {
   display: inline-flex;
   background-color: rgb(250, 250, 250);
   position: fixed;
