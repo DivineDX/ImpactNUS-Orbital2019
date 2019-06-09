@@ -4,23 +4,32 @@ import NavBar from './Components/NavBar/NavBar';
 import BannerPage from './Components/BannerPage/BannerPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 
-const adminLogin = { //what we will use to test login
-	username: 'admin',
-	password: '123',
-}
-
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			route: 'home',
-			isSignedIn: false, //default is not signed in
+			route: 'home', //keeps track of where we are on the page
+			isSignedIn: false, //default is false (not signed in)
+			user: '', //user's name
 		}
 	}
+
+	loginUser = (currUser) => {
+		this.setState({isSignedIn: true, user: currUser});
+	}
+
+	signoutUser = () => {
+		this.setState({isSignedIn: false, user: ''}); //empty user
+	}
+
 	render() {
+		const {route, isSignedIn} = this.state;
+		let loginProp = 
+			(isSignedIn) ? this.signoutUser : this.loginUser;
+
 		return (
 			<div>
-				<NavBar/>
+				<NavBar loginProp = {loginProp} isSignedIn = {isSignedIn}/>
 				<div className="body">
 					<BannerPage />
 					<Bulletin />
