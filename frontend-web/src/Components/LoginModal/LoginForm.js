@@ -1,16 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 
-const adminLogin = [ //for testing login. Delete after database is coded
-	{
-        nusID: 'admin',
-        password: '123',
-    }, {
-        nusID: 'dx',
-        password: 'xd123',
-    }
-];
-
 class LoginForm extends React.Component {
     constructor(props) { //takes in loginProp
         super(props);
@@ -29,12 +19,20 @@ class LoginForm extends React.Component {
     }
 
     onSignIn = () => { //modify this after database is coded
-        for (let user of adminLogin) {
-            if(user.nusID === this.state.nusID && user.password === this.state.password){
+        fetch('http://localhost:3001/signin', {
+            method: 'post',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                id: this.state.nusID,
+                password: this.state.password,
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if (data === "Successful Login") {
                 this.props.loginProp(this.state.nusID);
-                break;
             }
-        }
+        })
     }
 
     render() {

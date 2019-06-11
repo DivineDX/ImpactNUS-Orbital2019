@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const userDB = [ //Fake databse for testing login. Delete after NUS OpenID API is added
 	{
@@ -17,7 +19,7 @@ const userDB = [ //Fake databse for testing login. Delete after NUS OpenID API i
 
 //this is a test example. Use postman for interaction!
 app.get('/', (req, res) => {
-    res.send("Get success");
+    res.send(userDB); //sends database of user so that we can verify log in on frontend
 });
 
 app.post('/signin', (req, res) => {
@@ -33,7 +35,8 @@ app.post('/signin', (req, res) => {
     if(!signedIn) { //not signed in
         res.status(400).json('Error logging in');
     }
-})
+});
+
 app.listen(3001); //port number - 3000 is used for our frontend web
 
 /* Planned Features for API

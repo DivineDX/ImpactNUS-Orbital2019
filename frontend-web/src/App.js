@@ -17,6 +17,13 @@ class App extends Component {
 		}
 	}
 
+	//for testing purposes
+	componentDidMount() {
+		fetch("http://localhost:3001")
+			.then(resp => resp.json())
+			.then(console.log);
+	}
+
 	loginUser = (currUser) => {
 		this.setState({ isSignedIn: true, user: currUser });
 	}
