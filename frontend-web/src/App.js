@@ -1,40 +1,51 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
-import BannerPage from './Components/BannerPage/BannerPage';
 import Bulletin from './Container/Bulletin/Bulletin';
+import Dashboard from './Container/Dashboard/Dashboard';
+import Feed from './Container/Feed/Feed';
+import Homepage from './Container/Homepage/Homepage';
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			route: 'home', //keeps track of where we are on the page
 			isSignedIn: false, //default is false (not signed in)
 			user: '', //user's name
 		}
 	}
 
 	loginUser = (currUser) => {
-		this.setState({isSignedIn: true, user: currUser});
+		this.setState({ isSignedIn: true, user: currUser });
 	}
 
 	signoutUser = () => {
-		this.setState({isSignedIn: false, user: ''}); //empty user
+		this.setState({ isSignedIn: false, user: '' }); //empty user
 	}
 
 	render() {
-		const {route, isSignedIn} = this.state;
-		let loginProp = 
+		const isSignedIn = this.state.isSignedIn;
+		let loginProp =
 			(isSignedIn) ? this.signoutUser : this.loginUser;
 
 		return (
-			<div>
-				<NavBar loginProp = {loginProp} isSignedIn = {isSignedIn}/>
-				<div className="body">
-					<BannerPage />
-					<Bulletin />
+			<Router>
+				<div>
+					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
+					<div className="body">
+						{/* <BannerPage />
+						<Bulletin />						 */}
+						<Switch>
+							<Route path="/" exact component={Homepage} />
+							<Route path="/bulletin" component={Bulletin} />
+							<Route path="/dashboard" component={Dashboard} />
+							<Route path="/feed" component={Feed} />
+						</Switch>
+					</div>
 				</div>
-			</div>
+			</Router>
 		);
 	}
 }
