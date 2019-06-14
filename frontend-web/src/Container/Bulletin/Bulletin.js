@@ -11,15 +11,16 @@ class Bulletin extends Component{
 					return <Card
 							key = {id}
 							type = {data.type}
-							date_started = {data.date_started}
-							header = {data.header}
 							title = {data.title}
-							description = {data.description}
+							recipient = {data.recipient}
 							organizer = {data.organizer}
+							anonymity = {data.anonymity}
+							date_started = {data.date_started}
+							description = {data.description}
 							image = {data.image}
-							numSupporters = {data.numSupporters}
 							targetNum = {data.targetNum}
-							numLikes = {data.numLikes}							
+							numSupporters = {data.numSupporters}
+							numFollowing = {data.numFollowing}							
 							/>
 				})}
 			</div>

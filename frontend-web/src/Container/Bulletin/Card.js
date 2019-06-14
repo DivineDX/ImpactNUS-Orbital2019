@@ -2,12 +2,19 @@ import React from 'react';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
 import './Card.css';
 
-const Card = ({ key, type, date_started, header, title, description, organizer, image, numSupporters, targetNum, numLikes }) => { //Destructuring right here
+const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => { //Destructuring
     let footer = '';
     if (type === 'petition') {
         footer = numSupporters + " Signed | Target: " + targetNum;
     } else { //campaign
         footer = numSupporters + " Supported | Target: " + targetNum;
+    }
+
+    let displayedOrganizer = '';
+    if (anonymity) {
+        displayedOrganizer = "Anonymous";
+    } else{
+        displayedOrganizer = organizer;
     }
 
     return (
@@ -42,12 +49,12 @@ const Card = ({ key, type, date_started, header, title, description, organizer, 
                         </div>
                         <div className="text_wrap">
                             <h1 className="">{title}</h1>
-                            <p className="i">{header}</p>
+                            <p className="i">{recipient}</p>
                             <p className="">
                                 {description}
                             </p>
                             <p className="b">
-                                By {organizer}
+                                By {displayedOrganizer}
                             </p>
                             <ProgressBar numSupporters = {numSupporters} targetNum = {targetNum}/>
                             <p>{footer}</p>

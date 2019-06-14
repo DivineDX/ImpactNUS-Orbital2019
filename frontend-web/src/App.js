@@ -42,8 +42,6 @@ class App extends Component {
 				<div>
 					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
 					<div className="body">
-						{/* <BannerPage />
-						<Bulletin />						 */}
 						<Switch>
 							<Route path="/" exact component={Homepage} />
 							<Route path="/bulletin" component={Bulletin} />
