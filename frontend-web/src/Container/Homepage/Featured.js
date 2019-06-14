@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Data} from '../../Data/Data';
-import Card from './Card';
+import Card from '../Bulletin/Card';
 
-class Bulletin extends Component{
+class Featured extends Component{
 	render() {
 		return (	 //acts as a card list here
 			<div>
-                <h1 className = "bb b--black-10 w-70 pt4 tc center baskerville fw5"> Discover Petitions and Campaigns</h1>
+                <h1 className = 'bb b--black-10 w-70 pt4 tc center baskerville fw5'>Featured</h1>
 				{Data.map((data, id) => {
 					return <Card
 							key = {id}
@@ -28,4 +28,4 @@ class Bulletin extends Component{
   }
 }
 
-export default Bulletin;
+export default Featured;

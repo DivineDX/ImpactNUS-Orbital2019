@@ -1,3 +1,4 @@
 .banner {
-    height: 20rem;
+    height: 60rem;
+    background: linear-gradient(to right, rgb(0, 196, 242), rgb(62, 242, 100));
 }

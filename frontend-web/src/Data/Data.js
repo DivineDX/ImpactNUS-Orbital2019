@@ -24,7 +24,7 @@ export const Data = [
         title: "Petition to install more recycling bins in hostels",
         recipient: "Petition to Office of Student Affairs",
         organizer: "De Xun",
-        anoymity: true,
+        anonymity: true,
         date_started: new Date(2019, 5, 30),
         date_end: new Date (2019, 10, 30),
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ultricies ante, vitae molestie libero. In id cursus felis. Sed imperdiet vehicula ex, eget venenatis augue. Integer ornare, tellus non.",
