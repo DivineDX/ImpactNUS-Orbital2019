@@ -12,18 +12,27 @@ const BannerPage2 = () => {
                 DIAGNUS was created for the purpose of...
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat
             </p>
-            <div className = "ph-3 mt5 flex flex-row-ns flex-column items-center justify-between">
-                <div>
-                    <Icon name='gavel' size='huge' />
-                    <h3>Decide on your cause</h3>
+            <div className = "ph-3 mt5-ns flex flex-row-ns justify-between-ns flex-column items-center">
+                <div className = 'mh2 pv4 pv0-ns mh0-ns'>
+                    <Icon name='gavel' size='huge'/>
+                    <h3>Decide The Cause</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat
+                    </p>
                 </div>
-                <div>
-                    <Icon name='rss' size='huge' />
-                    <h3>Raise the support</h3>
+                <div className = 'mh2 pv4 pv0-ns mh0-ns'>
+                    <Icon name='rss' size='huge'/>
+                    <h3>Raise The Support</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat
+                    </p>
                 </div>
-                <div>
+                <div className = 'mh2 pv4 pv0-ns mh0-ns'> 
                     <Icon name = 'winner' size ='huge'/>
-                    <h3>Induce the change</h3>
+                    <h3>Make Your Mark</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat
+                    </p>
                 </div>
             </div>
         </article>

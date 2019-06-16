@@ -10,7 +10,7 @@ img {
     height: 350px;
 }
 
-/* Small/Mobile Screens */
+/* Large Screens */
 @media(min-width: 700px) {
     section {
         /* Responsive padding - 15% for sides */
