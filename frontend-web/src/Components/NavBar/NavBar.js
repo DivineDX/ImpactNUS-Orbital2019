@@ -4,7 +4,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import { Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-const NavBar = ({ loginProp, isSignedIn }) => {
+const NavBar = ({ loginProp, isSignedIn }) => {    
     return (
         <div className="bb menu">
             <Link to="/" className="link no-underline flex items-center pa2 br">
@@ -24,13 +24,10 @@ const NavBar = ({ loginProp, isSignedIn }) => {
                 </Link>
 
             </div>
-            <div className="wrap">
-                <div className="search">
-                    <input type="text" className="searchTerm" placeholder="Search" />
-                    <button type="submit" className="searchButton">
-                        <img id="SearchButton" src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-square/512/Button_15-512.png" alt="search button" />
-                        <i className="fa fa-search"></i>
-                    </button>
+            <div className="right item wrap">
+                <div className="ui action input search">
+                    <input type="text" placeholder="Search..." />
+                    <button type="submit" className="ui button go">Go</button>
                 </div>
             </div>
             <div className="flex-grow pa3 flex items-center ml7">
@@ -40,10 +37,12 @@ const NavBar = ({ loginProp, isSignedIn }) => {
                         : <Button onClick={() => loginProp()}>Sign Out</Button> //onClick, will run the signOutUser as defined in App.js
                     }
                 </div>
-
             </div>
         </div>
     );
 }
 
+
 export default NavBar;
+
+

@@ -7,6 +7,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 
+.gen{
+  display: inline-flex;
+}
+
 #Logo {
     font-family: 'Orbitron';
     font-size: 25px;
@@ -31,50 +35,55 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
-.search {
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid grey;
-  border-right: none;
-  padding: 5px;
-  height: 36px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: grey;
-}
-
-.searchTerm:focus{
-  color: grey;
-}
-
-.searchButton {
-  width: 36px;
-  height: 36px;
-  border: 1px solid grey;
-  background: grey;
-  border-radius: 0 5px 5px 0;
-  padding: 0;
-}
-
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 20%;
   position: absolute;
-  top: 7px;
-  left: 68%;
+  top: 6px;
+  left: 74%;
+}
+
+.search {
+  position: absolute;
+}
+
+.search input {
+  height: 35.4px;
+}
+
+.go {
+  height: 35.4px;
 }
 
 #Login {
-    position: absolute;
-    left: 90%
+  display: inline-flex;  
+  position: absolute;
+  left: 92%;
 }
 
-#SearchButton {
-    height: 35px;
-    width: 30px;
-}
+@media only screen and (max-width: 620px) {
+  #Logo {
+    font-size: 13px;
+  }
+
+  .menu {
+    font-size: 0.8em;
+  }
+
+  .wrap {
+    padding: 0; 
+    top: 15px;
+    left: 55%;
+  }
+
+  .go {
+    width: 50px;
+  }
+
+  .search input {
+    width: 70px;
+  }
+
+  #Login {
+    left: 82%;
+  }
+}  
