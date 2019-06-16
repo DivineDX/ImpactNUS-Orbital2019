@@ -7,6 +7,7 @@ import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
 import Homepage from './Container/Homepage/Homepage';
+import StartForm from './Container/StartForm/StartForm';
 
 class App extends Component {
 	constructor() {
@@ -21,7 +22,7 @@ class App extends Component {
 	componentDidMount() {
 		fetch("http://localhost:3001")
 			.then(resp => resp.json())
-			.then(console.log);
+			.then();
 	}
 
 	loginUser = (currUser) => {
@@ -43,10 +44,11 @@ class App extends Component {
 					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact component={Homepage} />
+							<Route path="/" exact render = {(props) => <Homepage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
 							<Route path="/bulletin" component={Bulletin} />
 							<Route path="/dashboard" component={Dashboard} />
 							<Route path="/feed" component={Feed} />
+							<Route path = "/startform" component = {StartForm} />
 						</Switch>
 					</div>
 				</div>

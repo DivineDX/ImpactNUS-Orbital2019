@@ -4,12 +4,14 @@ import Featured from './Featured';
 import BannerPage2 from '../../Components/BannerPage2/BannerPage2';
 
 class Homepage extends Component {
+
     render() {
+        const {isSignedIn, loginUser} = this.props; //destructuring
         return ( //acts as a card list here
             <div>
-                <BannerPage />
+                <BannerPage isSignedIn = {isSignedIn} loginUser = {loginUser}/>
                 <BannerPage2/>
-                <Featured />
+                <Featured/>
             </div>
         );
     }

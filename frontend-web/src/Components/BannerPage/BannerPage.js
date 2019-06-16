@@ -1,7 +1,10 @@
 import React from 'react';
 import "./BannerPage.css";
+import ButtonModal from "./ButtonModals";
+import { Link } from 'react-router-dom';
 
-const BannerPage = () => {
+const BannerPage = ({ isSignedIn, loginUser }) => {
+    console.log("Loginprop", loginUser);
     return (
         <article className="banner center ph3 ph5-ns tc br2 pv5 white flex flex-column justify-center">
             <h1 className="fw9 f1 f-headline-ns lh-title mt0 mb3">
@@ -14,14 +17,20 @@ const BannerPage = () => {
                 Mobilize your peers and Make a difference now
             </p>
             <div>
-                <a className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3"
-                    href="#0">
-                    Start Petition
-                </a>
-                <a className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib"
-                    href="#0">
-                    Start Campaign
-                </a>
+                {isSignedIn === false
+                    ? <div>
+                        <ButtonModal loginProp={loginUser} buttonWord={"Start Petition"} />
+                        <ButtonModal loginProp={loginUser} buttonWord={"Start Campaign"} />
+                    </div>
+                    : <div>
+                        <Link to="/startform" className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                            Start Petition
+                        </Link>
+                        <Link to="/startform" className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                            Start Campaign
+                        </Link>
+                    </div>
+                }
             </div>
         </article>
     );

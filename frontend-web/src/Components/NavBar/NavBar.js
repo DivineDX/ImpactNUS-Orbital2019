@@ -36,7 +36,7 @@ const NavBar = ({ loginProp, isSignedIn }) => {
             <div className="flex-grow pa3 flex items-center ml7">
                 <div id="Login">
                     {isSignedIn === false //conditional
-                        ? <LoginModal loginProp={loginProp} /> //loginUser function
+                        ? <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
                         : <Button onClick={() => loginProp()}>Sign Out</Button> //onClick, will run the signOutUser as defined in App.js
                     }
                 </div>
