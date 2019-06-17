@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
+import Footer from './Components/Footer/Footer';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
@@ -51,6 +52,7 @@ class App extends Component {
 							<Route path = "/startform" component = {StartForm} />
 						</Switch>
 					</div>
+					<Footer/>
 				</div>
 			</Router>
 		);

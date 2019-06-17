@@ -16,6 +16,8 @@
 .headerWord {
   font-size: 1.2em;
   padding: 0;
+  border: none;
+  padding: none;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -36,14 +38,4 @@
 
 button {
   height: 35px;
-}
-
-/* #Login {
-  display: flex;
-  position: relative;
-  top: 10%;
-} */
-
-.login {
-  height: 100px;  
 }

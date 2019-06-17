@@ -40,7 +40,7 @@ class NavBar extends Component {
         </Menu.Item>
         </div>
         <Menu.Menu position='right'>
-            <Menu.Item position='right'>
+            <Menu.Item>
                 <Input action={{ type: 'submit', content: 'Go' }} placeholder='Search...' />
             </Menu.Item>
           <Menu.Item>
