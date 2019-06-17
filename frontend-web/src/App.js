@@ -7,6 +7,11 @@ import Footer from './Components/Footer/Footer';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
+import About from './Container/About/About';
+import HowItWorks from './Container/HowItWorks/HowItWorks';
+import GitHubb from './Container/GitHubb/GitHubb';
+import FAQ from './Container/FAQ/FAQ';
+import ContactUs from './Container/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
 import StartForm from './Container/StartForm/StartForm';
 
@@ -50,6 +55,11 @@ class App extends Component {
 							<Route path="/dashboard" component={Dashboard} />
 							<Route path="/feed" component={Feed} />
 							<Route path = "/startform" component = {StartForm} />
+							<Route path = "/about" component={About} />
+							<Route path = "/howitworks" component={HowItWorks} />
+							<Route path = "/githubb" component={GitHubb} />
+							<Route path = "/faq" component={FAQ} />
+							<Route path = "/contactus" component={ContactUs} />
 						</Switch>
 					</div>
 					<Footer/>
