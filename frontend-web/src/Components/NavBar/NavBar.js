@@ -14,7 +14,7 @@ class NavBar extends Component {
     const {loginProp, isSignedIn} = this.props
 
     return (
-    <Menu stackable>
+    <Menu borderless stackable>
         <Menu.Item>
             <Link to="/" className="link no-underline flex items-center pa2 br">
                 <div id="Logo">
@@ -22,7 +22,7 @@ class NavBar extends Component {
                 </div>
             </Link>
         </Menu.Item>
-        <div className="flex items-center pa3 fw9 headerWord">
+        <div className=" dib flex items-center pa9 fw9 headerWord">
         <Menu.Item name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
             <Link to="/bulletin">
                     <div className="link dib dim mr3 mr4-ns">Bulletin</div>
@@ -30,18 +30,18 @@ class NavBar extends Component {
         </Menu.Item>
         <Menu.Item name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
             <Link to="/feed">
-                    <div className="link dib dim mr3 mr4-ns">My Feed</div>
+                    <div className="link dib dim mr3 mr4-ns">Feed</div>
             </Link>
         </Menu.Item>
         <Menu.Item name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
             <Link to="/dashboard">
-                    <div className="link dib dim mr3 mr4-ns">My Dashboard</div>
+                    <div className="link dib dim mr3 mr4-ns">Dashboard</div>
             </Link>
         </Menu.Item>
         </div>
-        <Menu.Menu position='right'>
+        <Menu.Menu position='right' className='alignment'>
             <Menu.Item>
-                <Input action={{ type: 'submit', content: 'Go' }} placeholder='Search...' />
+                <Input action={{ type: 'submit', content: 'Go' }} placeholder='Search...'/> 
             </Menu.Item>
           <Menu.Item>
             <div>
