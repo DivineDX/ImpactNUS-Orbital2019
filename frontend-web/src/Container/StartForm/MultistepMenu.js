@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import { Icon, Menu } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Icon, Step } from 'semantic-ui-react'
 
 export default class MultistepMenu extends Component {
-    state = {}
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
+    constructor(props) {
+        super(props);
+        this.state = {
+            step1_Completed: '',
+            step2_Completed: '',
+            step3_Completed: '',
+        }
     }
-
     render() {
-        const { activeItem } = this.state
-
         return (
-            <Menu compact icon='labeled'>
+            /*<Menu compact icon='labeled'>
                 <Menu.Item
-                    name='1' //Choose petition or campaign, select title
+                    name='1'
                     active={activeItem === '1'}
                     onClick={this.handleItemClick}
                 >
@@ -39,7 +39,28 @@ export default class MultistepMenu extends Component {
                     <Icon name='keyboard' />
                     DESCRIBE
                 </Menu.Item>
-            </Menu>
-        )
+            </Menu> */
+            
+            <Step.Group >
+                <Step active>
+                    <Icon name='pencil alternate' />
+                    <Step.Content>
+                        <Step.Title>State</Step.Title>
+                    </Step.Content>
+                </Step>
+                <Step >
+                    <Icon name='tasks' />
+                    <Step.Content>
+                        <Step.Title>Specify</Step.Title>
+                    </Step.Content>
+                </Step>
+                <Step >
+                    <Icon name='keyboard' />
+                    <Step.Content>
+                        <Step.Title>Describe</Step.Title>
+                    </Step.Content>
+                </Step>
+            </Step.Group>
+        );
     }
 }

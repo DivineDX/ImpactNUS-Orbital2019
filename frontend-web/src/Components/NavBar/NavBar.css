@@ -20,23 +20,9 @@
   width: 150px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-/* .menu {
-  display: inline-flex;
-  background-color: rgb(250, 250, 250);
+.ui.menu {
+  margin: 0;
   position: fixed;
-  top: 0;
   width: 100%;
   z-index: 1;
-} */
-
- body{
-  background: rgb(250, 250, 250)  ;
-  font-family: 'Open Sans', sans-serif;
-}
-
-button {
-  height: 35px;
-  cursor: pointer;
 }
