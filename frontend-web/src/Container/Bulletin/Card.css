@@ -10,6 +10,12 @@ img {
     height: 350px;
 }
 
+.readmore {
+    text-decoration: underline;
+    color: red;
+    cursor: pointer;
+}
+
 /* Large Screens */
 @media(min-width: 700px) {
     section {

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import "./Footer.css";
 
 class Footer extends Component {
-  state = { activeItem: '1' }
+  state = { activeItem: 'none' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -12,7 +11,7 @@ class Footer extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu borderless className="alignment">
+      <Menu borderless size='mini' position='left'>
         <Menu.Item name='About' active={activeItem === 'About'} onClick={this.handleItemClick}>
             <Link to="/about">
                 <span className="link dib dim mr3 mr4-ns">About</span>

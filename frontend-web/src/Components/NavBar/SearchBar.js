@@ -1,0 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const SearchBar = () => {
+    return (
+        <div class="right item">
+            <div class="ui action input">
+            <input type="text" placeholder="Search..." />
+            <button type="submit" class="ui button">Go
+            </button>
+            </div>
+        </div>
+    )
+}
+
+
+export default SearchBar;

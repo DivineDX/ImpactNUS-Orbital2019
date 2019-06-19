@@ -1,5 +1,6 @@
 import React from 'react';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => { //Destructuring
@@ -29,6 +30,11 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <p className="i">{recipient}</p>
                             <p className="">
                                 {description}
+                                <text> </text>
+                                <Link to="/"> 
+                                {/* to add links to indiv page  */}
+                                <text className='readmore'> Read more </text>
+                                </Link>
                             </p>
                             <p className="b">
                                 By {displayedOrganizer}
