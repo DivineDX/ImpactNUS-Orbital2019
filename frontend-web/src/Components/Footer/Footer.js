@@ -11,7 +11,7 @@ class Footer extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu borderless size='mini' position='left'>
+      <Menu borderless position='left'>
         <Menu.Item name='About' active={activeItem === 'About'} onClick={this.handleItemClick}>
             <Link to="/about">
                 <span className="link dib dim mr3 mr4-ns">About</span>

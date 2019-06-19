@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Menu } from 'semantic-ui-react';
+import { Button, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
 import LoginModal from "../LoginModal/LoginModal";
@@ -7,8 +7,6 @@ import SearchBar from "./SearchBar";
 import { data } from "./data";
 
 class NavBar extends Component {
-
-
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   constructor() {
@@ -29,7 +27,7 @@ class NavBar extends Component {
     const { loginProp, isSignedIn } = this.props
 
     return (
-      <Menu borderless stackable >
+      <Menu borderless stackable id="navbar">
         <Menu.Item className="br b--blue">
           <Link to="/" className="link no-underline flex items-center pa2">
             <div id="Logo">

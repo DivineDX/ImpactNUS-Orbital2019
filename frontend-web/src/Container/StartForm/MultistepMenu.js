@@ -5,42 +5,24 @@ export default class MultistepMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step1_Completed: '',
-            step2_Completed: '',
-            step3_Completed: '',
+            step1Completed: false,
+            step2Completed: false,
+            step3Completed: false,
         }
     }
+
+    markCompleted = (stepNumber) => {
+        if(stepNumber === 1){
+            this.setState({step1Completed: true});
+        } else if(stepNumber === 2){
+            this.setState({step2Completed: true});
+        } else if (stepNumber === 3){
+            this.setState({step3Completed: true});
+        }
+    }
+    
     render() {
         return (
-            /*<Menu compact icon='labeled'>
-                <Menu.Item
-                    name='1'
-                    active={activeItem === '1'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='pencil alternate'/>
-                    STATE
-                </Menu.Item>
-
-                <Menu.Item
-                    name='2'
-                    active={activeItem === '2'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='tasks' />
-                    SPECIFY
-                </Menu.Item>
-
-                <Menu.Item
-                    name='3' //Description & Image
-                    active={activeItem === '3'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='keyboard' />
-                    DESCRIBE
-                </Menu.Item>
-            </Menu> */
-            
             <Step.Group >
                 <Step active>
                     <Icon name='pencil alternate' />
