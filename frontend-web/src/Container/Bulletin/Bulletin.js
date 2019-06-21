@@ -15,16 +15,17 @@ class Bulletin extends Component{
 		const { activeItem } = this.state
 		return (	 //acts as a card list here
 			<div>
+				<div className='help'>
                 <h1 className = "bb b--black-10 w-70 pt4 tc center baskerville fw5 heading"> Discover Petitions and Campaigns</h1>
-
+				</div>
 			<div className='miniHeader'>
-				<Menu.Item name='Petition' active={activeItem === 'Petition'} onClick={this.handleItemClick} className='dim headerElem'>
+				<Menu.Item name='Petition' active={activeItem === 'Petition'} onClick={this.handleItemClick} className='headerElem'>
 					<Link to= '/'> Petition </Link>
 				</Menu.Item>
-				<Menu.Item name='Campaign' active={activeItem === 'Campaign'} onClick={this.handleItemClick} className='dim headerElem'>
+				<Menu.Item name='Campaign' active={activeItem === 'Campaign'} onClick={this.handleItemClick} className='headerElem'>
 					<Link to= '/'> Campaign </Link>	
 				</Menu.Item>
-				<Dropdown text='Sort' pointing className='link item dropdown'>
+				<Dropdown text='Sort' pointing className='link item'>
 				<Dropdown.Menu>
 					<Dropdown.Item> 
 						<Link to="/" className = "dropitem"> Popularity </Link>
