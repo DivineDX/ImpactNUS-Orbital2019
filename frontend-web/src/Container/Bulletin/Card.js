@@ -18,6 +18,8 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
         displayedOrganizer = organizer;
     }
 
+    let flag = false;
+
     return (
         <section className="avenir">
             <article className="bb b--black-10">
