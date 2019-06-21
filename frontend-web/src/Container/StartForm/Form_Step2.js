@@ -1,27 +1,51 @@
 import React, { Component } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 
+const targetPetition = "Select a decision maker";
+const targetCampaign = "Select a target audience";
+const petitionPlaceholder = "This is the organization/person who is able to respond to your petition";
+const campaignPlaceholder = "This is your main group of people you aim to reach out to";
+
 class Form_Step2 extends Component {
     render() {
-        const target_Petition = "Select a decision maker";
-        const petition_Placehoder = "This is the organization/person who is able to respond to your petiton"
+        const {navButton, inputChange, toggleAnonymity, currentAnonymity, currType} = this.props;
+        let target, placeholder;
+        if(currType === 'petition'){
+            target = targetPetition;
+            placeholder = petitionPlaceholder;
+        }else if (currType === 'campaign') {
+            target = targetCampaign;
+            placeholder = campaignPlaceholder;
+        }
+
         return (
             <Form size='huge'>
                 <Form.Field>
-                    <h1>{target_Petition}</h1>
-                    <input placeholder={petition_Placehoder} />
+                    <h1>{target}</h1>
+                    <input onChange={(event) => inputChange(event, 'targetGroup')} placeholder={placeholder} />
                 </Form.Field>
-
+    
                 <Form.Field>
                     <h1>State your target number of supporters</h1>
-                    <input min="0" type="number" placeholder = "Target Number"/>
-
+                    <input onChange={(event) => inputChange(event, 'targetSupporters')} min="0" type="number" placeholder="Target Number" />
                 </Form.Field>
+
                 <Form.Field>
-                    <Checkbox label='Enable organizer anonymity' />
+                    {currType === 'petition' && 
+                        <Checkbox checked = {currentAnonymity} onClick = {() => toggleAnonymity()} label='Enable organizer anonymity' />
+                    }
+                    {currType === 'campaign' &&
+                        <div>
+                            <h3>Select a target end date for your campaign</h3>
+                            <input type = "date"></input>
+                        </div>
+                    }
                 </Form.Field>
-
-                <Button type='submit'>Next</Button>
+    
+                <Button.Group>
+                    <Button labelPosition='left' icon='left chevron' onClick={() => navButton(1)} content='Previous' />
+                    <Button labelPosition='right' icon='right chevron' onClick={() => navButton(3)} content='Next' />
+                </Button.Group>
             </Form>
         );
     }
