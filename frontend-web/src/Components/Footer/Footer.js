@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 class Footer extends Component {
-  state = { activeItem: 'none' }
+  state = { activeItem: 'About' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 

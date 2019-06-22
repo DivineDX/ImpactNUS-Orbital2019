@@ -1,0 +1,57 @@
+.heading {
+    font-size: 3em;
+}
+
+.miniHeader {
+    padding-left: 11%;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.headerElem {    
+    padding: 20px;
+    margin-left: 10px;
+    margin-bottom: 0;
+    width: 10%;
+    font-size: 1.5em;
+}
+
+.miniHeader :hover {
+    background-color: rgb(250,250,250);
+    cursor: pointer;
+}
+
+.dropdown {
+    padding-left: 55px;
+    padding-top: 11px;
+    height: 55px;
+    width: 15%;
+    color: #4778b1;
+    font-size: 1.5em;
+    /* position: fixed;
+    text-align: center;
+    align-content: center;
+    justify-content: center; */
+}
+
+.dropitem {
+    font-size: 1.2em;
+}
+
+@media screen and (max-width: 780px) {
+    .help {
+        padding-top: 150px;
+    }
+
+    .heading {
+        font-size: 2.5em;
+    }
+
+    .miniHeader {
+        padding: 0;
+    }
+
+    .headerElem {
+        padding-right: 100px;
+    }
+}
