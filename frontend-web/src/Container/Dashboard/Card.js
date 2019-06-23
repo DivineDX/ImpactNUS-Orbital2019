@@ -1,8 +1,14 @@
 import React from 'react';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
-import Follow from './Follow';
 import { Link } from 'react-router-dom';
 import './Card.css';
+import { Dropdown, Button } from 'semantic-ui-react';
+
+const options = [
+    { key: 'edit', icon: 'edit', text: 'Edit Post', value: 'edit' },
+    { key: 'delete', icon: 'delete', text: 'Remove Post', value: 'delete' },
+    { key: 'hide', icon: 'hide', text: 'Hide Post', value: 'hide' },
+  ]
 
 const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => { //Destructuring
     let footer = '';
@@ -22,17 +28,11 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
     let flag = false;
 
     return (
-        <section className="avenir">
+        <section className="avenir helpme">
             <article className="bb b--black-10">
                     <div className="card-container">
-                        <div className="img_wrap">
-                            <img src={image} className="w-100" alt="IMG" />
-                        </div>
                         <div className="text_wrap">
                             <h2 className="">{title} </h2>
-                            <Follow>
-                                Follow
-                            </Follow>
                             <p className="i">{recipient}</p>
                             <p className="">
                                 {description}
@@ -42,11 +42,28 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                                 <text className='readmore'> Read more </text>
                                 </Link>
                             </p>
-                            <p className="b">
-                                By {displayedOrganizer}
-                            </p>
                             <ProgressBar numSupporters = {numSupporters} targetNum = {targetNum}/>
                             <p>{footer}</p>
+                        </div>
+                        <div className="img_wrap">
+                            <img src={image} className="w-100" alt="IMG" />
+
+                            {/* <Button.Group color='teal'> */}
+                                {/* <Button> Save </Button> */}
+                                <Dropdown text='Sort' pointing className='link item'>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item> 
+                                        <Link to="/" className = "dropitem"> Popularity </Link>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Link to="/" className = "dropitem"> Featured </Link>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Link to="/" className = "dropitem"> Recent </Link>
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                                </Dropdown>
+                            {/* </Button.Group> */}
                         </div>
                     </div>
             </article>

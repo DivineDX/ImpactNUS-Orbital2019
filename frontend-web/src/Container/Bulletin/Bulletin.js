@@ -1,30 +1,51 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { Button, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Data } from '../../Data/Data';
 import Card from './Card';
 import "./Bulletin.css";  
 
 class Bulletin extends Component{
-	state = { activeItem: 'Petition'}
+	constructor() {
+		super() 
+		this.state = {
+			Data: Data,
+			activeItem: 'petition'
+		}
+	}
 
-  	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+	handleItemClick = ({ name }) => this.setState({ activeItem: name })
+
+	petitionClickChange = () => {
+		this.setState({Data: this.state.Data.filter(data => {
+			return data.type === 'petition';
+		})});
+		this.setState({activeItem: 'petition'});
+	}
 	
+	campaignClickChange = () => {
+		this.setState({Data: this.state.Data.filter(data => {
+			return data.type === 'campaign';
+		})});
+		this.setState({activeItem: 'campaign'});
+	}
+
 	render() {
-		const { activeItem } = this.state
+		const { activeItem } = this.state.activeItem;
 		return (	 //acts as a card list here
 			<div>
 				<div className='help'>
                 <h1 className = "bb b--black-10 w-70 pt4 tc center baskerville fw5 heading"> Discover Petitions and Campaigns</h1>
 				</div>
 			<div className='miniHeader'>
-				<Menu.Item name='Petition' active={activeItem === 'Petition'} onClick={this.handleItemClick} className='headerElem'>
-					<Link to= '/'> Petition </Link>
-				</Menu.Item>
-				<Menu.Item name='Campaign' active={activeItem === 'Campaign'} onClick={this.handleItemClick} className='headerElem'>
-					<Link to= '/'> Campaign </Link>	
-				</Menu.Item>
+				<Button.Group>
+					<Button name='petition' toggle active={activeItem === 'petition'} onClick={() => this.petitionClickChange()} className='headerElem'>
+						Petition
+					</Button>
+					<Button name='campaign' toggle active={activeItem === 'campaign'} onClick={() => this.campaignClickChange()} className='headerElem'>
+						Campaign
+					</Button>
+				</Button.Group>
 				<Dropdown text='Sort' pointing className='link item'>
 				<Dropdown.Menu>
 					<Dropdown.Item> 
@@ -40,7 +61,7 @@ class Bulletin extends Component{
 				</Dropdown>
 			</div>
 				
-			{Data.map((data, id) => {
+			{this.state.Data.map((data, id) => {
 				return <Card
 					key = {id}
 					type = {data.type}

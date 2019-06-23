@@ -1,9 +1,16 @@
 /* For  */
+.helpme {
+    padding-left: 20px;
+    
+}
 
 .card-container {
     height: 750px;
+    width: 110%;
     display: flex;
     flex-direction: column;
+    padding-top: 0;
+    margin: 0;
 }
 
 img {
@@ -16,8 +23,8 @@ img {
     cursor: pointer;
 }
 
-.i {
-    padding-top: 20px;
+.icon {
+    position: left;
 }
 
 /* Large Screens */
@@ -31,17 +38,16 @@ img {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 1rem;
     }
 
     .img_wrap {
         width: 30%;
-        padding-right: 1rem;
+        padding-right: 10px;
     }
 
     .text_wrap {
         width: 70%;
-        padding-left: 1rem;
+        padding-left: 10px;
     }
 
     img {
