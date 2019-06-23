@@ -27,7 +27,7 @@ class NavBar extends Component {
         const { loginProp, isSignedIn } = this.props
 
         return (
-            <Menu borderless stackable id="navbar">
+            <Menu borderless id="navbar">
                 <Menu.Item className="br b--blue">
                     <Link to="/" className="link no-underline flex items-center pa2">
                         <div id="Logo">
@@ -58,8 +58,8 @@ class NavBar extends Component {
                     </div>
                 </div>
 
-                <Menu.Menu position='right'>
-                    <SearchBar searchChange={this.onSearchChange} />
+                <Menu.Menu position='right' className='right'>
+                    <SearchBar searchChange={this.onSearchChange} className='search'/>
                     <Menu.Item>
                         <div>
                             {isSignedIn === false //conditional

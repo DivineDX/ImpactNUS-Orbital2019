@@ -26,3 +26,21 @@
   width: 100%;
   z-index: 1;
 }
+
+@media screen and (max-width: 845px) {
+  #navbar {
+    display: flex; 
+    flex-direction: column;
+  }
+
+  .right {
+    display:flex; 
+    justify-content: flex-start;
+    align-self: auto;
+  }
+
+  .search {
+    display: flex;
+    flex-grow: 5;
+  }
+}
