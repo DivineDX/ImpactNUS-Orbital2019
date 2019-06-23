@@ -22,8 +22,8 @@ class Footer extends Component {
                 <span className="link dib dim mr3 mr4-ns">How It Works</span>
             </Link> 
         </Menu.Item>
-        <Menu.Item name='GitHubb' active={activeItem === 'GitHubb'} onClick={this.handleItemClick}>
-            <Link to="/githubb">
+        <Menu.Item name='GitHub' active={activeItem === 'GitHub'} onClick={this.handleItemClick}>
+            <Link to="/github">
                 <span className="link dib dim mr3 mr4-ns">GitHub</span>
             </Link>
         </Menu.Item>

@@ -17,12 +17,20 @@ Num Followers
 Finished
 */
 
+/*
+List of userID:
+admin,
+e0309595
+e0322822
+e0395042
+e0496840
+*/
 export const Data = [
     {
         type: "petition",
         id: "1",
         title: "Petition to install more recycling bins in hostels",
-        recipient: "Petition to Office of Student Affairs",
+        recipient: "Office of Student Affairs",
         organizer: "De Xun",
         anonymity: true,
         date_started: new Date(2019, 5, 30),
@@ -32,7 +40,7 @@ export const Data = [
         image: "https://www.recycleaway.com/assets/images/product-photos/Iowa%20Rotocast/RB-1_Triple.jpg",
         targetNum: 300,
         numSupporters: 130,
-        numFollowing: 256,
+        numFollowing: 100,
         finished: false,
     },
     {  
@@ -84,7 +92,7 @@ export const Data = [
         targetNum: 700,
         numSupporters: 700,
         numFollowing: 300,
-        finished: false,
+        finished: true,
     },
     {  
         type: "petition",
@@ -100,7 +108,7 @@ export const Data = [
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpjT_DHspqCI2JptaUg_L4fXlzHgoasHjIvbFljRckf_U2aVZOuA",
         targetNum: 250,
         numSupporters: 150,
-        numFollowing: 300,
+        numFollowing: 200,
         finished: false,
     },
     {  
@@ -113,7 +121,7 @@ export const Data = [
         date_started: new Date(2019, 5, 11),
         date_end: new Date(2019, 12, 12),
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus felis non nunc mollis egestas. Nunc bibendum molestie nisi sed vehicula. Donec sollicitudin tellus vitae dui euismod facilisis. Vestibulum ante.",
-        tags: ["Volunteer", "CIP"],
+        tags: ["CIP"],
         image: "https://images.jg-cdn.com/image/60d60f4f-13d4-42f0-a96e-152772ed195c.jpg?template=FundraisingPageHeroImageM",
         targetNum: 1000,
         numSupporters: 150,

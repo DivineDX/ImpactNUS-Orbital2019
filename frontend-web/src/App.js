@@ -9,11 +9,12 @@ import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
 import About from './Container/About/About';
 import HowItWorks from './Container/HowItWorks/HowItWorks';
-import GitHubb from './Container/GitHubb/GitHubb';
+import GitHub from './Container/Github/GitHub';
 import FAQ from './Container/FAQ/FAQ';
 import ContactUs from './Container/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
 import StartForm from './Container/StartForm/StartForm';
+import LandingPage from './Components/LandingPage/LandingPage';
 
 class App extends Component {
 	constructor() {
@@ -57,12 +58,13 @@ class App extends Component {
 							<Route path = "/startform" component = {StartForm} />
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
-							<Route path = "/githubb" component={GitHubb} />
+							<Route path = "/github" component={GitHub} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
+							<Route path = "/landingpage" component = {LandingPage}/>
 						</Switch>
 					</div>
-					<Footer/>
+					{/* <Footer/> */}
 				</div>
 			</Router>
 		);

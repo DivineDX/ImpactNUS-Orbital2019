@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class GitHubb extends Component {
+class GitHub extends Component {
     render() {
         return ( //acts as a card list here
             <div>
@@ -10,4 +10,4 @@ class GitHubb extends Component {
     }
 }
 
-export default GitHubb;
+export default GitHub;
