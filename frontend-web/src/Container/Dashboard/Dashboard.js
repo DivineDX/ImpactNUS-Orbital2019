@@ -14,7 +14,9 @@ class Dashboard extends Component {
     render() {
         return (	 //acts as a card list here
 			<div>
-                <h1> Your Dashboard</h1>
+                <div className='header'>
+                    <h1> Your Dashboard</h1>
+                </div>
                 {this.state.Data.map((data, id) => {
                     return <Card
                         key = {id}

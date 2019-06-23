@@ -1,6 +1,5 @@
 import React from 'react';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
-import Follow from './Follow';
 import { Link } from 'react-router-dom';
 
 const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => { //Destructuring
@@ -28,10 +27,7 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <img src={image} className="w-100" alt="IMG" />
                         </div>
                         <div className="text_wrap">
-                            <h1 className="">{title} </h1>
-                            <Follow>
-                                Follow
-                            </Follow>
+                            <h2 className="">{title} </h2>
                             <p className="i">{recipient}</p>
                             <p className="">
                                 {description}

@@ -29,7 +29,7 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <img src={image} className="w-100" alt="IMG" />
                         </div>
                         <div className="text_wrap">
-                            <h1 className="">{title} </h1>
+                            <h2 className="">{title} </h2>
                             <Follow>
                                 Follow
                             </Follow>
