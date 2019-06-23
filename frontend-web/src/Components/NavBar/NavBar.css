@@ -27,20 +27,10 @@
   z-index: 1;
 }
 
+/* if you do this, the search bar is strange
 @media screen and (max-width: 845px) {
   #navbar {
     display: flex; 
     flex-direction: column;
   }
-
-  .right {
-    display:flex; 
-    justify-content: flex-start;
-    align-self: auto;
-  }
-
-  .search {
-    display: flex;
-    flex-grow: 5;
-  }
-}
+} */
