@@ -14,7 +14,7 @@ class Bulletin extends Component{
 		}
 	}
 
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+	handleItemClick = ({ name }) => this.setState({ activeItem: name })
 
 	petitionClickChange = () => {
 		this.setState({Data: this.state.Data.filter(data => {
@@ -28,7 +28,6 @@ class Bulletin extends Component{
 			return data.type === 'campaign';
 		})});
 		this.setState({activeItem: 'campaign'});
-
 	}
 
 	render() {
@@ -39,12 +38,14 @@ class Bulletin extends Component{
                 <h1 className = "bb b--black-10 w-70 pt4 tc center baskerville fw5 heading"> Discover Petitions and Campaigns</h1>
 				</div>
 			<div className='miniHeader'>
-				<Button name='petitions' toggle active={activeItem === 'petition'} onClick={() => this.petitionClickChange()} onClick={this.handleItemClick} className='headerElem'>
-					Petition
-				</Button>
-				<Button name='campaigns' toggle active={activeItem === 'campaign'} onClick={() => this.campaignClickChange()} onClick={this.handleItemClick} className='headerElem'>
-					Campaign
-				</Button>
+				<Button.Group>
+					<Button name='petition' toggle active={activeItem === 'petition'} onClick={() => this.petitionClickChange()} className='headerElem'>
+						Petition
+					</Button>
+					<Button name='campaign' toggle active={activeItem === 'campaign'} onClick={() => this.campaignClickChange()} className='headerElem'>
+						Campaign
+					</Button>
+				</Button.Group>
 				<Dropdown text='Sort' pointing className='link item'>
 				<Dropdown.Menu>
 					<Dropdown.Item> 
