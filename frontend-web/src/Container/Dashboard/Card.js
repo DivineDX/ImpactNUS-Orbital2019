@@ -37,7 +37,7 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <p className="">
                                 {description}
                                 <text> </text>
-                                <Link to="/"> 
+                                <Link to="/LandingPage"> 
                                 {/* to add links to indiv page  */}
                                 <text className='readmore'> Read more </text>
                                 </Link>
@@ -50,18 +50,26 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
 
                             {/* <Button.Group color='teal'> */}
                                 {/* <Button> Save </Button> */}
-                                <Dropdown text='Sort' pointing className='link item'>
+                                <Dropdown text='Choose Action' pointing className='link item'>
                                 <Dropdown.Menu>
                                     <Dropdown.Item> 
-                                        <Link to="/" className = "dropitem"> Popularity </Link>
+                                        <Link to="/LandingPage" className = "dropitem"> Edit Petition </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/" className = "dropitem"> Featured </Link>
+                                        <Link to="/" className = "dropitem"> View Discussion </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/" className = "dropitem"> Recent </Link>
+                                        <Link to="/" className = "dropitem"> Post Update </Link>
                                     </Dropdown.Item>
-                                </Dropdown.Menu>
+                                    {type === 'petition' //conditional
+                                    ? <Dropdown.Item>
+                                            <Link to="/" className = "dropitem"> End Petition </Link>
+                                        </Dropdown.Item>
+                                    : <Dropdown.Item>
+                                            <Link to="/" className = "dropitem"> End Campaign </Link>
+                                        </Dropdown.Item>
+                                    }    
+                                    </Dropdown.Menu>
                                 </Dropdown>
                             {/* </Button.Group> */}
                         </div>
