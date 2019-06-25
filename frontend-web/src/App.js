@@ -15,6 +15,7 @@ import ContactUs from './Container/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
 import StartForm from './Container/StartForm/StartForm';
 import LandingPage from './Components/LandingPage/LandingPage';
+import EditForm from './Container/Dashboard/EditForm';
 
 class App extends Component {
 	constructor() {
@@ -62,6 +63,7 @@ class App extends Component {
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/landingpage" component = {LandingPage}/>
+							<Route path = "/editform" component = {EditForm}/>
 						</Switch>
 					</div>
 					{/* <Footer/> */}

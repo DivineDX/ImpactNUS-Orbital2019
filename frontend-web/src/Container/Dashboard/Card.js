@@ -53,18 +53,23 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                                 <Dropdown text='Choose Action' pointing className='link item'>
                                 <Dropdown.Menu>
                                     <Dropdown.Item> 
-                                        <Link to="/LandingPage" className = "dropitem"> Edit Petition </Link>
+                                        <Link to="/EditForm" className = "dropitem"> Edit Petition </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/" className = "dropitem"> View Discussion </Link>
+                                        <Link to="/LandingPage" className = "dropitem"> View Discussion </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/" className = "dropitem"> Post Update </Link>
+                                        <Link to="/UpdatesSlider" className = "dropitem"> Post Update </Link>
                                     </Dropdown.Item>
                                     {type === 'petition' //conditional
-                                    ? <Dropdown.Item>
+                                    ?   <div>
+                                        <Dropdown.Item>
+                                            <Link to="/" className = "dropitem"> Declare Victory </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item>
                                             <Link to="/" className = "dropitem"> End Petition </Link>
                                         </Dropdown.Item>
+                                        </div>
                                     : <Dropdown.Item>
                                             <Link to="/" className = "dropitem"> End Campaign </Link>
                                         </Dropdown.Item>
