@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Data } from '../../Data/Data';
-import {UpdateData} from '../../Data/UpdateData';
+import { UpdateData } from '../../Data/UpdateData';
+import { ReasonSupport } from '../../Data/ReasonSupport';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import TargetCard from './TargetCard';
+import SupportForm from './SupportForm';
+import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
 import { Button } from 'semantic-ui-react'
 import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
 import './LandingPage.css';
 
-const fakeData = Data[0];
+const fakeData = Data[1];
 /*
     type: "petition",
     id: "1",
@@ -29,31 +32,32 @@ const fakeData = Data[0];
 class LandingPage extends Component {
     render() {
         return (
-            <article className = 'tc'>
-                <div className = "pv3">
-                    <h1 className = 'f2 tc'> {fakeData.title}</h1>
+            <article id='landingPage' className='tc'>
+                <div className="pv3">
+                    <h1 className='f2 tc'> {fakeData.title}</h1>
                 </div>
 
-                <div className  = "flex flex-column pv2 items-center">
-                    <img className = "pb3 ma3" src={fakeData.image} alt="IMG" />
-                    <ProgressBar numSupporters={fakeData.numSupporters} targetNum={fakeData.targetNum}/>
-                    <p className = "i">Signatures: <b>{fakeData.numSupporters}</b> of <b>{fakeData.targetNum}</b></p>
-                </div>
-
-                <div id="subHeader" className = "f4 pv2 mh3 flex flex-row items-center">
-                    <div className = 'w-60 tl'>
-                        <nobr>By: <b>{fakeData.organizer}</b></nobr>
-                        <p>Created on: {fakeData.date_started.toDateString().split(' ').slice(1).join(' ')}</p>
+                <div id="subHeader" className = 'pv2 flex flex-column items-center'>
+                    <img className="pb3 ma3" src={fakeData.image} alt="IMG" />
+                    <div className = ''>
+                        <ProgressBar numSupporters={fakeData.numSupporters} targetNum={fakeData.targetNum} />
+                        <p className="i">Signatures: <b>{fakeData.numSupporters}</b> of <b>{fakeData.targetNum}</b></p>
+                        <div id = "subContainer" className = 'flex flex-row items-center'>
+                            <div className='w-60 tl'>
+                                <nobr>By: <b>{fakeData.organizer}</b></nobr>
+                                <p>Created on: {fakeData.date_started.toDateString().split(' ').slice(1).join(' ')}</p>
+                            </div>
+                            <div className='w-40'>
+                                {fakeData.type === 'petition'
+                                    ? <Button color='orange' floated='right' circular>Sign Petition</Button>
+                                    : <Button color='orange' floated='right' circular>Support Campaign</Button>
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div className = 'w-40'>
-                        {fakeData.type === 'petition' 
-                            ? <Button color = 'orange' floated='right' circular>Sign Petition</Button>
-                            : <Button color = 'orange' floated='right' circular>Support Campaign</Button>
-                        }
-                    </div>
                 </div>
 
-                <div id="description" className = 'pb3'>
+                <div id="description" className='pa3 mv3'>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat elit lectus, accumsan egestas libero scelerisque at. Nullam et velit ligula. Integer quis ultrices mauris. Phasellus eget maximus purus, varius finibus nisi. Etiam aliquet malesuada erat, porta gravida lectus efficitur in. Sed vulputate et est a suscipit. Curabitur porttitor faucibus feugiat. Aenean euismod quis elit nec varius.
                     </p>
@@ -65,27 +69,36 @@ class LandingPage extends Component {
                     </p>
                 </div>
 
-                {fakeData.type === 'petition' && 
-                    <div id="target" className = 'tc mv3'>
-                        <p className = 'pv2 f4 i'>This petition will be sent to:</p>
-                        <TargetCard name = {fakeData.recipient}/>
+                {fakeData.type === 'petition' &&
+                    <div id="target" className='tc mv3'>
+                        <p className='pv2 f4 i'>This petition will be sent to:</p>
+                        <TargetCard name={fakeData.recipient} />
                     </div>
                 }
 
-                <div id="Updates" className = 'pv3 ph2 bg-washed-green flex flex-column'>
-                    <p className = 'f3'>
+                <div id="Updates" className='pv4 ph2 bg-washed-green'>
+                    <p className='f3'>
                         Updates
-                        <hr className = 'mw4 bb bw1 b--black-10'></hr>
+                        <hr className='mw4 bb bw1 b--black-10'></hr>
                     </p>
-                    <UpdatesSlider updateData = {UpdateData}/>
+                    <UpdatesSlider updateData={UpdateData} />
                 </div>
 
-                <div id="Reasons" className = 'h5'>
-                    <p className = 'f3'>Reasons for Support</p>
+                <div id="Reasons" className='pv3 ph2'>
+                    <p className='f3'>
+                        Reasons for Support
+                        <hr className='mw5 bb bw1 b--black-10'></hr>
+                    </p>
+                    <ReasonSupportBulletin reasonData={ReasonSupport} />
+                    <button className="landing-button">See All</button>
                 </div>
 
-                <div id="SupportForm" className = 'bg-washed-green h5'>
-                    <p className = 'f3'> Sign this {fakeData.type}</p>
+                <div id="SupportForm" className='pv3 ph2 bg-washed-green'>
+                    <p className='f3'>
+                        Sign this {fakeData.type}
+                        <hr className='mw5 bb bw1 b--black-10'></hr>
+                    </p>
+                    <SupportForm />
                 </div>
             </article>
 

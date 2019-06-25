@@ -1,0 +1,13 @@
+#RSB {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    justify-items: center;
+}
+
+@media screen and (min-width: 846px) {
+    #RSB {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
