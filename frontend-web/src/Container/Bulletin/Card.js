@@ -37,7 +37,7 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <p className="">
                                 {description}
                                 <text> </text>
-                                <Link to="/"> 
+                                <Link to="/LandingPage"> 
                                 {/* to add links to indiv page  */}
                                 <text className='readmore'> Read more </text>
                                 </Link>
