@@ -33,7 +33,7 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                             <Follow>
                                 Follow
                             </Follow>
-                            <p className="i">{recipient}</p>
+                            <p className="i pt3">{recipient}</p>
                             <p className="">
                                 {description}
                                 <text> </text>
