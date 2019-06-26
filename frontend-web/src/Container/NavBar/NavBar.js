@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Button, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
-import LoginModal from "../LoginModal/LoginModal";
-import SearchBar from "./SearchBar";
-import { data } from "./data";
+import LoginModal from "../../Components/LoginModal/LoginModal";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 class NavBar extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -13,7 +12,6 @@ class NavBar extends Component {
         super()
         this.state = {
             activeItem: 'DiagNus',
-            data: data, // --> will get the data from there
             searchfield: ''
         }
     }

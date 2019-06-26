@@ -13,9 +13,8 @@ import GitHub from './Container/Github/GitHub';
 import FAQ from './Container/FAQ/FAQ';
 import ContactUs from './Container/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
-import StartForm from './Container/StartForm/StartForm';
+import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
-import EditForm from './Container/Dashboard/EditForm';
 
 class App extends Component {
 	constructor() {
@@ -56,14 +55,14 @@ class App extends Component {
 							<Route path="/bulletin" component={Bulletin} />
 							<Route path="/dashboard" component={Dashboard} />
 							<Route path="/feed" component={Feed} />
-							<Route path = "/startform" component = {StartForm} />
+							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
 							<Route path = "/github" component={GitHub} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/landingpage" component = {LandingPage}/>
-							<Route path = "/editform" component = {EditForm}/>
+							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true}/>}/>
 						</Switch>
 					</div>
 					{/* <Footer/> */}

@@ -53,13 +53,13 @@ const Card = ({ key, type, title, recipient, organizer, anonymity, date_started,
                                 <Dropdown text='Choose Action' pointing className='link item'>
                                 <Dropdown.Menu>
                                     <Dropdown.Item> 
-                                        <Link to="/EditForm" className = "dropitem"> Edit Petition </Link>
+                                        <Link to="/editform" className = "dropitem"> Edit Petition </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/LandingPage" className = "dropitem"> View Discussion </Link>
+                                        <Link to="/landingpage" className = "dropitem"> View Discussion </Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item>
-                                        <Link to="/UpdatesSlider" className = "dropitem"> Post Update </Link>
+                                        <Link to="/updatesslider" className = "dropitem"> Post Update </Link>
                                     </Dropdown.Item>
                                     {type === 'petition' //conditional
                                     ?   <div>

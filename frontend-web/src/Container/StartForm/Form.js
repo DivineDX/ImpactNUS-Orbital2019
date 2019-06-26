@@ -4,12 +4,10 @@ import FormStep1 from './Form_Step1';
 import FormStep2 from './Form_Step2';
 import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
-import './EditForm.css';
-import { Data } from '../../Data/Data'
+import './Form.css';
 
 const defaultState = {
     currentStep: 1,
-    id: '', 
     type: '',
     title: '',
     targetGroup: '',
@@ -21,13 +19,12 @@ const defaultState = {
     imageURL: ''
 }
 
-class EditForm extends Component {
-    constructor() {
-        super();
+class StartForm extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            Data: Data,
+            isEditing: props.isEditing,
             currentStep: 1,
-            id: '1',
             type: '',
             title: '',
             targetGroup: '',
@@ -47,10 +44,8 @@ class EditForm extends Component {
         */
     }
 
-    // loop through the data in Data, if there is a type and id that matches, return that data 
-
-
     toggleType = (type) => {
+        console.log(this.state.isEditing);
         if (type === 'petition') {
             this.setState({ type: 'petition' });
         } else if (type === 'campaign') {
@@ -157,4 +152,4 @@ class EditForm extends Component {
     }
 }
 
-export default EditForm;
+export default StartForm;

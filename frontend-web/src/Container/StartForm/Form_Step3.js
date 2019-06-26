@@ -29,7 +29,7 @@ const Form_Step3 = ({ navButton, inputChange, dropdownChange, currState }) => {
             <Button.Group>
                 <Button labelPosition='left' icon='left chevron' onClick={() => navButton(2)} content='Previous' />
                 <Button 
-                    disabled = {currState.description === ''}
+                    disabled = {!currState.isEditing && currState.description === ''}
                     labelPosition='right' icon='right chevron' onClick={() => navButton(4)} content='Next' />
             </Button.Group>
         </Form>
