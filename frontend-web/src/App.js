@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
-import NavBar from './Components/NavBar/NavBar';
-import Footer from './Components/Footer/Footer';
+import NavBar from './Container/NavBar/NavBar';
+import Footer from './Container/Footer/Footer';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
-import About from './Container/About/About';
-import HowItWorks from './Container/HowItWorks/HowItWorks';
-import GitHub from './Container/Github/GitHub';
-import FAQ from './Container/FAQ/FAQ';
-import ContactUs from './Container/ContactUs/ContactUs';
+import About from './Components/FooterItems/About/About';
+import HowItWorks from './Components/FooterItems/HowItWorks/HowItWorks';
+import Github from './Components/FooterItems/Github/Github';
+import FAQ from './Components/FooterItems/FAQ/FAQ';
+import ContactUs from './Components/FooterItems/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
 import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
@@ -58,7 +58,7 @@ class App extends Component {
 							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
-							<Route path = "/github" component={GitHub} />
+							<Route path = "/github" component={Github} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/landingpage" component = {LandingPage}/>
