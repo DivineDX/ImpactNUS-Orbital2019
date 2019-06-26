@@ -21,7 +21,7 @@
     cursor: pointer;
 }
 
-.dropdown {
+/* .dropdown {
     padding-left: 55px;
     padding-top: 11px;
     height: 55px;
@@ -31,8 +31,8 @@
     /* position: fixed;
     text-align: center;
     align-content: center;
-    justify-content: center; */
-}
+    justify-content: center;
+} */
 
 .dropitem {
     font-size: 1.2em;
