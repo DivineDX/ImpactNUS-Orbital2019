@@ -32,7 +32,7 @@ class Bulletin extends Component {
 		return (	 //acts as a card list here
 			<div>
 				<div className = "w-75 pt5 center">
-					<h1 className="b--black-10 tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
+					<h1 className="tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
 					<BulletinMenuBar handleFilterClick = {this.handleFilterClick}/>
 				</div>
 
@@ -50,7 +50,9 @@ class Bulletin extends Component {
 						targetNum={data.targetNum}
 						numSupporters={data.numSupporters}
 						numFollowing={data.numFollowing}
-					/>
+					>
+						<FollowButton/>
+					</Card>
 				})}
 			</div>
 		);
