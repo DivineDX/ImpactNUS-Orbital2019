@@ -1,0 +1,36 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#cardImage {
+    height: 350px;
+}
+
+#contentWrap {
+    padding-top: 1rem;
+}
+
+/* Large Screens */
+@media(min-width: 846px) {
+    .card-container {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 1% 20%;
+        padding: 0;
+    }
+
+    #cardImage {
+        width: 30%;
+        height: 250px;
+        padding-right: 2%;
+    }
+
+    #contentWrap {
+        width: 70%;
+    }
+}

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Menu, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import { Data } from '../../Data/Data';
-import Card from './Card';
+import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import "./Bulletin.css";
+import FollowButton from '../../Components/Buttons/FollowButton';
 
 class Bulletin extends Component {
 	constructor() {
@@ -29,55 +28,14 @@ class Bulletin extends Component {
 		});
 	}
 
-	/* petitionClickChange = () => {
-		this.setState({
-			data: this.state.data.filter(data => {
-				return data.type === 'petition';
-			})
-		});
-		this.setState({ activeTab: 'petition' });
-	}
-
-	campaignClickChange = () => {
-		this.setState({
-			data: this.state.data.filter(data => {
-				return data.type === 'campaign';
-			})
-		});
-		this.setState({ activeTab: 'campaign' });
-	} */
-
 	render() {
-		const { activeTab } = this.state.activeTab;
 		return (	 //acts as a card list here
 			<div>
 				<div className = "w-75 pt5 center">
 					<h1 className="b--black-10 tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
 					<BulletinMenuBar handleFilterClick = {this.handleFilterClick}/>
 				</div>
-				{/* <div className='miniHeader'>
-				<Button.Group>
-					<Button name='petition' toggle active={activeTab === 'petition'} onClick={() => this.petitionClickChange()} className='headerElem'>
-						Petition
-					</Button>
-					<Button name='campaign' toggle active={activeTab === 'campaign'} onClick={() => this.campaignClickChange()} className='headerElem'>
-						Campaign
-					</Button>
-				</Button.Group>
-				<Dropdown text='Sort' pointing className='link item'>
-				<Dropdown.Menu>
-					<Dropdown.Item> 
-						<Link to="/" className = "dropitem"> Popularity </Link>
-					</Dropdown.Item>
-					<Dropdown.Item>
-						<Link to="/" className = "dropitem"> Featured </Link>
-					</Dropdown.Item>
-					<Dropdown.Item>
-						<Link to="/" className = "dropitem"> Recent </Link>
-					</Dropdown.Item>
-				</Dropdown.Menu>
-				</Dropdown>
-			</div> */}
+
 				{this.state.data.map((data, id) => {
 					return <Card
 						key={id}

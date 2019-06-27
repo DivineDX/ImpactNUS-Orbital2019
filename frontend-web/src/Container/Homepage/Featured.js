@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Data} from '../../Data/Data';
-import Card from '../Bulletin/Card';
+import Card from '../../Components/Card/Card';
 
 class Featured extends Component{
 	render() {

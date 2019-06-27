@@ -1,8 +1,7 @@
 import React from 'react';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom';
-import './Card.css';
-import { Dropdown, Button } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 const options = [
     { key: 'edit', icon: 'edit', text: 'Edit Post', value: 'edit' },

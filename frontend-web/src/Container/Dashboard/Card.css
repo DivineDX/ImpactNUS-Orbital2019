@@ -1,12 +1,9 @@
-/* For  */
-.helpme {
+/* .helpme {
     padding-left: 20px;
-    
 }
 
 .card-container {
     height: 750px;
-    width: 110%;
     display: flex;
     flex-direction: column;
     padding-top: 0;
@@ -27,10 +24,8 @@ img {
     position: left;
 }
 
-/* Large Screens */
 @media(min-width: 700px) {
     section {
-        /* Responsive padding - 15% for sides */
         padding: 0% 15%;
     }
     .card-container {
@@ -55,3 +50,4 @@ img {
         width: 30%;
     }
 }
+*/
