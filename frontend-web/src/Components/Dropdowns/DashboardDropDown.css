@@ -1,0 +1,8 @@
+.forceBlack {
+    color: black;
+}
+
+.hoverLink:hover {
+    color: #1e70bf;
+    text-decoration: none;
+}
