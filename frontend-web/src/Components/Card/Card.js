@@ -1,5 +1,6 @@
 import React from 'react';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { Link } from 'react-router-dom'
 import './Card.css';
 // import FollowButton from '../../Components/Buttons/FollowButton';
 
@@ -29,7 +30,11 @@ const Card = (props) => {
             <img src={image} className="w-100" id="cardImage" alt="IMG" />
             <div id = "contentWrap">
                 <div className="text_wrap flex flex-row">
-                    <h3 className="w-80">{title} </h3>
+                    <h3 className="w-80">
+                        <Link to='/landingpage'>
+                            {title} 
+                        </Link>
+                    </h3>
                     <div className="w-20">{props.children}</div>
                 </div>
                 <p className="i pt3">{sub}</p>
