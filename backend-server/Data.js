@@ -19,7 +19,7 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "1",
+        id: "2",
         title: "OCIP Fundraising Project",
         recipient: "Campaign for OCIP Project",
         organizer: "Xiao Ming",
@@ -37,7 +37,7 @@ export const Data = [
     },
     {  
         type: "petition",
-        id: "2",
+        id: "3",
         title: "Petition to repeal the straw ban",
         recipient: "Petition to NUS & OSA", 
         organizer: "Mike",
@@ -55,7 +55,7 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "2",
+        id: "4",
         title: "Lorem Ipsum",
         recipient: "Campaign @ RC4", //Input form will only ask for Purpose
         organizer: "Phaedra",
@@ -73,7 +73,7 @@ export const Data = [
     },
     {  
         type: "petition",
-        id: "3",
+        id: "5",
         title: "Petition for release of final paper results",
         recipient: "Petition to NUS Provost Office",
         organizer: "De Xun",
@@ -91,7 +91,7 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "3",
+        id: "6",
         title: "Recruitment of Volunteers",
         recipient: "Campaign for Make a Wish Foundation",
         organizer: "Phaedra",

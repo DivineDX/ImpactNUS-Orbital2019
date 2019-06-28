@@ -10,7 +10,7 @@ import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
 import About from './Components/FooterItems/About/About';
 import HowItWorks from './Components/FooterItems/HowItWorks/HowItWorks';
-// import Github from './Components/FooterItems/Github/Github';
+import Github from './Components/FooterItems/Github/Github';
 import FAQ from './Components/FooterItems/FAQ/FAQ';
 import ContactUs from './Components/FooterItems/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
@@ -22,7 +22,8 @@ class App extends Component {
 		super();
 		this.state = {
 			isSignedIn: false, //default is false (not signed in)
-			user: '', //user's name
+			userID: '', //userID
+			username: '', 
 		}
 	}
 
@@ -33,12 +34,16 @@ class App extends Component {
 			.then();
 	}
 
-	loginUser = (currUser) => {
-		this.setState({ isSignedIn: true, user: currUser });
+	loginUser = (userID, username) => {
+		this.setState({ 
+			isSignedIn: true,
+			userID: userID,
+			username: username
+		});
 	}
 
 	signoutUser = () => {
-		this.setState({ isSignedIn: false, user: '' }); //empty user
+		this.setState({ isSignedIn: false, userID: '', username: '', }); //empty user
 	}
 
 	render() {
@@ -55,13 +60,13 @@ class App extends Component {
 							<Route path="/" exact render = {(props) => <Homepage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
 							<Route path="/login" exact render = {(props) => <LoginPage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
 							<Route path="/bulletin" component={Bulletin} />
-							<Route path="/dashboard" exact render = {(props) => <Dashboard {...props} userID = {this.state.user}/>}/>
+							<Route path="/dashboard" exact render = {(props) => <Dashboard {...props} userID = {this.state.userID}/>}/>
 							<Route path="/feed" component={Feed} />
 							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/updatemodal" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
-							{/* <Route path = "/github" component={Github} /> */}
+							<Route path = "/github" component={Github} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/landingpage" component = {LandingPage}/>

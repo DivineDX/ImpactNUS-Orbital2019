@@ -58,8 +58,7 @@ class Bulletin extends Component {
 						image={data.image}
 						targetNum={data.targetNum}
 						numSupporters={data.numSupporters}
-						numFollowing={data.numFollowing}
-					>
+						numFollowing={data.numFollowing}>
 						<FollowButton />
 					</Card>
 				})}

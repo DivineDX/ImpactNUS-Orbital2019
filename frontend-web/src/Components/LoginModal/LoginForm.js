@@ -29,8 +29,8 @@ class LoginForm extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            if (data === "Successful Login") {
-                this.props.loginProp(this.state.nusID);
+            if (data.success) {
+                this.props.loginProp(this.state.nusID, data.username);
             }
         })
     }

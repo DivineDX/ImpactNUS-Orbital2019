@@ -36,13 +36,6 @@ class StartForm extends Component {
             description: '',
             imageURL: ''
         }
-        /*
-        Will have 4 steps
-        1: [State] Choose petition or campaign, title
-        2: [Specify]: Target recipient/group, Target End Date, Target Supporters, Anonymity (Petition only) 
-        3: [Describe] Tags, Description and Image
-        4: Preview and Confirmation
-        */
     }
 
     toggleType = (type) => {
@@ -92,7 +85,6 @@ class StartForm extends Component {
     }
 
     onDropdownChange = (e, { value }) => {
-        // console.log(value);
         this.setState({ tags: value });
     }
 
@@ -114,6 +106,30 @@ class StartForm extends Component {
                 this.setState({ currentStep: 1 });
                 break;
         }
+    }
+
+    onSubmitForm = () => { //modify this after database is coded
+        fetch('http://localhost:3001/submitform', {
+            method: 'post',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                type: this.state.type,
+                title: this.state.title,
+                targetGroup: this.state.targertGroup,
+                endDate: this.state.endDate,
+                targetSupporters: this.state.targetSupporters,
+                anonymity: this.state.anonymity,
+                tags: this.state.tags,
+                description: this.state.description,
+                imageURL: this.state.imageURL,
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => { 
+            if(data === "success") {
+                //should link to landing page of the newly created petition/campaign
+            }
+        })
     }
 
     render() {
