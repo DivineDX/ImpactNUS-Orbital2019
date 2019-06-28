@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { Data } from "../../Data/Data";
 import Card from '../../Components/Card/Card';
 import DashboardDropDown from '../../Components/Dropdowns/DashboardDropDown';
 
 class Dashboard extends Component {
-    constructor() {
-		super() 
+    constructor(props) {
+		super(props) 
 		this.state = {
-			Data: Data,
+            userID: this.props.userID,
+			displayedData: [],
 		}
+    }
+    
+    componentDidMount() {
+		fetch('http://localhost:3001/retrievepersonaldata', {
+            method: 'post',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                userID: this.state.userID,
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                displayedData: data,
+            })
+        });
 	}
 
     render() {
@@ -18,7 +34,7 @@ class Dashboard extends Component {
 					<h1 className="tc baskerville f1 fw5"> Your Dashboard</h1>
 				</div>
 
-                {this.state.Data.map((data, id) => {
+                {this.state.displayedData.map((data, id) => {
                     return <Card
                         key = {id}
                         type = {data.type}

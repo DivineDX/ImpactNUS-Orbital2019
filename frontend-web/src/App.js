@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
 // import Footer from './Container/Footer/Footer';
+import LoginPage from './Container/LoginPage/LoginPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
@@ -52,8 +53,9 @@ class App extends Component {
 					<div className="body">
 						<Switch>
 							<Route path="/" exact render = {(props) => <Homepage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
+							<Route path="/login" exact render = {(props) => <LoginPage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
 							<Route path="/bulletin" component={Bulletin} />
-							<Route path="/dashboard" component={Dashboard} />
+							<Route path="/dashboard" exact render = {(props) => <Dashboard {...props} userID = {this.state.user}/>}/>
 							<Route path="/feed" component={Feed} />
 							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/updatemodal" render = {(props) => <Form {...props} isEditing = {false}/>}/>
