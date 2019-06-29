@@ -10,7 +10,7 @@ class Featured extends Component{
 	}
 	
 	componentDidMount() {
-		fetch("http://localhost:3001/retrievedata")
+		fetch("http://localhost:3001/retrieveall")
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({displayData: data})
@@ -21,20 +21,9 @@ class Featured extends Component{
 		return (	 //acts as a card list here
 			<div>
                 <h1 className = 'bb b--black-10 w-70 pt4 tc center baskerville fw5'>Featured</h1>
-				{this.state.displayData.map((data, id) => {
+				{this.state.displayData.map((data) => {
 					return <Card
-							key = {id}
-							type = {data.type}
-							title = {data.title}
-							recipient = {data.recipient}
-							organizer = {data.organizer}
-							anonymity = {data.anonymity}
-							date_started = {data.date_started}
-							description = {data.description}
-							image = {data.image}
-							targetNum = {data.targetNum}
-							numSupporters = {data.numSupporters}
-							numFollowing = {data.numFollowing}							
+							loadedData = {data}						
 							/>
 				})}
 			</div>

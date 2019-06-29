@@ -82,7 +82,7 @@ class App extends Component {
 							<Route path = "/github" component={Github} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
-							<Route path = "/landingpage" component = {LandingPage}/>
+							<Route path = "/pg/:id" component = {LandingPage}/>
 							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true} userID = {this.state.userID} username = {this.state.username}/>}/>
 						</Switch>
 					</div>

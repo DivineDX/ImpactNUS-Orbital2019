@@ -7,9 +7,11 @@ import './Card.css';
 //const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => {
 
 const Card = (props) => {
-    const {key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing} = props;
+    const loadedData = props.loadedData;
+    const {type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished} = loadedData;
     let footer = '';
     let sub = '';
+
     if (type === 'petition') {
         footer = numSupporters + " Signed | Target: " + targetNum;
         sub = "Petition to: " + recipient;

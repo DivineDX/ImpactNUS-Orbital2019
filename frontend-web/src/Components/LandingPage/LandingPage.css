@@ -12,8 +12,18 @@
     color:  #446CB3;
 }
 
+#cardImage {
+    height: 350px;
+    width: 100%;
+}
+
 /* Desktop Screens */
 @media screen and (min-width: 846px) {
+    #cardImage {
+        width: 35%;
+        height: 350px;
+    }
+    
     #subHeader {
         display: flex;
         flex-direction: row;

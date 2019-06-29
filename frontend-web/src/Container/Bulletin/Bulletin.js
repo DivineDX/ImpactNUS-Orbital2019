@@ -13,7 +13,7 @@ class Bulletin extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3001/retrievedata")
+		fetch("http://localhost:3001/retrieveall")
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({
@@ -45,10 +45,10 @@ class Bulletin extends Component {
 					<BulletinMenuBar handleFilterClick={this.handleFilterClick} />
 				</div>
 
-				{this.state.filteredData.map((data, id) => {
+				{this.state.filteredData.map((data) => {
 					return <Card
-						key={id}
-						type={data.type}
+						loadedData = {data}
+						/*type={data.type}
 						title={data.title}
 						recipient={data.recipient}
 						organizer={data.organizer}
@@ -58,7 +58,7 @@ class Bulletin extends Component {
 						image={data.image}
 						targetNum={data.targetNum}
 						numSupporters={data.numSupporters}
-						numFollowing={data.numFollowing}>
+						numFollowing={data.numFollowing}*/>
 						<FollowButton />
 					</Card>
 				})}

@@ -10,7 +10,6 @@ const userDB = require('./userDB');
 const UpdatesData = require('./UpdatesData');
 const ReasonSupportData = require('./ReasonSupportData');
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -19,9 +18,23 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Retrieves array of all data (Petition + Campaigns)
-app.get('/retrievedata', (req, res) => {
+app.get('/retrieveall', (req, res) => {
     res.json(Data);
 });
+
+app.get('/retrieve/:id', (req, res) => {
+    let found = false;
+    Data.forEach(data => {
+        if(data.id == req.params.id) {
+            found = true;
+            return res.json(data);
+        }
+    })
+
+    if (!found) {
+        res.status(400).json('Not found');
+    }
+})
 
 // Retrieves the list of updates of a petition
 app.get('/updatesdata/:id', (req, res) => {
@@ -46,14 +59,14 @@ app.get('/reasonssupport/:id', (req, res) => {
             return res.json(data.support);
         }
     })
-    
+
     if (!found) {
         res.status(400).json('not found');
     }
 })
 
 //Retrieves user-specific dashboard data (only those that the person has started)
-app.post('/retrievepersonaldata', (req, res) => {
+app.post('/dashboarddata', (req, res) => {
     let personalData = Data.filter(data => data.organizerID === req.body.userID);
     res.json(personalData);
 });
@@ -62,7 +75,7 @@ app.post('/submitform', (req, res) => {
     const { userID, username, type, title, targetGroup, endDate, targetSupporters, anonymity, tags, description, imageURL } = req.body;
     Data.push({
         type: type,
-        id: Data.length + 1,
+        id: Data[Data.length - 1].id + 1,
         title: title,
         recipient: targetGroup,
         organizer: username,
@@ -78,14 +91,14 @@ app.post('/submitform', (req, res) => {
         numFollowing: 0,
         finished: false,
     })
-    res.json(Data[Data.length - 1]); //returns object of the newly created 
+    res.json(Data[Data.length - 1]); //returns object of the newly created petition/campaign
 })
 
 //updates existing petition/campaign
 app.put('/updateform', (req, res) => {
     let updated = false;
     Data.forEach(data => {
-        if(data.id === req.body.id) { //it is the data we want to update
+        if (data.id === req.body.id) { //it is the data we want to update
             data.recipient = req.body.recipient;
             data.anonymity = req.body.anonymity;
             data.date_end = req.body.date_end;
@@ -97,8 +110,8 @@ app.put('/updateform', (req, res) => {
             res.json(data);
         }
     })
-    
-    if(!updated) {
+
+    if (!updated) {
         return res.json('Error');
     }
 })
@@ -106,13 +119,13 @@ app.put('/updateform', (req, res) => {
 app.post('/checkifsigned', (req, res) => {
     let signed = false;
     userDB.forEach(user => {
-        if(user.userID === req.body.userID && user.supportedIDs.includes(req.body.id)){
+        if (user.userID === req.body.userID && user.supportedIDs.includes(req.body.id)) {
             signed = true;
             return res.json(true);
         }
     })
 
-    if(!signed) {
+    if (!signed) {
         return res.json(false);
     }
 })
@@ -129,7 +142,7 @@ app.put('/signsupport', (req, res) => {
         }
     })
 
-    if(!userFound){
+    if (!userFound) {
         res.status(400).json('user not found');
     }
 })
@@ -139,18 +152,18 @@ app.post('/postupdate', (req, res) => {
     let posted = false;
 
     UpdatesData.forEach(obj => {
-        if(obj.id === req.body.id){
+        if (obj.id === req.body.id) {
             obj.updates.push({
-                id: obj.updates.length + 1,
+                id: obj.updates[obj.updates.length - 1].id + 1,
                 title: req.body.title,
-                content: req.body.content, 
+                content: req.body.content,
                 datePosted: new Date(),
             })
             res.json('Success');
         }
     })
 
-    if(!posted) {
+    if (!posted) {
         res.status(400).json('Error');
     }
 })
@@ -158,14 +171,14 @@ app.post('/postupdate', (req, res) => {
 app.put('/victory', (req, res) => {
     let found = false;
     Data.forEach(data => {
-        if(data.id === req.body.id 
-            && data.organizerID === req.body.organizerID){
-                data.finished = true;
-                res.json('Success');
-            }
+        if (data.id === req.body.id
+            && data.organizerID === req.body.organizerID) {
+            data.finished = true;
+            res.json('Success');
+        }
     })
 
-    if(!found) {
+    if (!found) {
         res.status(400).json('Error');
     }
 })
@@ -173,17 +186,17 @@ app.put('/victory', (req, res) => {
 //Self-Explanatory: For deleting a petition/campaign
 app.delete('/delete', (req, res) => {
     let found = false;
-    for(let i = 0; i < Data.length; i++) {
-        if(Data[i].id === req.body.id 
+    for (let i = 0; i < Data.length; i++) {
+        if (Data[i].id === req.body.id
             && Data[i].organizerID === req.body.organizerID) {
-                Data.splice(i, 1);
-                found = true;
-                res.json('Success');
-                break;
-            }
+            Data.splice(i, 1);
+            found = true;
+            res.json('Success');
+            break;
+        }
     }
 
-    if(!found) {
+    if (!found) {
         res.status(400).json('Error');
     }
 })

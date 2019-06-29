@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Data } from '../../Data/Data';
 import { UpdateData } from '../../Data/UpdateData';
 import { ReasonSupport } from '../../Data/ReasonSupport';
 import ProgressBar from '../ProgressBar/ProgressBar';
@@ -10,7 +9,6 @@ import { Button } from 'semantic-ui-react'
 import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
 import './LandingPage.css';
 
-const fakeData = Data[1];
 /*
     type: "petition",
     id: "1",
@@ -30,25 +28,44 @@ const fakeData = Data[1];
 */
 
 class LandingPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loadedData: {},
+        }
+    }
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        fetch(`http://localhost:3001/retrieve/${id}`)
+            .then(resp => resp.json())
+            .then(data => {
+                console.log("data", data);
+                this.setState({ loadedData: data });
+            })
+    }
+
     render() {
+        const { type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished} = this.state.loadedData;
+        // console.log(date_started);
         return (
             <article id='landingPage' className='tc'>
                 <div className="pv3">
-                    <h1 className='f2 tc'> {fakeData.title}</h1>
+                    <h1 className='f2 tc'> {title}</h1>
                 </div>
 
-                <div id="subHeader" className = 'pv2 flex flex-column items-center'>
-                    <img className="pb3 ma3" src={fakeData.image} alt="IMG" />
-                    <div className = ''>
-                        <ProgressBar numSupporters={fakeData.numSupporters} targetNum={fakeData.targetNum} />
-                        <p className="i">Signatures: <b>{fakeData.numSupporters}</b> of <b>{fakeData.targetNum}</b></p>
-                        <div id = "subContainer" className = 'flex flex-row items-center'>
+                <div id="subHeader" className='pv2 flex flex-column items-center'>
+                    <img className="pb3 ma3" id = 'cardImage' src={image} alt="IMG" />
+                    <div className=''>
+                        <ProgressBar numSupporters={numSupporters} targetNum={targetNum} />
+                        <p className="i">Signatures: <b>{numSupporters}</b> of <b>{targetNum}</b></p>
+                        <div id="subContainer" className='flex flex-row items-center'>
                             <div className='w-60 tl'>
-                                <nobr>By: <b>{fakeData.organizer}</b></nobr>
-                                <p>Created on: {fakeData.date_started.toDateString().split(' ').slice(1).join(' ')}</p>
+                                <nobr>By: <b>{organizer}</b></nobr>
+                                {/* <p>Created on: {date_started.toDateString().split(' ').slice(1).join(' ')}</p> */}
                             </div>
                             <div className='w-40'>
-                                {fakeData.type === 'petition'
+                                {type === 'petition'
                                     ? <Button color='orange' floated='right' circular>Sign Petition</Button>
                                     : <Button color='orange' floated='right' circular>Support Campaign</Button>
                                 }
@@ -69,10 +86,10 @@ class LandingPage extends Component {
                     </p>
                 </div>
 
-                {fakeData.type === 'petition' &&
+                {type === 'petition' &&
                     <div id="target" className='tc mv3'>
                         <p className='pv2 f4 i'>This petition will be sent to:</p>
-                        <TargetCard name={fakeData.recipient} />
+                        <TargetCard name={recipient} />
                     </div>
                 }
 
@@ -95,13 +112,12 @@ class LandingPage extends Component {
 
                 <div id="SupportForm" className='pv3 ph2 bg-washed-green'>
                     <p className='f3'>
-                        Sign this {fakeData.type}
+                        Sign this {type}
                         <hr className='mw5 bb bw1 b--black-10'></hr>
                     </p>
                     <SupportForm />
                 </div>
             </article>
-
         );
     }
 }
