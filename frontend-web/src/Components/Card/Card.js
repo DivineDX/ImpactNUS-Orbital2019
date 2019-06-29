@@ -2,13 +2,10 @@ import React from 'react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom'
 import './Card.css';
-// import FollowButton from '../../Components/Buttons/FollowButton';
-
-//const Card = ({ key, type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters, numFollowing }) => {
 
 const Card = (props) => {
     const loadedData = props.loadedData;
-    const {type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished} = loadedData;
+    const {id, type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished} = loadedData;
     let footer = '';
     let sub = '';
 
@@ -33,7 +30,7 @@ const Card = (props) => {
             <div id = "contentWrap">
                 <div className="text_wrap flex flex-row">
                     <h3 className="w-80">
-                        <Link to='/landingpage'>
+                        <Link to = {`/pg/${id}`}>
                             {title} 
                         </Link>
                     </h3>

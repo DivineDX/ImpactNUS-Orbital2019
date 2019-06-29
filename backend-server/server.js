@@ -73,9 +73,11 @@ app.post('/dashboarddata', (req, res) => {
 
 app.post('/submitform', (req, res) => {
     const { userID, username, type, title, targetGroup, endDate, targetSupporters, anonymity, tags, description, imageURL } = req.body;
+    const newID = Data[Data.length-1].id + 1;
+
     Data.push({
         type: type,
-        id: Data[Data.length - 1].id + 1,
+        id: newID,
         title: title,
         recipient: targetGroup,
         organizer: username,
@@ -90,6 +92,16 @@ app.post('/submitform', (req, res) => {
         numSupporters: 0,
         numFollowing: 0,
         finished: false,
+    })
+
+    UpdatesData.push({
+        id: newID,
+        updates: [],
+    })
+
+    ReasonSupportData.push({
+        id: newID,
+        support: [],
     })
     res.json(Data[Data.length - 1]); //returns object of the newly created petition/campaign
 })

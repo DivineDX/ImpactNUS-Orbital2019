@@ -16,13 +16,10 @@ const UpdatesSlider = ({ updateData }) => (
                 return <div className = 'mb2'>
                     <p className = 'f4 b'>{data.title}</p>
                     <p>{data.content}</p>
-                    <p className = 'i'>{data.datePosted.toDateString().split(' ').slice(1).join(' ')}</p>
+                    {/* <p className = 'i'>{data.datePosted.toDateString().split(' ').slice(1).join(' ')}</p> */}
                 </div>
             })}
-            {/* <div>Page 1</div>
-            updateData.map()
-            <div>Page 2</div>
-            <div>Page 3</div> */}
+
         </Slider>
     </div>
 );

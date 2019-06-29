@@ -12,7 +12,7 @@ const SupportCard = ({ name, desc, reason, date, anonymity}) => (
             <p class="f6 lh-copy">
                 {reason}
             </p>
-            <p className = 'i'>{date.toDateString().split(' ').slice(1).join(' ')}</p>
+            {/* <p className = 'i'>{date.toDateString().split(' ').slice(1).join(' ')}</p> */}
 
         </div>
     </article>

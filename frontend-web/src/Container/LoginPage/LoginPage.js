@@ -3,10 +3,6 @@ import LoginForm from '../../Components/LoginModal/LoginForm';
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { isSignedIn, loginUser } = this.props;
 

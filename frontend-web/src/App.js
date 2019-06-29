@@ -40,8 +40,6 @@ class App extends Component {
 				userID: this.state.userID,
 				username: this.state.username,
 			}
-		} else {
-			throw "NoUser";
 		}
 	}
 
