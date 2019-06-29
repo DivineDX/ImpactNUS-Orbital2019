@@ -1,7 +1,7 @@
 export const Data = [
     {
         type: "petition",
-        id: "1",
+        id: 1,
         title: "Petition to install more recycling bins in hostels",
         recipient: "Office of Student Affairs",
         organizer: "De Xun",
@@ -19,9 +19,9 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "2",
+        id: 2,
         title: "OCIP Fundraising Project",
-        recipient: "Campaign for OCIP Project",
+        recipient: "All Students",
         organizer: "Xiao Ming",
         organizerID: 'admin',
         anonymity: false,
@@ -37,9 +37,9 @@ export const Data = [
     },
     {  
         type: "petition",
-        id: "3",
+        id: 3,
         title: "Petition to repeal the straw ban",
-        recipient: "Petition to NUS & OSA", 
+        recipient: "NUS & OSA", 
         organizer: "Mike",
         organizerID: 'admin',
         anonymity: false,
@@ -55,9 +55,9 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "4",
+        id: 4,
         title: "Lorem Ipsum",
-        recipient: "Campaign @ RC4", //Input form will only ask for Purpose
+        recipient: "RC4 Residents", //Input form will only ask for Purpose
         organizer: "Phaedra",
         organizerID: 'e0322822',
         anonymity: false,
@@ -73,9 +73,9 @@ export const Data = [
     },
     {  
         type: "petition",
-        id: "5",
+        id: 5,
         title: "Petition for release of final paper results",
-        recipient: "Petition to NUS Provost Office",
+        recipient: "NUS Provost Office",
         organizer: "De Xun",
         organizerID: 'e0309595',
         anonymity: false,
@@ -91,9 +91,9 @@ export const Data = [
     },
     {  
         type: "campaign",
-        id: "6",
+        id: 6,
         title: "Recruitment of Volunteers",
-        recipient: "Campaign for Make a Wish Foundation",
+        recipient: "Make a Wish Foundation",
         organizer: "Phaedra",
         organizerID: 'e0322822',
         anonymity: false,

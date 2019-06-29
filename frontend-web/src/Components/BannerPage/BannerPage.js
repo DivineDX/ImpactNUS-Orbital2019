@@ -4,7 +4,6 @@ import ButtonModal from "./ButtonModals";
 import { Link } from 'react-router-dom';
 
 const BannerPage = ({ isSignedIn, loginUser }) => {
-    console.log("Loginprop", loginUser);
     return (
         <article className="banner center ph3 ph5-ns tc br2 pv5 white flex flex-column justify-center">
             <h1 className="fw9 f1 f-headline-ns lh-title mt0 mb3">

@@ -4,26 +4,16 @@ import FormStep1 from './Form_Step1';
 import FormStep2 from './Form_Step2';
 import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
-import UpdateModal from "../../Components/UpdateModal/UpdateModal"
+import FormStep5 from './Form_Step5';
 import './Form.css';
-
-const defaultState = {
-    currentStep: 1,
-    type: '',
-    title: '',
-    targetGroup: '',
-    // endDate: '',
-    targetSupporters: '',
-    anonymity: false,
-    tags: [],
-    description: '',
-    imageURL: ''
-}
 
 class StartForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            finished: false,
+            userID: props.userID,
+            username: props.username,
             isEditing: props.isEditing,
             currentStep: 1,
             type: '',
@@ -38,8 +28,25 @@ class StartForm extends Component {
         }
     }
 
+    resetDefault = () => {
+        this.setState({
+            finished: false,
+            userID: this.props.userID,
+            username: this.props.username,
+            isEditing: this.props.isEditing,
+            type: '',
+            title: '',
+            targetGroup: '',
+            endDate: '',
+            targetSupporters: '',
+            anonymity: false,
+            tags: [],
+            description: '',
+            imageURL: ''
+        });
+    }
+
     toggleType = (type) => {
-        console.log(this.state.isEditing);
         if (type === 'petition') {
             this.setState({ type: 'petition' });
         } else if (type === 'campaign') {
@@ -111,11 +118,13 @@ class StartForm extends Component {
     onSubmitForm = () => { //modify this after database is coded
         fetch('http://localhost:3001/submitform', {
             method: 'post',
-            headers: {'Content-type': 'application/json'},
+            headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
+                userID: this.state.userID,
+                username: this.state.username,
                 type: this.state.type,
                 title: this.state.title,
-                targetGroup: this.state.targertGroup,
+                targetGroup: this.state.targetGroup,
                 endDate: this.state.endDate,
                 targetSupporters: this.state.targetSupporters,
                 anonymity: this.state.anonymity,
@@ -124,21 +133,22 @@ class StartForm extends Component {
                 imageURL: this.state.imageURL,
             })
         })
-        .then(resp => resp.json())
-        .then(data => { 
-            if(data === "success") {
-                //should link to landing page of the newly created petition/campaign
-            }
-        })
+            .then(resp => resp.json())
+            .then(data => {
+                    // this.resetDefault();
+                    this.setState({currentStep: 5, finished: true});
+                    console.log(data); //Object Data of the created petition/campaign
+            })
     }
 
     render() {
         return (	 //acts as a card list here
-            <div id="formContainer" className = "flex flex-column items-center mt4 mb4">
-                <div id = "stepContainer" className = "pb3">
+            <div id="formContainer" className="flex flex-column items-center mt4 mb4">
+                {!this.state.finished &&
+                    <div id="stepContainer" className="pb3">
                     <MultistepMenu currentStep={this.state.currentStep} />
-                </div>
-                
+                </div>}
+
                 <div id="inputContainer">
                     {this.state.currentStep === 1 &&
                         <FormStep1
@@ -162,7 +172,13 @@ class StartForm extends Component {
                     {this.state.currentStep === 4 &&
                         <FormStep4
                             navButton={this.currentStep}
-                            currState={this.state} />}
+                            currState={this.state}
+                            onSubmitForm={this.onSubmitForm}
+                        />}
+                    {this.state.finished && //all steps completed
+                        <FormStep5
+                            type = {this.state.type}
+                        />}
                 </div>
             </div>
         );

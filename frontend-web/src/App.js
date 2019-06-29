@@ -27,11 +27,22 @@ class App extends Component {
 		}
 	}
 
-	//for testing purposes
+	/*for testing purposes
 	componentDidMount() {
 		fetch("http://localhost:3001")
 			.then(resp => resp.json())
 			.then();
+	} */
+	
+	retrieveUserInfo = () => {
+		if(this.state.isSignedIn) {
+			return {
+				userID: this.state.userID,
+				username: this.state.username,
+			}
+		} else {
+			throw "NoUser";
+		}
 	}
 
 	loginUser = (userID, username) => {
@@ -45,6 +56,8 @@ class App extends Component {
 	signoutUser = () => {
 		this.setState({ isSignedIn: false, userID: '', username: '', }); //empty user
 	}
+
+
 
 	render() {
 		const isSignedIn = this.state.isSignedIn;
@@ -62,7 +75,7 @@ class App extends Component {
 							<Route path="/bulletin" component={Bulletin} />
 							<Route path="/dashboard" exact render = {(props) => <Dashboard {...props} userID = {this.state.userID}/>}/>
 							<Route path="/feed" component={Feed} />
-							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false}/>}/>
+							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false} userID = {this.state.userID} username = {this.state.username}/>}/>
 							<Route path = "/updatemodal" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
@@ -70,7 +83,7 @@ class App extends Component {
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/landingpage" component = {LandingPage}/>
-							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true}/>}/>
+							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true} userID = {this.state.userID} username = {this.state.username}/>}/>
 						</Switch>
 					</div>
 					{/* <Footer/> */}
