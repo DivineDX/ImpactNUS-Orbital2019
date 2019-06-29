@@ -10,7 +10,6 @@ import Dashboard from './Container/Dashboard/Dashboard';
 import Feed from './Container/Feed/Feed';
 import About from './Components/FooterItems/About/About';
 import HowItWorks from './Components/FooterItems/HowItWorks/HowItWorks';
-import Github from './Components/FooterItems/Github/Github';
 import FAQ from './Components/FooterItems/FAQ/FAQ';
 import ContactUs from './Components/FooterItems/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
@@ -77,7 +76,6 @@ class App extends Component {
 							<Route path = "/updatemodal" render = {(props) => <Form {...props} isEditing = {false}/>}/>
 							<Route path = "/about" component={About} />
 							<Route path = "/howitworks" component={HowItWorks} />
-							<Route path = "/github" component={Github} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
 							<Route path = "/pg/:id" component = {LandingPage}/>

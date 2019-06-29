@@ -6,6 +6,7 @@ import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
 import FormStep5 from './Form_Step5';
 import './Form.css';
+import { Data } from '../../Data/Data';
 
 class StartForm extends Component {
     constructor(props) {
@@ -141,6 +142,29 @@ class StartForm extends Component {
             })
     }
 
+    editForm = (app) => {
+        app.put('/updateform' , (req, res) => {
+            let updated = false; 
+            Data.forEach(data => {
+                if(data.id === req.body.id) {
+                    data.recipient = req.body.recipient;
+                    data.anonymity = req.body.anonymity;
+                    data.endDate = req.body.endDate;
+                    data.description = req.body.description;
+                    data.tags = req.body.tags;
+                    data.image = req.body.image;
+                    data.targetSupporters = req.body.targetSupporters;
+                    updated = true;
+                    res.json(data);
+                }
+            })
+
+            if (!updated) {
+                return res.json('Error');
+            }
+        })
+    }
+
     render() {
         return (	 //acts as a card list here
             <div id="formContainer" className="flex flex-column items-center mt4 mb4">
@@ -150,30 +174,38 @@ class StartForm extends Component {
                 </div>}
 
                 <div id="inputContainer">
-                    {this.state.currentStep === 1 &&
+                    {this.state.currentStep === 1 && 
                         <FormStep1
                             navButton={this.currentStep}
                             toggleType={this.toggleType}
                             inputChange={this.onInputChange}
-                            currState={this.state} />}
+                            currState={this.state} 
+                            id = {this.id}
+                            editForm = {this.editForm}
+                            />}
                     {this.state.currentStep === 2 &&
                         <FormStep2
                             navButton={this.currentStep}
                             inputChange={this.onInputChange}
                             toggleAnonymity={this.toggleAnonymity}
                             currentAnonymity={this.state.anonymity}
-                            currState={this.state} />}
+                            currState={this.state} 
+                            editForm = {this.editForm}
+                            />}
                     {this.state.currentStep === 3 &&
                         <FormStep3
                             navButton={this.currentStep}
                             inputChange={this.onInputChange}
                             dropdownChange={this.onDropdownChange}
-                            currState={this.state} />}
+                            currState={this.state} 
+                            editForm = {this.editForm}
+                            />}
                     {this.state.currentStep === 4 &&
                         <FormStep4
                             navButton={this.currentStep}
                             currState={this.state}
                             onSubmitForm={this.onSubmitForm}
+                            editForm = {this.editForm}
                         />}
                     {this.state.finished && //all steps completed
                         <FormStep5
