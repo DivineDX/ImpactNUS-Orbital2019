@@ -1,6 +1,15 @@
-import {Data} from './Data';
-import {userDB} from './userDB';
-import {UpdatesData} from './UpdatesData';
+/* Old import & export
+import { Data } from './Data';
+import { userDB } from './userDB';
+import { UpdatesData } from './UpdatesData';
+import {ReasonSupportData} from './ReasonSupportData';
+*/
+
+const Data = require('./Data');
+const userDB = require('./userDB');
+const UpdatesData = require('./UpdatesData');
+const ReasonSupportData = require('./ReasonSupportData');
+
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -18,12 +27,27 @@ app.get('/retrievedata', (req, res) => {
 app.get('/updatesdata/:id', (req, res) => {
     let found = false;
     UpdatesData.forEach(post => {
-        if(req.params.id == post.id){
+        if (req.params.id == post.id) {
             found = true;
             return res.json(post.updates);
         }
     })
-    if(!found) {
+    if (!found) {
+        res.status(400).json('not found');
+    }
+})
+
+//Retrieves the list of signed support for a petition/campaign
+app.get('/reasonssupport/:id', (req, res) => {
+    let found = false;
+    ReasonSupportData.forEach(data => {
+        if (req.params.id == data.id) {
+            found = true;
+            return res.json(data.support);
+        }
+    })
+    
+    if (!found) {
         res.status(400).json('not found');
     }
 })
@@ -35,7 +59,7 @@ app.post('/retrievepersonaldata', (req, res) => {
 });
 
 app.post('/submitform', (req, res) => {
-    const {userID, username, type, title, targetGroup, endDate, targetSupporters, anonymity, tags, description, imageURL} = req.body;
+    const { userID, username, type, title, targetGroup, endDate, targetSupporters, anonymity, tags, description, imageURL } = req.body;
     Data.push({
         type: type,
         id: Data.length + 1,
@@ -54,46 +78,130 @@ app.post('/submitform', (req, res) => {
         numFollowing: 0,
         finished: false,
     })
-    res.json(Data[Data.length-1]); //returns object of the newly created 
+    res.json(Data[Data.length - 1]); //returns object of the newly created 
 })
 
 //updates existing petition/campaign
 app.put('/updateform', (req, res) => {
+    let updated = false;
+    Data.forEach(data => {
+        if(data.id === req.body.id) { //it is the data we want to update
+            data.recipient = req.body.recipient;
+            data.anonymity = req.body.anonymity;
+            data.date_end = req.body.date_end;
+            data.description = req.body.description;
+            data.tags = req.body.tags;
+            data.image = req.body.image;
+            data.targetNum = req.body.targetNum;
+            updated = true;
+            res.json(data);
+        }
+    })
+    
+    if(!updated) {
+        return res.json('Error');
+    }
+})
 
+app.post('/checkifsigned', (req, res) => {
+    let signed = false;
+    userDB.forEach(user => {
+        if(user.userID === req.body.userID && user.supportedIDs.includes(req.body.id)){
+            signed = true;
+            return res.json(true);
+        }
+    })
+
+    if(!signed) {
+        return res.json(false);
+    }
 })
 
 /*Gets user id, checks whether user has already supported, if not, increment
 the support number and add the reason of support (if not empty) into the 
 */
 app.put('/signsupport', (req, res) => {
+    let userFound = false;
+    userDB.forEach(user => {
+        if (req.body.userID === user.userID) {
+            user.supportedIDs.push(req.body.supportID);
+            return res.json('Success');
+        }
+    })
 
+    if(!userFound){
+        res.status(400).json('user not found');
+    }
 })
-
-
 
 //Organizers who want to post an update for their campaign/petition
 app.post('/postupdate', (req, res) => {
+    let posted = false;
+
+    UpdatesData.forEach(obj => {
+        if(obj.id === req.body.id){
+            obj.updates.push({
+                id: obj.updates.length + 1,
+                title: req.body.title,
+                content: req.body.content, 
+                datePosted: new Date(),
+            })
+            res.json('Success');
+        }
+    })
+
+    if(!posted) {
+        res.status(400).json('Error');
+    }
 })
 
+app.put('/victory', (req, res) => {
+    let found = false;
+    Data.forEach(data => {
+        if(data.id === req.body.id 
+            && data.organizerID === req.body.organizerID){
+                data.finished = true;
+                res.json('Success');
+            }
+    })
+
+    if(!found) {
+        res.status(400).json('Error');
+    }
+})
+
+//Self-Explanatory: For deleting a petition/campaign
+app.delete('/delete', (req, res) => {
+    let found = false;
+    for(let i = 0; i < Data.length; i++) {
+        if(Data[i].id === req.body.id 
+            && Data[i].organizerID === req.body.organizerID) {
+                Data.splice(i, 1);
+                found = true;
+                res.json('Success');
+                break;
+            }
+    }
+
+    if(!found) {
+        res.status(400).json('Error');
+    }
+})
+
+//Self-Explanatory: For sign in options 
 app.post('/signin', (req, res) => {
     let signedIn = false;
     for (let user of userDB) {
-        if(user.nusID === req.body.id && user.password === req.body.password){
-            res.json({success: true, username: user.name});
+        if (user.userID === req.body.id && user.password === req.body.password) {
+            res.json({ success: true, username: user.name });
             signedIn = true;
             break;
         }
     }
 
-    if(!signedIn) { //not signed in
+    if (!signedIn) { //not signed in
         res.status(400).json('Error');
     }
 });
-
-/*Will code in the future
-app.post('/follow', (req, res) => {
-
-}) */
-
 
 app.listen(3001); //port number - 3000 is used for our frontend web

@@ -1,17 +1,22 @@
-export const userDB = [ //Fake databse for testing login. Delete after NUS OpenID API is added
+const userDB = [ //Fake databse for testing login. Delete after NUS OpenID API is added
 	{
-        nusID: 'admin',
+        userID: 'admin',
         name: 'admin',
         password: '123',
+        supportedIDs: [],
     },
     {
-        nusID: 'e0309595',
+        userID: 'e0309595',
         name: 'dexun',
         password: 'xd123',
+        supportedIDs: [1,5],
     },
     {
-        nusID: 'e0322822',
+        userID: 'e0322822',
         name: 'phaedra',
         password: '123',
+        supportedIDs: [],
     }
 ];
+
+module.exports = userDB;

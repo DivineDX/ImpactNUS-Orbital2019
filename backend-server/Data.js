@@ -1,4 +1,4 @@
-export const Data = [
+const Data = [
     {
         type: "petition",
         id: 1,
@@ -8,7 +8,7 @@ export const Data = [
         organizerID: 'e0309595',
         anonymity: true,
         date_started: new Date(2019, 5, 30),
-        date_end: new Date (2019, 10, 30),
+        date_end: '',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ultricies ante, vitae molestie libero. In id cursus felis. Sed imperdiet vehicula ex, eget venenatis augue. Integer ornare, tellus non.",
         tags: ["Hostel Living", "Environment"],
         image: "https://www.recycleaway.com/assets/images/product-photos/Iowa%20Rotocast/RB-1_Triple.jpg",
@@ -44,7 +44,7 @@ export const Data = [
         organizerID: 'admin',
         anonymity: false,
         date_started: new Date(2019, 5, 19),
-        date_end: new Date(2019, 6, 15),
+        date_end: '',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in ligula rhoncus, vehicula sem ac, congue risus. Mauris eget quam nisi. Sed tortor velit, tincidunt ut neque vel, malesuada euismod.",
         tags: ["Student Life"],
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd8Ud-aJvfnJf7TKbcUZkGdnvRlFzqPIK28J8iEXopNsfvN2arhg",
@@ -80,7 +80,7 @@ export const Data = [
         organizerID: 'e0309595',
         anonymity: false,
         date_started: new Date(2019, 5, 7),
-        date_end: new Date(2019, 8, 15),
+        date_end: '',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer euismod, ante ut dignissim scelerisque, nisi libero venenatis magna, id ullamcorper ante magna nec dolor. Suspendisse molestie ex justo, tempus luctus.",
         tags: ["Academic"],
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpjT_DHspqCI2JptaUg_L4fXlzHgoasHjIvbFljRckf_U2aVZOuA",
@@ -108,3 +108,5 @@ export const Data = [
         finished: false,
     },
 ];
+
+module.exports = Data;
