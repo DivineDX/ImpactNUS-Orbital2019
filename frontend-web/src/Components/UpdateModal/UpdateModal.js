@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Dropdown, Modal } from 'semantic-ui-react'
-import UpdateForm from './UpdateForm.js'
+import { Dropdown, Modal, TextArea, Form, Button } from 'semantic-ui-react'
+
 
 class UpdateModal extends Component {
     render() {
@@ -10,7 +10,18 @@ class UpdateModal extends Component {
             <Modal trigger={<Dropdown.Item className = 'hoverLink'>{buttonWord}</Dropdown.Item>}>
                 <Modal.Header className='tc'> Post Update </Modal.Header>
                 <Modal.Content>
-                    <UpdateForm />
+                    <Form size='huge'>
+                        <Form.Field>
+                            <h1> Title {title} </h1>
+                        </Form.Field>
+                        <Form.Field>
+                            <h1> Update </h1>
+                            <TextArea
+                                // focus value = {currState.description} 
+                                onChange={(event) => inputChange(event, 'description')} style={{ minHeight: 200 }} />
+                        </Form.Field>
+                        <Button labelPosition='right' icon='right chevron' content='Update' />
+                    </Form>
                 </Modal.Content>
             </Modal>
         );

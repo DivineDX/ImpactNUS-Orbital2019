@@ -13,7 +13,7 @@ const DashboardDropDown = (props) => {
         <Dropdown text='Post Update' icon='gavel' floating labeled button className='icon'>
             <Dropdown.Menu>
                 <Dropdown.Item >
-                    <Link to="/editform" className="forceBlack">
+                    <Link to="/startform" className="forceBlack">
                         {type === 'petition' ? "Edit Petition" : "Edit Campaign"}
                     </Link>
                 </Dropdown.Item>

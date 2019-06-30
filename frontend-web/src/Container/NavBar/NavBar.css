@@ -33,4 +33,8 @@
     display: flex; 
     flex-direction: column;
   }
-} 
+ 
+  /* .ui.menu:not(.vertical) .right.menu {
+    margin-left: 0px;
+  } */ 
+}

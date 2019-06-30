@@ -25,7 +25,7 @@ class StartForm extends Component {
             anonymity: false,
             tags: [],
             description: '',
-            imageURL: ''
+            imageURL: '',
         }
     }
 
@@ -43,7 +43,7 @@ class StartForm extends Component {
             anonymity: false,
             tags: [],
             description: '',
-            imageURL: ''
+            imageURL: '',
         });
     }
 
@@ -144,7 +144,7 @@ class StartForm extends Component {
 
     editForm = (app) => {
         app.put('/updateform' , (req, res) => {
-            let updated = false; 
+            let updating = false;
             Data.forEach(data => {
                 if(data.id === req.body.id) {
                     data.recipient = req.body.recipient;
@@ -154,12 +154,12 @@ class StartForm extends Component {
                     data.tags = req.body.tags;
                     data.image = req.body.image;
                     data.targetSupporters = req.body.targetSupporters;
-                    updated = true;
+                    updating = true;
                     res.json(data);
                 }
             })
 
-            if (!updated) {
+            if (!updating) {
                 return res.json('Error');
             }
         })
@@ -180,8 +180,6 @@ class StartForm extends Component {
                             toggleType={this.toggleType}
                             inputChange={this.onInputChange}
                             currState={this.state} 
-                            id = {this.id}
-                            editForm = {this.editForm}
                             />}
                     {this.state.currentStep === 2 &&
                         <FormStep2
