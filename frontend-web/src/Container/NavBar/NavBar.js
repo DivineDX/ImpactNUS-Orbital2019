@@ -56,7 +56,7 @@ class NavBar extends Component {
                     </div>
                 </div>
 
-                <Menu.Menu position='right' className='right'>
+                <Menu.Menu position='right' id='right'>
                     <SearchBar searchChange={this.onSearchChange} className='search'/>
                     <Menu.Item>
                         <div>

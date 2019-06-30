@@ -42,6 +42,7 @@ export const Data = [
         numSupporters: 130,
         numFollowing: 100,
         finished: false,
+        updating: false,
     },
     {  
         type: "campaign",
@@ -59,6 +60,8 @@ export const Data = [
         numSupporters: 150,
         numFollowing: 300,
         finished: false,
+        updating: false,
+
     },
     {  
         type: "petition",
@@ -76,6 +79,8 @@ export const Data = [
         numSupporters: 250,
         numFollowing: 150,
         finished: false,
+        updating: false,
+
     },
     {  
         type: "campaign",
@@ -93,6 +98,8 @@ export const Data = [
         numSupporters: 700,
         numFollowing: 300,
         finished: true,
+        updating: false,
+
     },
     {  
         type: "petition",
@@ -110,6 +117,8 @@ export const Data = [
         numSupporters: 150,
         numFollowing: 200,
         finished: false,
+        updating: false,
+
     },
     {  
         type: "campaign",
@@ -127,5 +136,7 @@ export const Data = [
         numSupporters: 150,
         numFollowing: 300,
         finished: false,
+        updating: false,
+
     },
 ]
