@@ -7,7 +7,7 @@ const Data = [
         organizer: "De Xun",
         organizerID: 'e0309595',
         anonymity: true,
-        date_started: new Date(2019, 5, 30),
+        date_started: new Date(2019, 0, 30),
         date_end: '',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ultricies ante, vitae molestie libero. In id cursus felis. Sed imperdiet vehicula ex, eget venenatis augue. Integer ornare, tellus non.",
         tags: ["Hostel Living", "Environment"],

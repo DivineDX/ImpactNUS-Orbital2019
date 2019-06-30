@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import {DateToString} from '../DateConverter/DateToString';
 
 const UpdatesSlider = ({ updateData }) => (
     <div>
@@ -16,7 +17,7 @@ const UpdatesSlider = ({ updateData }) => (
                 return <div className = 'mb2'>
                     <p className = 'f4 b'>{data.title}</p>
                     <p>{data.content}</p>
-                    {/* <p className = 'i'>{data.datePosted.toDateString().split(' ').slice(1).join(' ')}</p> */}
+                    <p className = 'i'>{DateToString(data.datePosted)}</p>
                 </div>
             })}
 

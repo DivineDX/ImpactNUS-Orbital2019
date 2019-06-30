@@ -1,4 +1,5 @@
 import React from 'react';
+import {DateToString} from '../DateConverter/DateToString';
 
 const SupportCard = ({ name, desc, reason, date, anonymity}) => (
     <article class="w-100 center mh4 mv3 br3 hidden ba b--black-10">
@@ -12,7 +13,7 @@ const SupportCard = ({ name, desc, reason, date, anonymity}) => (
             <p class="f6 lh-copy">
                 {reason}
             </p>
-            {/* <p className = 'i'>{date.toDateString().split(' ').slice(1).join(' ')}</p> */}
+            <p className = 'i'>{DateToString(date)}</p>
 
         </div>
     </article>

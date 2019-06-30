@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import FollowButton from '../../Components/Buttons/FollowButton';
+import {DateSort} from '../../Components/DateConverter/DateSort';
 
 class Bulletin extends Component {
 	constructor() {
 		super()
 		this.state = {
+			filter: 'all', //Enums: all, petitions and campaigns
+			category: 'Popular', //Popular, Recent and Victories
 			origData: [],
-			filteredData: [],
 		}
 	}
 
@@ -18,47 +20,54 @@ class Bulletin extends Component {
 			.then(data => {
 				this.setState({
 					origData: data,
-					filteredData: data,
-				})
+				});
 			});
 	}
 
-	handleFilterClick = (option) => {
-		let filteredData = this.state.origData.filter(data => {
-			if (option === 'all') {
+	filterData = (arr, filter) => { //all, petition or campaign
+		return arr.filter(data => {
+			if (filter === 'all') {
 				return data;
-			} else {
-				return data.type === option;
+			} else { //petition or campaign
+				return data.type === filter;
 			}
-		});
-
-		this.setState({
-			filteredData: filteredData,
 		});
 	}
 
+	selectCategory = (arr, cat) => {
+		if (cat === 'Popular') {
+			// console.log("Popular Running");
+			return arr.sort((a, b) => b.numSupporters - a.numSupporters);
+		} else if (cat === 'Recent') {
+			return arr.sort((a,b) => DateSort(a.date_started,b.date_started));
+		} else if (cat === 'Victories') {
+			return arr.filter(data => data.finished === true);
+		}
+	}
+
+	handleFilterClick = (filter) => {
+		this.setState({ filter: filter });
+	}
+
+	handleCategoryClick = (cat) => { //Only for Popular and Recent (Sorting, not filtering)
+		this.setState({ category: cat });
+	}
+
 	render() {
+		const displayedData = this.selectCategory(this.filterData(this.state.origData, this.state.filter), this.state.category);
 		return (	 //acts as a card list here
 			<div>
 				<div className="w-75 pt5 center">
 					<h1 className="tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
-					<BulletinMenuBar handleFilterClick={this.handleFilterClick} />
+					<BulletinMenuBar
+						handleFilterClick={this.handleFilterClick}
+						handleCategoryClick={this.handleCategoryClick}
+					/>
 				</div>
 
-				{this.state.filteredData.map((data) => {
+				{displayedData.map((data) => {
 					return <Card
-						loadedData = {data}
-						/*type={data.type}
-						title={data.title}
-						recipient={data.recipient}
-						organizer={data.organizer}
-						anonymity={data.anonymity}
-						date_started={data.date_started}
-						description={data.description}
-						image={data.image}
-						targetNum={data.targetNum}
-						numSupporters={data.numSupporters}
-						numFollowing={data.numFollowing}*/>
+						loadedData={data}>
 						<FollowButton />
 					</Card>
 				})}

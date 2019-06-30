@@ -11,6 +11,7 @@ export default class BulletinMenuBar extends Component {
 
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
+        this.props.handleCategoryClick(name);
     }
 
     dropDownClick = (option) => {

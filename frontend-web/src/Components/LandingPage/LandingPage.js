@@ -8,6 +8,7 @@ import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
 import '../../Container/NonExistentPage/NonExistentPage';
 import './LandingPage.css';
 import NonExistentPage from '../../Container/NonExistentPage/NonExistentPage';
+import {DateToString} from '../DateConverter/DateToString';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -53,7 +54,6 @@ class LandingPage extends Component {
 
     render() {
         const { type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished } = this.state.loadedData;
-
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
@@ -73,8 +73,9 @@ class LandingPage extends Component {
                             <div id="subContainer" className='flex flex-row items-center'>
                                 <div className='w-60 tl'>
                                     <nobr>By: <b>{organizer}</b></nobr>
-                                    {/* <p>Created on: {date_startedtoDateString().split(' ').slice(1).join(' ')}</p> */}
+                                    <p>Created on: {DateToString(date_started)}</p>
                                 </div>
+
                                 <div className='w-40'>
                                     {type === 'petition'
                                         ? <Button color='orange' floated='right' circular>Sign Petition</Button>
@@ -109,7 +110,7 @@ class LandingPage extends Component {
                             Updates
                         <hr className='mw4 bb bw1 b--black-10'></hr>
                         </p>
-                        <UpdatesSlider updateData = {this.state.loadedUpdateData}/>
+                        <UpdatesSlider updateData={this.state.loadedUpdateData} />
                     </div>
 
                     <div id="Reasons" className='pv3 ph2'>
