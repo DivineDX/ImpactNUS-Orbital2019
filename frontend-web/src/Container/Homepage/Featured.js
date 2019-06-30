@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Card from '../../Components/Card/Card';
+import FeaturedCard from '../../Components/Card/FeaturedCard';
+import './Featured.css'
 
 class Featured extends Component{
 	constructor(props) {
@@ -21,11 +22,13 @@ class Featured extends Component{
 		return (	 //acts as a card list here
 			<div>
                 <h1 className = 'bb b--black-10 w-70 pt4 tc center baskerville fw5'>Featured</h1>
+				<div id = 'cardd'>
 				{this.state.displayData.map((data) => {
-					return <Card
+					return <FeaturedCard
 							loadedData = {data}						
 							/>
 				})}
+				</div>
 			</div>
     	);
   }

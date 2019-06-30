@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Button, Checkbox, Form, TextArea } from 'semantic-ui-react';
 
 class LoginForm extends React.Component {
     constructor(props) { //takes in loginProp
@@ -38,12 +38,12 @@ class LoginForm extends React.Component {
         return (
             <Form size='huge'>
                 <Form.Field>
-                    <text placeholder= {title}/>
+                    {/* <text placeholder= {title}/> */}
                 </Form.Field>
                 <Form.Field>
                     <h1> Update </h1>
                     <TextArea>
-                        // focus value = {currState.description} 
+                        {/* // focus value = {currState.description}  */}
                         <input placeholder='Update' onChange = {this.onUpdate}/>
                     </TextArea>
                 </Form.Field>

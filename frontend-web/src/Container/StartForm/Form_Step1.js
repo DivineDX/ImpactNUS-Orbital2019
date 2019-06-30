@@ -3,13 +3,19 @@ import { Button, Form, Input } from 'semantic-ui-react'
 
 class Form_Step1 extends Component {
     render() {
-        const {navButton, toggleType, inputChange, currState} = this.props;
+        const {navButton, toggleType, inputChange, currState, id} = this.props;
         return (
             <Form size='huge'>
                 <Form.Field>
                     <h1>State your option</h1>
                     <Button.Group size='massive' >
-                        <Button disabled = {currState.isEditing} toggle active={currState.type === 'petition'} onClick={() => toggleType('petition')}>Petition</Button>
+                        <Button 
+                            disabled = {currState.isEditing} 
+                            toggle active={currState.type === 'petition'}
+                            onClick={() => toggleType('petition')}
+                        > 
+                            Petition
+                        </Button>
                         <Button.Or />
                         <Button disabled = {currState.isEditing} toggle active={currState.type === 'campaign'} onClick={() => toggleType('campaign')}>Campaign</Button>
                     </Button.Group>
