@@ -22,7 +22,7 @@ class Featured extends Component{
 		return (	 //acts as a card list here
 			<div>
                 <h1 className = 'bb b--black-10 w-70 pt4 tc center baskerville fw5'>Featured</h1>
-				<div id = 'card'>
+				<div id = 'cardd'>
 				{this.state.displayData.map((data) => {
 					return <FeaturedCard
 							loadedData = {data}						

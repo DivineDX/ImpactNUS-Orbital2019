@@ -24,7 +24,7 @@ const Card = (props) => {
 
     return (
         <div className="shadow-4 w-100">
-            <img src={image} className='' id="cardImage" alt="IMG" />
+            <img src={image} className='' id="cardImg" alt="IMG" />
             <div id = "wrapContent">
                 <div className="">
                     <h3 className="">
