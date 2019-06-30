@@ -145,15 +145,35 @@ app.post('/checkifsigned', (req, res) => {
 /*Gets user id, checks whether user has already supported, if not, increment
 the support number and add the reason of support (if not empty) into the 
 */
-app.put('/signsupport', (req, res) => {
+app.post('/signsupport', (req, res) => {
     let userFound = false;
     userDB.forEach(user => {
         if (req.body.userID === user.userID) {
-            user.supportedIDs.push(req.body.supportID);
-            return res.json('Success');
+            user.supportedIDs.push(req.body.id); //id of the petition/campaign     
+            ReasonSupportData.forEach(data => {
+                if(data.id === req.body.id) {
+                    data.support.push({
+                        id: data.support[data.support.length-1].id+1,
+                        reason: req.body.reason,
+                        datePosted: new Date(),
+                        supporter: req.body.username,
+                        description: req.body.description,
+                        anonymous: req.body.anonymity,
+                    })
+                    userFound = true;
+                    return res.json('Success');
+                }
+            })
         }
     })
-
+    
+    if(userFound) {
+        Data.forEach(data => {
+            if(data.id === req.body.id) {
+                data.numSupporters++;
+            }
+        })
+    }
     if (!userFound) {
         res.status(400).json('user not found');
     }

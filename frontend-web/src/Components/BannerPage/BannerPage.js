@@ -22,10 +22,22 @@ const BannerPage = ({ isSignedIn, loginUser }) => {
                         <ButtonModal loginProp={loginUser} buttonWord={"Start Campaign"} />
                     </div>
                     : <div>
-                        <Link to="/startform" className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                        <Link to= {{
+                            pathname: "/startform",
+                            state: {
+                                predefinedType: 'petition'
+                            }
+                        }}
+                            className="pillButton f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
                             Start Petition
                         </Link>
-                        <Link to="/startform" className="f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                        <Link to= {{
+                            pathname: "/startform",
+                            state: {
+                                predefinedType: 'campaign'
+                            }
+                        }}
+                            className="pillButton f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
                             Start Campaign
                         </Link>
                     </div>

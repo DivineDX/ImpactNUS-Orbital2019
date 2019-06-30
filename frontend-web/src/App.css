@@ -2,6 +2,11 @@
     padding-top: 72px;
 }
 
+button:disabled {
+    background: white;
+    color: grey;
+    text-decoration: line-through;
+}
 /* Mobile Screens */
 @media screen and (max-width: 700px) {
     .body {

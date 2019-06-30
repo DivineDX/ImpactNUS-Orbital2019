@@ -7,13 +7,13 @@ const userDB = [ //Fake databse for testing login. Delete after NUS OpenID API i
     },
     {
         userID: 'e0309595',
-        name: 'dexun',
+        name: 'De Xun',
         password: 'xd123',
         supportedIDs: [1,5],
     },
     {
         userID: 'e0322822',
-        name: 'phaedra',
+        name: 'Phaedra',
         password: '123',
         supportedIDs: [],
     }

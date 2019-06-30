@@ -29,6 +29,11 @@ class StartForm extends Component {
         }
     }
 
+    componentDidMount() {
+        const {predefinedType} = this.props.location.state;
+        this.setState({type: predefinedType});
+    }
+
     resetDefault = () => {
         this.setState({
             finished: false,

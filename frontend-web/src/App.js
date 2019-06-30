@@ -15,6 +15,7 @@ import ContactUs from './Components/FooterItems/ContactUs/ContactUs';
 import Homepage from './Container/Homepage/Homepage';
 import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
+import NonExistentPage from './Container/NonExistentPage/NonExistentPage';
 
 class App extends Component {
 	constructor() {
@@ -25,13 +26,6 @@ class App extends Component {
 			username: '', 
 		}
 	}
-
-	/*for testing purposes
-	componentDidMount() {
-		fetch("http://localhost:3001")
-			.then(resp => resp.json())
-			.then();
-	} */
 	
 	retrieveUserInfo = () => {
 		if(this.state.isSignedIn) {
@@ -53,8 +47,6 @@ class App extends Component {
 	signoutUser = () => {
 		this.setState({ isSignedIn: false, userID: '', username: '', }); //empty user
 	}
-
-
 
 	render() {
 		const isSignedIn = this.state.isSignedIn;
@@ -78,8 +70,9 @@ class App extends Component {
 							<Route path = "/howitworks" component={HowItWorks} />
 							<Route path = "/faq" component={FAQ} />
 							<Route path = "/contactus" component={ContactUs} />
-							<Route path = "/pg/:id" component = {LandingPage}/>
+							<Route path = "/pg/:id" render = {(props) => <LandingPage {...props} userID = {this.state.userID} username = {this.state.username}/>}/>
 							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true} userID = {this.state.userID} username = {this.state.username}/>}/>
+							<Route path = "*" component = {NonExistentPage}/>
 						</Switch>
 					</div>
 					{/* <Footer/> */}

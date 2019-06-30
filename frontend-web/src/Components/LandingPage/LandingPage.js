@@ -8,13 +8,14 @@ import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
 import '../../Container/NonExistentPage/NonExistentPage';
 import './LandingPage.css';
 import NonExistentPage from '../../Container/NonExistentPage/NonExistentPage';
-import {DateToString} from '../DateConverter/DateToString';
+import { DateToString } from '../DateConverter/DateToString';
 
 class LandingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             notFound: true,
+            id: '',
             loadedData: {},
             loadedUpdateData: [],
             loadedSupportData: [],
@@ -23,7 +24,7 @@ class LandingPage extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-
+        this.setState({id: id});
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => {
                 if (resp.status === 200) { //data is loaded
@@ -127,7 +128,7 @@ class LandingPage extends Component {
                             Sign this {type}
                             <hr className='mw5 bb bw1 b--black-10'></hr>
                         </p>
-                        <SupportForm />
+                        <SupportForm userID = {this.props.userID} username = {this.props.username} id = {this.state.id}/>
                     </div>
 
                 </article>
