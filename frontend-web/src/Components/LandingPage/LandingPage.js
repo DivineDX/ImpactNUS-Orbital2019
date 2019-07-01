@@ -24,7 +24,7 @@ class LandingPage extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.setState({id: id});
+        this.setState({ id: id });
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => {
                 if (resp.status === 200) { //data is loaded
@@ -53,9 +53,19 @@ class LandingPage extends Component {
             });
     }
 
+    refreshSupportData() {
+        fetch(`http://localhost:3001/reasonssupport/${this.state.id}`)
+            .then(resp => {
+                return resp.json();
+            })
+            .then(data => {
+                this.setState({ loadedSupportData: data });
+            });
+    }
+
     render() {
         //unused consts: date-end, tags, numFollowing, finished
-        const { type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters} = this.state.loadedData;
+        const { type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters } = this.state.loadedData;
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
@@ -74,7 +84,7 @@ class LandingPage extends Component {
                             <p className="i">Signatures: <b>{numSupporters}</b> of <b>{targetNum}</b></p>
                             <div id="subContainer" className='flex flex-row items-center'>
                                 <div className='w-60 tl'>
-                                    <nobr>By: <b>{ anonymity ? "Anonymous" : organizer}</b></nobr>
+                                    <nobr>By: <b>{anonymity ? "Anonymous" : organizer}</b></nobr>
                                     <p>Created on: {DateToString(date_started)}</p>
                                 </div>
 
@@ -118,10 +128,13 @@ class LandingPage extends Component {
 
                     <div id="SupportForm" className='pv3 ph2 bg-washed-green'>
                         <p className='f3'>
-                            Sign this {type}
+                            {type === 'petition'
+                                ? "Sign this petition"
+                                : "Support this campaign"
+                            }
                             <hr className='mw5 bb bw1 b--black-10'></hr>
                         </p>
-                        <SupportForm userID = {this.props.userID} username = {this.props.username} id = {this.state.id}/>
+                        <SupportForm refresh = {this.refreshSupportData.bind(this)} userID={this.props.userID} username={this.props.username} id={this.state.id} />
                     </div>
 
                 </article>

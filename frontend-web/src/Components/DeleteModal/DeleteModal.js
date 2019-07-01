@@ -22,6 +22,7 @@ class DeleteModal extends Component {
             .then(data => {
                 if (data === 'Success') {
                     this.setState({clicked: true});
+                    this.props.refresh();
                 }
             })
     }

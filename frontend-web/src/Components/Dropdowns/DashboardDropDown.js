@@ -7,18 +7,6 @@ import DeleteModal from '../../Components/DeleteModal/DeleteModal';
 import './DashboardDropDown.css';
 
 class DashboardDropDown extends Component {
-    constructor() {
-        super();
-        this.state = {
-            finished: false,
-        }
-    }
-
-    componentDidMount() {
-        if(this.props.finished) {
-            this.setState({finished: true});
-        }
-    }
 
     render() {
         const { type, id, userID } = this.props;
@@ -34,13 +22,13 @@ class DashboardDropDown extends Component {
                     <Dropdown.Item>
                         <UpdateModal id={id} buttonWord={"Post Update"} className="hoverLink" />
                     </Dropdown.Item>
-                    <Dropdown.Item disabled={this.state.finished}>
-                        <VictoryModal id={id} userID={userID} buttonWord={"Declare Victory"} className="hoverLink" />
+                    <Dropdown.Item disabled={this.props.finished}>
+                        <VictoryModal refresh = {this.props.refresh} id={id} userID={userID} buttonWord={"Declare Victory"} className="hoverLink" />
                     </Dropdown.Item>
                     <Dropdown.Item>
                         {type === 'petition'
-                            ? <DeleteModal userID={userID} id={id} type={"petition"} className="hoverLink" />
-                            : <DeleteModal userID={userID} id={id} type={"campaign"} className="hoverLink" />
+                            ? <DeleteModal refresh = {this.props.refresh} userID={userID} id={id} type={"petition"} className="hoverLink" />
+                            : <DeleteModal refresh = {this.props.refresh} userID={userID} id={id} type={"campaign"} className="hoverLink" />
                         }
                     </Dropdown.Item>
                 </Dropdown.Menu>

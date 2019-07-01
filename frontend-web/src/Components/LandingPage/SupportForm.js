@@ -80,6 +80,7 @@ class SupportForm extends Component {
         .then(data => {
             if(data === 'Success'){
                 this.setState({alreadySigned: true});
+                this.props.refresh();
             }                
         })
     }

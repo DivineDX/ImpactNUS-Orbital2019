@@ -22,6 +22,7 @@ class VictoryModal extends Component {
             .then(data => {
                 if (data === 'Success') {
                     this.setState({ clickedVictory: true });
+                    this.props.refresh();
                 }
             })
     }
