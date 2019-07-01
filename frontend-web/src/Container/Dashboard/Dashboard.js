@@ -40,7 +40,7 @@ class Dashboard extends Component {
                     return <Card
                         loadedData={data}
                     >
-                        <DashboardDropDown type={data.type} />
+                        <DashboardDropDown finished =  {data.finished} type={data.type} id = {data.id} userID = {this.state.userID}/>
                     </Card>
                 })}
             </div>

@@ -5,7 +5,8 @@ import './Card.css';
 
 const Card = (props) => {
     const loadedData = props.loadedData;
-    const {id, type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished} = loadedData;
+    //unsued const: date_started,date_end,  description, numFollowing, finished, tags
+    const {id, type, title, recipient, organizer, anonymity, image, targetNum, numSupporters} = loadedData;
     let footer = '';
     let sub = '';
 

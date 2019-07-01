@@ -166,7 +166,7 @@ app.post('/signsupport', (req, res) => {
             })
         }
     })
-    
+
     if(userFound) {
         Data.forEach(data => {
             if(data.id === req.body.id) {
@@ -187,10 +187,11 @@ app.post('/postupdate', (req, res) => {
         if (obj.id === req.body.id) {
             obj.updates.push({
                 id: obj.updates[obj.updates.length - 1].id + 1,
-                title: req.body.title,
-                content: req.body.content,
+                title: req.body.updateTitle,
+                content: req.body.updateContent,
                 datePosted: new Date(),
             })
+            posted = true;
             res.json('Success');
         }
     })
@@ -200,12 +201,14 @@ app.post('/postupdate', (req, res) => {
     }
 })
 
+
 app.put('/victory', (req, res) => {
     let found = false;
     Data.forEach(data => {
         if (data.id === req.body.id
             && data.organizerID === req.body.organizerID) {
             data.finished = true;
+            found = true;
             res.json('Success');
         }
     })

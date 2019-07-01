@@ -54,7 +54,8 @@ class LandingPage extends Component {
     }
 
     render() {
-        const { type, title, recipient, organizer, anonymity, date_started, date_end, description, tags, image, targetNum, numSupporters, numFollowing, finished } = this.state.loadedData;
+        //unused consts: date-end, tags, numFollowing, finished
+        const { type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters} = this.state.loadedData;
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
@@ -73,7 +74,7 @@ class LandingPage extends Component {
                             <p className="i">Signatures: <b>{numSupporters}</b> of <b>{targetNum}</b></p>
                             <div id="subContainer" className='flex flex-row items-center'>
                                 <div className='w-60 tl'>
-                                    <nobr>By: <b>{organizer}</b></nobr>
+                                    <nobr>By: <b>{ anonymity ? "Anonymous" : organizer}</b></nobr>
                                     <p>Created on: {DateToString(date_started)}</p>
                                 </div>
 
@@ -88,15 +89,7 @@ class LandingPage extends Component {
                     </div>
 
                     <div id="description" className='pa3 mv3'>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat elit lectus, accumsan egestas libero scelerisque at. Nullam et velit ligula. Integer quis ultrices mauris. Phasellus eget maximus purus, varius finibus nisi. Etiam aliquet malesuada erat, porta gravida lectus efficitur in. Sed vulputate et est a suscipit. Curabitur porttitor faucibus feugiat. Aenean euismod quis elit nec varius.
-                    </p>
-                        <p>
-                            In hendrerit, lorem a pulvinar tempor, tortor libero vulputate nulla, et lacinia massa nisi sed justo. Morbi non eros metus. Ut maximus eget lorem nec tempus. Nam ipsum enim, scelerisque sed sem vitae, efficitur vestibulum quam. Aliquam ullamcorper venenatis interdum. Duis tristique lorem purus, ac molestie enim pretium vel. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                    </p>
-                        <p>
-                            Vestibulum ut faucibus ex. Sed suscipit sem ut quam pellentesque, molestie scelerisque nibh vulputate. Fusce massa arcu, dapibus in vehicula sed, ornare porttitor enim. Quisque et purus velit. Ut fringilla, augue eu egestas ultrices, sapien turpis semper dui, ac dictum nisi est ut urna. Vestibulum quis sem mattis, imperdiet sem ut, hendrerit lacus. Maecenas nisl neque, posuere in feugiat sed, iaculis quis est. Duis lobortis, massa et suscipit interdum, odio ipsum facilisis velit, sit amet placerat augue nisi et urna. Sed hendrerit eros eget felis vestibulum, quis varius enim euismod. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper mi erat, vitae pretium nulla pretium ut. Suspendisse sodales tempor posuere. Phasellus vitae elit lorem. Nunc dapibus ante ut lectus posuere ultricies. Praesent bibendum lorem ut molestie elementum.
-                    </p>
+                        <p>{description}</p>
                     </div>
 
                     {type === 'petition' &&

@@ -8,59 +8,66 @@ class UpdateModal extends Component {
         super(props);
         this.state = {
             updateTitle: '',
-            updateDescription: '',
+            updateContent: '',
+            updated: false,
         }
     }
-    
-    onUpdate = () => { //modify this after database is coded
-        fetch('http://localhost:3001/update', {
+
+    submitUpdate = () => { //modify this after database is coded
+        fetch('http://localhost:3001/postupdate', {
             method: 'post',
-            headers: {'Content-type': 'application/json'},
+            headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
+                id: Number(this.props.id),
                 updateTitle: this.state.updateTitle,
-                updateDescription: this.state.updateDescription,
+                updateContent: this.state.updateContent,
             })
         })
-        .then(resp => resp.json())
-        .then(data => {
-            // this.resetDefault();
-            this.setState({updating: true});
-            console.log(data); //Object Data of the created petition/campaign
-    })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data === 'Success') {
+                    this.setState({ updated: true });
+                }
+            })
     }
 
     onInputChange = (event, category) => {
         // console.log("input Change", category);
         switch (category) {
-            case "updateTitle":
+            case "title":
                 this.setState({ updateTitle: event.target.value }); //petition or campaign 
                 break;
-            case "description":
-                this.setState({ updateDescription: event.target.value }); //petition or campaign 
+            case "content":
+                this.setState({ updateContent: event.target.value }); //petition or campaign 
+                break;
+            default:
                 break;
         }
     }
 
     render() {
-        const { currState, buttonWord, title } = this.props;
-
+        const { buttonWord } = this.props;
         return (
-            <Modal trigger={<Dropdown.Item className = 'hoverLink'>{buttonWord}</Dropdown.Item>}>
+            <Modal trigger={<Dropdown.Item className='hoverLink'>{buttonWord}</Dropdown.Item>}>
                 <Modal.Header className='tc'> Post Update </Modal.Header>
                 <Modal.Content>
                     <Form size='huge'>
                         <Form.Field>
-                            <h1> Title {title} </h1>
-                            <input type = 'text' placeholder = 'Title your update' onChange={(event) => this.onInputChange(event, 'updateTitle')}/>
+                            <h3>Title</h3>
+                            <input type='text' placeholder='Title your update' onChange={(event) => this.onInputChange(event, 'title')} />
                         </Form.Field>
                         <Form.Field>
-                            <h1> Update </h1>
-                            <textarea placeholder = "Updates" 
-                            onChange={(event) => this.onInputChange(event, 'updateDescription')} style={{ minHeight: 200 }} />
+                            <h3>Description of Update</h3>
+                            <textarea placeholder="Updates"
+                                onChange={(event) => this.onInputChange(event, 'content')} style={{ minHeight: 200 }} />
                         </Form.Field>
-                        <Link to="/">
-                            <Button labelPosition='right' icon='right chevron' content='Update'/>
+                        <Link to="/dashboard">
+                            <Button disabled={this.state.updated} onClick={() => this.submitUpdate()} labelPosition='right' icon='right chevron' content='Update' />
                         </Link>
+                        {   this.state.updated
+                            ?  <h3>Update posted! Click anywhere out of the modal to exit</h3>
+                            : <div></div>
+                        }
                     </Form>
                 </Modal.Content>
             </Modal>

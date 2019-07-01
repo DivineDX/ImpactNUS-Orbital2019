@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'semantic-ui-react'
 
 class Form_Step1 extends Component {
     render() {
-        const {navButton, toggleType, inputChange, currState, id} = this.props;
+        const {navButton, toggleType, inputChange, currState} = this.props;
         return (
             <Form size='huge'>
                 <Form.Field>

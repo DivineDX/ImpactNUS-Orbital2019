@@ -4,7 +4,8 @@ import './LoginPage.css';
 
 class LoginPage extends React.Component {
     render() {
-        const { isSignedIn, loginUser } = this.props;
+        //unused prop: isSignedIn
+        const {loginUser } = this.props;
 
         return (
             <div className='' id=''>
