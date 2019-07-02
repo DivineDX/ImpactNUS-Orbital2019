@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react';
 import UpdateModal from '../../Components/UpdateModal/UpdateModal'
@@ -15,7 +15,13 @@ class DashboardDropDown extends Component {
             <Dropdown text='Choose Option' icon='gavel' floating labeled button className='icon'>
                 <Dropdown.Menu>
                     <Dropdown.Item >
-                        <Link to="/startform" className="forceBlack">
+                        <Link to={{
+                            pathname: "/startform",
+                            state: {
+                                editing: true,
+                                id: id,
+                            }
+                        }} className="forceBlack">
                             {type === 'petition' ? "Edit Petition" : "Edit Campaign"}
                         </Link>
                     </Dropdown.Item>
@@ -23,12 +29,12 @@ class DashboardDropDown extends Component {
                         <UpdateModal id={id} buttonWord={"Post Update"} className="hoverLink" />
                     </Dropdown.Item>
                     <Dropdown.Item disabled={this.props.finished}>
-                        <VictoryModal refresh = {this.props.refresh} id={id} userID={userID} buttonWord={"Declare Victory"} className="hoverLink" />
+                        <VictoryModal refresh={this.props.refresh} id={id} userID={userID} buttonWord={"Declare Victory"} className="hoverLink" />
                     </Dropdown.Item>
                     <Dropdown.Item>
                         {type === 'petition'
-                            ? <DeleteModal refresh = {this.props.refresh} userID={userID} id={id} type={"petition"} className="hoverLink" />
-                            : <DeleteModal refresh = {this.props.refresh} userID={userID} id={id} type={"campaign"} className="hoverLink" />
+                            ? <DeleteModal refresh={this.props.refresh} userID={userID} id={id} type={"petition"} className="hoverLink" />
+                            : <DeleteModal refresh={this.props.refresh} userID={userID} id={id} type={"campaign"} className="hoverLink" />
                         }
                     </Dropdown.Item>
                 </Dropdown.Menu>

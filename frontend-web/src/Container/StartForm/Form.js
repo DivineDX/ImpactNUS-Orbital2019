@@ -12,10 +12,10 @@ class StartForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditing: false,
             finished: false,
             userID: props.userID,
             username: props.username,
-            isEditing: props.isEditing,
             currentStep: 1,
             type: '',
             title: '',
@@ -29,9 +29,35 @@ class StartForm extends Component {
         }
     }
 
+    
     componentDidMount() {
-        const {predefinedType} = this.props.location.state;
+        const {predefinedType, editing, id} = this.props.location.state;
+        // console.log("the id is ", id);
         this.setState({type: predefinedType});
+        if(editing) {
+            this.loadData(id);
+        }
+    }
+
+    loadData = (id) => { // fetch data to be able to edit later on
+        fetch(`http://localhost:3001/retrieve/${id}`)
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data);
+
+                this.setState({ 
+                    isEditing: true,
+                    type: data.type,
+                    title: data.title,
+                    targetGroup: data.recipient,
+                    endDate: data.date_end,
+                    targetSupporters: data.targetNum,
+                    anonymity: data.anonymity,
+                    tags: data.tags,
+                    description: data.description,
+                    imageURL: data.image,
+                });
+            });
     }
 
     resetDefault = () => {
@@ -39,7 +65,6 @@ class StartForm extends Component {
             finished: false,
             userID: this.props.userID,
             username: this.props.username,
-            isEditing: this.props.isEditing,
             type: '',
             title: '',
             targetGroup: '',
@@ -81,8 +106,7 @@ class StartForm extends Component {
                 this.setState({ targetSupporters: event.target.value }); //petition or campaign 
                 break;
             case "date":
-                console.log("Date change");
-                console.log(event.target.value);
+                console.log("Date change", event.target.value);
                 this.setState({ endDate: event.target.value }); //petition or campaign 
                 break;
             case "description":

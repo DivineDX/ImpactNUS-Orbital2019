@@ -42,7 +42,12 @@ class Dashboard extends Component {
                     return <Card
                         loadedData={data}
                     >
-                        <DashboardDropDown refresh = {this.fetchData.bind(this)} finished={data.finished} type={data.type} id={data.id} userID={this.props.userID} />
+                        <DashboardDropDown 
+                            refresh = {this.fetchData.bind(this)}
+                            finished={data.finished}
+                            type={data.type}
+                            id={data.id}
+                            userID={this.props.userID} />
                     </Card>
                 })}
             </div>

@@ -28,7 +28,7 @@ class SupportForm extends Component {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 id: Number(this.props.id),// petition/campaign id
-                userID: this.props.userID,
+                userID: this.props.userID, //user id
             })
         })
             .then(resp => resp.json())
