@@ -6,7 +6,6 @@ import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
 import FormStep5 from './Form_Step5';
 import './Form.css';
-import { Data } from '../../Data/Data';
 
 class StartForm extends Component {
     constructor(props) {
@@ -16,6 +15,7 @@ class StartForm extends Component {
             finished: false,
             userID: props.userID,
             username: props.username,
+            id: '',
             currentStep: 1,
             type: '',
             title: '',
@@ -29,12 +29,11 @@ class StartForm extends Component {
         }
     }
 
-    
+
     componentDidMount() {
-        const {predefinedType, editing, id} = this.props.location.state;
-        // console.log("the id is ", id);
-        this.setState({type: predefinedType});
-        if(editing) {
+        const { predefinedType, editing, id } = this.props.location.state;
+        this.setState({ type: predefinedType, id: id });
+        if (editing) {
             this.loadData(id);
         }
     }
@@ -43,9 +42,7 @@ class StartForm extends Component {
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
-                console.log(data);
-
-                this.setState({ 
+                this.setState({
                     isEditing: true,
                     type: data.type,
                     title: data.title,
@@ -145,7 +142,15 @@ class StartForm extends Component {
         }
     }
 
-    onSubmitForm = () => { //modify this after database is coded
+    onSubmitForm = () => {
+        if (this.state.isEditing) {
+            this.updateForm();
+        } else {
+            this.submitForm();
+        }
+    }
+
+    submitForm = () => { //modify this after database is coded
         fetch('http://localhost:3001/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -165,33 +170,29 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                    // this.resetDefault();
-                    this.setState({currentStep: 5, finished: true});
-                    console.log(data); //Object Data of the created petition/campaign
+                this.setState({ currentStep: 5, finished: true });
             })
     }
 
-    editForm = (app) => {
-        app.put('/updateform' , (req, res) => {
-            let updating = false;
-            Data.forEach(data => {
-                if(data.id === req.body.id) {
-                    data.recipient = req.body.recipient;
-                    data.anonymity = req.body.anonymity;
-                    data.endDate = req.body.endDate;
-                    data.description = req.body.description;
-                    data.tags = req.body.tags;
-                    data.image = req.body.image;
-                    data.targetSupporters = req.body.targetSupporters;
-                    updating = true;
-                    res.json(data);
-                }
+    updateForm = () => {
+        fetch('http://localhost:3001/updateform', {
+            method: 'put',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                id: this.state.id,
+                targetGroup: this.state.targetGroup,
+                endDate: this.state.endDate,
+                targetSupporters: this.state.targetSupporters,
+                anonymity: this.state.anonymity,
+                tags: this.state.tags,
+                description: this.state.description,
+                imageURL: this.state.imageURL,
             })
-
-            if (!updating) {
-                return res.json('Error');
-            }
         })
+            .then(resp => resp.json())
+            .then(data => {
+                this.setState({ currentStep: 5, finished: true });
+            })
     }
 
     render() {
@@ -199,44 +200,41 @@ class StartForm extends Component {
             <div id="formContainer" className="flex flex-column items-center mt4 mb4">
                 {!this.state.finished &&
                     <div id="stepContainer" className="pb3">
-                    <MultistepMenu currentStep={this.state.currentStep} />
-                </div>}
+                        <MultistepMenu currentStep={this.state.currentStep} />
+                    </div>}
 
                 <div id="inputContainer">
-                    {this.state.currentStep === 1 && 
+                    {this.state.currentStep === 1 &&
                         <FormStep1
                             navButton={this.currentStep}
                             toggleType={this.toggleType}
                             inputChange={this.onInputChange}
-                            currState={this.state} 
-                            />}
+                            currState={this.state}
+                        />}
                     {this.state.currentStep === 2 &&
                         <FormStep2
                             navButton={this.currentStep}
                             inputChange={this.onInputChange}
                             toggleAnonymity={this.toggleAnonymity}
                             currentAnonymity={this.state.anonymity}
-                            currState={this.state} 
-                            editForm = {this.editForm}
-                            />}
+                            currState={this.state}
+                        />}
                     {this.state.currentStep === 3 &&
                         <FormStep3
                             navButton={this.currentStep}
                             inputChange={this.onInputChange}
                             dropdownChange={this.onDropdownChange}
-                            currState={this.state} 
-                            editForm = {this.editForm}
-                            />}
+                            currState={this.state}
+                        />}
                     {this.state.currentStep === 4 &&
                         <FormStep4
                             navButton={this.currentStep}
                             currState={this.state}
                             onSubmitForm={this.onSubmitForm}
-                            editForm = {this.editForm}
                         />}
                     {this.state.finished && //all steps completed
                         <FormStep5
-                            type = {this.state.type}
+                            type={this.state.type}
                         />}
                 </div>
             </div>
