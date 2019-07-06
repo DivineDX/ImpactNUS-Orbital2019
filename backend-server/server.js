@@ -72,23 +72,23 @@ app.post('/dashboarddata', (req, res) => {
 });
 
 app.post('/submitform', (req, res) => {
-    const { userID, username, type, title, targetGroup, endDate, targetSupporters, anonymity, tags, description, imageURL } = req.body;
+    const { userID, username, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
     const newID = Data[Data.length-1].id + 1;
 
     Data.push({
         type: type,
         id: newID,
         title: title,
-        recipient: targetGroup,
+        recipient: recipient,
         organizer: username,
         organizerID: userID,
         anonymity: anonymity,
         date_started: new Date(),
-        date_end: endDate,
+        date_end: date_end,
         description: description,
         tags: tags,
         image: imageURL,
-        targetNum: targetSupporters,
+        targetNum: targetNum,
         numSupporters: 0,
         numFollowing: 0,
         finished: false,
@@ -109,15 +109,17 @@ app.post('/submitform', (req, res) => {
 //updates existing petition/campaign
 app.put('/updateform', (req, res) => {
     let updated = false;
+    const { id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+
     Data.forEach(data => {
-        if (data.id === req.body.id) { //it is the data we want to update
-            data.recipient = req.body.recipient;
-            data.anonymity = req.body.anonymity;
-            data.date_end = req.body.date_end;
-            data.description = req.body.description;
-            data.tags = req.body.tags;
-            data.image = req.body.image;
-            data.targetNum = req.body.targetNum;
+        if (data.id === id) { //it is the data we want to update
+            data.recipient = recipient;
+            data.anonymity = anonymity;
+            data.date_end = date_end;
+            data.description = description;
+            data.tags = tags;
+            data.image = imageURL;
+            data.targetNum = targetNum;
             updated = true;
             res.json(data);
         }

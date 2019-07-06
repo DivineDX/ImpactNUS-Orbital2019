@@ -21,14 +21,14 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isSignedIn: true, //default is false (not signed in)
-			userID: 'e0309595', //userID
-			username: 'De Xun', 
+			isSignedIn: false, //default is false (not signed in)
+			userID: '', //userID
+			username: '',
 		}
 	}
-	
+
 	retrieveUserInfo = () => {
-		if(this.state.isSignedIn) {
+		if (this.state.isSignedIn) {
 			return {
 				userID: this.state.userID,
 				username: this.state.username,
@@ -37,7 +37,7 @@ class App extends Component {
 	}
 
 	loginUser = (userID, username) => {
-		this.setState({ 
+		this.setState({
 			isSignedIn: true,
 			userID: userID,
 			username: username
@@ -59,20 +59,20 @@ class App extends Component {
 					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact render = {(props) => <Homepage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
-							<Route path="/login" exact render = {(props) => <LoginPage {...props} isSignedIn = {isSignedIn} loginUser = {this.loginUser}/>}/>
+							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} />} />
+							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" component={Bulletin} />
-							<Route path="/dashboard" exact render = {(props) => <Dashboard {...props} userID = {this.state.userID}/>}/>
+							<Route path="/dashboard" exact render={(props) => <Dashboard {...props} userID={this.state.userID} />} />
 							<Route path="/feed" component={Feed} />
-							<Route path = "/startform" render = {(props) => <Form {...props} isEditing = {false} userID = {this.state.userID} username = {this.state.username}/>}/>
-							<Route path = "/updatemodal" render = {(props) => <Form {...props} isEditing = {false}/>}/>
-							<Route path = "/about" component={About} />
-							<Route path = "/howitworks" component={HowItWorks} />
-							<Route path = "/faq" component={FAQ} />
-							<Route path = "/contactus" component={ContactUs} />
-							<Route path = "/pg/:id" render = {(props) => <LandingPage {...props} userID = {this.state.userID} username = {this.state.username}/>}/>
-							<Route path = "/editform" render = {(props) => <Form {...props} isEditing = {true} userID = {this.state.userID} username = {this.state.username}/>}/>
-							<Route path = "*" component = {NonExistentPage}/>
+							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} username={this.state.username} />} />
+							<Route path="/updatemodal" render={(props) => <Form {...props} isEditing={false} />} />
+							<Route path="/about" component={About} />
+							<Route path="/howitworks" component={HowItWorks} />
+							<Route path="/faq" component={FAQ} />
+							<Route path="/contactus" component={ContactUs} />
+							<Route path="/pg/:id" render={(props) => <LandingPage {...props} userID={this.state.userID} username={this.state.username} />} />
+							<Route path="/editform" render={(props) => <Form {...props} isEditing={true} userID={this.state.userID} username={this.state.username} />} />
+							<Route path="*" component={NonExistentPage} />
 						</Switch>
 					</div>
 					{/* <Footer/> */}

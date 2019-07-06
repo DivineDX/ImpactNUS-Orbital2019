@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react';
-import UpdateModal from '../../Components/UpdateModal/UpdateModal'
-import VictoryModal from '../../Components/VictoryModal/VictoryModal'
-import DeleteModal from '../../Components/DeleteModal/DeleteModal';
+import UpdateModal from '../../Components/Modals/UpdateModal'
+import VictoryModal from '../../Components/Modals/VictoryModal'
+import DeleteModal from '../../Components/Modals/DeleteModal';
 import './DashboardDropDown.css';
 
 class DashboardDropDown extends Component {
-
     render() {
         const { type, id, userID } = this.props;
-
         return (
             <Dropdown text='Choose Option' icon='gavel' floating labeled button className='icon'>
                 <Dropdown.Menu>

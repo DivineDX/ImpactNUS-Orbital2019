@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Button, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
-import LoginModal from "../../Components/LoginModal/LoginModal";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
+//old modal: <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
 class NavBar extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -47,7 +47,7 @@ class NavBar extends Component {
                                 <div className="link dib dim mr0 mr1-ns">Feed</div>
                             </Link>
                         </Menu.Item>
-                        
+
                         <Menu.Item name='My Dashbard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
                             <Link to="/dashboard">
                                 <div className="link dib dim mr0 mr1-ns">Dashboard</div>
@@ -57,11 +57,13 @@ class NavBar extends Component {
                 </div>
 
                 <Menu.Menu position='right' id='right'>
-                    <SearchBar searchChange={this.onSearchChange} className='search'/>
+                    <SearchBar searchChange={this.onSearchChange} className='search' />
                     <Menu.Item>
                         <div>
                             {isSignedIn === false //conditional
-                                ? <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
+                                ? <Link to="/login">
+                                    <Button>Login</Button>
+                                </Link>
                                 : <Button onClick={() => loginProp()}>Sign Out</Button> //onClick, will run the signOutUser as defined in App.js
                             }
                         </div>

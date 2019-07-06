@@ -9,8 +9,8 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
             {currType === 'petition' &&
                 <div>
                     <h4>Title: {currState.title}</h4>
-                    <h4>Decision Maker: {currState.targetGroup}</h4>
-                    <h4>Target Supporters: {currState.targetSupporters}</h4>
+                    <h4>Decision Maker: {currState.recipient}</h4>
+                    <h4>Target Supporters: {currState.targetNum}</h4>
                     <h4>Anonymity: {currState.anonymity.toString()}</h4>
                     <h4>
                         Tags: {currState.tags.join(", ")}
@@ -23,9 +23,9 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
             {currType === 'campaign' &&
                 <div>
                     <h4>Title: {currState.title}</h4>
-                    <h4>Target Group: {currState.targetGroup}</h4>
-                    <h4>Target Supporters: {currState.targetSupporters}</h4>
-                    <h4>Target End Date: {currState.endDate}</h4>
+                    <h4>Target Group: {currState.recipient}</h4>
+                    <h4>Target Supporters: {currState.targetNum}</h4>
+                    <h4>Target End Date: {currState.date_end}</h4>
                     <h4> Tags: {currState.tags.join(", ")}</h4>
                     <h4>Description: {currState.description}</h4>
                     <h4>ImageURL: {currState.imageURL}</h4>

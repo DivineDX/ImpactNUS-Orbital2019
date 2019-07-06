@@ -1,9 +1,8 @@
 import React from 'react';
 import "./BannerPage.css";
-import ButtonModal from "./ButtonModals";
 import { Link } from 'react-router-dom';
 
-const BannerPage = ({ isSignedIn, loginUser }) => {
+const BannerPage = ({ isSignedIn}) => {
     return (
         <article className="banner center ph3 ph5-ns tc br2 pv5 white flex flex-column justify-center">
             <h1 className="fw9 f1 f-headline-ns lh-title mt0 mb3">
@@ -18,26 +17,30 @@ const BannerPage = ({ isSignedIn, loginUser }) => {
             <div>
                 {isSignedIn === false
                     ? <div>
-                        <ButtonModal loginProp={loginUser} buttonWord={"Start Petition"} />
-                        <ButtonModal loginProp={loginUser} buttonWord={"Start Campaign"} />
+                        <Link to={"/login"} className="pillButton grow">
+                            Start Petition
+                        </Link>
+                        <Link to={"/login"} className="pillButton grow">
+                            Start Campaign
+                        </Link>
                     </div>
                     : <div>
-                        <Link to= {{
+                        <Link to={{
                             pathname: "/startform",
                             state: {
                                 predefinedType: 'petition'
                             }
                         }}
-                            className="pillButton f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                            className="pillButton grow">
                             Start Petition
                         </Link>
-                        <Link to= {{
+                        <Link to={{
                             pathname: "/startform",
                             state: {
                                 predefinedType: 'campaign'
                             }
                         }}
-                            className="pillButton f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3">
+                            className="pillButton grow">
                             Start Campaign
                         </Link>
                     </div>

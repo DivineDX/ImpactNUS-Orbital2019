@@ -23,15 +23,15 @@ class Form_Step2 extends Component {
             <Form size='huge'>
                 <Form.Field>
                     <h1>{target}</h1>
-                    <Input value={currState.targetGroup} focus onChange={(event) => inputChange(event, 'targetGroup')} placeholder={placeholder} />
+                    <Input value={currState.recipient} focus onChange={(event) => inputChange(event, 'recipient')} placeholder={placeholder} />
                 </Form.Field>
 
                 <Form.Field>
                     <h1>State your target number of supporters</h1>
                     <Input
-                        value={currState.targetSupporters}
+                        value={currState.targetNum}
                         focus min="0" type="number" placeholder="Target Number"
-                        onChange={(event) => inputChange(event, 'targetSupporters')} />
+                        onChange={(event) => inputChange(event, 'targetNum')} />
                 </Form.Field>
 
                 <Form.Field>
@@ -57,8 +57,8 @@ class Form_Step2 extends Component {
                     <Button
                         disabled={
                             !currState.isEditing &&
-                            (currState.targetGroup === ''
-                                || (currState.type === 'petition' && currState.targetSupporters === '')
+                            (currState.recipient === ''
+                                || (currState.type === 'petition' && currState.targetNum === '')
                                 || (currState.type === 'campaign' && currState.endDate === ''))}
                         labelPosition='right' icon='right chevron'
                         onClick={() => navButton(3)}

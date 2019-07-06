@@ -17,7 +17,7 @@ const Data = [
         numFollowing: 100,
         finished: false,
     },
-    {  
+    {
         type: "campaign",
         id: 2,
         title: "OCIP Fundraising Project",
@@ -35,11 +35,11 @@ const Data = [
         numFollowing: 300,
         finished: false,
     },
-    {  
+    {
         type: "petition",
         id: 3,
         title: "Petition to repeal the straw ban",
-        recipient: "NUS & OSA", 
+        recipient: "NUS & OSA",
         organizer: "Mike",
         organizerID: 'admin',
         anonymity: false,
@@ -53,7 +53,7 @@ const Data = [
         numFollowing: 150,
         finished: false,
     },
-    {  
+    {
         type: "campaign",
         id: 4,
         title: "Lorem Ipsum",
@@ -71,7 +71,7 @@ const Data = [
         numFollowing: 300,
         finished: true,
     },
-    {  
+    {
         type: "petition",
         id: 5,
         title: "Petition for release of final paper results",
@@ -89,7 +89,7 @@ const Data = [
         numFollowing: 200,
         finished: false,
     },
-    {  
+    {
         type: "campaign",
         id: 6,
         title: "Recruitment of Volunteers",

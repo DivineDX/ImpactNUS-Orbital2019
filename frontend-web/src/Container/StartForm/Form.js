@@ -19,9 +19,9 @@ class StartForm extends Component {
             currentStep: 1,
             type: '',
             title: '',
-            targetGroup: '',
-            endDate: '',
-            targetSupporters: '',
+            recipient: '',
+            date_end: '',
+            targetNum: '',
             anonymity: false,
             tags: [],
             description: '',
@@ -46,9 +46,9 @@ class StartForm extends Component {
                     isEditing: true,
                     type: data.type,
                     title: data.title,
-                    targetGroup: data.recipient,
-                    endDate: data.date_end,
-                    targetSupporters: data.targetNum,
+                    recipient: data.recipient,
+                    date_end: data.date_end,
+                    targetNum: data.targetNum,
                     anonymity: data.anonymity,
                     tags: data.tags,
                     description: data.description,
@@ -64,9 +64,9 @@ class StartForm extends Component {
             username: this.props.username,
             type: '',
             title: '',
-            targetGroup: '',
-            endDate: '',
-            targetSupporters: '',
+            recipient: '',
+            date_end: '',
+            targetNum: '',
             anonymity: false,
             tags: [],
             description: '',
@@ -96,15 +96,15 @@ class StartForm extends Component {
             case "title":
                 this.setState({ title: event.target.value }); //petition or campaign 
                 break;
-            case "targetGroup":
-                this.setState({ targetGroup: event.target.value }); //petition or campaign 
+            case "recipient":
+                this.setState({ recipient: event.target.value }); //petition or campaign 
                 break;
-            case "targetSupporters":
-                this.setState({ targetSupporters: event.target.value }); //petition or campaign 
+            case "targetNum":
+                this.setState({ targetNum: event.target.value }); //petition or campaign 
                 break;
             case "date":
                 console.log("Date change", event.target.value);
-                this.setState({ endDate: event.target.value }); //petition or campaign 
+                this.setState({ date_end: event.target.value }); //petition or campaign 
                 break;
             case "description":
                 this.setState({ description: event.target.value }); //petition or campaign 
@@ -159,9 +159,9 @@ class StartForm extends Component {
                 username: this.state.username,
                 type: this.state.type,
                 title: this.state.title,
-                targetGroup: this.state.targetGroup,
-                endDate: this.state.endDate,
-                targetSupporters: this.state.targetSupporters,
+                recipient: this.state.recipient,
+                date_end: this.state.date_end,
+                targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
                 description: this.state.description,
@@ -180,9 +180,9 @@ class StartForm extends Component {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 id: this.state.id,
-                targetGroup: this.state.targetGroup,
-                endDate: this.state.endDate,
-                targetSupporters: this.state.targetSupporters,
+                recipient: this.state.recipient,
+                date_end: this.state.date_end,
+                targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
                 description: this.state.description,

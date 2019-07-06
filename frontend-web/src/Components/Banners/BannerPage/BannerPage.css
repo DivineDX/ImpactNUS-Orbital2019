@@ -1,0 +1,22 @@
+.banner {
+    height: 60rem;
+    background: linear-gradient(to right, rgb(0, 196, 242), rgb(62, 242, 100));
+}
+
+/* f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3 */
+.pillButton {
+    font-size: 1.5rem;
+    border-radius: 9999px;
+    background-color: darkgreen;
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgreen;
+    padding: 1rem 0.5rem;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.pillButton:hover {
+    color: white;
+}
