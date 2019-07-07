@@ -28,11 +28,6 @@ const db = knex({
     }
 });
 
-db.select('*').from('users').then(data => {
-    // console.log(data);
-});
-
-
 //Retrieves array of all data (Petition + Campaigns)
 app.get('/retrieveall', (req, res) => {
     // res.json(Data);
