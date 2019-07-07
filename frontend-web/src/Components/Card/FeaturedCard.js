@@ -6,13 +6,13 @@ import './FeaturedCard.css';
 const Card = (props) => {
     const loadedData = props.loadedData;
     //unused consts in props.loadedData: recipient, date_started, date_end, description, tags, numFollowing, finished 
-    const { id, type, title, organizer, anonymity, image, targetNum, numSupporters} = loadedData;
+    const { id, type, title, organizer, anonymity, imageurl, targetnumsupporters, currnumsupporters} = loadedData;
     let smalltext = '';
 
     if (type === 'petition') {
-        smalltext = "Target: " + targetNum + " | " + numSupporters + " Signed ";
+        smalltext = "Target: " + targetnumsupporters + " | " + currnumsupporters + " Signed ";
     } else { //campaign
-        smalltext = "Target: " + targetNum + " | " + numSupporters + " Supported ";
+        smalltext = "Target: " + targetnumsupporters + " | " + currnumsupporters + " Supported ";
     }
 
     let displayedOrganizer = '';
@@ -24,7 +24,7 @@ const Card = (props) => {
 
     return (
         <div className="shadow-4 w-100">
-            <img src={image} className='' id="cardImg" alt="IMG" />
+            <img src={imageurl} className='' id="cardImg" alt="IMG" />
             <div id="wrapContent">
                 <h3 id = "titleContainer">
                     <Link to={`/pg/${id}`}>
@@ -33,7 +33,7 @@ const Card = (props) => {
                 </h3>
                 <div id = "detailContainer">
                     <div className="pb1 smalltxt"> {smalltext} </div>
-                    <ProgressBar numSupporters={numSupporters} targetNum={targetNum} />
+                    <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
                     <p className="b pt2"> Initiated by: {displayedOrganizer}</p>
                 </div>
 

@@ -16,16 +16,37 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+const knex = require('knex');
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        host: '127.0.0.1',
+        user: '', //change accordingly to your local computer!
+        password: '',
+        database: 'orbital'
+    }
+});
+
+db.select('*').from('users').then(data => {
+    // console.log(data);
+});
+
 
 //Retrieves array of all data (Petition + Campaigns)
 app.get('/retrieveall', (req, res) => {
-    res.json(Data);
+    // res.json(Data);
+    db.select('*')
+        .from('pnc')
+        .then(pnc => {
+            res.json(pnc);
+        });
 });
 
 app.get('/retrieve/:id', (req, res) => {
     let found = false;
     Data.forEach(data => {
-        if(data.id == req.params.id) {
+        if (data.id == req.params.id) {
             found = true;
             return res.json(data);
         }
@@ -73,7 +94,7 @@ app.post('/dashboarddata', (req, res) => {
 
 app.post('/submitform', (req, res) => {
     const { userID, username, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
-    const newID = Data[Data.length-1].id + 1;
+    const newID = Data[Data.length - 1].id + 1;
 
     Data.push({
         type: type,
@@ -153,9 +174,9 @@ app.post('/signsupport', (req, res) => {
         if (req.body.userID === user.userID) {
             user.supportedIDs.push(req.body.id); //id of the petition/campaign     
             ReasonSupportData.forEach(data => {
-                if(data.id === req.body.id) {
+                if (data.id === req.body.id) {
                     data.support.push({
-                        id: data.support[data.support.length-1].id+1,
+                        id: data.support[data.support.length - 1].id + 1,
                         reason: req.body.reason,
                         datePosted: new Date(),
                         supporter: req.body.username,
@@ -169,9 +190,9 @@ app.post('/signsupport', (req, res) => {
         }
     })
 
-    if(userFound) {
+    if (userFound) {
         Data.forEach(data => {
-            if(data.id === req.body.id) {
+            if (data.id === req.body.id) {
                 data.numSupporters++;
             }
         })
