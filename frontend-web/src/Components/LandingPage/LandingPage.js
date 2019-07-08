@@ -65,7 +65,7 @@ class LandingPage extends Component {
 
     render() {
         //unused consts: date-end, tags, numFollowing, finished
-        const { type, title, recipient, organizer, anonymity, date_started, description, image, targetNum, numSupporters } = this.state.loadedData;
+        const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
@@ -78,13 +78,13 @@ class LandingPage extends Component {
                     </div>
 
                     <div id="subHeader" className='pv2 flex flex-column items-center'>
-                        <img className="pb3 ma3" id='pageImage' src={image} alt="IMG" />
+                        <img className="pb3 ma3" id='pageImage' src={imageurl} alt="IMG" />
                         <div className=''>
-                            <ProgressBar numSupporters={numSupporters} targetNum={targetNum} />
-                            <p className="i">Signatures: <b>{numSupporters}</b> of <b>{targetNum}</b></p>
+                            <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
+                            <p className="i">Signatures: <b>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
                             <div id="subContainer" className='flex flex-row items-center'>
                                 <div className='w-60 tl'>
-                                    <nobr>By: <b>{anonymity ? "Anonymous" : organizer}</b></nobr>
+                                    <nobr>By: <b>{anonymity ? "Anonymous" : name}</b></nobr>
                                     <p>Created on: {DateToString(date_started)}</p>
                                 </div>
 

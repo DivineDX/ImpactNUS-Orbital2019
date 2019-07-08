@@ -6,15 +6,15 @@ import './Card.css';
 const Card = (props) => {
     const loadedData = props.loadedData;
     //unsued const: date_started,date_end,  description, numFollowing, finished, tags
-    const {id, type, title, recipient, organizer, anonymity, image, targetNum, numSupporters} = loadedData;
+    const {id, type, title, recipient, name, anonymity, imageurl, targetnumsupporters, currnumsupporters} = loadedData;
     let footer = '';
     let sub = '';
 
     if (type === 'petition') {
-        footer = numSupporters + " Signed | Target: " + targetNum;
+        footer = currnumsupporters + " Signed | Target: " + targetnumsupporters;
         sub = "Petition to: " + recipient;
     } else { //campaign
-        footer = numSupporters + " Supported | Target: " + targetNum;
+        footer = currnumsupporters + " Supported | Target: " + targetnumsupporters;
         sub = "Reaching out to: " + recipient;
     }
 
@@ -22,12 +22,12 @@ const Card = (props) => {
     if (anonymity) {
         displayedOrganizer = "Anonymous";
     } else {
-        displayedOrganizer = organizer;
+        displayedOrganizer = name;
     }
 
     return (
         <div className="avenir card-container shadow-4">
-            <img src={image} className="w-100" id="cardImage" alt="IMG" />
+            <img src={imageurl} className="w-100" id="cardImage" alt="IMG" />
             <div id = "contentWrap">
                 <div className="text_wrap flex flex-row">
                     <h3 className="w-80">
@@ -39,7 +39,7 @@ const Card = (props) => {
                 </div>
                 <p className="i pt3">{sub}</p>
                 <p className="b"> Initiated by: {displayedOrganizer}</p>
-                <ProgressBar numSupporters={numSupporters} targetNum={targetNum} />
+                <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
                 <p>{footer}</p>
             </div>
         </div>

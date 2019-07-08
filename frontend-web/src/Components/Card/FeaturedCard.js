@@ -6,7 +6,7 @@ import './FeaturedCard.css';
 const Card = (props) => {
     const loadedData = props.loadedData;
     //unused consts in props.loadedData: recipient, date_started, date_end, description, tags, numFollowing, finished 
-    const { id, type, title, organizer, anonymity, imageurl, targetnumsupporters, currnumsupporters} = loadedData;
+    const { id, type, title, name, anonymity, imageurl, targetnumsupporters, currnumsupporters} = loadedData;
     let smalltext = '';
 
     if (type === 'petition') {
@@ -19,7 +19,7 @@ const Card = (props) => {
     if (anonymity) {
         displayedOrganizer = "Anonymous";
     } else {
-        displayedOrganizer = organizer;
+        displayedOrganizer = name;
     }
 
     return (

@@ -14,7 +14,6 @@ class Featured extends Component {
 		fetch("http://localhost:3001/retrieveall")
 			.then(resp => resp.json())
 			.then(data => {
-				console.log(data);
 				this.setState({ displayData: data })
 			});
 	}

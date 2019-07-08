@@ -28,28 +28,35 @@ const db = knex({
     }
 });
 
-//Retrieves array of all data (Petition + Campaigns)
+//Used in Bulletin and Featured, passed down to card
 app.get('/retrieveall', (req, res) => {
-    // res.json(Data);
-    db.select('*')
-        .from('pnc')
-        .then(pnc => {
-            res.json(pnc);
-        });
+    db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
+    .select('pnc.id', 'pnc.type', 'pnc.title','pnc.recipient', 'pnc.organizer_id','pnc.anonymity',
+    'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags',  'pnc.imageurl',
+    'pnc.targetnumsupporters', 'pnc.currnumsupporters','pnc.numfollowers','pnc.finished',
+    'users.name')
+    .then(data => {
+        if(!data || !data.length) {
+            throw err;
+        }
+        res.json(data);
+    }).catch(err => res.status(400).json('Unable to retrieve'));
 });
 
+//Used in Form.js(Edit form) and Landing Page
 app.get('/retrieve/:id', (req, res) => {
-    let found = false;
-    Data.forEach(data => {
-        if (data.id == req.params.id) {
-            found = true;
-            return res.json(data);
+    db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
+    .select('pnc.id', 'pnc.type', 'pnc.title','pnc.recipient', 'pnc.organizer_id','pnc.anonymity',
+    'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags',  'pnc.imageurl',
+    'pnc.targetnumsupporters', 'pnc.currnumsupporters','pnc.numfollowers','pnc.finished',
+    'users.name')
+    .where('pnc.id', '=', req.params.id)
+    .then(data => {
+        if(!data || !data.length) {
+            throw err;
         }
-    })
-
-    if (!found) {
-        res.status(400).json('Not found');
-    }
+        res.json(data[0]);
+    }).catch(err => res.status(400).json('Unable to retrieve'));
 })
 
 // Retrieves the list of updates of a petition

@@ -48,11 +48,11 @@ class StartForm extends Component {
                     title: data.title,
                     recipient: data.recipient,
                     date_end: data.date_end,
-                    targetNum: data.targetNum,
+                    targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
                     tags: data.tags,
                     description: data.description,
-                    imageURL: data.image,
+                    imageURL: data.imageurl,
                 });
             });
     }
