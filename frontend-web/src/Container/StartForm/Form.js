@@ -42,12 +42,18 @@ class StartForm extends Component {
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
+                let date_end;
+                if(data.type === 'campaign') {
+                    date_end = data.date_end.substring(0,10);
+                } else{
+                    date_end = data.date_end;
+                }
                 this.setState({
                     isEditing: true,
                     type: data.type,
                     title: data.title,
                     recipient: data.recipient,
-                    date_end: data.date_end,
+                    date_end: date_end,
                     targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
                     tags: data.tags,

@@ -17,10 +17,10 @@ class SupportForm extends Component {
     }
 
     componentDidMount() {
-        this.setState({ 
+        this.setState({
             username: this.props.username,
             userID: this.props.userID,
-            id: this.props.id 
+            id: this.props.id
         });
 
         fetch('http://localhost:3001/checkifsigned', {
@@ -63,7 +63,6 @@ class SupportForm extends Component {
     }
 
     onSubmitClick = () => { //modify this after database is coded
-        console.log("Submit", this.state);
         fetch('http://localhost:3001/signsupport', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -76,13 +75,15 @@ class SupportForm extends Component {
                 anonymity: this.state.anonymity,
             })
         })
-        .then(resp => resp.json())
-        .then(data => {
-            if(data === 'Success'){
-                this.setState({alreadySigned: true});
-                this.props.refresh();
-            }                
-        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data === 'Success') {
+                    this.setState({ alreadySigned: true });
+                    this.props.refresh();
+                }else{
+                    throw new Error(); //unable to support
+                }
+            })
     }
 
     render() {
@@ -105,7 +106,7 @@ class SupportForm extends Component {
                 <Form.Field>
                     <Checkbox label='Enable anonymity' onClick={() => this.toggleAnonymity()} />
                 </Form.Field>
-                <button className="landing-button" disabled = {this.state.alreadySigned || this.state.userID === ''} onClick={() => this.onSubmitClick()}>Submit</button>
+                <button className="landing-button" disabled={this.state.alreadySigned || this.state.userID === ''} onClick={() => this.onSubmitClick()}>Submit</button>
             </Form>
         );
     }

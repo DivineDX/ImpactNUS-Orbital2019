@@ -24,7 +24,7 @@ class DashboardDropDown extends Component {
                         </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        <UpdateModal id={id} buttonWord={"Post Update"} className="hoverLink" />
+                        <UpdateModal id={id} userID = {userID} buttonWord={"Post Update"} className="hoverLink" />
                     </Dropdown.Item>
                     <Dropdown.Item disabled={this.props.finished}>
                         <VictoryModal refresh={this.props.refresh} id={id} userID={userID} buttonWord={"Declare Victory"} className="hoverLink" />

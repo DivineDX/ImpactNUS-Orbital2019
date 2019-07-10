@@ -21,6 +21,7 @@ class UpdateModal extends Component {
                 id: Number(this.props.id),
                 updateTitle: this.state.updateTitle,
                 updateContent: this.state.updateContent,
+                organizerID: this.props.userID,
             })
         })
             .then(resp => resp.json())
