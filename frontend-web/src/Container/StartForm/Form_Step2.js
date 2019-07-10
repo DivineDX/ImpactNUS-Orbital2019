@@ -46,7 +46,7 @@ class Form_Step2 extends Component {
                             <h3>Select a target end date for your campaign</h3>
                             <Input
                                 type="date"
-                                value={currState.endDate}
+                                value={currState.date_end}
                                 onChange={(event) => inputChange(event, 'date')} />
                         </div>
                     }
@@ -57,9 +57,11 @@ class Form_Step2 extends Component {
                     <Button
                         disabled={
                             !currState.isEditing &&
-                            (currState.recipient === ''
+                            ((currState.recipient === undefined || currState.recipient.length === 0 || currState.recipient[0] === '') //not filled
                                 || (currState.type === 'petition' && currState.targetNum === '')
-                                || (currState.type === 'campaign' && currState.endDate === ''))}
+                                || (currState.type === 'campaign' && 
+                                    (currState.targetNum === '' || currState.date_end === '')))
+                            }
                         labelPosition='right' icon='right chevron'
                         onClick={() => navButton(3)}
                         content='Next' />

@@ -29,9 +29,12 @@ class LoginForm extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            if (data.success) {
-                this.props.loginProp(this.state.nusID, data.username);
+            if(data === 'Failed login') {
+                throw new Error();
             }
+            this.props.loginProp(this.state.nusID, data.username);
+        }).catch(err => {
+            alert('Wrong user credentials');
         })
     }
 

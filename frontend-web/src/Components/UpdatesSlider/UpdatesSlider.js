@@ -17,7 +17,7 @@ const UpdatesSlider = ({ updateData }) => (
                 return <div className = 'mb2'>
                     <p className = 'f4 b'>{data.title}</p>
                     <p>{data.content}</p>
-                    <p className = 'i'>{DateToString(data.datePosted)}</p>
+                    <p className = 'i'>{DateToString(data.dateposted)}</p>
                 </div>
             })}
 

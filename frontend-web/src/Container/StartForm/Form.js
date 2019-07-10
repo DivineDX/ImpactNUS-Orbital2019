@@ -19,8 +19,8 @@ class StartForm extends Component {
             currentStep: 1,
             type: '',
             title: '',
-            recipient: '',
-            date_end: '',
+            recipient: [],
+            date_end: null,
             targetNum: '',
             anonymity: false,
             tags: [],
@@ -91,19 +91,17 @@ class StartForm extends Component {
     }
 
     onInputChange = (event, category) => {
-        // console.log("input Change", category);
         switch (category) {
             case "title":
                 this.setState({ title: event.target.value }); //petition or campaign 
                 break;
             case "recipient":
-                this.setState({ recipient: event.target.value }); //petition or campaign 
+                this.setState({ recipient: [event.target.value] }); //petition or campaign 
                 break;
             case "targetNum":
                 this.setState({ targetNum: event.target.value }); //petition or campaign 
                 break;
             case "date":
-                console.log("Date change", event.target.value);
                 this.setState({ date_end: event.target.value }); //petition or campaign 
                 break;
             case "description":
@@ -151,6 +149,7 @@ class StartForm extends Component {
     }
 
     submitForm = () => { //modify this after database is coded
+        console.log(this.state);
         fetch('http://localhost:3001/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -170,6 +169,7 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
+                console.log("after form submitted", data);
                 this.setState({ currentStep: 5, finished: true });
             })
     }
@@ -190,8 +190,11 @@ class StartForm extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(data => {
+            .then(data => { 
+                console.log("after form submitted", data); //this is the id of the newly created
                 this.setState({ currentStep: 5, finished: true });
+            }).catch(err => {
+                alert('Form submission failed');
             })
     }
 
