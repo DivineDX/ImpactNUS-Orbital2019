@@ -1,15 +1,3 @@
-/* Old import & export
-import { Data } from './Data';
-import { userDB } from './userDB';
-import { UpdatesData } from './UpdatesData';
-import {ReasonSupportData} from './ReasonSupportData';
-*/
-
-const Data = require('./Data');
-const userDB = require('./userDB');
-const UpdatesData = require('./UpdatesData');
-const ReasonSupportData = require('./ReasonSupportData');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -31,250 +19,199 @@ const db = knex({
 //Used in Bulletin and Featured, passed down to card
 app.get('/retrieveall', (req, res) => {
     db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
-    .select('pnc.id', 'pnc.type', 'pnc.title','pnc.recipient', 'pnc.organizer_id','pnc.anonymity',
-    'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags',  'pnc.imageurl',
-    'pnc.targetnumsupporters', 'pnc.currnumsupporters','pnc.numfollowers','pnc.finished',
-    'users.name')
-    .then(data => {
-        if(!data || !data.length) {
-            throw err;
-        }
-        res.json(data);
-    }).catch(err => res.status(400).json('Unable to retrieve'));
+        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'pnc.organizer_id', 'pnc.anonymity',
+            'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags', 'pnc.imageurl',
+            'pnc.targetnumsupporters', 'pnc.currnumsupporters', 'pnc.numfollowers', 'pnc.finished',
+            'users.name')
+        .then(data => {
+            if (!data || !data.length) {
+                throw err;
+            }
+            res.json(data);
+        }).catch(err => res.status(400).json('Unable to retrieve'));
 });
 
 //Used in Form.js(Edit form) and Landing Page
 app.get('/retrieve/:id', (req, res) => {
     db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
-    .select('pnc.id', 'pnc.type', 'pnc.title','pnc.recipient', 'pnc.organizer_id','pnc.anonymity',
-    'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags',  'pnc.imageurl',
-    'pnc.targetnumsupporters', 'pnc.currnumsupporters','pnc.numfollowers','pnc.finished',
-    'users.name')
-    .where('pnc.id', '=', req.params.id)
-    .then(data => {
-        if(!data || !data.length) {
-            throw err;
-        }
-        res.json(data[0]);
-    }).catch(err => res.status(400).json('Unable to retrieve'));
+        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'pnc.organizer_id', 'pnc.anonymity',
+            'pnc.date_started', 'pnc.date_end', 'pnc.description', 'pnc.tags', 'pnc.imageurl',
+            'pnc.targetnumsupporters', 'pnc.currnumsupporters', 'pnc.numfollowers', 'pnc.finished',
+            'users.name')
+        .where('pnc.id', '=', req.params.id)
+        .then(data => {
+            if (!data || !data.length) {
+                throw err;
+            }
+            res.json(data[0]);
+        }).catch(err => res.status(400).json('Unable to retrieve'));
 })
 
-// Retrieves the list of updates of a petition
+// Called in UpdatesSlider.js
 app.get('/updatesdata/:id', (req, res) => {
-    let found = false;
-    UpdatesData.forEach(post => {
-        if (req.params.id == post.id) {
-            found = true;
-            return res.json(post.updates);
-        }
-    })
-    if (!found) {
-        res.status(400).json('not found');
-    }
+    db('updates').select('title', 'content', 'dateposted').where('pnc_id', '=', req.params.id)
+        .then(data => {
+            res.json(data);
+        }).catch(err => res.status(400).json('Unable to retrieve'));
+
 })
 
-//Retrieves the list of signed support for a petition/campaign
+//Used in ReasonSupportBulletin.js
 app.get('/reasonssupport/:id', (req, res) => {
-    let found = false;
-    ReasonSupportData.forEach(data => {
-        if (req.params.id == data.id) {
-            found = true;
-            return res.json(data.support);
-        }
-    })
-
-    if (!found) {
-        res.status(400).json('not found');
-    }
+    db('support').join('users', 'support.poster_id', '=', 'users.id')
+        .select('support.poster_id', 'support.poster_description', 'support.content',
+            'support.anonymity', 'support.dateposted', 'users.name')
+        .where('support.pnc_id', '=', req.params.id)
+        .then(data => {
+            res.json(data);
+        }).catch(err => res.status(400).json('Unable to retrieve'));
 })
 
-//Retrieves user-specific dashboard data (only those that the person has started)
+//Called in Dashboard.js
 app.post('/dashboarddata', (req, res) => {
-    let personalData = Data.filter(data => data.organizerID === req.body.userID);
-    res.json(personalData);
+    db('pnc').select('id', 'type', 'title', 'recipient', 'organizer_id',
+        'anonymity', 'imageurl', 'targetnumsupporters', 'currnumsupporters')
+        .where('organizer_id', '=', req.body.userID)
+        .then(data => {
+            res.json(data);
+        }).catch(err => res.status(400).json('Unable to retrieve'));
 });
 
+//Called in Form.js
 app.post('/submitform', (req, res) => {
     const { userID, username, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
-    const newID = Data[Data.length - 1].id + 1;
-
-    Data.push({
+    db('pnc').returning('id').insert({
         type: type,
-        id: newID,
         title: title,
         recipient: recipient,
-        organizer: username,
-        organizerID: userID,
+        organizer_id: userID,
         anonymity: anonymity,
         date_started: new Date(),
         date_end: date_end,
         description: description,
         tags: tags,
-        image: imageURL,
-        targetNum: targetNum,
-        numSupporters: 0,
-        numFollowing: 0,
-        finished: false,
+        imageurl: imageURL,
+        targetnumsupporters: targetNum,
     })
-
-    UpdatesData.push({
-        id: newID,
-        updates: [],
-    })
-
-    ReasonSupportData.push({
-        id: newID,
-        support: [],
-    })
-    res.json(Data[Data.length - 1]); //returns object of the newly created petition/campaign
+        .then(id => {
+            res.json(id[0]); //id of the newly created petition/campaign
+        })
+        .catch(err => res.status(400).json('Unable to post'));
 })
 
-//updates existing petition/campaign
+//Used in Form.js
 app.put('/updateform', (req, res) => {
     let updated = false;
     const { id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
 
-    Data.forEach(data => {
-        if (data.id === id) { //it is the data we want to update
-            data.recipient = recipient;
-            data.anonymity = anonymity;
-            data.date_end = date_end;
-            data.description = description;
-            data.tags = tags;
-            data.image = imageURL;
-            data.targetNum = targetNum;
-            updated = true;
-            res.json(data);
-        }
-    })
-
-    if (!updated) {
-        return res.json('Error');
-    }
+    db('pnc').where('id', '=', id)
+        .update({
+            recipient: recipient,
+            anonymity: anonymity,
+            date_end: date_end,
+            description: description,
+            tags: tags,
+            imageurl: imageURL,
+            targetnumsupporters: targetNum,
+        })
+        .catch(err => res.status(400).json('Update problem'));
 })
 
+//Used in SupportForm.js
 app.post('/checkifsigned', (req, res) => {
-    let signed = false;
-    userDB.forEach(user => {
-        if (user.userID === req.body.userID && user.supportedIDs.includes(req.body.id)) {
-            signed = true;
-            return res.json(true);
+    const { id, userID } = req.body;
+    db('support').where({
+        poster_id: userID,
+        pnc_id: id,
+    }).then(data => {
+        if (data.length) {
+            res.json(true);
+        } else {
+            res.json(false);
         }
-    })
+    }).catch(err => res.status(400).json('Update problem'));
 
-    if (!signed) {
-        return res.json(false);
-    }
 })
 
 /*Gets user id, checks whether user has already supported, if not, increment
 the support number and add the reason of support (if not empty) into the 
 */
+//Used in SupportForm.js
 app.post('/signsupport', (req, res) => {
-    let userFound = false;
-    userDB.forEach(user => {
-        if (req.body.userID === user.userID) {
-            user.supportedIDs.push(req.body.id); //id of the petition/campaign     
-            ReasonSupportData.forEach(data => {
-                if (data.id === req.body.id) {
-                    data.support.push({
-                        id: data.support[data.support.length - 1].id + 1,
-                        reason: req.body.reason,
-                        datePosted: new Date(),
-                        supporter: req.body.username,
-                        description: req.body.description,
-                        anonymous: req.body.anonymity,
-                    })
-                    userFound = true;
-                    return res.json('Success');
-                }
-            })
-        }
+    const { id, userID, description, reason, anonymity } = req.body;
+    db('support').returning('support_id').insert({
+        poster_id: userID,
+        poster_description: description,
+        content: reason,
+        pnc_id: id,
+        anonymity: anonymity,
+        dateposted: new Date(),
     })
-
-    if (userFound) {
-        Data.forEach(data => {
-            if (data.id === req.body.id) {
-                data.numSupporters++;
+        .then(data => {
+            if (data[0]) { //exists
+                res.json('Success')
+            } else {
+                throw new Error();
             }
         })
-    }
-    if (!userFound) {
-        res.status(400).json('user not found');
-    }
+        .catch(err => res.status(400).json('Unable to support'));
 })
 
 //Organizers who want to post an update for their campaign/petition
+//Used in UpdateModal.js
 app.post('/postupdate', (req, res) => {
-    let posted = false;
-
-    UpdatesData.forEach(obj => {
-        if (obj.id === req.body.id) {
-            obj.updates.push({
-                id: obj.updates[obj.updates.length - 1].id + 1,
-                title: req.body.updateTitle,
-                content: req.body.updateContent,
-                datePosted: new Date(),
-            })
-            posted = true;
+    const { id, updateTitle, updateContent, organizerID } = req.body;
+    db('updates').returning('update_id').insert({
+        title: updateTitle,
+        content: updateContent,
+        dateposted: new Date(),
+        pnc_id: id,
+        organizer_id: organizerID,
+    }).then(data => {
+        if (data[0]) {
             res.json('Success');
+        } else {
+            throw new Error();
         }
-    })
-
-    if (!posted) {
-        res.status(400).json('Error');
-    }
+    }).catch(err => res.status(400).json('Update failed'));
 })
 
-
+//VictoryModal.js
 app.put('/victory', (req, res) => {
-    let found = false;
-    Data.forEach(data => {
-        if (data.id === req.body.id
-            && data.organizerID === req.body.organizerID) {
-            data.finished = true;
-            found = true;
-            res.json('Success');
-        }
+    const { id, organizerID } = req.body;
+    db('pnc').where({
+        id: id,
+        organizer_id: organizerID,
+    }).update({
+        finished: true
     })
-
-    if (!found) {
-        res.status(400).json('Error');
-    }
+        .then(res.json('Success'))
+        .catch(err => res.status(400).json('Update Error'));
 })
 
 //Self-Explanatory: For deleting a petition/campaign
+//Used in deletemodal.js
 app.delete('/delete', (req, res) => {
-    let found = false;
-    for (let i = 0; i < Data.length; i++) {
-        if (Data[i].id === req.body.id
-            && Data[i].organizerID === req.body.organizerID) {
-            Data.splice(i, 1);
-            found = true;
-            res.json('Success');
-            break;
-        }
-    }
-
-    if (!found) {
-        res.status(400).json('Error');
-    }
+    const { id, organizerID } = req.body;
+    db('pnc').where({
+        id: id,
+        organizer_id: organizerID,
+    }).del()
+        .then(res.json('Success'))
+        .catch(err => res.status(400).json('Error in delete'));
 })
 
-//Self-Explanatory: For sign in options 
+//LoginForm.js
 app.post('/signin', (req, res) => {
-    let signedIn = false;
-    for (let user of userDB) {
-        if (user.userID === req.body.id && user.password === req.body.password) {
-            res.json({ success: true, username: user.name });
-            signedIn = true;
-            break;
-        }
-    }
-
-    if (!signedIn) { //not signed in
-        res.status(400).json('Error');
-    }
+    const { id, password } = req.body;
+    db('users').select('id', 'password', 'name')
+        .where('id', '=', id).andWhere('password', '=', password)
+        .then(data => {
+            if (!data || !data.length) {
+                throw err;
+            }
+            res.json(data[0].name);
+        }).catch(err => res.status(400).json('Failed login'))
 });
 
 app.listen(3001); //port number - 3000 is used for our frontend web

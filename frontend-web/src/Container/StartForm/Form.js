@@ -29,7 +29,6 @@ class StartForm extends Component {
         }
     }
 
-
     componentDidMount() {
         const { predefinedType, editing, id } = this.props.location.state;
         this.setState({ type: predefinedType, id: id });
@@ -43,9 +42,9 @@ class StartForm extends Component {
             .then(resp => resp.json())
             .then(data => {
                 let date_end;
-                if(data.type === 'campaign') {
-                    date_end = data.date_end.substring(0,10);
-                } else{
+                if (data.type === 'campaign') {
+                    date_end = data.date_end.substring(0, 10);
+                } else {
                     date_end = data.date_end;
                 }
                 this.setState({
@@ -196,7 +195,7 @@ class StartForm extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(data => { 
+            .then(data => {
                 console.log("after form submitted", data); //this is the id of the newly created
                 this.setState({ currentStep: 5, finished: true });
             }).catch(err => {
