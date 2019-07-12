@@ -134,7 +134,7 @@ class LandingPage extends Component {
                             }
                             <hr className='mw5 bb bw1 b--black-10'></hr>
                         </p>
-                        <SupportForm refresh={this.refreshSupportData.bind(this)} userID={this.props.userID} username={this.props.username} id={this.state.id} />
+                        <SupportForm refresh={this.refreshSupportData.bind(this)} userID={this.props.userID} id={this.state.id} />
                     </div>
 
                 </article>

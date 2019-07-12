@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
 import { Checkbox, Form } from 'semantic-ui-react'
 import './SupportForm.css';
+import { Formik } from "formik";
+import * as yup from "yup";
 
 class SupportForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            id: '',
-            userID: '',
-            username: '',
             alreadySigned: false,
-            description: '',
-            reason: '',
             anonymity: false,
         }
     }
-
     componentDidMount() {
-        this.setState({
-            username: this.props.username,
-            userID: this.props.userID,
-            id: this.props.id
-        });
-
         fetch('http://localhost:3001/checkifsigned', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                id: Number(this.props.id),// petition/campaign id
+                id: this.props.id,// petition/campaign id
                 userID: this.props.userID, //user id
             })
         })
@@ -39,7 +29,7 @@ class SupportForm extends Component {
             })
     }
 
-    toggleAnonymity = () => {
+    toggleAnonymity = () => { //hard coded this because default checkbox is ugly and S/UI does not sync well
         // console.log("toggling");
         if (this.state.anonymity) { //true
             this.setState({ anonymity: false });
@@ -48,30 +38,15 @@ class SupportForm extends Component {
         }
     }
 
-    onInputChange = (event, category) => {
-        // console.log("input Change", event.target.value);
-        switch (category) {
-            case "description":
-                this.setState({ description: event.target.value }); //petition or campaign 
-                break;
-            case "reason":
-                this.setState({ reason: event.target.value }); //petition or campaign 
-                break;
-            default:
-                break;
-        }
-    }
-
-    onSubmitClick = () => { //modify this after database is coded
+    submitSupport = (values) => { //modify this after database is coded
         fetch('http://localhost:3001/signsupport', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                id: Number(this.state.id),
-                username: this.state.username,
-                userID: this.state.userID,
-                description: this.state.description,
-                reason: this.state.reason,
+                id: this.props.id,
+                userID: this.props.userID,
+                description: values.description,
+                reason: values.reason,
                 anonymity: this.state.anonymity,
             })
         })
@@ -80,7 +55,7 @@ class SupportForm extends Component {
                 if (data === 'Success') {
                     this.setState({ alreadySigned: true });
                     this.props.refresh();
-                }else{
+                } else {
                     throw new Error(); //unable to support
                 }
             })
@@ -88,28 +63,72 @@ class SupportForm extends Component {
 
     render() {
         return (
-            <Form>
-                <Form.Field
-                    className='ph3 mv2'>
-                    <div>
-                        <p className='f5 fw7'>Describe yourself (Optional)</p>
-                        <input type="text" placeholder="E.g. Freshman residing in RC4" onChange={(event) => this.onInputChange(event, 'description')} />
-                    </div>
-                </Form.Field>
-                <Form.Field
-                    className='ph3 mv2'>
-                    <div>
-                        <p className='f5 fw7'>Reason for Support (Optional)</p>
-                        <textarea onChange={(event) => this.onInputChange(event, 'reason')} placeholder="Why are you supporting this?"></textarea>
-                    </div>
-                </Form.Field>
-                <Form.Field>
-                    <Checkbox label='Enable anonymity' onClick={() => this.toggleAnonymity()} />
-                </Form.Field>
-                <button className="landing-button" disabled={this.state.alreadySigned || this.state.userID === ''} onClick={() => this.onSubmitClick()}>Submit</button>
-            </Form>
+            <Formik
+                initialValues={{
+                    description: "", //100 max
+                    reason: "",
+                }}
+                onSubmit={(values, actions) => {
+                    setTimeout(() => {
+                        this.submitSupport(values);
+                        actions.setSubmitting(false);
+                        actions.resetForm();
+                    }, 2000);
+                }}
+                validationSchema={yup.object().shape({
+                    description: yup.string().required("This field is required")
+                        .max(50, "Please make your description shorter (50 Characters Maximum)"),
+                    reason: yup.string(),
+                })}
+                render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => {
+                    return (
+                        <Form className='mh2'>
+                            <Form.Field className="ph3 mv2">
+                                <p className='f5 fw7'>Describe yourself</p>
+                                {touched.description && errors.description && (
+                                    <div className='i mv3 red tc'> {errors.description}</div>
+                                )}
+                                <input
+                                    type='text'
+                                    placeholder="E.g. Freshman residing in RC4"
+                                    name="description"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.description}
+                                />
+                            </Form.Field>
+
+                            <Form.Field className='ph3 mv2'>
+                                <p className='f5 fw7'>Reason for Support (Optional)</p>
+                                {touched.reason && errors.reason && (
+                                    <div className='i mv3 red tc'> {errors.reason}</div>
+                                )}
+                                <textarea
+                                    placeholder="Why are you supporting this?"
+                                    name="reason"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.reason}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <Checkbox label='Enable anonymity' onClick={() => this.toggleAnonymity()} />
+                            </Form.Field>
+
+                            <button
+                                className='landing-button'
+                                type="submit"
+                                onClick={handleSubmit}
+                                disabled={isSubmitting || this.state.alreadySigned}>
+                                Submit
+                            </button>
+                        </Form>
+                    );
+                }}
+            />
         );
     }
 }
 
 export default SupportForm;
+
