@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import TargetCard from './TargetCard';
-import SupportForm from './SupportForm';
+import SupportForm from '../Forms/SupportForm';
 import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
 import { Button } from 'semantic-ui-react'
 import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
