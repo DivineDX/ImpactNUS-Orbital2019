@@ -9,7 +9,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
             title: currState.title, 
         }}
 
-        onSubmit={(values, actions) => {
+        onSubmit={(values) => {
             navButton(2, values);
         }}  
 

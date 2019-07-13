@@ -11,7 +11,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                     <h4>Title: {currState.title}</h4>
                     <h4>Decision Maker: {currState.recipient}</h4>
                     <h4>Target Supporters: {currState.targetNum}</h4>
-                    <h4>Anonymity: {currState.anonymity.toString()}</h4>
+                    <h4>Anonymity: {currState.anonymity}</h4>
                     <h4>
                         Tags: {currState.tags.join(", ")}
                     </h4>
@@ -25,7 +25,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                     <h4>Title: {currState.title}</h4>
                     <h4>Target Group: {currState.recipient}</h4>
                     <h4>Target Supporters: {currState.targetNum}</h4>
-                    <h4>Target End Date: {currState.date_end}</h4>
+                    <h4>Target End Date: {currState.date_end.toDateString()}</h4>
                     <h4> Tags: {currState.tags.join(", ")}</h4>
                     <h4>Description: {currState.description}</h4>
                     <h4>ImageURL: {currState.imageURL}</h4>

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
-// import DatePicker from "react-datepicker";
-// import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
+import Flatpickr from 'react-flatpickr'
+import '../../../node_modules/flatpickr/dist/themes/light.css';
 
 class Form_Step2 extends Component {
     render() {
@@ -39,7 +39,7 @@ class Form_Step2 extends Component {
                             .max(new Date(2020, 6, 13), "Maximum Campaign length is 1 year"),
                 })}
 
-                render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => {
+                render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => {
                     return (
                         <Form size='huge'>
                             <Form.Field >
@@ -85,12 +85,13 @@ class Form_Step2 extends Component {
                                         {touched.date_end && (
                                             <div className='i mb4 red'> {errors.date_end}</div>
                                         )}
-                                        <Input
-                                            type='date'
-                                            name="date_end"
-                                            onChange={handleChange}
+                                        <Flatpickr
+                                            options={{ minDate: 'today', maxDate: new Date().fp_incr(365) }}
+                                            placeholder="YYYY/MM/DD"
+                                            onChange={e => setFieldValue('date_end', e[0])}
                                             onBlur={handleBlur}
                                             value={values.date_end}
+                                            name="date_end"
                                         />
                                     </div>
                                 }

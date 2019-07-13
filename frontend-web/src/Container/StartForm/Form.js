@@ -118,6 +118,7 @@ class StartForm extends Component {
     }
 
     submitForm = () => {
+        console.log('submitting', this.state);
         fetch('http://localhost:3001/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -126,8 +127,8 @@ class StartForm extends Component {
                 username: this.state.username,
                 type: this.state.type,
                 title: this.state.title,
-                recipient: this.state.recipient,
-                date_end: this.state.date_end,
+                recipient: [this.state.recipient],
+                date_end: this.state.date_end.toISOString(),
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
@@ -137,8 +138,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log("after form submitted", data);
-                this.setState({ currentStep: 5, finished: true });
+                if(data !== 'Unable to post') {
+                    this.setState({ currentStep: 5, finished: true });
+                }                
             })
     }
 
