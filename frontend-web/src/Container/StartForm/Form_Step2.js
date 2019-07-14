@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
 import Flatpickr from 'react-flatpickr'
-import '../../../node_modules/flatpickr/dist/themes/light.css';
+import '../../../node_modules/flatpickr/dist/themes/material_blue.css';
 
 class Form_Step2 extends Component {
     render() {
