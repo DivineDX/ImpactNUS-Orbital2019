@@ -149,15 +149,18 @@ app.post('/signsupport', (req, res) => {
         pnc_id: id,
         anonymity: anonymity,
         dateposted: new Date(),
+    })  
+    .then(data => {
+        if (data[0]) { //exists
+            db('pnc')
+                .where('id', '=', id)
+                .increment('currnumsupporters', 1)
+                .then(res.json('Success'))
+        } else {
+            throw new Error();
+        }
     })
-        .then(data => {
-            if (data[0]) { //exists
-                res.json('Success')
-            } else {
-                throw new Error();
-            }
-        })
-        .catch(err => res.status(400).json('Unable to support'));
+    .catch(err => res.status(400).json('Unable to support'));
 })
 
 //Organizers who want to post an update for their campaign/petition
