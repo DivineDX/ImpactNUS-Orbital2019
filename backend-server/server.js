@@ -79,7 +79,8 @@ app.post('/dashboarddata', (req, res) => {
 
 //Called in Form.js
 app.post('/submitform', (req, res) => {
-    const { userID, username, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const { userID, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+
     db('pnc').returning('id').insert({
         type: type,
         title: title,
@@ -96,7 +97,9 @@ app.post('/submitform', (req, res) => {
         .then(id => {
             res.json(id[0]); //id of the newly created petition/campaign
         })
-        .catch(err => res.status(400).json('Unable to post'));
+        .catch(err => {
+            res.status(400).json('Unable to post');
+        });
 })
 
 //Used in Form.js
