@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "formik": "^1.5.7",
     "react": "^16.8.6",
     "react-autosuggest": "^9.4.3",
+    "react-datepicker": "^2.8.0",
     "react-dom": "^16.8.6",
+    "react-loader-spinner": "^2.3.0",
     "react-native-text-gradient": "^0.1.5",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-slick": "^0.24.0",
     "react-widgets": "^4.4.11",
     "semantic-ui-react": "^0.87.1",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

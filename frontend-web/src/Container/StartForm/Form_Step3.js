@@ -1,43 +1,83 @@
 import React from 'react';
 import { Button, TextArea, Form, Dropdown, Input } from 'semantic-ui-react'
 import tagOptions from './tagOptions';
+import { Formik } from "formik";
+import * as yup from "yup";
 
-const Form_Step3 = ({ navButton, inputChange, dropdownChange, currState }) => {
-    return (
-        <Form size='huge'>
-            <Form.Field>
-                <h1>Provide a detailed description of your {currState.type}</h1>
-                <TextArea focus
-                    value={currState.description}
-                    onChange={(event) => inputChange(event, 'description')}
-                    style={{ minHeight: 200 }} />
-            </Form.Field>
+const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
+    <Formik
+        initialValues={{
+            description: currState.description,
+            imageURL: currState.imageURL,
+        }}
 
-            <Form.Field>
-                <h1>Add a photo (Optional but highly recommended)</h1>
-                <Input focus value={currState.imageURL}
-                    onChange={(event) => inputChange(event, 'imageURL')}
-                    placeholder="Link to an image hosting site" />
-            </Form.Field>
+        onSubmit={(values) => {
+            navButton(4, values);
+        }}
 
-            <Form.Field>
-                <h1>Input relevant tags</h1>
-                <Dropdown
-                    clearable fluid multiple search selection
-                    value={currState.tags}
-                    options={tagOptions}
-                    onChange={dropdownChange.bind(this)}
-                    placeholder='Insert tags' />
-            </Form.Field>
+        validationSchema={yup.object().shape({
+            description: yup.string().required("This field is required"),
+            imageURL: yup.string().url("This is not a url!"),
+        })}
 
-            <Button.Group>
-                <Button labelPosition='left' icon='left chevron' onClick={() => navButton(2)} content='Previous' />
-                <Button
-                    disabled={!currState.isEditing && currState.description === ''}
-                    labelPosition='right' icon='right chevron' onClick={() => navButton(4)} content='Next' />
-            </Button.Group>
-        </Form>
-    );
-}
+        render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => {
+            return (
+                <Form size='huge'>
+                    <Form.Field >
+                        <h1>Provide a detailed description of your {currState.type}</h1>
+                        {touched.description && (
+                            <div className='i mv3 red'> {errors.description}</div>
+                        )}
+                        <TextArea
+                            placeholder="Description"
+                            name="description"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.description}
+                        />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <h1>Add a photo (Optional but highly recommended)</h1>
+                        {touched.imageURL && (
+                            <div className='i mv3 red'> {errors.imageURL}</div>
+                        )}
+                        <Input
+                            type='text'
+                            placeholder="Link to an image hosting site"
+                            name="imageURL"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.imageURL}
+                        />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <h1>Input relevant tags</h1>
+                        <Dropdown
+                            clearable fluid multiple search selection
+                            value={currState.tags}
+                            options={tagOptions}
+                            onChange={dropdownChange.bind(this)}
+                            placeholder='Insert tags' />
+                    </Form.Field>
+
+                    <Button.Group>
+                        <Button
+                            labelPosition='left'
+                            icon='left chevron'
+                            onClick={() => navButton(2, values)}
+                            content='Previous' />
+                        <Button
+                            labelPosition='right' icon='right chevron'
+                            onClick={handleSubmit}
+                            content='Next'
+                            type='submit' />
+                    </Button.Group>
+                </Form>
+            );
+        }}
+    />
+);
 
 export default Form_Step3;

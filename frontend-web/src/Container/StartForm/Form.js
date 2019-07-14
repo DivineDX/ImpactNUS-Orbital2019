@@ -5,6 +5,7 @@ import FormStep2 from './Form_Step2';
 import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
 import FormStep5 from './Form_Step5';
+import Loading from '../../Components/Loader/Loading';
 import './Form.css';
 
 class StartForm extends Component {
@@ -13,6 +14,7 @@ class StartForm extends Component {
         this.state = {
             isEditing: false,
             finished: false,
+            loading: false,
             userID: props.userID,
             username: props.username,
             id: '',
@@ -26,6 +28,7 @@ class StartForm extends Component {
             tags: [],
             description: '',
             imageURL: '',
+
         }
     }
 
@@ -33,6 +36,7 @@ class StartForm extends Component {
         const { predefinedType, editing, id } = this.props.location.state;
         this.setState({ type: predefinedType, id: id });
         if (editing) {
+            this.setState({ loading: true });
             this.loadData(id);
         }
     }
@@ -49,6 +53,7 @@ class StartForm extends Component {
                 }
                 this.setState({
                     isEditing: true,
+                    loading: false,
                     type: data.type,
                     title: data.title,
                     recipient: data.recipient,
@@ -95,54 +100,13 @@ class StartForm extends Component {
         }
     }
 
-    onInputChange = (event, category) => {
-        switch (category) {
-            case "title":
-                this.setState({ title: event.target.value }); //petition or campaign 
-                break;
-            case "recipient":
-                this.setState({ recipient: [event.target.value] }); //petition or campaign 
-                break;
-            case "targetNum":
-                this.setState({ targetNum: event.target.value }); //petition or campaign 
-                break;
-            case "date":
-                this.setState({ date_end: event.target.value }); //petition or campaign 
-                break;
-            case "description":
-                this.setState({ description: event.target.value }); //petition or campaign 
-                break;
-            case "imageURL":
-                this.setState({ imageURL: event.target.value }); //petition or campaign 
-                break;
-
-            default:
-                break;
-        }
-    }
-
     onDropdownChange = (e, { value }) => {
         this.setState({ tags: value });
     }
 
-    currentStep = (stepNumber) => {
-        switch (stepNumber) {
-            case 1:
-                this.setState({ currentStep: 1 });
-                break;
-            case 2:
-                this.setState({ currentStep: 2 });
-                break;
-            case 3:
-                this.setState({ currentStep: 3 });
-                break;
-            case 4:
-                this.setState({ currentStep: 4 });
-                break;
-            default:
-                this.setState({ currentStep: 1 });
-                break;
-        }
+    changeStep = (stepNumber, values) => {
+        this.setState({ currentStep: stepNumber });
+        this.setState(values);
     }
 
     onSubmitForm = () => {
@@ -153,8 +117,7 @@ class StartForm extends Component {
         }
     }
 
-    submitForm = () => { //modify this after database is coded
-        console.log(this.state);
+    submitForm = () => {
         fetch('http://localhost:3001/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -204,49 +167,53 @@ class StartForm extends Component {
     }
 
     render() {
-        return (	 //acts as a card list here
-            <div id="formContainer" className="flex flex-column items-center mt4 mb4">
-                {!this.state.finished &&
-                    <div id="stepContainer" className="pb3">
-                        <MultistepMenu currentStep={this.state.currentStep} />
-                    </div>}
-
-                <div id="inputContainer">
-                    {this.state.currentStep === 1 &&
-                        <FormStep1
-                            navButton={this.currentStep}
-                            toggleType={this.toggleType}
-                            inputChange={this.onInputChange}
-                            currState={this.state}
-                        />}
-                    {this.state.currentStep === 2 &&
-                        <FormStep2
-                            navButton={this.currentStep}
-                            inputChange={this.onInputChange}
-                            toggleAnonymity={this.toggleAnonymity}
-                            currentAnonymity={this.state.anonymity}
-                            currState={this.state}
-                        />}
-                    {this.state.currentStep === 3 &&
-                        <FormStep3
-                            navButton={this.currentStep}
-                            inputChange={this.onInputChange}
-                            dropdownChange={this.onDropdownChange}
-                            currState={this.state}
-                        />}
-                    {this.state.currentStep === 4 &&
-                        <FormStep4
-                            navButton={this.currentStep}
-                            currState={this.state}
-                            onSubmitForm={this.onSubmitForm}
-                        />}
-                    {this.state.finished && //all steps completed
-                        <FormStep5
-                            type={this.state.type}
-                        />}
-                </div>
+        if (this.state.loading) {
+            return <div className="mt7">
+                <Loading />
             </div>
-        );
+        } else {
+            return (	 //acts as a card list here
+                <div id="formContainer" className="flex flex-column items-center mt4 mb4">
+                    {!this.state.finished &&
+                        <div id="stepContainer" className="pb3">
+                            <MultistepMenu currentStep={this.state.currentStep} />
+                        </div>}
+
+                    <div id="inputContainer">
+                        {this.state.currentStep === 1 &&
+                            <FormStep1
+                                navButton={this.changeStep}
+                                toggleType={this.toggleType}
+                                currState={this.state}
+                            />}
+                        {this.state.currentStep === 2 &&
+                            <FormStep2
+                                navButton={this.changeStep}
+                                toggleAnonymity={this.toggleAnonymity}
+                                currentAnonymity={this.state.anonymity}
+                                currState={this.state}
+                            />}
+                        {this.state.currentStep === 3 &&
+                            <FormStep3
+                                navButton={this.changeStep}
+                                inputChange={this.onInputChange}
+                                dropdownChange={this.onDropdownChange}
+                                currState={this.state}
+                            />}
+                        {this.state.currentStep === 4 &&
+                            <FormStep4
+                                navButton={this.changeStep}
+                                currState={this.state}
+                                onSubmitForm={this.onSubmitForm}
+                            />}
+                        {this.state.finished && //all steps completed
+                            <FormStep5
+                                type={this.state.type}
+                            />}
+                    </div>
+                </div>
+            );
+        }
     }
 }
 
