@@ -4,7 +4,7 @@ import TargetCard from './TargetCard';
 import SupportForm from '../Forms/SupportForm';
 import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
 import { Button } from 'semantic-ui-react'
-import UpdatesSlider from '../UpdatesSlider/UpdatesSlider';
+import UpdatesSlider from '../Sliders/UpdatesSlider';
 import '../../Container/NonExistentPage/NonExistentPage';
 import './LandingPage.css';
 import NonExistentPage from '../../Container/NonExistentPage/NonExistentPage';

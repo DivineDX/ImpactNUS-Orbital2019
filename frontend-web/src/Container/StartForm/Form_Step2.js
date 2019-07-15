@@ -3,9 +3,11 @@ import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
 import Flatpickr from 'react-flatpickr'
+import NumberSlider from '../../Components/Sliders/NumberSlider';
 import '../../../node_modules/flatpickr/dist/themes/material_blue.css';
 
 class Form_Step2 extends Component {
+
     render() {
         const { navButton, toggleAnonymity, currentAnonymity, currState } = this.props;
         const currType = currState.type;
@@ -58,17 +60,14 @@ class Form_Step2 extends Component {
 
                             <Form.Field>
                                 <h1>State your target number of supporters</h1>
-                                {touched.targetNum && (
-                                    <div className='i mb4 red'> {errors.targetNum}</div>
-                                )}
-                                <Input
-                                    type='number'
-                                    placeholder="Target Number"
-                                    name="targetNum"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                <NumberSlider
+                                    min={10}
+                                    max={2000}
                                     value={values.targetNum}
+                                    name="targetNum"
+                                    onChange={e => setFieldValue('targetNum', e)}
                                 />
+
                             </Form.Field>
 
                             <Form.Field>

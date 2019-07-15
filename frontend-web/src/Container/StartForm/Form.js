@@ -18,17 +18,16 @@ class StartForm extends Component {
             userID: props.userID,
             username: props.username,
             id: '',
-            currentStep: 2,
-            type: 'campaign',
+            currentStep: 1,
+            type: '',
             title: '',
             recipient: [],
             date_end: null,
-            targetNum: '',
+            targetNum: 10,
             anonymity: false,
             tags: [],
             description: '',
             imageURL: '',
-
         }
     }
 
