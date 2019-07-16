@@ -5,7 +5,8 @@ import { Markup } from 'interweave';
 const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
     const currType = currState.type;
     const descHTML = <Markup content={currState.description.toString("html")}/>;
-   
+    console.log("End Date: ", currState.date_end)
+
     return (
         <div>
             <h1>Please confirm your {currType} details</h1>

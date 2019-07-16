@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button, TextArea, Form, Dropdown, Input } from 'semantic-ui-react'
+import { Button, Form, Dropdown, Input } from 'semantic-ui-react'
 import tagOptions from './tagOptions';
 import { Formik } from "formik";
 import * as yup from "yup";
 import TextEditor from '../../Components/TextEditor/TextEditor';
-
 
 const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
     <Formik

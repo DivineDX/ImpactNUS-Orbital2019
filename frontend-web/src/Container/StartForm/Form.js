@@ -45,19 +45,19 @@ class StartForm extends Component {
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
-                let date_end;
-                if (data.type === 'campaign') {
-                    date_end = data.date_end.substring(0, 10);
-                } else {
-                    date_end = data.date_end;
-                }
+                // let date_end;
+                // if (data.type === 'campaign') {
+                //     date_end = data.date_end.substring(0, 10);
+                // } else {
+                //     date_end = data.date_end;
+                // }
                 this.setState({
                     isEditing: true,
                     loading: false,
                     type: data.type,
                     title: data.title,
                     recipient: data.recipient,
-                    date_end: date_end,
+                    date_end: new Date(data.date_end),
                     targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
                     tags: data.tags,
@@ -118,7 +118,6 @@ class StartForm extends Component {
     }
 
     submitForm = () => {
-        console.log('submitting', this.state);
         fetch('http://localhost:3001/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },

@@ -7,34 +7,33 @@
 
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 #Logo {
-    font-family: 'Orbitron';
-    font-size: 25px;
-    /* color: ; */
-
+	font-family: 'Orbitron';
+	font-size: 25px;
+	/* color: ; */
 }
 
 .headerWord {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 1.2em;
-  width: 150px;
+	display: flex;
+	justify-content: flex-start;
+	font-size: 1.2em;
+	width: 150px;
 }
 
-#navbar{
-  margin: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+#navbar {
+	margin: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 4;
 }
 
 /* if you do this, the search bar is strange */
+
 @media screen and (max-width: 845px) {
-  #navbar {
-    display: flex; 
-    flex-direction: column;
-  }
- 
-  /* .ui.menu:not(.vertical) .right.menu {
+	#navbar {
+		display: flex;
+		flex-direction: column;
+	}
+	/* .ui.menu:not(.vertical) .right.menu {
     margin-left: 0px;
-  } */ 
+  } */
 }
