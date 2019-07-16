@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react'
+import { Markup } from 'interweave';
 
 const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
-    let currType = currState.type;
+    const currType = currState.type;
+    const descHTML = <Markup content={currState.description.toString("html")}/>;
+   
     return (
         <div>
             <h1>Please confirm your {currType} details</h1>
@@ -15,7 +18,8 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                     <h4>
                         Tags: {currState.tags.join(", ")}
                     </h4>
-                    <h4>Description: {currState.description}</h4>
+                    <h4>Description:</h4>
+                    <p>{descHTML}</p>
                     <h4>ImageURL: {currState.imageURL}</h4>
                 </div>
             }
@@ -27,7 +31,8 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                     <h4>Target Supporters: {currState.targetNum}</h4>
                     <h4>Target End Date: {currState.date_end.toDateString()}</h4>
                     <h4> Tags: {currState.tags.join(", ")}</h4>
-                    <h4>Description: {currState.description}</h4>
+                    <h4>Description: </h4>
+                    <p>{descHTML}</p>
                     <h4>ImageURL: {currState.imageURL}</h4>
                 </div>
             }

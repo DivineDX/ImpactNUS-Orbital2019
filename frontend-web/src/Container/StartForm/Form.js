@@ -6,6 +6,7 @@ import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
 import FormStep5 from './Form_Step5';
 import Loading from '../../Components/Loader/Loading';
+import RichTextEditor from "react-rte";
 import './Form.css';
 
 class StartForm extends Component {
@@ -26,7 +27,7 @@ class StartForm extends Component {
             targetNum: 10,
             anonymity: false,
             tags: [],
-            description: '',
+            description: RichTextEditor.createEmptyValue(),
             imageURL: '',
         }
     }
@@ -60,7 +61,7 @@ class StartForm extends Component {
                     targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
                     tags: data.tags,
-                    description: data.description,
+                    description: RichTextEditor.createValueFromString(data.description, 'html'),
                     imageURL: data.imageurl,
                 });
             });
@@ -131,7 +132,7 @@ class StartForm extends Component {
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
-                description: this.state.description,
+                description: this.state.description.toString('html'),
                 imageURL: this.state.imageURL,
             })
         })
@@ -174,13 +175,13 @@ class StartForm extends Component {
             </div>
         } else {
             return (	 //acts as a card list here
-                <div id="formContainer" className="flex flex-column items-center mt4 mb4">
+                <div id="formContainer" className="flex flex-column items-center mv4">
                     {!this.state.finished &&
-                        <div id="stepContainer" className="pb3">
+                        <div className="pb3 pl1">
                             <MultistepMenu currentStep={this.state.currentStep} />
                         </div>}
 
-                    <div id="inputContainer">
+                    <div >
                         {this.state.currentStep === 1 &&
                             <FormStep1
                                 navButton={this.changeStep}

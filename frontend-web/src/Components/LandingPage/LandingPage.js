@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react'
+import { Markup } from 'interweave';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import TargetCard from './TargetCard';
 import SupportForm from '../Forms/SupportForm';
 import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
-import { Button } from 'semantic-ui-react'
 import UpdatesSlider from '../Sliders/UpdatesSlider';
 import '../../Container/NonExistentPage/NonExistentPage';
 import './LandingPage.css';
@@ -98,8 +99,8 @@ class LandingPage extends Component {
                         </div>
                     </div>
 
-                    <div id="description" className='pa3 mv3'>
-                        <p>{description}</p>
+                    <div id="description" className='pa3 mv3 tl'>
+                        <Markup content={description}/>
                     </div>
 
                     {type === 'petition' &&

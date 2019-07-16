@@ -30,7 +30,7 @@ export default class MultistepMenu extends Component {
     render() {
         const {currentStep} = this.props;
         return (
-            <Step.Group >
+            <Step.Group>
                 <Step active = {currentStep === 1}>
                     <Icon name='pencil alternate' />
                     <Step.Content>

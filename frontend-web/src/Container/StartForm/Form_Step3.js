@@ -3,6 +3,8 @@ import { Button, TextArea, Form, Dropdown, Input } from 'semantic-ui-react'
 import tagOptions from './tagOptions';
 import { Formik } from "formik";
 import * as yup from "yup";
+import TextEditor from '../../Components/TextEditor/TextEditor';
+
 
 const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
     <Formik
@@ -16,27 +18,12 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
         }}
 
         validationSchema={yup.object().shape({
-            description: yup.string().required("This field is required"),
             imageURL: yup.string().url("This is not a url!"),
         })}
 
         render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => {
             return (
                 <Form size='huge'>
-                    <Form.Field >
-                        <h1>Provide a detailed description of your {currState.type}</h1>
-                        {touched.description && (
-                            <div className='i mv3 red'> {errors.description}</div>
-                        )}
-                        <TextArea
-                            placeholder="Description"
-                            name="description"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.description}
-                        />
-                    </Form.Field>
-
                     <Form.Field>
                         <h1>Add a photo (Optional but highly recommended)</h1>
                         {touched.imageURL && (
@@ -60,6 +47,16 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                             options={tagOptions}
                             onChange={dropdownChange.bind(this)}
                             placeholder='Insert tags' />
+                    </Form.Field>
+
+                    <Form.Field >
+                        <h1>Provide a detailed description of your {currState.type}</h1>
+                        <TextEditor
+                            placeholder="Tell your story..."
+                            name="description"
+                            onChange={e => setFieldValue('description', e)}
+                            value={values.description}
+                        />
                     </Form.Field>
 
                     <Button.Group>
