@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import Flatpickr from 'react-flatpickr'
 import NumberSlider from '../../Components/Sliders/NumberSlider';
+import InputErrorLabel from '../../Components/Label/InputErrorLabel';
 import '../../../node_modules/flatpickr/dist/themes/material_blue.css';
 
 class Form_Step2 extends Component {
@@ -46,9 +47,6 @@ class Form_Step2 extends Component {
                         <Form size='huge'>
                             <Form.Field >
                                 <h1>{target}</h1>
-                                {touched.recipient && (
-                                    <div className='i mb4 red'> {errors.recipient}</div>
-                                )}
                                 <Input
                                     type='text'
                                     name="recipient"
@@ -56,6 +54,7 @@ class Form_Step2 extends Component {
                                     onBlur={handleBlur}
                                     value={values.recipient}
                                     placeholder={placeholder} />
+                                <InputErrorLabel touched={touched.recipient} errors={errors.recipient} />
                             </Form.Field>
 
                             <Form.Field>
@@ -67,7 +66,6 @@ class Form_Step2 extends Component {
                                     name="targetNum"
                                     onChange={e => setFieldValue('targetNum', e)}
                                 />
-
                             </Form.Field>
 
                             <Form.Field>
@@ -81,9 +79,6 @@ class Form_Step2 extends Component {
                                 {currType === 'campaign' &&
                                     <div>
                                         <h1>Select a target end date for your campaign</h1>
-                                        {touched.date_end && (
-                                            <div className='i mb4 red'> {errors.date_end}</div>
-                                        )}
                                         <Flatpickr
                                             options={{ minDate: 'today', maxDate: new Date().fp_incr(365) }}
                                             placeholder="YYYY/MM/DD"
@@ -91,8 +86,9 @@ class Form_Step2 extends Component {
                                             onBlur={handleBlur}
                                             value={values.date_end}
                                             name="date_end"
-                                            disabled = {currState.isEditing}
+                                            disabled={currState.isEditing}
                                         />
+                                        <InputErrorLabel touched={touched.date_end} errors={errors.date_end} />
                                     </div>
                                 }
                             </Form.Field>

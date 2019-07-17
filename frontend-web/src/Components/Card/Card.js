@@ -2,6 +2,8 @@ import React from 'react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom'
 import './Card.css';
+import wireframeImage from '../../Images/wireframeImage.png';
+import {Image} from 'semantic-ui-react';
 
 const Card = (props) => {
     const loadedData = props.loadedData;
@@ -27,7 +29,11 @@ const Card = (props) => {
 
     return (
         <div className="avenir card-container shadow-4">
-            <img src={imageurl} className="w-100" id="cardImage" alt="IMG" />
+            <Image 
+                src={imageurl} 
+                onError={(e)=>{e.target.onerror = null; e.target.src=wireframeImage}}
+                alt = "Error" className="w-100" id="cardImage"
+                />
             <div id = "contentWrap">
                 <div className="text_wrap flex flex-row">
                     <h3 className="w-80">

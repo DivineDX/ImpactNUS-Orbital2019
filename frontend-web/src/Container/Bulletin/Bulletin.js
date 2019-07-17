@@ -46,7 +46,6 @@ class Bulletin extends Component {
 
 	selectCategory = (arr, cat) => {
 		if (cat === 'Popular') {
-			// console.log("Popular Running");
 			return arr.sort((a, b) => b.numSupporters - a.numSupporters);
 		} else if (cat === 'Recent') {
 			return arr.sort((a, b) => DateSort(a.date_started, b.date_started));
@@ -56,17 +55,17 @@ class Bulletin extends Component {
 	}
 
 	handleFilterClick = (filter) => {
-		this.setState({ filter: filter });
+		this.setState({ visible: 3, filter: filter });
 	}
 
 	handleCategoryClick = (cat) => { //Only for Popular and Recent (Sorting, not filtering)
-		this.setState({ category: cat });
+		this.setState({ visible: 3, category: cat });
 	}
 
 	render() {
 		const displayedData = this.selectCategory(this.filterData(this.state.origData, this.state.filter), this.state.category);
 		return (
-			<div className=''>
+			<div>
 				<div className="w-75 pt5 center">
 					<h1 className="tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
 					<BulletinMenuBar
@@ -81,8 +80,17 @@ class Bulletin extends Component {
 						<FollowButton />
 					</Card>
 				})}
-				
-				<Button onClick = {() => this.loadMore()} size='large' color='red' className='w-50 center'>See More</Button>
+
+				{this.state.visible < displayedData.length &&
+					<div className='flex justify-center'>
+						<Button
+							onClick={() => this.loadMore()}
+							size='large' color='blue' className='w-40 f5'>
+							See More
+						</Button>
+					</div>
+				}
+
 			</div>
 		);
 	}

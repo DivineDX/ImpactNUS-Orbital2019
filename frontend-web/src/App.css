@@ -8,9 +8,25 @@ button:disabled {
     text-decoration: line-through;
 }
 
+/* Edit below to standardize how all the input boxes look
 .ui.form .field  {
     margin: 0rem 0rem 2rem 0rem;
 }
+
+.ui.form textarea, .ui.form input[type=text] {
+    background: transparent;
+    resize: none;
+    border-radius: 25px;
+    border: 1px solid #446cb3;
+}
+
+.ui.form textarea:focus, .ui.form input[type=text]:focus {
+    background: transparent;
+    resize: none;
+    border-radius: 25px;
+    border: 1px solid #446cb3;
+} */
+
 /* Mobile Screens */
 @media screen and (max-width: 700px) {
     .body {

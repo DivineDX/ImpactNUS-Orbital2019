@@ -2,6 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Form } from "semantic-ui-react";
+import InputErrorLabel from '../Label/InputErrorLabel';
 
 const UpdateForm = ({ submitUpdate, updatePosted }) => (
     <Formik
@@ -27,9 +28,6 @@ const UpdateForm = ({ submitUpdate, updatePosted }) => (
                 <Form className='mh2'>
                     <Form.Field className="formfieldstyle">
                         <h3 className='tc'>Title of Update</h3>
-                        {touched.title && errors.title && (
-                            <div className='i mv3 red tc'> {errors.title}</div>
-                        )}
                         <input
                             type='text'
                             placeholder="Title"
@@ -38,13 +36,11 @@ const UpdateForm = ({ submitUpdate, updatePosted }) => (
                             onBlur={handleBlur}
                             value={values.title}
                         />
+                        <InputErrorLabel touched={touched.title} errors={errors.title} />
                     </Form.Field>
 
                     <Form.Field>
                         <h3 className='tc'> Description of Update</h3>
-                        {touched.description && errors.description && (
-                            <div className='i mv3 red tc'> {errors.description}</div>
-                        )}
                         <textarea
                             placeholder="Description"
                             name="description"
@@ -52,6 +48,7 @@ const UpdateForm = ({ submitUpdate, updatePosted }) => (
                             onBlur={handleBlur}
                             value={values.description}
                         />
+                        <InputErrorLabel touched={touched.description} errors={errors.description} />
                     </Form.Field>
                     {updatePosted
                         ? <h3>Update posted! Click anywhere out of the modal to exit</h3>

@@ -6,10 +6,11 @@ import TargetCard from './TargetCard';
 import SupportForm from '../Forms/SupportForm';
 import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
 import UpdatesSlider from '../Sliders/UpdatesSlider';
-import '../../Container/NonExistentPage/NonExistentPage';
-import './LandingPage.css';
 import NonExistentPage from '../../Container/NonExistentPage/NonExistentPage';
 import { DateToString } from '../DateConverter/DateToString';
+import LandingPageHeading from '../Headers/LandingPageHeading';
+import wireframeImage from '../../Images/wireframeImage.png';
+import './LandingPage.css';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -45,17 +46,11 @@ class LandingPage extends Component {
                 this.setState({ loadedUpdateData: data });
             });
 
-        fetch(`http://localhost:3001/reasonssupport/${id}`)
-            .then(resp => {
-                return resp.json();
-            })
-            .then(data => {
-                this.setState({ loadedSupportData: data });
-            });
+        this.fetchSupportData(id);
     }
 
-    refreshSupportData() {
-        fetch(`http://localhost:3001/reasonssupport/${this.state.id}`)
+    fetchSupportData(id) {
+        fetch(`http://localhost:3001/reasonssupport/${id}`)
             .then(resp => {
                 return resp.json();
             })
@@ -73,13 +68,18 @@ class LandingPage extends Component {
             )
         } else {
             return (
-                <article id='landingPage' className='tc'>
+                <article id='landingPage' className=''>
                     <div className="pv3">
                         <h1 className='f2 tc'> {title}</h1>
                     </div>
 
                     <div id="subHeader" className='pv2 flex flex-column items-center'>
-                        <img className="pb3 ma3" id='pageImage' src={imageurl} alt="IMG" />
+                        <img
+                            className="pb3 ma3"
+                            id='pageImage'
+                            src={imageurl}
+                            onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
+                            alt="Error" />
                         <div className=''>
                             <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
                             <p className="i">Signatures: <b>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
@@ -100,7 +100,7 @@ class LandingPage extends Component {
                     </div>
 
                     <div id="description" className='pa3 mv3 tl'>
-                        <Markup content={description}/>
+                        <Markup content={description} />
                     </div>
 
                     {type === 'petition' &&
@@ -110,32 +110,19 @@ class LandingPage extends Component {
                         </div>
                     }
 
-                    <div id="Updates" className='pv4 ph2 bg-washed-green'>
-                        <p className='f3'>
-                            Updates
-                        <hr className='mw4 bb bw1 b--black-10'></hr>
-                        </p>
+                    <div id="Updates" className='pv4 ph2 bg-washed-green tc'>
+                        <LandingPageHeading text="Updates" />
                         <UpdatesSlider updateData={this.state.loadedUpdateData} />
                     </div>
 
-                    <div id="Reasons" className='pv3 ph2'>
-                        <p className='f3'>
-                            Reasons for Support
-                        <hr className='mw5 bb bw1 b--black-10'></hr>
-                        </p>
+                    <div id="Reasons" className='pv3 ph2 tc'>
+                        <LandingPageHeading text="Reasons for Support" />
                         <ReasonSupportBulletin reasonData={this.state.loadedSupportData} />
-                        <button className="landing-button">See All</button>
                     </div>
 
                     <div id="SupportForm" className='pv3 ph2 bg-washed-green'>
-                        <p className='f3'>
-                            {type === 'petition'
-                                ? "Sign this petition"
-                                : "Support this campaign"
-                            }
-                            <hr className='mw5 bb bw1 b--black-10'></hr>
-                        </p>
-                        <SupportForm refresh={this.refreshSupportData.bind(this)} userID={this.props.userID} id={this.state.id} />
+                        <LandingPageHeading text={type === 'petition' ? "Sign this petition" : "Support this campaign"} />
+                        <SupportForm refresh={this.fetchSupportData.bind(this)} userID={this.props.userID} id={this.state.id} />
                     </div>
 
                 </article>

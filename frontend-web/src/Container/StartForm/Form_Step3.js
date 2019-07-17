@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Form, Dropdown, Input } from 'semantic-ui-react'
-import tagOptions from './tagOptions';
 import { Formik } from "formik";
 import * as yup from "yup";
+import tagOptions from './tagOptions';
 import TextEditor from '../../Components/TextEditor/TextEditor';
+import InputErrorLabel from '../../Components/Label/InputErrorLabel';
 
 const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
     <Formik
@@ -24,10 +25,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field>
-                        <h1>Add a photo (Optional but highly recommended)</h1>
-                        {touched.imageURL && (
-                            <div className='i mv3 red'> {errors.imageURL}</div>
-                        )}
+                        <h1>Add a URL of an image (Optional but highly recommended)</h1>
                         <Input
                             type='text'
                             placeholder="Link to an image hosting site"
@@ -36,6 +34,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                             onBlur={handleBlur}
                             value={values.imageURL}
                         />
+                        <InputErrorLabel touched={touched.imageURL} errors={errors.imageURL} />
                     </Form.Field>
 
                     <Form.Field>

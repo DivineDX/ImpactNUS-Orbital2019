@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Checkbox, Form } from 'semantic-ui-react'
+import { Checkbox, Form, Label } from 'semantic-ui-react'
 import './SupportForm.css';
 import { Formik } from "formik";
 import * as yup from "yup";
+import InputErrorLabel from '../Label/InputErrorLabel';
 
 class SupportForm extends Component {
     constructor(props) {
@@ -82,12 +83,9 @@ class SupportForm extends Component {
                 })}
                 render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => {
                     return (
-                        <Form className='mh2'>
-                            <Form.Field className="ph3 mv2">
+                        <Form className='w-two-thirds center'>
+                            <Form.Field className="mv2">
                                 <p className='f5 fw7'>Describe yourself</p>
-                                {touched.description && errors.description && (
-                                    <div className='i mv3 red tc'> {errors.description}</div>
-                                )}
                                 <input
                                     type='text'
                                     placeholder="E.g. Freshman residing in RC4"
@@ -95,33 +93,45 @@ class SupportForm extends Component {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
+                                    disabled={isSubmitting || this.state.alreadySigned}
                                 />
+                                <InputErrorLabel touched={touched.description} errors={errors.description} />
                             </Form.Field>
 
-                            <Form.Field className='ph3 mv2'>
+                            <Form.Field className='mv2'>
                                 <p className='f5 fw7'>Reason for Support (Optional)</p>
-                                {touched.reason && errors.reason && (
-                                    <div className='i mv3 red tc'> {errors.reason}</div>
-                                )}
                                 <textarea
                                     placeholder="Why are you supporting this?"
                                     name="reason"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.reason}
+                                    disabled={isSubmitting || this.state.alreadySigned}
                                 />
+                                <InputErrorLabel touched={touched.reason} errors={errors.reason} />
+
                             </Form.Field>
+
                             <Form.Field>
                                 <Checkbox label='Enable anonymity' onClick={() => this.toggleAnonymity()} />
                             </Form.Field>
 
-                            <button
-                                className='landing-button'
-                                type="submit"
-                                onClick={handleSubmit}
-                                disabled={isSubmitting || this.state.alreadySigned}>
-                                Submit
-                            </button>
+                            <div className='flex flex-column items-center'>
+                                <button
+                                    className='landing-button'
+                                    type="submit"
+                                    onClick={handleSubmit}
+                                    disabled={isSubmitting || this.state.alreadySigned}>
+                                    Submit
+                                </button>
+                                {this.state.alreadySigned
+                                    ? <Label basic color='red' pointing>
+                                        You have already signed!
+                                        </Label>
+                                    : null
+                                }
+                            </div>
+
                         </Form>
                     );
                 }}

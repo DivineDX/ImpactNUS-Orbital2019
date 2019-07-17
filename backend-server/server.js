@@ -69,8 +69,10 @@ app.get('/reasonssupport/:id', (req, res) => {
 
 //Called in Dashboard.js
 app.post('/dashboarddata', (req, res) => {
-    db('pnc').select('id', 'type', 'title', 'recipient', 'organizer_id',
-        'anonymity', 'imageurl', 'targetnumsupporters', 'currnumsupporters')
+    db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
+        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient','users.name',
+        'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
+        )
         .where('organizer_id', '=', req.body.userID)
         .then(data => {
             res.json(data);

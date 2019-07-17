@@ -1,6 +1,7 @@
 import React from 'react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom'
+import wireframeImage from '../../Images/wireframeImage.png';
 import './FeaturedCard.css';
 
 const Card = (props) => {
@@ -24,7 +25,11 @@ const Card = (props) => {
 
     return (
         <div className="shadow-4 w-100">
-            <img src={imageurl} className='' id="cardImg" alt="IMG" />
+            <img 
+                src={imageurl} 
+                onError={(e)=>{e.target.onerror = null; e.target.src=wireframeImage}}
+                id="cardImg" 
+                alt="IMG" />
             <div id="wrapContent">
                 <h3 id = "titleContainer">
                     <Link to={`/pg/${id}`}>
