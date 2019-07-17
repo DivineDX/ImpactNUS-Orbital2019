@@ -5,8 +5,7 @@ import { Markup } from 'interweave';
 const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
     const currType = currState.type;
     const descHTML = <Markup content={currState.description.toString("html")}/>;
-    console.log("End Date: ", currState.date_end)
-
+    
     return (
         <div>
             <h1>Please confirm your {currType} details</h1>
@@ -15,7 +14,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                     <h4>Title: {currState.title}</h4>
                     <h4>Decision Maker: {currState.recipient}</h4>
                     <h4>Target Supporters: {currState.targetNum}</h4>
-                    <h4>Anonymity: {currState.anonymity}</h4>
+                    <h4>Anonymity: {currState.anonymity.toString()}</h4>
                     <h4>
                         Tags: {currState.tags.join(", ")}
                     </h4>

@@ -117,6 +117,7 @@ app.put('/updateform', (req, res) => {
             imageurl: imageURL,
             targetnumsupporters: targetNum,
         })
+        .then(res.json(id))
         .catch(err => res.status(400).json('Update problem'));
 })
 

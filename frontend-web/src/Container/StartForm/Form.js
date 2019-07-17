@@ -41,23 +41,25 @@ class StartForm extends Component {
         }
     }
 
+    getEndDate = () => {
+        if(this.state.type === 'campaign') {
+            return this.state.date_end.toISOString();
+        } else{
+            return null;
+        }
+    }
+
     loadData = (id) => { // fetch data to be able to edit later on
         fetch(`http://localhost:3001/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
-                // let date_end;
-                // if (data.type === 'campaign') {
-                //     date_end = data.date_end.substring(0, 10);
-                // } else {
-                //     date_end = data.date_end;
-                // }
                 this.setState({
                     isEditing: true,
                     loading: false,
                     type: data.type,
                     title: data.title,
                     recipient: data.recipient,
-                    date_end: new Date(data.date_end),
+                    date_end: new Date(data.date_end), //ISO string
                     targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
                     tags: data.tags,
@@ -93,6 +95,7 @@ class StartForm extends Component {
     }
 
     toggleAnonymity = () => {
+        console.log("toggling anonymity");
         if (this.state.anonymity) { //true
             this.setState({ anonymity: false });
         } else {
@@ -123,11 +126,10 @@ class StartForm extends Component {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 userID: this.state.userID,
-                username: this.state.username,
                 type: this.state.type,
                 title: this.state.title,
                 recipient: [this.state.recipient],
-                date_end: this.state.date_end.toISOString(),
+                date_end: this.getEndDate(),
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
@@ -149,19 +151,20 @@ class StartForm extends Component {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 id: this.state.id,
-                recipient: this.state.recipient,
-                date_end: this.state.date_end,
+                recipient: [this.state.recipient],
+                date_end: this.getEndDate(),
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
                 tags: this.state.tags,
-                description: this.state.description,
+                description: this.state.description.toString('html'),
                 imageURL: this.state.imageURL,
             })
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log("after form submitted", data); //this is the id of the newly created
-                this.setState({ currentStep: 5, finished: true });
+                if(data === this.state.id) { //success 
+                    this.setState({ currentStep: 5, finished: true });
+                }
             }).catch(err => {
                 alert('Form submission failed');
             })

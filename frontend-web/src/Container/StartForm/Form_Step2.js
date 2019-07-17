@@ -9,7 +9,7 @@ import '../../../node_modules/flatpickr/dist/themes/material_blue.css';
 class Form_Step2 extends Component {
 
     render() {
-        const { navButton, toggleAnonymity, currentAnonymity, currState } = this.props;
+        const { navButton, toggleAnonymity, currState } = this.props;
         const currType = currState.type;
         let target, placeholder;
         if (currType === 'petition') {
@@ -19,7 +19,7 @@ class Form_Step2 extends Component {
             target = "Select a target audience";
             placeholder = "This is your main group of people you aim to reach out to";
         }
-
+        console.log("Form Step2: ", currState.date_end);
         return (
             <Formik
                 initialValues={{
@@ -73,7 +73,7 @@ class Form_Step2 extends Component {
                             <Form.Field>
                                 {currType === 'petition' &&
                                     <Checkbox
-                                        checked={currentAnonymity}
+                                        checked={currState.anonymity}
                                         onClick={() => toggleAnonymity()}
                                         label='Enable organizer anonymity' />
                                 }
@@ -91,6 +91,7 @@ class Form_Step2 extends Component {
                                             onBlur={handleBlur}
                                             value={values.date_end}
                                             name="date_end"
+                                            disabled = {currState.isEditing}
                                         />
                                     </div>
                                 }
