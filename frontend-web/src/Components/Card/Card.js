@@ -1,9 +1,8 @@
 import React from 'react';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom'
 import './Card.css';
 import wireframeImage from '../../Images/wireframeImage.png';
-import {Image} from 'semantic-ui-react';
+import {Image, Progress} from 'semantic-ui-react';
 
 const Card = (props) => {
     const loadedData = props.loadedData;
@@ -43,10 +42,13 @@ const Card = (props) => {
                     </h3>
                     <div className="w-20">{props.children}</div>
                 </div>
-                <p className="i pt3">{sub}</p>
-                <p className="b"> Initiated by: {displayedOrganizer}</p>
-                <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
-                <p>{footer}</p>
+                <div id = "descriptionWrap">
+                    <p className="i pt3">{sub}</p>
+                    <p className="b"> Initiated by: {displayedOrganizer}</p>
+                    <Progress color='teal' size='small' value = {currnumsupporters} total = {targetnumsupporters}/>
+                    <p>{footer}</p>
+                </div>
+                
             </div>
         </div>
     )

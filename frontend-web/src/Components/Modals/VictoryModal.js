@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
 
+const keywords = {
+    petition: ["Declare Victory", "declare victory", "Victory Declared!"],
+    campaign: ["Conclude Campaign", "conclude this campaign", "Campaign Concluded!"],
+}
+
 class VictoryModal extends Component {
     constructor() {
         super();
@@ -28,23 +33,29 @@ class VictoryModal extends Component {
     }
 
     render() {
-        const { buttonWord } = this.props;
+        const { type } = this.props;
+        let filledWords;
+        if (type === 'petition') {
+            filledWords = keywords.petition;
+        } else {
+            filledWords = keywords.campaign;
+        }
 
         return (
-            <Modal trigger={<Dropdown.Item className='hoverLink'>{buttonWord}</Dropdown.Item>}>
+            <Modal trigger={<Dropdown.Item className='hoverLink'>{filledWords[0]}</Dropdown.Item>}>
                 <Modal.Header className='tc'> Declare Victory </Modal.Header>
                 <Modal.Content>
-                    <p> Are you sure you want to declare victory? By doing so, you won't be able to gain more supporters </p>
+                    <p> Are you sure you want to {filledWords[1]}? This action cannot be undone </p>
+
                     <Button positive onClick={() => this.clickVictory()}>
-                        Declare
+                        {filledWords[0]}
                     </Button>
                     {
                         this.state.clickedVictory
-                            ? <h3>Victory Declared! Click anywhere out of the modal to exit</h3>
+                            ? <h3>{filledWords[2]} Click anywhere out of the modal to exit</h3>
                             : <div></div>
                     }
                 </Modal.Content>
-
             </Modal>
         );
     }

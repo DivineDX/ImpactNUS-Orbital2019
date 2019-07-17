@@ -1,6 +1,6 @@
 import React from 'react';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import { Link } from 'react-router-dom'
+import {Progress} from 'semantic-ui-react';
 import wireframeImage from '../../Images/wireframeImage.png';
 import './FeaturedCard.css';
 
@@ -38,7 +38,7 @@ const Card = (props) => {
                 </h3>
                 <div id = "detailContainer">
                     <div className="pb1 smalltxt"> {smalltext} </div>
-                    <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
+                    <Progress color='teal' size='small' value = {currnumsupporters} total = {targetnumsupporters}/>
                     <p className="b pt2"> Initiated by: {displayedOrganizer}</p>
                 </div>
 
