@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RichTextEditor from "react-rte";
 import MultistepMenu from './MultistepMenu';
 import FormStep1 from './Form_Step1';
 import FormStep2 from './Form_Step2';
@@ -6,18 +7,19 @@ import FormStep3 from './Form_Step3';
 import FormStep4 from './Form_Step4';
 import FormStep5 from './Form_Step5';
 import Loading from '../../Components/Loader/Loading';
-import RichTextEditor from "react-rte";
+import ExceedStartLimit from '../../Components/EmptyFillers/ExceedStartLimit';
+
 import './Form.css';
 
 class StartForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            canStart: false,
             isEditing: false,
             finished: false,
-            loading: false,
+            loading: true,
             userID: props.userID,
-            username: props.username,
             id: '',
             currentStep: 1,
             type: '',
@@ -36,15 +38,34 @@ class StartForm extends Component {
         const { predefinedType, editing, id } = this.props.location.state;
         this.setState({ type: predefinedType, id: id });
         if (editing) {
-            this.setState({ loading: true });
+            this.setState({ canStart: true });
             this.loadData(id);
+        } else { //checks through anti-spam system
+            this.checkStart();
         }
     }
 
+    checkStart = () => {
+        fetch('http://localhost:3001/checkStart', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                userID: this.state.userID,
+            })
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data) { //not exceed
+                    this.setState({ canStart: true });
+                }
+                this.setState({ loading: false });
+            }).catch(err => console.log("Cannot check", err));
+    }
+
     getEndDate = () => {
-        if(this.state.type === 'campaign') {
+        if (this.state.type === 'campaign') {
             return this.state.date_end.toISOString();
-        } else{
+        } else {
             return null;
         }
     }
@@ -69,23 +90,6 @@ class StartForm extends Component {
             });
     }
 
-    resetDefault = () => {
-        this.setState({
-            finished: false,
-            userID: this.props.userID,
-            username: this.props.username,
-            type: '',
-            title: '',
-            recipient: '',
-            date_end: '',
-            targetNum: '',
-            anonymity: false,
-            tags: [],
-            description: '',
-            imageURL: '',
-        });
-    }
-
     toggleType = (type) => {
         if (type === 'petition') {
             this.setState({ type: 'petition' });
@@ -95,7 +99,6 @@ class StartForm extends Component {
     }
 
     toggleAnonymity = () => {
-        console.log("toggling anonymity");
         if (this.state.anonymity) { //true
             this.setState({ anonymity: false });
         } else {
@@ -139,9 +142,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if(data !== 'Unable to post') {
+                if (data !== 'Unable to post') {
                     this.setState({ currentStep: 5, finished: true });
-                }                
+                }
             })
     }
 
@@ -162,7 +165,7 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if(data === this.state.id) { //success 
+                if (data === this.state.id) { //success 
                     this.setState({ currentStep: 5, finished: true });
                 }
             }).catch(err => {
@@ -175,6 +178,9 @@ class StartForm extends Component {
             return <div className="mt7">
                 <Loading />
             </div>
+        }
+        else if (!this.state.loading && !this.state.canStart) { //cannot start
+            return <ExceedStartLimit/>
         } else {
             return (	 //acts as a card list here
                 <div id="formContainer" className="flex flex-column items-center mv4">

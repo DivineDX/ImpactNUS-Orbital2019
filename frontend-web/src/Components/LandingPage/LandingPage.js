@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Progress } from 'semantic-ui-react'
 import { Markup } from 'interweave';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import TargetCard from './TargetCard';
 import SupportForm from '../Forms/SupportForm';
 import ReasonSupportBulletin from '../ReasonSupportBulletin/ReasonSupportBulletin';
@@ -81,7 +80,7 @@ class LandingPage extends Component {
                             onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
                             alt="Error" />
                         <div className=''>
-                            <ProgressBar numSupporters={currnumsupporters} targetNum={targetnumsupporters} />
+                            <Progress color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
                             <p className="i">Signatures: <b>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
                             <div id="subContainer" className='flex flex-row items-center'>
                                 <div className='w-60 tl'>

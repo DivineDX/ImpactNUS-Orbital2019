@@ -20,7 +20,6 @@ class Form_Step2 extends Component {
             target = "Select a target audience";
             placeholder = "This is your main group of people you aim to reach out to";
         }
-        console.log("Form Step2: ", currState.date_end);
         return (
             <Formik
                 initialValues={{

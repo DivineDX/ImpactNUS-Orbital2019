@@ -70,13 +70,37 @@ app.get('/reasonssupport/:id', (req, res) => {
 //Called in Dashboard.js
 app.post('/dashboarddata', (req, res) => {
     db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
-        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient','users.name',
-        'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
+        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'users.name',
+            'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
         )
         .where('organizer_id', '=', req.body.userID)
         .then(data => {
             res.json(data);
         }).catch(err => res.status(400).json('Unable to retrieve'));
+});
+
+//For Anti-Spam: Limit of 5/Month. Response True = pass spam check
+app.post('/checkStart', (req, res) => {
+    db('pnc')
+        .select('date_started')
+        .where('organizer_id', '=', req.body.userID)
+        .orderBy('date_started', 'desc')
+        .limit(5) //<-- This numbrer is the limit per month
+        .then(data => { //data is an array
+            const currTime = Date.now();
+            const earliestPast5 = data.slice(-1)[0]; //last element in array
+            if (earliestPast5 === undefined) { //no past started pnc
+                res.json(true); 
+            } else {
+                const earliestPast5Time = earliestPast5.date_started.getTime();
+                const dayDiff = (currTime - earliestPast5Time) / 86400000; //convert to days
+                if (dayDiff >= 30) {
+                    res.json(true); //can post
+                } else {
+                    res.json(false); //cannot post
+                }
+            }
+        }).catch(err => res.status(400).json('Error', err));
 });
 
 //Called in Form.js
@@ -152,18 +176,18 @@ app.post('/signsupport', (req, res) => {
         pnc_id: id,
         anonymity: anonymity,
         dateposted: new Date(),
-    })  
-    .then(data => {
-        if (data[0]) { //exists
-            db('pnc')
-                .where('id', '=', id)
-                .increment('currnumsupporters', 1)
-                .then(res.json('Success'))
-        } else {
-            throw new Error();
-        }
     })
-    .catch(err => res.status(400).json('Unable to support'));
+        .then(data => {
+            if (data[0]) { //exists
+                db('pnc')
+                    .where('id', '=', id)
+                    .increment('currnumsupporters', 1)
+                    .then(res.json('Success'))
+            } else {
+                throw new Error();
+            }
+        })
+        .catch(err => res.status(400).json('Unable to support'));
 })
 
 //Organizers who want to post an update for their campaign/petition
