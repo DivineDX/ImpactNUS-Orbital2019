@@ -56,15 +56,15 @@ class App extends Component {
 							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} />} />
 							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" exact component={Bulletin} />
-							<ProtectedRoute path="/dashboard" component = {Dashboard} userID={this.state.userID} isSignedIn = {isSignedIn}/>
-							<ProtectedRoute path="/feed" component={Feed} isSignedIn = {isSignedIn}/>
-							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID}/>} />
+							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />
+							<ProtectedRoute path="/feed" component={Feed} isSignedIn={isSignedIn} />
+							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} />} />
 							<Route path="/about" component={About} />
 							<Route path="/howitworks" component={HowItWorks} />
 							<Route path="/faq" component={FAQ} />
 							<Route path="/contactus" component={ContactUs} />
-							<Route path="/pg/:id" render={(props) => <LandingPage {...props} userID={this.state.userID}/>} />
-							<Route path="*" component={NonExistentPage} /> 
+							<Route path="/pg/:id" render={(props) => <LandingPage {...props} userID={this.state.userID} />} />
+							<Route path="*" component={NonExistentPage} />
 						</Switch>
 					</div>
 					{/* <Footer/> */}

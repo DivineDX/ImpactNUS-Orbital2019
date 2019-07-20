@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-app.use(bodyParser.json());
-app.use(cors());
 const knex = require('knex');
+const passport = require('@passport-next/passport');
+const nusStrategy = require('passport-nus-openid').Strategy;
 
 const db = knex({
     client: 'pg',
@@ -15,6 +15,61 @@ const db = knex({
         database: 'orbital'
     }
 });
+
+app.use(bodyParser.json());
+app.use(cors());
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+    done(null, obj);
+});
+
+const findOrCreate = (user, func) => {
+    console.log(user); //NUS User ID
+    func();
+}
+
+passport.use(new nusStrategy({
+    returnURL: 'http://localhost:3001/auth/nus/return', //redirects here
+    realm: 'http://localhost:3000/',
+    profile: true,
+},
+    function (identifier, profile, done) {
+        /* profile:
+        { displayName: 'Chia De Xun', 
+            emails: [ { value: 'e0309595@u.nus.edu' } ],
+            name: { familyName: '', givenName: '' }, 
+            NusNetsID: 'e0309595' } /*
+        identifier: https://openid.nus.edu.sg/e0309595 */
+
+        /* Original callback func
+        User.findByOpenID({ openId: identifier }, function (err, user) {
+            return done(err, user);
+        });*/
+        profile.NusNetsID = identifier.split("/")[3];
+        findOrCreate(profile.NusNetsID, function (err, user) {
+            return done(null, profile);
+        })
+        // return done(null, profile);
+    }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/nus', passport.authenticate('nus-openid'));
+
+app.get('/auth/nus/return',
+    passport.authenticate('nus-openid', { failureRedirect: '/' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    }
+);
+
 
 //Used in Bulletin and Featured, passed down to card
 app.get('/retrieveall', (req, res) => {
@@ -90,7 +145,7 @@ app.post('/checkStart', (req, res) => {
             const currTime = Date.now();
             const earliestPast5 = data.slice(-1)[0]; //last element in array
             if (earliestPast5 === undefined) { //no past started pnc
-                res.json(true); 
+                res.json(true);
             } else {
                 const earliestPast5Time = earliestPast5.date_started.getTime();
                 const dayDiff = (currTime - earliestPast5Time) / 86400000; //convert to days
