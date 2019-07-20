@@ -1,18 +1,27 @@
 .banner {
-    height: 60rem;
-    background: linear-gradient(to right, rgb(0, 196, 242), rgb(62, 242, 100));
+    min-height: 100vh;
+    /* background: linear-gradient(to right, rgb(0, 196, 242), rgb(62, 242, 100)); */
+    background: linear-gradient( rgba(0,0,0,0.05), rgba(0, 0, 0, 0.05) ), url('../../../Images/Colorful_Memphis.jpg') no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;   
+}
+
+.header {
+    font-size: 4rem;
 }
 
 /* f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3 */
 .pillButton {
-    font-size: 1.5rem;
-    border-radius: 9999px;
-    background-color: darkgreen;
+    font-size: 3em;
+    border-radius: 4px;
+    background-color: #0067ee;
     color: white;
     border-style: solid;
     border-width: 1px;
-    border-color: darkgreen;
-    padding: 1rem 0.5rem;
+    border-color: #0067ee;
+    padding: 2rem 1rem;
     display: inline-block;
     margin-right: 1rem;
 }
