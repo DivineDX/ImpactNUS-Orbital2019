@@ -14,20 +14,23 @@ class SupportForm extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost:3001/checkifsigned', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({
-                id: this.props.id,// petition/campaign id
-                userID: this.props.userID, //user id
+        if (this.props.userID !== '') { //not signed in
+            fetch('http://localhost:3001/checkifsigned', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({
+                    id: this.props.id,// petition/campaign id
+                    userID: this.props.userID, //user id
+                })
             })
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                if (data) { //already signed
-                    this.setState({ alreadySigned: true });
-                }
-            })
+                .then(resp => resp.json())
+                .then(data => {
+                    if (data) { //already signed
+                        this.setState({ alreadySigned: true });
+                    }
+                })
+        }
+
     }
 
     toggleAnonymity = () => { //hard coded this because default checkbox is ugly and S/UI does not sync well
@@ -121,7 +124,7 @@ class SupportForm extends Component {
                                     className='landing-button'
                                     type="submit"
                                     onClick={handleSubmit}
-                                    disabled={isSubmitting || this.state.alreadySigned}>
+                                    disabled={this.props.userID === '' || isSubmitting || this.state.alreadySigned}>
                                     Submit
                                 </button>
                                 {this.state.alreadySigned

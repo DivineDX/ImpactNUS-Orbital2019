@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, path: path, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     // console.log(rest);
     return (
         <Route
             {...rest}
-            path = {path}
+            path = {rest.path}
             exact
             render={props => {
                 if (rest.isSignedIn) {
