@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 class LoginForm extends React.Component {
-    constructor(props) { //takes in loginProp
+    constructor(props) {
         super(props);
         this.state = {
             nusID: '',
@@ -30,11 +30,13 @@ class LoginForm extends React.Component {
         .then(resp => resp.json())
         .then(data => {
             if(data === 'Failed login') {
-                throw new Error();
+                throw new Error("Incorrect User/PW");
+            } else {
+                this.props.loginUser(this.state.nusID);
+                this.props.history.push("/");
             }
-            this.props.loginProp(this.state.nusID, data.username);
         }).catch(err => {
-            alert('Wrong user credentials');
+            alert(err);
         })
     }
 

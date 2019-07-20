@@ -64,7 +64,9 @@ class NavBar extends Component {
                                 ? <Link to="/login">
                                     <Button>Login</Button>
                                 </Link>
-                                : <Button onClick={() => loginProp()}>Sign Out</Button> //onClick, will run the signOutUser as defined in App.js
+                                : <Link to="/">
+                                    <Button onClick={() => loginProp()}>Sign Out</Button> 
+                                </Link>
                             }
                         </div>
                     </Menu.Item>
