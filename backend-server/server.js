@@ -5,6 +5,8 @@ const app = express();
 const knex = require('knex');
 const passport = require('@passport-next/passport');
 const nusStrategy = require('passport-nus-openid').Strategy;
+const jwt = require('jsonwebtoken');
+const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
 
 const db = knex({
     client: 'pg',
@@ -28,7 +30,7 @@ passport.deserializeUser(function (obj, done) {
 });
 
 const findOrCreate = (user, func) => {
-    console.log(user); //NUS User ID
+    // console.log(user); //NUS User ID
     func();
     return user;
 }
@@ -39,7 +41,6 @@ passport.use(new nusStrategy({
     profile: true,
 },
     function (identifier, profile, done) {
-        console.log(done);
         profile.nusNetID = identifier.split("/")[3];
         findOrCreate(profile.nusNetID, function (err, user) {
             done(null, profile);
@@ -52,19 +53,54 @@ app.use(passport.session());
 
 app.get('/auth/nus', passport.authenticate('nus-openid'));
 
-app.get('/auth/nus/return',
-    passport.authenticate('nus-openid', { failureRedirect: '/' }),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('http://localhost:3000?token=' + req.user.nusNetID);
-    }
-);
+//Old code which sends string
+// app.get('/auth/nus/return',
+//     passport.authenticate('nus-openid', { failureRedirect: '/' }),
+//     function (req, res) {
+//         // Successful authentication, redirect home.
+//         res.redirect('http://localhost:3000?token=' + req.user.nusNetID);
+//     }
+// );
 
-app.get('/', function (req, res) {
-    // res.send('<p>some html</p>');
+//sending jwt token
+app.get('/auth/nus/return',
+    function (req, res, next) {
+        passport.authenticate('nus-openid', function (err, user, info) {
+            var payload = {
+                user: user.nusNetID,
+                name: user.displayName, //literal full name
+            };
+            const token = jwt.sign(payload, "secret", { expiresIn: 60 * 60 * 24 }); //modify secret value
+            res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
+            res.redirect('http://localhost:3000/');
+        })(req, res, next)
+    });
+
+
+app.post('/isAuth', (req, res) => {
+    const { nusNetID, jwtToken } = req.body;
+    const decodedID = jwt.decode(jwtToken).user;
+    if (nusNetID === decodedID) {
+        res.status(400).json(true);
+    } else {
+        res.status(403).json(false);
+    }
 });
 
-
+app.post('/loginNUS', (req, res) => {
+    const { jwtToken } = req.body;
+    let decodedID;
+    try {
+        decodedID = jwt.decode(jwtToken).user;
+        if (decodedID) {
+            res.json(decodedID);
+        } else {
+            res.json(false);
+        }
+    } catch {
+        res.json(false);
+    }
+})
 //Used in Bulletin and Featured, passed down to card
 app.get('/retrieveall', (req, res) => {
     db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')

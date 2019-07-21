@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import BannerPage from '../../Components/Banners/BannerPage/BannerPage';
 import Featured from './Featured';
 import BannerPage2 from '../../Components/Banners/BannerPage2/BannerPage2';
-import queryString from "query-string";
+import {attemptLogin} from '../../Auth';
 
 class Homepage extends Component {
     componentWillMount() {
-        var query = queryString.parse(this.props.location.search);
-        if (query.token) {
-          window.localStorage.setItem("jwt", query.token);
-          this.props.loginUser(query.token); //not secure
-          this.props.history.push("/");
-
-       }
+        attemptLogin(this.props.loginUser);
     }
 
     render() {

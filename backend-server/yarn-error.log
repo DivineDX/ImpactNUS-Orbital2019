@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js remove passport
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js add jsonwebtoken
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/dexun/.yarn/bin:/Users/dexun/.config/yarn/global/node_modules/.bin:/anaconda3/bin:/Users/dexun/Library/Android/sdk/emulator:/Users/dexun/Library/Android/sdk/tools:/Users/dexun/Library/Android/sdk/tools/bin:/Users/dexun/Library/Android/sdk/platform-tools
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/Users/dexun/Desktop/Orbital_TeamRocket/backend-server/node_modules/passport-nus-openid/node_modules/passport-openid'
+  Error: EACCES: permission denied, unlink '/Users/dexun/Desktop/Orbital_TeamRocket/backend-server/node_modules/accepts/HISTORY.md'
 
 npm manifest: 
   {
@@ -39,6 +39,7 @@ npm manifest:
       "esm": "^3.2.25",
       "express": "^4.17.1",
       "knex": "^0.18.3",
+      "passport": "^0.4.0",
       "passport-nus-openid": "^0.0.3",
       "passport-openid": "^0.4.0",
       "pg": "^7.11.0"
