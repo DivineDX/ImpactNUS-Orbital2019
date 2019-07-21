@@ -12,6 +12,10 @@
 	/* color: ; */
 }
 
+#Diagnus {
+	background-color: white;
+}
+
 .headerWord {
 	display: flex;
 	justify-content: flex-start;

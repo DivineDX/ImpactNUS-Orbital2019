@@ -26,13 +26,13 @@ class NavBar extends Component {
 
         return (
             <Menu borderless id="navbar">
-                <Menu.Item className="br b--blue">
+                <Button id='Diagnus'>
                     <Link to="/" className="link no-underline flex items-center pa2">
                         <div id="Logo">
                             DIAGNUS
                         </div>
                     </Link>
-                </Menu.Item>
+                </Button>
 
                 <div className=" dib flex items-center pa9 fw9">
                     <div className='headerWord'>
