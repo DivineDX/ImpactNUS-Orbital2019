@@ -25,7 +25,7 @@ class NavBar extends Component {
         const { loginProp, isSignedIn } = this.props
 
         return (
-            <Menu borderless id="navbar">
+            <Menu borderless id="Navbar">
                 <Button id='Diagnus'>
                     <Link to="/" className="link no-underline flex items-center pa2">
                         <div id="Logo">
@@ -35,24 +35,24 @@ class NavBar extends Component {
                 </Button>
 
                 <div className=" dib flex items-center pa9 fw9">
-                    <div className='headerWord'>
-                        <Menu.Item name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
+                    <div id='HeaderWord'>
+                        <Button name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
                             <Link to="/bulletin">
                                 <div className="link dib dim mr0 mr1-ns">Bulletin</div>
                             </Link>
-                        </Menu.Item>
+                        </Button>
 
-                        <Menu.Item name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
+                        <Button name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
                             <Link to="/feed">
                                 <div className="link dib dim mr0 mr1-ns">Feed</div>
                             </Link>
-                        </Menu.Item>
+                        </Button>
 
-                        <Menu.Item name='My Dashbard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
+                        <Button name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
                             <Link to="/dashboard">
                                 <div className="link dib dim mr0 mr1-ns">Dashboard</div>
                             </Link>
-                        </Menu.Item>
+                        </Button>
                     </div>
                 </div>
 
