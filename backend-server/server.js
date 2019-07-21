@@ -30,6 +30,7 @@ passport.deserializeUser(function (obj, done) {
 const findOrCreate = (user, func) => {
     console.log(user); //NUS User ID
     func();
+    return user;
 }
 
 passport.use(new nusStrategy({
@@ -38,22 +39,11 @@ passport.use(new nusStrategy({
     profile: true,
 },
     function (identifier, profile, done) {
-        /* profile:
-        { displayName: 'Chia De Xun', 
-            emails: [ { value: 'e0309595@u.nus.edu' } ],
-            name: { familyName: '', givenName: '' }, 
-            NusNetsID: 'e0309595' } /*
-        identifier: https://openid.nus.edu.sg/e0309595 */
-
-        /* Original callback func
-        User.findByOpenID({ openId: identifier }, function (err, user) {
-            return done(err, user);
-        });*/
-        profile.NusNetsID = identifier.split("/")[3];
-        findOrCreate(profile.NusNetsID, function (err, user) {
-            return done(null, profile);
+        console.log(done);
+        profile.nusNetID = identifier.split("/")[3];
+        findOrCreate(profile.nusNetID, function (err, user) {
+            done(null, profile);
         })
-        // return done(null, profile);
     }
 ));
 
@@ -66,9 +56,13 @@ app.get('/auth/nus/return',
     passport.authenticate('nus-openid', { failureRedirect: '/' }),
     function (req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/');
+        res.redirect('http://localhost:3000?token=' + req.user.nusNetID);
     }
 );
+
+app.get('/', function (req, res) {
+    // res.send('<p>some html</p>');
+});
 
 
 //Used in Bulletin and Featured, passed down to card

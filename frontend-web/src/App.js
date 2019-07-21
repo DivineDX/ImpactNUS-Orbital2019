@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
 // import Footer from './Container/Footer/Footer';
@@ -53,7 +52,7 @@ class App extends Component {
 					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} />} />
+							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser = {this.loginUser}/>} />
 							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" exact component={Bulletin} />
 							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />
