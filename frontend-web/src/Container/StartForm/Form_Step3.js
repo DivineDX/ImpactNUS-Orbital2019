@@ -49,12 +49,14 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
 
                     <Form.Field >
                         <h1>Provide a detailed description of your {currState.type}</h1>
+                        <div class="field" rows="3">
                         <TextEditor
                             placeholder="Tell your story..."
                             name="description"
                             onChange={e => setFieldValue('description', e)}
                             value={values.description}
-                        />
+                        /></div>
+                        
                     </Form.Field>
 
                     <Button.Group>

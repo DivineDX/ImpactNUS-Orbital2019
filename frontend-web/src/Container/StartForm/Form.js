@@ -21,7 +21,7 @@ class StartForm extends Component {
             loading: true,
             userID: props.userID,
             id: '',
-            currentStep: 1,
+            currentStep: 3,
             type: '',
             title: '',
             recipient: [],

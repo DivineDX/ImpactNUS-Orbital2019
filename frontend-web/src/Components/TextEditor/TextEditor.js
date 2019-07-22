@@ -34,7 +34,8 @@ class TextEditor extends Component {
 
         return (
             <div id="editorBox">
-                <RichTextEditor
+                <RichTextEditor 
+                    id="descrip"
                     value={value}
                     onChange={onChange}
                     toolbarConfig={toolbarConfig}
