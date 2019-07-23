@@ -9,6 +9,9 @@
     --spacing-extra-extra-extra-large: 16rem;
 } */
 
+.sizingg {
+    width: 80rem;
+}
 
 /* Mobile screens */
 @media only screen and (max-width: 767px) {

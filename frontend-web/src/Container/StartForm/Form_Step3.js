@@ -25,7 +25,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field>
-                        <h1>Add a URL of an image (Optional but highly recommended)</h1>
+                        <h1 className='sizingg'>Image (Optional but highly recommended)</h1>
                         <Input
                             type='text'
                             placeholder="Link to an image hosting site"
@@ -38,7 +38,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                     </Form.Field>
 
                     <Form.Field>
-                        <h1>Input relevant tags</h1>
+                        <h1 className='sizingg'>Input relevant tags</h1>
                         <Dropdown
                             clearable fluid multiple search selection
                             value={currState.tags}
@@ -48,15 +48,15 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                     </Form.Field>
 
                     <Form.Field >
-                        <h1>Provide a detailed description of your {currState.type}</h1>
+                        <h1 className='sizingg'>Detailed description of your {currState.type}</h1>
                         <div class="field" rows="3">
-                        <TextEditor
-                            placeholder="Tell your story..."
-                            name="description"
-                            onChange={e => setFieldValue('description', e)}
-                            value={values.description}
-                        /></div>
-                        
+                            <TextEditor
+                                placeholder="Tell your story..."
+                                name="description"
+                                onChange={e => setFieldValue('description', e)}
+                                value={values.description}
+                            />
+                        </div>      
                     </Form.Field>
 
                     <Button.Group>

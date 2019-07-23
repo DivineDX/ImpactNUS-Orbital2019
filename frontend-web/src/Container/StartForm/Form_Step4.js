@@ -8,7 +8,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
     
     return (
         <div>
-            <h1>Please confirm your {currType} details</h1>
+            <h1 className='sizingg'>Please confirm your {currType} details</h1>
             {currType === 'petition' &&
                 <div>
                     <h4>Title: {currState.title}</h4>
