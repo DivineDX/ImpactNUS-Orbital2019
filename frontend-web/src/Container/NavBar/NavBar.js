@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Menu } from 'semantic-ui-react';
+import { Button, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -55,21 +55,47 @@ class NavBar extends Component {
                         </Button>
                     </div>
                     
-                <Menu.Menu position='right' id='right'>
-                    {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
-                    <Menu.Item id='SignInOut'>
-                        <div>
-                            {isSignedIn === false //conditional
-                                ? <Link to="/login">
-                                    <Button>Login</Button>
-                                </Link>
-                                : <Link to="/">
-                                    <Button onClick={() => loginProp()}>Sign Out</Button> 
-                                </Link>
-                            }
-                        </div>
-                    </Menu.Item>
-                </Menu.Menu>
+                    <Dropdown text='Menu' id='MobileView'>
+                        <Dropdown.Menu>
+                            <Dropdown.Item>
+                                <Button name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
+                                    <Link to="/bulletin">
+                                        <div className="link dib dim mr0 mr1-ns">Bulletin</div>
+                                    </Link>
+                                </Button>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <Button name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
+                                    <Link to="/feed">
+                                        <div className="link dib dim mr0 mr1-ns">Feed</div>
+                                    </Link>
+                                </Button>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <Button name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
+                                    <Link to="/dashboard">
+                                        <div className="link dib dim mr0 mr1-ns">Dashboard</div>
+                                    </Link>
+                                </Button>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    
+                    <Menu.Menu position='right' id='right'>
+                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
+                        <Menu.Item id='SignInOut'>
+                            <div>
+                                {isSignedIn === false //conditional
+                                    ? <Link to="/login">
+                                        <Button>Login</Button>
+                                    </Link>
+                                    : <Link to="/">
+                                        <Button onClick={() => loginProp()}>Sign Out</Button> 
+                                    </Link>
+                                }
+                            </div>
+                        </Menu.Item>
+                    </Menu.Menu>
                 </div>
 
             </Menu>
