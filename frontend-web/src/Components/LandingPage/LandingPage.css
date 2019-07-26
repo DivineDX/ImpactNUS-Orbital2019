@@ -12,22 +12,68 @@
     color:  #446CB3;
 }
 
+.ui.progress {
+    margin-top: 0px;
+}
+
+#Signature {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
 #pageImage {
     height: 350px;
-    width: 100%;
+    width: 57%;
+    margin-left: 20%
+}
+
+#SignButton {
+    margin-top: 30px;
+
+}
+
+#PetitionBut, #CampaignBut {
+    padding-left: 35%;
+    padding-right: 35%;
+    font-size: 1em;
+    float: left;
+}
+
+#Extras {
+    font-size: 1.2em;
+}
+
+#ProgressBar {
+    width: 120%;
+}
+
+#Title {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 3em;
+}
+
+#description {
+    width: 30%;
+    margin-left: 20%;
+}
+
+#sectionn {
+    width: 50%
 }
 
 /* Desktop Screens */
 @media screen and (min-width: 846px) {
     #pageImage {
-        width: 35%;
-        height: 350px;
+        /* width: 35%;
+        height: 350px; */
+
     }
     
     #subHeader {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        /* justify-content: center; */
     }
 
     #subContainer{
@@ -43,7 +89,7 @@
         margin: 3%;
     }
     
-    #description, #SupportForm {
+    #SupportForm {
         padding: 0% 7%;
     }
 
