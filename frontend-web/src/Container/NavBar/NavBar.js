@@ -54,11 +54,10 @@ class NavBar extends Component {
                             </Link>
                         </Button>
                     </div>
-                </div>
-
+                    
                 <Menu.Menu position='right' id='right'>
-                    <SearchBar searchChange={this.onSearchChange} className='search' />
-                    <Menu.Item>
+                    {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
+                    <Menu.Item id='SignInOut'>
                         <div>
                             {isSignedIn === false //conditional
                                 ? <Link to="/login">
@@ -71,6 +70,8 @@ class NavBar extends Component {
                         </div>
                     </Menu.Item>
                 </Menu.Menu>
+                </div>
+
             </Menu>
         )
     }

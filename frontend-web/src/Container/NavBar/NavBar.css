@@ -27,6 +27,13 @@
 	background-color: white;
 }
 
+#SignInOut {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	padding-top: 10px;
+}
+
 .ui.button {
 	background-color: white;
 }
