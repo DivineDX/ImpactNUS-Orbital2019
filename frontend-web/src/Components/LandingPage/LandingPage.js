@@ -81,8 +81,8 @@ class LandingPage extends Component {
                         <div id="description" className='pa3 mv3 tl'>
                             <Markup content={description} />
                         </div>
-                        <div className='mt3 ml4 w-25'>
-                            <p className="i" id='Signature'>Signatures: <b>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p> 
+                        <div className='mt3 ml4 w-25' id='bigSection'>
+                            <p className="i" id='Signature'>Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p> 
                             <Progress id='ProgressBar' color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
                             <div>
                                 <div className='w-60 tl' id='Extras'>
