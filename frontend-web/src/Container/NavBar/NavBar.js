@@ -72,7 +72,7 @@ class NavBar extends Component {
                         </Menu.Item>
                     </Menu.Menu>
                 </div>
-                <Dropdown text='Menu' id='MobileView' direction='down'> 
+                <Dropdown id='MobileView' icon='align justify' floating labeled button >
                         <Dropdown.Menu>
                             <Dropdown.Item>
                                 <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>

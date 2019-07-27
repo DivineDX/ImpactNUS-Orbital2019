@@ -60,8 +60,7 @@
 @media screen and (max-width: 600px) {
 	#MobileView {
 		display: block;
-		margin-top: 40px;
-		margin-bottom: 10px;
+		margin-top: 18px;
 		font-size: 15px;
 		float: left;
 	}
@@ -73,5 +72,10 @@
 	#Diagnus {
 		padding-top: 10px;
 		height: 50px;
+	}
+
+	#NavBar {
+		display: inline-flex;
+		flex-direction: column;
 	}
 }
