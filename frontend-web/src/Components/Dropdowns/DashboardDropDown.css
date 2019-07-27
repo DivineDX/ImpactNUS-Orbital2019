@@ -6,3 +6,17 @@
     color: #1e70bf;
     text-decoration: none;
 }
+
+#MobileDisplay {
+    display: none; 
+}
+
+@media screen and (max-width: 846px) {
+    #MobileDisplay {
+        display: block;
+    }
+
+    #NormalDisplay {
+        display: none;
+    }
+}
