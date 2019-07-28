@@ -17,8 +17,13 @@
 
 @media screen and (max-width: 846px) {
     #MobileDisplay {
-        display: block;
+        display: inline-block;
         float: right;
+        margin-right: 0px;
+    }
+
+    .ui.labeled.icon.button, .ui.labeled.icon.buttons.button {
+        padding-left: 0px;
     }
 
     #NormalDisplay {

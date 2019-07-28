@@ -43,7 +43,7 @@ class DashboardDropDown extends Component {
                 </Dropdown.Menu>
             </Dropdown>
             
-            <Dropdown icon='gavel' floating labeled button className='icon' id='MobileDisplay'>
+            <Dropdown icon='gavel' floating button className='icon' id='MobileDisplay' direction='left'>
 
                 <Dropdown.Menu>
                     <Dropdown.Item >
