@@ -38,19 +38,13 @@ class NavBar extends Component {
                     <div id='HeaderWord'>
                         <Button name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
                             <Link to="/bulletin">
-                                <div className="link dib dim mr0 mr1-ns">Bulletin</div>
-                            </Link>
-                        </Button>
-
-                        <Button name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
-                            <Link to="/feed">
-                                <div className="link dib dim mr0 mr1-ns">Feed</div>
+                                <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Bulletin</div>
                             </Link>
                         </Button>
 
                         <Button name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
                             <Link to="/dashboard">
-                                <div className="link dib dim mr0 mr1-ns">Dashboard</div>
+                                <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Dashboard</div>
                             </Link>
                         </Button>
                     </div>
@@ -78,13 +72,6 @@ class NavBar extends Component {
                                 <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
                                     <Link to="/bulletin">
                                         <div className="link dib dim mr0 mr1-ns">Bulletin</div>
-                                    </Link>
-                                </Button>
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                <Button className='HeaderBut' name='My Feed' active={activeItem === 'My Feed'} onClick={this.handleItemClick}>
-                                    <Link to="/feed">
-                                        <div className="link dib dim mr0 mr1-ns">Feed</div>
                                     </Link>
                                 </Button>
                             </Dropdown.Item>

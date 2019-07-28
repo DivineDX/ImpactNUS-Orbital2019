@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './Card.css';
-import wireframeImage from '../../Images/wireframeImage.png';
+import '../Components/Card/Card';
+import wireframeImage from '../Images/wireframeImage.png';
 import { Icon, Image, Item } from 'semantic-ui-react'
 
 const FeedCard = (props) => {

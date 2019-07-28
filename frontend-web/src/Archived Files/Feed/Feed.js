@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FeedCard from '../../Components/Card/FeedCard';
+import FeedCard from '../FeedCard';
 const fakeData = [
 	{
 		pncID: 1,

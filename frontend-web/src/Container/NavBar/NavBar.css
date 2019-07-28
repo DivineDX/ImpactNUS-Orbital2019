@@ -21,6 +21,8 @@
 	justify-content: flex-start;
 	font-size: 1.2em;
 	width: 150px;
+	border: none;
+	box-shadow: none;
 }
 
 #HeaderWord :hover {
@@ -53,6 +55,10 @@
     background-color: grey;
     color: #4183C4;
     cursor: pointer;
+} 
+
+.HeaderFS {
+	font-size: 20px;
 }
 
 /* if you do this, the search bar is strange */

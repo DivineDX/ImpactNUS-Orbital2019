@@ -8,7 +8,9 @@ button:disabled {
     text-decoration: line-through;
 }
 
-
+.ui.menu.item {
+    -webkit-tap-highlight-color: transparent;
+}
 
 /* Edit below to standardize how all the input boxes look
 .ui.form .field  {
