@@ -12,7 +12,7 @@ class FollowButton extends Component {
         return (
             <Button icon toggle active={active} onClick={this.handleClick} float id='FollowBut'>
                 <Icon name='rss' />
-                <p float id='FollowText'> Follow </p>
+                <p id='FollowText'> Follow </p>
             </Button>
         );
     }
