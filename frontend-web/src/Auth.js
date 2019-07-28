@@ -12,9 +12,7 @@ export const authUser = (nusNetID) => {
     })
         .then(resp => resp.json())
         .then(data => {
-            if (data) { //not exceed
-                console.log("Auth response: ", data);
-            }
+            console.log(data);
         }).catch(err => console.log("Cannot check", err));
 }
 

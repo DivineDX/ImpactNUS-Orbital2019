@@ -61,6 +61,11 @@ app.get('/auth/nus', passport.authenticate('nus-openid'));
 //     }
 // );
 
+const authUser = (nusNetID, jwtToken) => {
+    const decodedID = jwt.decode(jwtToken).user;
+    return nusNetID === decodedID;
+}
+
 //sending jwt token
 app.get('/auth/nus/return',
     function (req, res, next) {
@@ -78,8 +83,7 @@ app.get('/auth/nus/return',
 
 app.post('/isAuth', (req, res) => {
     const { nusNetID, jwtToken } = req.body;
-    const decodedID = jwt.decode(jwtToken).user;
-    if (nusNetID === decodedID) {
+    if (authUser(nusNetID, jwtToken)) {
         res.status(400).json(true);
     } else {
         res.status(403).json(false);
@@ -153,14 +157,20 @@ app.get('/reasonssupport/:id', (req, res) => {
 
 //Called in Dashboard.js
 app.post('/dashboarddata', (req, res) => {
-    db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
-        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'users.name',
-            'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
-        )
-        .where('organizer_id', '=', req.body.userID)
-        .then(data => {
-            res.json(data);
-        }).catch(err => res.status(400).json('Unable to retrieve'));
+    const { userID, jwtToken } = req.body;
+    const auth = authUser(userID, jwtToken); //authenticates
+    if (auth) {
+        db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
+            .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'users.name',
+                'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
+            )
+            .where('organizer_id', '=', req.body.userID)
+            .then(data => {
+                res.json(data);
+            }).catch(err => res.status(400).json('Unable to retrieve'));
+    } else {
+        res.json("Auth failed")
+    }
 });
 
 //For Anti-Spam: Limit of 5/Month. Response True = pass spam check
@@ -318,7 +328,7 @@ app.delete('/delete', (req, res) => {
         .catch(err => res.status(400).json('Error in delete'));
 })
 
-//LoginForm.js
+//Manual Sign in function
 app.post('/signin', (req, res) => {
     const { id, password } = req.body;
     db('users').select('id', 'password', 'name')
