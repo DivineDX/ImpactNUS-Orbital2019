@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-app.use(bodyParser.json());
-app.use(cors());
 const knex = require('knex');
+const passport = require('@passport-next/passport');
+const nusStrategy = require('passport-nus-openid').Strategy;
+const jwt = require('jsonwebtoken');
 
 const db = knex({
     client: 'pg',
@@ -16,6 +17,93 @@ const db = knex({
     }
 });
 
+app.use(bodyParser.json());
+app.use(cors());
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+    done(null, obj);
+});
+
+const findOrCreate = (user, func) => {
+    // console.log(user); //NUS User ID
+    func();
+    return user;
+}
+
+passport.use(new nusStrategy({
+    returnURL: 'http://localhost:3001/auth/nus/return', //redirects here
+    realm: 'http://localhost:3000/',
+    profile: true,
+},
+    function (identifier, profile, done) {
+        profile.nusNetID = identifier.split("/")[3];
+        findOrCreate(profile.nusNetID, function (err, user) {
+            done(null, profile);
+        })
+    }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/nus', passport.authenticate('nus-openid'));
+
+//Old code which sends string
+// app.get('/auth/nus/return',
+//     passport.authenticate('nus-openid', { failureRedirect: '/' }),
+//     function (req, res) {
+//         // Successful authentication, redirect home.
+//         res.redirect('http://localhost:3000?token=' + req.user.nusNetID);
+//     }
+// );
+
+const authUser = (nusNetID, jwtToken) => {
+    const decodedID = jwt.decode(jwtToken).user;
+    return nusNetID === decodedID;
+}
+
+//sending jwt token
+app.get('/auth/nus/return',
+    function (req, res, next) {
+        passport.authenticate('nus-openid', function (err, user, info) {
+            var payload = {
+                user: user.nusNetID,
+                name: user.displayName, //literal full name
+            };
+            const token = jwt.sign(payload, "secret", { expiresIn: 60 * 60 * 24 }); //modify secret value
+            res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
+            res.redirect('http://localhost:3000/');
+        })(req, res, next)
+    });
+
+
+app.post('/isAuth', (req, res) => {
+    const { nusNetID, jwtToken } = req.body;
+    if (authUser(nusNetID, jwtToken)) {
+        res.status(400).json(true);
+    } else {
+        res.status(403).json(false);
+    }
+});
+
+app.post('/loginNUS', (req, res) => {
+    const { jwtToken } = req.body;
+    let decodedID;
+    try {
+        decodedID = jwt.decode(jwtToken).user;
+        if (decodedID) {
+            res.json(decodedID);
+        } else {
+            res.json(false);
+        }
+    } catch {
+        res.json(false);
+    }
+})
 //Used in Bulletin and Featured, passed down to card
 app.get('/retrieveall', (req, res) => {
     db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
@@ -69,14 +157,20 @@ app.get('/reasonssupport/:id', (req, res) => {
 
 //Called in Dashboard.js
 app.post('/dashboarddata', (req, res) => {
-    db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
-        .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'users.name',
-            'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
-        )
-        .where('organizer_id', '=', req.body.userID)
-        .then(data => {
-            res.json(data);
-        }).catch(err => res.status(400).json('Unable to retrieve'));
+    const { userID, jwtToken } = req.body;
+    const auth = authUser(userID, jwtToken); //authenticates
+    if (auth) {
+        db('pnc').join('users', 'pnc.organizer_id', '=', 'users.id')
+            .select('pnc.id', 'pnc.type', 'pnc.title', 'pnc.recipient', 'users.name',
+                'pnc.anonymity', 'pnc.imageurl', 'pnc.targetnumsupporters', 'pnc.currnumsupporters'
+            )
+            .where('organizer_id', '=', req.body.userID)
+            .then(data => {
+                res.json(data);
+            }).catch(err => res.status(400).json('Unable to retrieve'));
+    } else {
+        res.json("Auth failed")
+    }
 });
 
 //For Anti-Spam: Limit of 5/Month. Response True = pass spam check
@@ -90,7 +184,7 @@ app.post('/checkStart', (req, res) => {
             const currTime = Date.now();
             const earliestPast5 = data.slice(-1)[0]; //last element in array
             if (earliestPast5 === undefined) { //no past started pnc
-                res.json(true); 
+                res.json(true);
             } else {
                 const earliestPast5Time = earliestPast5.date_started.getTime();
                 const dayDiff = (currTime - earliestPast5Time) / 86400000; //convert to days
@@ -105,62 +199,76 @@ app.post('/checkStart', (req, res) => {
 
 //Called in Form.js
 app.post('/submitform', (req, res) => {
-    const { userID, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const { jwtToken, userID, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const auth = authUser(userID, jwtToken);
 
-    db('pnc').returning('id').insert({
-        type: type,
-        title: title,
-        recipient: recipient,
-        organizer_id: userID,
-        anonymity: anonymity,
-        date_started: new Date(),
-        date_end: date_end,
-        description: description,
-        tags: tags,
-        imageurl: imageURL,
-        targetnumsupporters: targetNum,
-    })
-        .then(id => {
-            res.json(id[0]); //id of the newly created petition/campaign
-        })
-        .catch(err => {
-            res.status(400).json('Unable to post');
-        });
-})
-
-//Used in Form.js
-app.put('/updateform', (req, res) => {
-    let updated = false;
-    const { id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
-
-    db('pnc').where('id', '=', id)
-        .update({
+    if (auth) {
+        db('pnc').returning('id').insert({
+            type: type,
+            title: title,
             recipient: recipient,
+            organizer_id: userID,
             anonymity: anonymity,
+            date_started: new Date(),
             date_end: date_end,
             description: description,
             tags: tags,
             imageurl: imageURL,
             targetnumsupporters: targetNum,
         })
-        .then(res.json(id))
-        .catch(err => res.status(400).json('Update problem'));
+            .then(id => {
+                res.json(id[0]); //id of the newly created petition/campaign
+            })
+            .catch(err => {
+                res.status(400).json('Unable to post');
+            });
+    } else {
+        res.json("Auth failed");
+    }
+})
+
+//Used in Form.js
+app.put('/updateform', (req, res) => {
+    const { jwtToken, userID, id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const auth = authUser(userID, jwtToken);
+
+    if (auth) {
+        db('pnc').where('id', '=', id)
+            .update({
+                recipient: recipient,
+                anonymity: anonymity,
+                date_end: date_end,
+                description: description,
+                tags: tags,
+                imageurl: imageURL,
+                targetnumsupporters: targetNum,
+            })
+            .then(res.json(id))
+            .catch(err => res.status(400).json('Update problem'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Used in SupportForm.js
 app.post('/checkifsigned', (req, res) => {
-    const { id, userID } = req.body;
-    db('support').where({
-        poster_id: userID,
-        pnc_id: id,
-    }).then(data => {
-        if (data.length) {
-            res.json(true);
-        } else {
-            res.json(false);
-        }
-    }).catch(err => res.status(400).json('Update problem'));
+    const { id, userID, jwtToken } = req.body;
+    const auth = authUser(userID, jwtToken);
 
+    if (auth) {
+        db('support').where({
+            poster_id: userID,
+            pnc_id: id,
+        }).then(data => {
+            if (data.length) {
+                res.json(true);
+            } else {
+                res.json(false);
+            }
+        }).catch(err => res.status(400).json('Update problem'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 /*Gets user id, checks whether user has already supported, if not, increment
@@ -168,73 +276,97 @@ the support number and add the reason of support (if not empty) into the
 */
 //Used in SupportForm.js
 app.post('/signsupport', (req, res) => {
-    const { id, userID, description, reason, anonymity } = req.body;
-    db('support').returning('support_id').insert({
-        poster_id: userID,
-        poster_description: description,
-        content: reason,
-        pnc_id: id,
-        anonymity: anonymity,
-        dateposted: new Date(),
-    })
-        .then(data => {
-            if (data[0]) { //exists
-                db('pnc')
-                    .where('id', '=', id)
-                    .increment('currnumsupporters', 1)
-                    .then(res.json('Success'))
-            } else {
-                throw new Error();
-            }
+    const { id, userID, jwtToken, description, reason, anonymity } = req.body;
+    const auth = authUser(userID, jwtToken);
+
+    if (auth) {
+        db('support').returning('support_id').insert({
+            poster_id: userID,
+            poster_description: description,
+            content: reason,
+            pnc_id: id,
+            anonymity: anonymity,
+            dateposted: new Date(),
         })
-        .catch(err => res.status(400).json('Unable to support'));
+            .then(data => {
+                if (data[0]) { //exists
+                    db('pnc')
+                        .where('id', '=', id)
+                        .increment('currnumsupporters', 1)
+                        .then(res.json('Success'))
+                } else {
+                    throw new Error();
+                }
+            })
+            .catch(err => res.status(400).json('Unable to support'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Organizers who want to post an update for their campaign/petition
 //Used in UpdateModal.js
 app.post('/postupdate', (req, res) => {
-    const { id, updateTitle, updateContent, organizerID } = req.body;
-    db('updates').returning('update_id').insert({
-        title: updateTitle,
-        content: updateContent,
-        dateposted: new Date(),
-        pnc_id: id,
-        organizer_id: organizerID,
-    }).then(data => {
-        if (data[0]) {
-            res.json('Success');
-        } else {
-            throw new Error();
-        }
-    }).catch(err => res.status(400).json('Update failed'));
+    const { id, updateTitle, updateContent, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('updates').returning('update_id').insert({
+            title: updateTitle,
+            content: updateContent,
+            dateposted: new Date(),
+            pnc_id: id,
+            organizer_id: organizerID,
+        }).then(data => {
+            if (data[0]) {
+                res.json('Success');
+            } else {
+                throw new Error();
+            }
+        }).catch(err => res.status(400).json('Update failed'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //VictoryModal.js
 app.put('/victory', (req, res) => {
-    const { id, organizerID } = req.body;
-    db('pnc').where({
-        id: id,
-        organizer_id: organizerID,
-    }).update({
-        finished: true
-    })
-        .then(res.json('Success'))
-        .catch(err => res.status(400).json('Update Error'));
+    const { id, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('pnc').where({
+            id: id,
+            organizer_id: organizerID,
+        }).update({
+            finished: true
+        })
+            .then(res.json('Success'))
+            .catch(err => res.status(400).json('Update Error'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Self-Explanatory: For deleting a petition/campaign
 //Used in deletemodal.js
 app.delete('/delete', (req, res) => {
-    const { id, organizerID } = req.body;
-    db('pnc').where({
-        id: id,
-        organizer_id: organizerID,
-    }).del()
-        .then(res.json('Success'))
-        .catch(err => res.status(400).json('Error in delete'));
+    const { id, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('pnc').where({
+            id: id,
+            organizer_id: organizerID,
+        }).del()
+            .then(res.json('Success'))
+            .catch(err => res.status(400).json('Error in delete'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
-//LoginForm.js
+//Manual Sign in function
 app.post('/signin', (req, res) => {
     const { id, password } = req.body;
     db('users').select('id', 'password', 'name')

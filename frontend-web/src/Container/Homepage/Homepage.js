@@ -5,7 +5,7 @@ import BannerPage from '../../Components/Banners/BannerPage/BannerPage';
 
 class Homepage extends Component {
     render() {
-        const {isSignedIn} = this.props; //destructuring
+        const { isSignedIn } = this.props; //destructuring
         return ( //acts as a card list here
             <div>
                 <BannerPage isSignedIn = {isSignedIn}/>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
 // import Footer from './Container/Footer/Footer';
@@ -17,6 +16,8 @@ import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
 import NonExistentPage from './Container/NonExistentPage/NonExistentPage';
 import ProtectedRoute from './ProtectedRoute';
+import {attemptLogin} from './Auth'; 
+import Cookies from 'universal-cookie';
 
 class App extends Component {
 	constructor() {
@@ -24,6 +25,13 @@ class App extends Component {
 		this.state = {
 			isSignedIn: true, //default is false (not signed in)
 			userID: 'e0322822', //userID
+		}
+	}
+
+	componentWillMount() {
+		const jwtToken = new Cookies().get('token');
+		if (jwtToken) {
+			attemptLogin(this.loginUser);
 		}
 	}
 
@@ -39,9 +47,14 @@ class App extends Component {
 	}
 
 	signoutUser = () => {
+		new Cookies().remove('token');
 		this.setState({ isSignedIn: false, userID: '', }); //empty user		
 	}
 
+	getUserID = () => {
+		return this.state.userID;
+	}
+	
 	render() {
 		const isSignedIn = this.state.isSignedIn;
 		let loginProp =
@@ -53,18 +66,18 @@ class App extends Component {
 					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} />} />
+							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser = {this.loginUser}/>} />
 							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" exact component={Bulletin} />
-							<ProtectedRoute path="/dashboard" component = {Dashboard} userID={this.state.userID} isSignedIn = {isSignedIn}/>
-							<ProtectedRoute path="/feed" component={Feed} isSignedIn = {isSignedIn}/>
-							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID}/>} />
+							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />
+							<ProtectedRoute path="/feed" component={Feed} isSignedIn={isSignedIn} />
+							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} />} />
 							<Route path="/about" component={About} />
 							<Route path="/howitworks" component={HowItWorks} />
 							<Route path="/faq" component={FAQ} />
 							<Route path="/contactus" component={ContactUs} />
-							<Route path="/pg/:id" render={(props) => <LandingPage {...props} userID={this.state.userID}/>} />
-							<Route path="*" component={NonExistentPage} /> 
+							<Route path="/pg/:id" render={(props) => <LandingPage {...props} userID={this.state.userID} />} />
+							<Route path="*" component={NonExistentPage} />
 						</Switch>
 					</div>
 					{/* <Footer/> */}

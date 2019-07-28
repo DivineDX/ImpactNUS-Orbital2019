@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
+import Cookies from 'universal-cookie';
 
 class DeleteModal extends Component {
     constructor() {
         super();
         this.state = {
             clicked: false,
+            authFailed: false,
         }
     }
 
@@ -16,6 +18,7 @@ class DeleteModal extends Component {
             body: JSON.stringify({
                 id: Number(this.props.id),
                 organizerID: this.props.userID,
+                jwtToken: new Cookies().get('token'),
             })
         })
             .then(resp => resp.json())
@@ -23,6 +26,8 @@ class DeleteModal extends Component {
                 if (data === 'Success') {
                     this.setState({clicked: true});
                     this.props.refresh();
+                } else if (data === 'Auth failed') {
+                    this.setState({authFailed: true})
                 }
             })
     }
@@ -43,6 +48,10 @@ class DeleteModal extends Component {
                     <Button negative onClick={() => this.clickDelete()} content='End' />
                     {this.state.clicked 
                         ? <h3>Your {type} has been deleted. Click out of this modal to exit</h3>
+                        : <div></div>
+                    }
+                    {this.state.authFailed 
+                        ? <h3 className = 'red'>User Authentication failed</h3>
                         : <div></div>
                     }
                 </Modal.Content>

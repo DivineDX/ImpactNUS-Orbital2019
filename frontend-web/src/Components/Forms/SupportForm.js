@@ -4,6 +4,7 @@ import './SupportForm.css';
 import { Formik } from "formik";
 import * as yup from "yup";
 import InputErrorLabel from '../Label/InputErrorLabel';
+import Cookies from 'universal-cookie';
 
 class SupportForm extends Component {
     constructor(props) {
@@ -11,26 +12,31 @@ class SupportForm extends Component {
         this.state = {
             alreadySigned: false,
             anonymity: false,
+            authFailed: false,
         }
     }
-    componentDidMount() {
-        if (this.props.userID !== '') { //not signed in
-            fetch('http://localhost:3001/checkifsigned', {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({
-                    id: this.props.id,// petition/campaign id
-                    userID: this.props.userID, //user id
-                })
-            })
-                .then(resp => resp.json())
-                .then(data => {
-                    if (data) { //already signed
-                        this.setState({ alreadySigned: true });
-                    }
-                })
-        }
 
+    componentDidMount() {
+        setTimeout(this.checkIfSigned, 2500);
+    }
+
+    checkIfSigned = () => {
+        fetch('http://localhost:3001/checkifsigned', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                id: this.props.id,// petition/campaign id
+                userID: this.props.userID, //user id
+                jwtToken: new Cookies().get('token'),
+            })
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log("Support form data", data);
+                if (data === true) { //already signed
+                    this.setState({ alreadySigned: true });
+                }
+            })
     }
 
     toggleAnonymity = () => { //hard coded this because default checkbox is ugly and S/UI does not sync well
@@ -49,6 +55,7 @@ class SupportForm extends Component {
             body: JSON.stringify({
                 id: this.props.id,
                 userID: this.props.userID,
+                jwtToken: new Cookies().get('token'),
                 description: values.description,
                 reason: values.reason,
                 anonymity: this.state.anonymity,
@@ -59,7 +66,9 @@ class SupportForm extends Component {
                 if (data === 'Success') {
                     this.setState({ alreadySigned: true });
                     this.props.refresh();
-                } else {
+                } else if (data === 'Auth failed') {
+                    this.setState({ authFailed: true })
+                } else { //Auth failed
                     throw new Error(); //unable to support
                 }
             })
@@ -124,12 +133,19 @@ class SupportForm extends Component {
                                     className='landing-button'
                                     type="submit"
                                     onClick={handleSubmit}
-                                    disabled={this.props.userID === '' || isSubmitting || this.state.alreadySigned}>
+                                    disabled={this.props.userID === '' || isSubmitting || this.state.alreadySigned || this.state.authFailed}>
                                     Submit
                                 </button>
                                 {this.state.alreadySigned
                                     ? <Label basic color='red' pointing>
                                         You have already signed!
+                                        </Label>
+                                    : null
+                                }
+
+                                {this.state.authFailed
+                                    ? <Label basic color='red' pointing>
+                                        Authentication Error
                                         </Label>
                                     : null
                                 }
