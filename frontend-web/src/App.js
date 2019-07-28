@@ -16,6 +16,8 @@ import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
 import NonExistentPage from './Container/NonExistentPage/NonExistentPage';
 import ProtectedRoute from './ProtectedRoute';
+import {authUser, attemptLogin} from './Auth'; 
+import Cookies from 'universal-cookie';
 
 class App extends Component {
 	constructor() {
@@ -23,6 +25,14 @@ class App extends Component {
 		this.state = {
 			isSignedIn: false, //default is false (not signed in)
 			userID: '', //userID
+		}
+	}
+
+	componentWillMount() {
+		console.log("Component mounting");
+		const jwtToken = new Cookies().get('token');
+		if (jwtToken) {
+			attemptLogin(this.loginUser);
 		}
 	}
 
@@ -38,6 +48,7 @@ class App extends Component {
 	}
 
 	signoutUser = () => {
+		new Cookies().remove('token');
 		this.setState({ isSignedIn: false, userID: '', }); //empty user		
 	}
 

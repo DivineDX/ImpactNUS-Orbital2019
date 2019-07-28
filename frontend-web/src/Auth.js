@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-export const Auth = (nusNetID) => {
+export const authUser = (nusNetID) => {
     fetch('http://localhost:3001/isAuth', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
@@ -13,13 +13,22 @@ export const Auth = (nusNetID) => {
         .then(resp => resp.json())
         .then(data => {
             if (data) { //not exceed
-                this.setState({ canStart: true });
+                console.log("Auth response: ", data);
             }
-            this.setState({ loading: false });
         }).catch(err => console.log("Cannot check", err));
 }
 
-export const attemptLogin = (login) => {
+// export const containerMount = () => {
+//     const jwtToken = new Cookies().get('token');
+//     if (jwtToken) {
+//         console.log("There is a JWT Token")
+//         attemptLogin(this.loginUser);
+//     } else {
+//         console.log("there isnt a jwt token");
+//     }
+// }
+
+export const attemptLogin = (login) => { //login is a function
     fetch('http://localhost:3001/loginNUS', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },

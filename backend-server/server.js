@@ -6,7 +6,6 @@ const knex = require('knex');
 const passport = require('@passport-next/passport');
 const nusStrategy = require('passport-nus-openid').Strategy;
 const jwt = require('jsonwebtoken');
-const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
 
 const db = knex({
     client: 'pg',
