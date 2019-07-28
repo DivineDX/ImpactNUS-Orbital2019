@@ -31,7 +31,7 @@ class StartForm extends Component {
             date_end: null,
             targetNum: 10,
             anonymity: false,
-            tags: [],
+            // tags: [],
             description: RichTextEditor.createEmptyValue(),
             imageURL: '',
         }
@@ -86,7 +86,7 @@ class StartForm extends Component {
                     date_end: new Date(data.date_end), //ISO string
                     targetNum: data.targetnumsupporters,
                     anonymity: data.anonymity,
-                    tags: data.tags,
+                    // tags: data.tags,
                     description: RichTextEditor.createValueFromString(data.description, 'html'),
                     imageURL: data.imageurl,
                 });
@@ -139,7 +139,7 @@ class StartForm extends Component {
                 date_end: this.getEndDate(),
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
-                tags: this.state.tags,
+                // tags: this.state.tags,
                 description: this.state.description.toString('html'),
                 imageURL: this.state.imageURL,
             })
@@ -166,7 +166,7 @@ class StartForm extends Component {
                 date_end: this.getEndDate(),
                 targetNum: this.state.targetNum,
                 anonymity: this.state.anonymity,
-                tags: this.state.tags,
+                // tags: this.state.tags,
                 description: this.state.description.toString('html'),
                 imageURL: this.state.imageURL,
             })

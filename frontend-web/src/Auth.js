@@ -35,9 +35,11 @@ export const attemptLogin = (login) => { //login is a function
         })
     })
         .then(resp => resp.json())
-        .then(nusNetID => {
-            if (nusNetID) { //not exceed
-                login(nusNetID);
+        .then(jwtObject => {
+            const userID = jwtObject.user;
+            const name = jwtObject.name;
+            if (userID) { //not exceed
+                login(userID, name);
             } else {
             }
         }).catch(err => alert("Login error", err));

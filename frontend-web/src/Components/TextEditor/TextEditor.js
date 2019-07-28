@@ -33,7 +33,7 @@ class TextEditor extends Component {
         const { placeholder, name, onChange, value } = this.props;
 
         return (
-            <div id="editorBox">
+            <div className = 'textEditorFix'>
                 <RichTextEditor 
                     id="descrip"
                     value={value}

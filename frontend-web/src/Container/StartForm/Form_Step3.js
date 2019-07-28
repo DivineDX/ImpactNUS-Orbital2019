@@ -38,7 +38,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
 
                     <Form.Field >
                         <h1 className='sizingg'>Detailed description of your {currState.type}</h1>
-                        <div class="field" rows="3">
+                        <div className="field" rows="3">
                             <TextEditor
                                 placeholder="Tell your story..."
                                 name="description"

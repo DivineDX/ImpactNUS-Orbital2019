@@ -1,40 +1,86 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Image } from 'semantic-ui-react'
 import { Markup } from 'interweave';
+import { Header, Segment } from 'semantic-ui-react'
+import wireframeImage from '../../Images/wireframeImage.png';
 
 const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
     const currType = currState.type;
-    const descHTML = <Markup content={currState.description.toString("html")}/>;
-    
+    const descHTML = <Markup content={currState.description.toString("html")} />;
+
     return (
         <div>
             <h1 id='HeaderNote'>Please confirm your {currType} details</h1>
             {currType === 'petition' &&
-                <div>
-                    <h2 >Title: {currState.title}</h2>
-                    <h2>Decision Maker: {currState.recipient}</h2>
-                    <h2>Target Supporters: {currState.targetNum}</h2>
-                    <h2>Anonymity: {currState.anonymity.toString()}</h2>
-                    <h2>
-                        Tags: {currState.tags.join(", ")}
-                    </h2>
-                    <h2>Description:</h2>
-                    <p id='testestest'>{descHTML}</p>
-                    <h2>ImageURL: {currState.imageURL}</h2>
-                </div>
+                <Segment.Group>
+                    <Segment attached>
+                        <h2>Title</h2>
+                        {currState.title}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Decision Maker</h2>
+                        {currState.recipient}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Target Supporters</h2>
+                        {currState.targetNum}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Anonymity</h2>
+                        {currState.anonymity.toString()}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Image</h2>
+                        <Image
+                            onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
+                            size='medium' src={currState.imageURL} alt="image" />
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Description</h2>
+                        <p className='textEditorFix'>{descHTML}</p>
+                    </Segment>
+                </Segment.Group>
             }
 
             {currType === 'campaign' &&
-                <div>
-                    <h2>Title: {currState.title}</h2>
-                    <h2>Target Group: {currState.recipient}</h2>
-                    <h2>Target Supporters: {currState.targetNum}</h2>
-                    <h2>Target End Date: {currState.date_end.toDateString()}</h2>
-                    <h2> Tags: {currState.tags.join(", ")}</h2>
-                    <h2>Description: </h2>
-                    <p>{descHTML}</p>
-                    <h2>ImageURL: {currState.imageURL}</h2>
-                </div>
+                <Segment.Group>
+                    <Segment attached>
+                        <h2>Title</h2>
+                        {currState.title}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Target Group</h2>
+                        {currState.recipient}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Target Supporters</h2>
+                        {currState.targetNum}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Target End Date</h2>
+                        {currState.date_end.toDateString()}
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Image</h2>
+                        <Image
+                            onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
+                            size='medium' src={currState.imageURL} alt="image" />
+                    </Segment>
+
+                    <Segment attached>
+                        <h2>Description</h2>
+                        <p className='textEditorFix'>{descHTML}</p>
+                    </Segment>
+                </Segment.Group>
             }
 
             <Button.Group>

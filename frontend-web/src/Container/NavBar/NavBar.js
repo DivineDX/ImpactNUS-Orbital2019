@@ -20,7 +20,7 @@ class NavBar extends Component {
 
     render() {
         const { activeItem } = this.state
-        const { loginProp, isSignedIn } = this.props
+        const { loginProp, isSignedIn, name } = this.props
 
         return (
             <Menu borderless id="Navbar">
@@ -35,38 +35,43 @@ class NavBar extends Component {
                 <div className=" dib flex items-left ">
                     <Menu id='HeaderWord'>
                         <Menu.Item>
-                        <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
-                            <Link to="/bulletin">
-                                <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Bulletin</div>
-                            </Link>
-                        </Button>
+                            <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
+                                <Link to="/bulletin">
+                                    <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Bulletin</div>
+                                </Link>
+                            </Button>
                         </Menu.Item>
 
                         <Menu.Item>
-                        <Button  className='HeaderBut' name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
-                            <Link to="/dashboard">
-                                <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Dashboard</div>
-                            </Link>
-                        </Button>
+                            <Button className='HeaderBut' name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
+                                <Link to="/dashboard">
+                                    <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Dashboard</div>
+                                </Link>
+                            </Button>
                         </Menu.Item>
                     </Menu>
-                        
+
                     <Menu.Menu position='right' id='right'>
-                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
+                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}              
                         <Menu.Item id='SignInOut'>
                             <div>
+                            {isSignedIn
+                                ? <i className = 'underline'>Logged in as {name}</i>
+                                : null
+                            }
+
                                 {isSignedIn === false //conditional
                                     ? <Link to="/login">
                                         <Button>Login</Button>
                                     </Link>
                                     : <Link to="/">
-                                        <Button id='LoginButSize'onClick={() => loginProp()}>Sign Out</Button> 
+                                        <Button id='LoginButSize' onClick={() => loginProp()}>Sign Out</Button>
                                     </Link>
                                 }
                             </div>
                         </Menu.Item>
                     </Menu.Menu>
-                </div>                    
+                </div>
             </Menu>
         )
     }

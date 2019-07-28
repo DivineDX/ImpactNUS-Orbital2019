@@ -23,8 +23,9 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isSignedIn: true, //default is false (not signed in)
-			userID: 'e0322822', //userID
+			isSignedIn: false, //default is false (not signed in)
+			userID: '', //userID
+			name: ''
 		}
 	}
 
@@ -39,10 +40,11 @@ class App extends Component {
 		return this.state.isSignedIn;
 	}
 
-	loginUser = (userID) => {
+	loginUser = (userID, name) => {
 		this.setState({
 			isSignedIn: true,
 			userID: userID,
+			name: name,
 		});
 	}
 
@@ -63,7 +65,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} />
+					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} name = {this.state.name}/>
 					<div className="body">
 						<Switch>
 							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser = {this.loginUser}/>} />

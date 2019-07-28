@@ -94,9 +94,11 @@ app.post('/loginNUS', (req, res) => {
     const { jwtToken } = req.body;
     let decodedID;
     try {
+        const decodedJWT = jwt.decode(jwtToken);
+        console.log(jwt.decode(jwtToken));
         decodedID = jwt.decode(jwtToken).user;
-        if (decodedID) {
-            res.json(decodedID);
+        if (decodedJWT.user) {
+            res.json(decodedJWT);
         } else {
             res.json(false);
         }

@@ -17,13 +17,16 @@
     font-size: 40px;
 }
 
-#testestest {
+.textEditorFix {
     word-wrap: break-word;
-    width: 640px;
+    width: 60rem;
 }
 
 /* Mobile screens */
 @media only screen and (max-width: 767px) {
+    .sizingg {
+        width: 10rem;
+    }
     /* #formContainer {
         height: 700px;
         display: flex;
