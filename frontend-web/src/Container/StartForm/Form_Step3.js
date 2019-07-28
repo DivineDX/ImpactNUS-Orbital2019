@@ -37,16 +37,6 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                         <InputErrorLabel touched={touched.imageURL} errors={errors.imageURL} />
                     </Form.Field>
 
-                    <Form.Field>
-                        <h1 className='sizingg'>Input relevant tags</h1>
-                        <Dropdown
-                            clearable fluid multiple search selection
-                            value={currState.tags}
-                            options={tagOptions}
-                            onChange={dropdownChange.bind(this)}
-                            placeholder='Insert tags' />
-                    </Form.Field>
-
                     <Form.Field >
                         <h1 className='sizingg'>Detailed description of your {currState.type}</h1>
                         <div class="field" rows="3">

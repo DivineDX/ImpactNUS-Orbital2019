@@ -10,11 +10,16 @@
 } */
 
 .sizingg {
-    width: 80rem;
+    width: 60rem;
 }
 
-#Testing123 {
+#HeaderNote {
     font-size: 40px;
+}
+
+#testestest {
+    word-wrap: break-word;
+    width: 640px;
 }
 
 /* Mobile screens */

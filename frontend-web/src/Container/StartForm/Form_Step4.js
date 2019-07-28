@@ -8,7 +8,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
     
     return (
         <div>
-            <h1 id='Testing123'>Please confirm your {currType} details</h1>
+            <h1 id='HeaderNote'>Please confirm your {currType} details</h1>
             {currType === 'petition' &&
                 <div>
                     <h2 >Title: {currState.title}</h2>
@@ -19,7 +19,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
                         Tags: {currState.tags.join(", ")}
                     </h2>
                     <h2>Description:</h2>
-                    <p>{descHTML}</p>
+                    <p id='testestest'>{descHTML}</p>
                     <h2>ImageURL: {currState.imageURL}</h2>
                 </div>
             }

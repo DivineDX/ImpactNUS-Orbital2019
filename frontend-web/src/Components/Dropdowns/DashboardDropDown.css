@@ -11,6 +11,10 @@
     display: none; 
 }
 
+#NormalDisplay {
+    right: 5%;
+}
+
 @media screen and (max-width: 846px) {
     #MobileDisplay {
         display: block;
