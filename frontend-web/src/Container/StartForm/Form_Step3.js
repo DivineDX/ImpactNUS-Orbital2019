@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Form, Dropdown, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
-import tagOptions from './tagOptions';
 import TextEditor from '../../Components/TextEditor/TextEditor';
 import InputErrorLabel from '../../Components/Label/InputErrorLabel';
 
