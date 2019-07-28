@@ -55,13 +55,15 @@ class LandingPage extends Component {
                 return resp.json();
             })
             .then(data => {
-                this.setState({ loadedSupportData: data });
+                if (data !== 'Unable to retrieve') {
+                    this.setState({ loadedSupportData: data });
+                }
             });
     }
 
     render() {
         //unused consts: date-end, tags, numFollowing, finished
-        const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;        
+        const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
@@ -72,7 +74,7 @@ class LandingPage extends Component {
                     <div className="pv3">
                         <h1 className='f2 tc' id='Title'> {title}</h1>
                     </div>
-                     <img
+                    <img
                         className="pb3 ma3"
                         id='pageImage'
                         src={imageurl}
@@ -83,7 +85,7 @@ class LandingPage extends Component {
                             <Markup content={description} />
                         </div>
                         <div className='mt3 ml4 w-25' id='bigSection'>
-                            <p className="i" id='Signature'>Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p> 
+                            <p className="i" id='Signature'>Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
                             <Progress id='ProgressBar' color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
                             <div>
                                 <div className='w-60 tl' id='Extras'>
@@ -93,7 +95,7 @@ class LandingPage extends Component {
                                 <div className='ml0' id='SignButton'>
                                     {type === 'petition'
                                         ? <Button id='PetitionBut' color='orange' floated='right' circular>Sign Petition</Button>
-                                    : <Button id='CampaignBut' color='orange' floated='right' circular>Support Campaign</Button>
+                                        : <Button id='CampaignBut' color='orange' floated='right' circular>Support Campaign</Button>
                                     }
                                 </div>
                             </div>

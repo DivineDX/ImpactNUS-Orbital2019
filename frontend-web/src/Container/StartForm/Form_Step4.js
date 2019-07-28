@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Image } from 'semantic-ui-react'
 import { Markup } from 'interweave';
-import { Header, Segment } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import wireframeImage from '../../Images/wireframeImage.png';
 
 const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {

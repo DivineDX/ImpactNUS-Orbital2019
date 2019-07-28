@@ -28,10 +28,27 @@ passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
-const findOrCreate = (user, func) => {
-    // console.log(user); //NUS User ID
+const findOrCreate = (profile, func) => {
+    // console.log("Profile: ", profile); //profile is an obj with displayName and nusNetID
+    const nusNetID = profile.nusNetID;
+
+    db('users').select('id')
+        .where('id', '=', nusNetID)
+        .then(data => {
+            if (!data || !data.length) { //create new user
+                db('users').returning('id').insert({
+                    id: nusNetID,
+                    password: '123', //will be removed later
+                    name: profile.displayName,
+                }).then(data => {
+                    if(!data[0]) {
+                        throw new Error();
+                    }
+                })
+            }
+        }).catch(err => res.status(400).json('Failed login'))
     func();
-    return user;
+    return nusNetID;
 }
 
 passport.use(new nusStrategy({
@@ -41,7 +58,7 @@ passport.use(new nusStrategy({
 },
     function (identifier, profile, done) {
         profile.nusNetID = identifier.split("/")[3];
-        findOrCreate(profile.nusNetID, function (err, user) {
+        findOrCreate(profile, function (err, user) {
             done(null, profile);
         })
     }
@@ -51,15 +68,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/auth/nus', passport.authenticate('nus-openid'));
-
-//Old code which sends string
-// app.get('/auth/nus/return',
-//     passport.authenticate('nus-openid', { failureRedirect: '/' }),
-//     function (req, res) {
-//         // Successful authentication, redirect home.
-//         res.redirect('http://localhost:3000?token=' + req.user.nusNetID);
-//     }
-// );
 
 const authUser = (nusNetID, jwtToken) => {
     const decodedID = jwt.decode(jwtToken).user;
@@ -95,7 +103,6 @@ app.post('/loginNUS', (req, res) => {
     let decodedID;
     try {
         const decodedJWT = jwt.decode(jwtToken);
-        console.log(jwt.decode(jwtToken));
         decodedID = jwt.decode(jwtToken).user;
         if (decodedJWT.user) {
             res.json(decodedJWT);
@@ -360,6 +367,22 @@ app.delete('/delete', (req, res) => {
         db('pnc').where({
             id: id,
             organizer_id: organizerID,
+        }).del()
+            .then(res.json('Success'))
+            .catch(err => res.status(400).json('Error in delete'));
+    } else {
+        res.json("Auth failed");
+    }
+})
+
+app.delete('/withdrawsupport', (req, res) => {
+    const { id, poster_id, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('support').where({
+            pnc_id: id,
+            poster_id: poster_id,
         }).del()
             .then(res.json('Success'))
             .catch(err => res.status(400).json('Error in delete'));

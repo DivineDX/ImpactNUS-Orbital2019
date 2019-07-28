@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Form, Dropdown, Input } from 'semantic-ui-react'
+import { Button, Form, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
 import TextEditor from '../../Components/TextEditor/TextEditor';
 import InputErrorLabel from '../../Components/Label/InputErrorLabel';
 
-const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
+const Form_Step3 = ({ navButton, currState }) => (
     <Formik
         initialValues={{
             description: currState.description,

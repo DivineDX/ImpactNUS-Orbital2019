@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Menu, Dropdown } from 'semantic-ui-react';
+import { Button, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
 
@@ -52,13 +52,13 @@ class NavBar extends Component {
                     </Menu>
 
                     <Menu.Menu position='right' id='right'>
-                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}              
+                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
                         <Menu.Item id='SignInOut'>
                             <div>
-                            {isSignedIn
-                                ? <i className = 'underline'>Logged in as {name}</i>
-                                : null
-                            }
+                                {isSignedIn
+                                    ? <i className='underline'>Logged in as {name}</i>
+                                    : null
+                                }
 
                                 {isSignedIn === false //conditional
                                     ? <Link to="/login">

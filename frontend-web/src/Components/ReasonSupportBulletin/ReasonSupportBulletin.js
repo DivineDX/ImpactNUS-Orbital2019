@@ -4,6 +4,7 @@ import './ReasonSupportBulletin.css';
 import EmptySupportSegment from '../EmptyFillers/EmptySupportSegment';
 
 const ReasonSupportBulletin = ({ reasonData }) => {
+    console.log("Reason data", reasonData);
     if (reasonData.length === 0) {
         return (
             <EmptySupportSegment />
