@@ -8,8 +8,9 @@ button:disabled {
     text-decoration: line-through;
 }
 
-.ui.menu.item {
-    -webkit-tap-highlight-color: transparent;
+.ui.icon.button {
+    height: 50px; 
+    width: 100px;
 }
 
 

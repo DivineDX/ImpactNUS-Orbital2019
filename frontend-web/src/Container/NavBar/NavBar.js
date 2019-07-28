@@ -27,7 +27,7 @@ class NavBar extends Component {
                 <Button id='Diagnus'>
                     <Link to="/" className="link no-underline flex items-center pa2">
                         <div id="Logo">
-                            DIAGNUS
+                            ImpactNUS
                         </div>
                     </Link>
                 </Button>

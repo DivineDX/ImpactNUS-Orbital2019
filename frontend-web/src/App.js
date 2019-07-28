@@ -23,8 +23,8 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isSignedIn: true, //default is false (not signed in)
-			userID: 'e0322822', //userID
+			isSignedIn: false, //default is false (not signed in)
+			userID: '', //userID
 		}
 	}
 

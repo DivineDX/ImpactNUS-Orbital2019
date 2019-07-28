@@ -37,10 +37,6 @@
 	margin-top: 0px;
 }
 
-.ui.button {
-	background-color: white;
-}
-
 #Navbar {
 	margin: 0;
 	position: fixed;
@@ -50,6 +46,10 @@
 
 #Mobileeee {
 	display: none;
+}
+
+.HeaderBut {
+	background-color: white !important;
 }
 
 .HeaderBut :hover {
