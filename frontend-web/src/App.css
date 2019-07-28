@@ -1,5 +1,5 @@
 .body {
-    padding-top: 72px;
+    padding-top: 50px;
 }
 
 button:disabled {
@@ -11,6 +11,7 @@ button:disabled {
 .ui.menu.item {
     -webkit-tap-highlight-color: transparent;
 }
+
 
 /* Edit below to standardize how all the input boxes look
 .ui.form .field  {
@@ -34,6 +35,6 @@ button:disabled {
 /* Mobile Screens */
 @media screen and (max-width: 700px) {
     .body {
-        padding-top: 188px;
+        padding-top: 105px;
     }
 }

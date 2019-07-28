@@ -33,7 +33,8 @@
 	position: fixed;
 	right: 0px;
 	top: 0px;
-	padding-top: 10px;
+	padding-top: 12px;
+	margin-top: 0px;
 }
 
 .ui.button {
@@ -47,7 +48,7 @@
 	z-index: 4;
 }
 
-#MobileView {
+#Mobileeee {
 	display: none;
 }
 
@@ -59,34 +60,58 @@
 
 .ui.active.button {
 	background-color: white;
-
 } 
 
 #BulletinFS, #DashboardFS {
-	font-size: 20px;
+	font-size: 18px;
+}
+
+.ui.menu {
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	box-shadow: none;
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px;
+}
+
+.ui.button {
+	padding-right: 0px;
+	padding-left: 12px;
 }
 
 /* if you do this, the search bar is strange */
 
 @media screen and (max-width: 600px) {
-	#MobileView {
+	#Mobileeee {
 		display: block;
-		margin-top: 18px;
+		/* margin-top: 18px;
 		font-size: 15px;
-		float: left;
+		float: left; */
+	}
+
+	/* .headerWord {
+	display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	} */
+
+	#Navbar {
+		display: flex;
+		flex-direction: column;
 	}
 
 	#HeaderWord {
-		display: none;
+		display: flex;
 	}
 
-	#Diagnus {
-		padding-top: 10px;
-		height: 50px;
+	#BulletinFS, #DashboardFS {
+		font-size: 18px;
 	}
 
-	#NavBar {
-		display: inline-flex;
-		flex-direction: column;
+	.ui.button.HeaderBut  {
+		padding-left: 0px;
 	}
 }

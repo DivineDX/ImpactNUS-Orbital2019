@@ -11,7 +11,6 @@ class NavBar extends Component {
         super()
         this.state = {
             activeItem: 'DiagNus',
-            searchfield: ''
         }
     }
 
@@ -33,22 +32,25 @@ class NavBar extends Component {
                     </Link>
                 </Button>
 
-                <div className=" dib flex items-center pa9 fw9">
-                    <div id='HeaderWord'>
+                <div className=" dib flex items-left ">
+                    <Menu id='HeaderWord'>
+                        <Menu.Item>
                         <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
                             <Link to="/bulletin">
                                 <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Bulletin</div>
                             </Link>
                         </Button>
+                        </Menu.Item>
 
+                        <Menu.Item>
                         <Button  className='HeaderBut' name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
                             <Link to="/dashboard">
                                 <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Dashboard</div>
                             </Link>
                         </Button>
-                    </div>
-                    
-                    
+                        </Menu.Item>
+                    </Menu>
+                        
                     <Menu.Menu position='right' id='right'>
                         {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
                         <Menu.Item id='SignInOut'>
@@ -64,26 +66,7 @@ class NavBar extends Component {
                             </div>
                         </Menu.Item>
                     </Menu.Menu>
-                </div>
-                <Dropdown id='MobileView' icon='align justify' floating labeled button >
-                        <Dropdown.Menu>
-                            <Dropdown.Item>
-                                <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
-                                    <Link to="/bulletin">
-                                        <div className="link dib dim mr0 mr1-ns">Bulletin</div>
-                                    </Link>
-                                </Button>
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                <Button className='HeaderBut' name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
-                                    <Link to="/dashboard">
-                                        <div className="link dib dim mr0 mr1-ns">Dashboard</div>
-                                    </Link>
-                                </Button>
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    
+                </div>                    
             </Menu>
         )
     }
