@@ -8,11 +8,6 @@ button:disabled {
     text-decoration: line-through;
 }
 
-.ui.icon.button {
-    height: 50px; 
-    width: 100px;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 #OrbitronF {
 	font-family: 'Orbitron';

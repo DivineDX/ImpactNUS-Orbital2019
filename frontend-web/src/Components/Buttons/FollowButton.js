@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Icon } from 'semantic-ui-react'
-import "./FollowButton.css";
 
 class FollowButton extends Component {
     state = {}
@@ -12,7 +11,7 @@ class FollowButton extends Component {
         return (
             <Button icon toggle active={active} onClick={this.handleClick} float id='FollowBut'>
                 <Icon name='rss' />
-                <p id='FollowText'> Follow </p>
+                Follow
             </Button>
         );
     }
