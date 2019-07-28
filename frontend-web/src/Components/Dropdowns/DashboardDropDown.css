@@ -6,3 +6,27 @@
     color: #1e70bf;
     text-decoration: none;
 }
+
+#MobileDisplay {
+    display: none; 
+}
+
+#NormalDisplay {
+    float: right;
+}
+
+@media screen and (max-width: 846px) {
+    #MobileDisplay {
+        display: inline-block;
+        float: right;
+        margin-right: 0px;
+    }
+
+    .ui.labeled.icon.button, .ui.labeled.icon.buttons.button {
+        padding-left: 0px;
+    }
+
+    #NormalDisplay {
+        display: none;
+    }
+}

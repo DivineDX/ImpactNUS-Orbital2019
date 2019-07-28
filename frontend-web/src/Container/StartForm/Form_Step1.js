@@ -24,7 +24,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field >
-                        <h1>State your option</h1>
+                        <h1 className='sizingg'>State your option</h1>
                         <Button.Group size='massive' >
                             <Button disabled={currState.isEditing} toggle active={currState.type === 'petition'} onClick={() => toggleType('petition')}>
                                 Petition

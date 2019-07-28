@@ -45,7 +45,7 @@ class Form_Step2 extends Component {
                     return (
                         <Form size='huge'>
                             <Form.Field >
-                                <h1>{target}</h1>
+                                <h1 className='sizingg'>{target}</h1>
                                 <Input
                                     type='text'
                                     name="recipient"
@@ -57,7 +57,7 @@ class Form_Step2 extends Component {
                             </Form.Field>
 
                             <Form.Field>
-                                <h1>State your target number of supporters</h1>
+                                <h1 className='sizingg'>State your target number of supporters</h1>
                                 <NumberSlider
                                     min={10}
                                     max={2000}

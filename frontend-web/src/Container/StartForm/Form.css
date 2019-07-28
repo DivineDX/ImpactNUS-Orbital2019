@@ -9,6 +9,18 @@
     --spacing-extra-extra-extra-large: 16rem;
 } */
 
+.sizingg {
+    width: 60rem;
+}
+
+#HeaderNote {
+    font-size: 40px;
+}
+
+#testestest {
+    word-wrap: break-word;
+    width: 640px;
+}
 
 /* Mobile screens */
 @media only screen and (max-width: 767px) {

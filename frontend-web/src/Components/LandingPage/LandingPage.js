@@ -70,37 +70,34 @@ class LandingPage extends Component {
             return (
                 <article id='landingPage' className=''>
                     <div className="pv3">
-                        <h1 className='f2 tc'> {title}</h1>
+                        <h1 className='f2 tc' id='Title'> {title}</h1>
                     </div>
-
-                    <div id="subHeader" className='pv2 flex flex-column items-center'>
-                        <img
-                            className="pb3 ma3"
-                            id='pageImage'
-                            src={imageurl}
-                            onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
-                            alt="Error" />
-                        <div className=''>
-                            <Progress color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
-                            <p className="i">Signatures: <b>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
-                            <div id="subContainer" className='flex flex-row items-center'>
-                                <div className='w-60 tl'>
-                                    <nobr>By: <b>{anonymity ? "Anonymous" : name}</b></nobr>
-                                    <p>Created on: {DateToString(date_started)}</p>
+                     <img
+                        className="pb3 ma3"
+                        id='pageImage'
+                        src={imageurl}
+                        onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
+                        alt="Error" />
+                    <div id="subHeader" className='pv2 flex flex-column'>
+                        <div id="description" className='pa3 mv3 tl'>
+                            <Markup content={description} />
+                        </div>
+                        <div className='mt3 ml4 w-25' id='bigSection'>
+                            <p className="i" id='Signature'>Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p> 
+                            <Progress id='ProgressBar' color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
+                            <div>
+                                <div className='w-60 tl' id='Extras'>
+                                    <nobr className='tc'>By: <b>{anonymity ? "Anonymous" : name}</b></nobr>
+                                    <p id='testtest'>Created on: {DateToString(date_started)}</p>
                                 </div>
-
-                                <div className='w-40'>
+                                <div className='ml0' id='SignButton'>
                                     {type === 'petition'
-                                        ? <Button color='orange' floated='right' circular>Sign Petition</Button>
-                                        : <Button color='orange' floated='right' circular>Support Campaign</Button>
+                                        ? <Button id='PetitionBut' color='orange' floated='right' circular>Sign Petition</Button>
+                                    : <Button id='CampaignBut' color='orange' floated='right' circular>Support Campaign</Button>
                                     }
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div id="description" className='pa3 mv3 tl'>
-                        <Markup content={description} />
                     </div>
 
                     {type === 'petition' &&

@@ -67,7 +67,7 @@ class Bulletin extends Component {
 		return (
 			<div>
 				<div className="w-75 pt5 center">
-					<h1 className="tc baskerville f1 fw5"> Discover Petitions and Campaigns</h1>
+					<h1 className="tc baskerville f1 fw5 mb4"> Discover Petitions and Campaigns</h1>
 					<BulletinMenuBar
 						handleFilterClick={this.handleFilterClick}
 						handleCategoryClick={this.handleCategoryClick}

@@ -6,7 +6,7 @@ import NavBar from './Container/NavBar/NavBar';
 import LoginPage from './Container/LoginPage/LoginPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
-import Feed from './Container/Feed/Feed';
+import Feed from './Archived Files/Feed/Feed';
 import About from './Components/FooterItems/About/About';
 import HowItWorks from './Components/FooterItems/HowItWorks/HowItWorks';
 import FAQ from './Components/FooterItems/FAQ/FAQ';
@@ -23,8 +23,8 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isSignedIn: false, //default is false (not signed in)
-			userID: '', //userID
+			isSignedIn: true, //default is false (not signed in)
+			userID: 'e0322822', //userID
 		}
 	}
 

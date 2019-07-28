@@ -12,43 +12,104 @@
     color:  #446CB3;
 }
 
+.ui.progress {
+    margin-top: 0px;
+}
+
+#Signature {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
 #pageImage {
     height: 350px;
-    width: 100%;
+    width: 57%;
+    margin-left: 20%
+}
+
+#SignButton {
+    margin-top: 30px;
+}
+
+#PetitionBut, #CampaignBut {
+    padding-left: 35%;
+    padding-right: 35%;
+    font-size: 1em;
+    float: left;
+}
+
+#Extras {
+    font-size: 1.2em;
+}
+
+#ProgressBar {
+    width: 120%;
+}
+
+#Title {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 3em;
+}
+
+#description {
+    width: 30%;
+    margin-left: 20%;
+}
+
+#subHeader {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+}
+
+#subContainer{
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#subContainer div {
+    width: auto;
+    margin: 3%;
+}
+
+#SupportForm {
+    padding: 0% 7%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 /* Desktop Screens */
-@media screen and (min-width: 846px) {
+@media screen and (max-width: 500px) {
+    #Title {
+        margin: 0px;
+        padding: 0px;
+    }
+
     #pageImage {
-        width: 35%;
-        height: 350px;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
     }
-    
+
     #subHeader {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+        display: block;
     }
 
-    #subContainer{
-        margin: 5%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    #description {
+        width: 70%;
+        margin-left: 15%;
     }
 
-    #subContainer div {
-        width: auto;
-        margin: 3%;
+    #bigSection {
+        margin-left: 18%;
     }
     
-    #description, #SupportForm {
-        padding: 0% 7%;
+    #SignButton {
+        margin-bottom: 20px;
     }
 
-    #SupportForm {
-        padding-top: 3%;
-        padding-bottom: 3%;
-    }
 }

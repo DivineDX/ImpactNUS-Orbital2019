@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Form, Dropdown, Input } from 'semantic-ui-react'
 import { Formik } from "formik";
 import * as yup from "yup";
-import tagOptions from './tagOptions';
 import TextEditor from '../../Components/TextEditor/TextEditor';
 import InputErrorLabel from '../../Components/Label/InputErrorLabel';
 
@@ -25,7 +24,7 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field>
-                        <h1>Add a URL of an image (Optional but highly recommended)</h1>
+                        <h1 className='sizingg'>Image (Optional but highly recommended)</h1>
                         <Input
                             type='text'
                             placeholder="Link to an image hosting site"
@@ -37,24 +36,16 @@ const Form_Step3 = ({ navButton, dropdownChange, currState }) => (
                         <InputErrorLabel touched={touched.imageURL} errors={errors.imageURL} />
                     </Form.Field>
 
-                    <Form.Field>
-                        <h1>Input relevant tags</h1>
-                        <Dropdown
-                            clearable fluid multiple search selection
-                            value={currState.tags}
-                            options={tagOptions}
-                            onChange={dropdownChange.bind(this)}
-                            placeholder='Insert tags' />
-                    </Form.Field>
-
                     <Form.Field >
-                        <h1>Provide a detailed description of your {currState.type}</h1>
-                        <TextEditor
-                            placeholder="Tell your story..."
-                            name="description"
-                            onChange={e => setFieldValue('description', e)}
-                            value={values.description}
-                        />
+                        <h1 className='sizingg'>Detailed description of your {currState.type}</h1>
+                        <div class="field" rows="3">
+                            <TextEditor
+                                placeholder="Tell your story..."
+                                name="description"
+                                onChange={e => setFieldValue('description', e)}
+                                value={values.description}
+                            />
+                        </div>      
                     </Form.Field>
 
                     <Button.Group>
