@@ -199,62 +199,76 @@ app.post('/checkStart', (req, res) => {
 
 //Called in Form.js
 app.post('/submitform', (req, res) => {
-    const { userID, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const { jwtToken, userID, type, title, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const auth = authUser(userID, jwtToken);
 
-    db('pnc').returning('id').insert({
-        type: type,
-        title: title,
-        recipient: recipient,
-        organizer_id: userID,
-        anonymity: anonymity,
-        date_started: new Date(),
-        date_end: date_end,
-        description: description,
-        tags: tags,
-        imageurl: imageURL,
-        targetnumsupporters: targetNum,
-    })
-        .then(id => {
-            res.json(id[0]); //id of the newly created petition/campaign
-        })
-        .catch(err => {
-            res.status(400).json('Unable to post');
-        });
-})
-
-//Used in Form.js
-app.put('/updateform', (req, res) => {
-    let updated = false;
-    const { id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
-
-    db('pnc').where('id', '=', id)
-        .update({
+    if (auth) {
+        db('pnc').returning('id').insert({
+            type: type,
+            title: title,
             recipient: recipient,
+            organizer_id: userID,
             anonymity: anonymity,
+            date_started: new Date(),
             date_end: date_end,
             description: description,
             tags: tags,
             imageurl: imageURL,
             targetnumsupporters: targetNum,
         })
-        .then(res.json(id))
-        .catch(err => res.status(400).json('Update problem'));
+            .then(id => {
+                res.json(id[0]); //id of the newly created petition/campaign
+            })
+            .catch(err => {
+                res.status(400).json('Unable to post');
+            });
+    } else {
+        res.json("Auth failed");
+    }
+})
+
+//Used in Form.js
+app.put('/updateform', (req, res) => {
+    const { jwtToken, userID, id, recipient, date_end, targetNum, anonymity, tags, description, imageURL } = req.body;
+    const auth = authUser(userID, jwtToken);
+
+    if (auth) {
+        db('pnc').where('id', '=', id)
+            .update({
+                recipient: recipient,
+                anonymity: anonymity,
+                date_end: date_end,
+                description: description,
+                tags: tags,
+                imageurl: imageURL,
+                targetnumsupporters: targetNum,
+            })
+            .then(res.json(id))
+            .catch(err => res.status(400).json('Update problem'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Used in SupportForm.js
 app.post('/checkifsigned', (req, res) => {
-    const { id, userID } = req.body;
-    db('support').where({
-        poster_id: userID,
-        pnc_id: id,
-    }).then(data => {
-        if (data.length) {
-            res.json(true);
-        } else {
-            res.json(false);
-        }
-    }).catch(err => res.status(400).json('Update problem'));
+    const { id, userID, jwtToken } = req.body;
+    const auth = authUser(userID, jwtToken);
 
+    if (auth) {
+        db('support').where({
+            poster_id: userID,
+            pnc_id: id,
+        }).then(data => {
+            if (data.length) {
+                res.json(true);
+            } else {
+                res.json(false);
+            }
+        }).catch(err => res.status(400).json('Update problem'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 /*Gets user id, checks whether user has already supported, if not, increment
@@ -262,70 +276,94 @@ the support number and add the reason of support (if not empty) into the
 */
 //Used in SupportForm.js
 app.post('/signsupport', (req, res) => {
-    const { id, userID, description, reason, anonymity } = req.body;
-    db('support').returning('support_id').insert({
-        poster_id: userID,
-        poster_description: description,
-        content: reason,
-        pnc_id: id,
-        anonymity: anonymity,
-        dateposted: new Date(),
-    })
-        .then(data => {
-            if (data[0]) { //exists
-                db('pnc')
-                    .where('id', '=', id)
-                    .increment('currnumsupporters', 1)
-                    .then(res.json('Success'))
-            } else {
-                throw new Error();
-            }
+    const { id, userID, jwtToken, description, reason, anonymity } = req.body;
+    const auth = authUser(userID, jwtToken);
+
+    if (auth) {
+        db('support').returning('support_id').insert({
+            poster_id: userID,
+            poster_description: description,
+            content: reason,
+            pnc_id: id,
+            anonymity: anonymity,
+            dateposted: new Date(),
         })
-        .catch(err => res.status(400).json('Unable to support'));
+            .then(data => {
+                if (data[0]) { //exists
+                    db('pnc')
+                        .where('id', '=', id)
+                        .increment('currnumsupporters', 1)
+                        .then(res.json('Success'))
+                } else {
+                    throw new Error();
+                }
+            })
+            .catch(err => res.status(400).json('Unable to support'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Organizers who want to post an update for their campaign/petition
 //Used in UpdateModal.js
 app.post('/postupdate', (req, res) => {
-    const { id, updateTitle, updateContent, organizerID } = req.body;
-    db('updates').returning('update_id').insert({
-        title: updateTitle,
-        content: updateContent,
-        dateposted: new Date(),
-        pnc_id: id,
-        organizer_id: organizerID,
-    }).then(data => {
-        if (data[0]) {
-            res.json('Success');
-        } else {
-            throw new Error();
-        }
-    }).catch(err => res.status(400).json('Update failed'));
+    const { id, updateTitle, updateContent, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('updates').returning('update_id').insert({
+            title: updateTitle,
+            content: updateContent,
+            dateposted: new Date(),
+            pnc_id: id,
+            organizer_id: organizerID,
+        }).then(data => {
+            if (data[0]) {
+                res.json('Success');
+            } else {
+                throw new Error();
+            }
+        }).catch(err => res.status(400).json('Update failed'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //VictoryModal.js
 app.put('/victory', (req, res) => {
-    const { id, organizerID } = req.body;
-    db('pnc').where({
-        id: id,
-        organizer_id: organizerID,
-    }).update({
-        finished: true
-    })
-        .then(res.json('Success'))
-        .catch(err => res.status(400).json('Update Error'));
+    const { id, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('pnc').where({
+            id: id,
+            organizer_id: organizerID,
+        }).update({
+            finished: true
+        })
+            .then(res.json('Success'))
+            .catch(err => res.status(400).json('Update Error'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Self-Explanatory: For deleting a petition/campaign
 //Used in deletemodal.js
 app.delete('/delete', (req, res) => {
-    const { id, organizerID } = req.body;
-    db('pnc').where({
-        id: id,
-        organizer_id: organizerID,
-    }).del()
-        .then(res.json('Success'))
-        .catch(err => res.status(400).json('Error in delete'));
+    const { id, organizerID, jwtToken } = req.body;
+    const auth = authUser(organizerID, jwtToken);
+
+    if (auth) {
+        db('pnc').where({
+            id: id,
+            organizer_id: organizerID,
+        }).del()
+            .then(res.json('Success'))
+            .catch(err => res.status(400).json('Error in delete'));
+    } else {
+        res.json("Auth failed");
+    }
 })
 
 //Manual Sign in function

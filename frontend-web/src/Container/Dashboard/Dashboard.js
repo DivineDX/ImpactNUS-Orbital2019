@@ -28,7 +28,6 @@ class Dashboard extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data);
                 if(data === 'Auth failed') {
                     this.setState({authFailed: true})
                 } else {
@@ -38,7 +37,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        if(true) {
+        if(this.state.authFailed) {
             return (
                 <AuthFailed/>
             )

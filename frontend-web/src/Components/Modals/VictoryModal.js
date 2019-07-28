@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
+import Cookies from 'universal-cookie';
 
 const keywords = {
     petition: ["Declare Victory", "declare victory", "Victory Declared!"],
@@ -11,6 +12,7 @@ class VictoryModal extends Component {
         super();
         this.state = {
             clickedVictory: false,
+            authFailed: false,
         }
     }
 
@@ -21,6 +23,7 @@ class VictoryModal extends Component {
             body: JSON.stringify({
                 id: Number(this.props.id),
                 organizerID: this.props.userID,
+                jwtToken: new Cookies().get('token'),
             })
         })
             .then(resp => resp.json())
@@ -28,6 +31,8 @@ class VictoryModal extends Component {
                 if (data === 'Success') {
                     this.setState({ clickedVictory: true });
                     this.props.refresh();
+                } else if (data === 'Auth failed') {
+                    this.setState({authFailed: true});
                 }
             })
     }
@@ -53,6 +58,12 @@ class VictoryModal extends Component {
                     {
                         this.state.clickedVictory
                             ? <h3>{filledWords[2]} Click anywhere out of the modal to exit</h3>
+                            : <div></div>
+                    }
+
+                    {
+                        this.state.authFailed
+                            ? <h3 className = 'red'>User authentication failed</h3>
                             : <div></div>
                     }
                 </Modal.Content>

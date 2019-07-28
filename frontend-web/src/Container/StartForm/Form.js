@@ -10,6 +10,8 @@ import Loading from '../../Components/Loader/Loading';
 import ExceedStartLimit from '../../Components/EmptyFillers/ExceedStartLimit';
 
 import './Form.css';
+import Cookies from 'universal-cookie';
+import AuthFailed from '../NonExistentPage/AuthFailed';
 
 class StartForm extends Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class StartForm extends Component {
         this.state = {
             canStart: false,
             isEditing: false,
+            authFailed: false,
             finished: false,
             loading: true,
             userID: props.userID,
@@ -128,7 +131,8 @@ class StartForm extends Component {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                userID: this.state.userID,
+                jwtToken: new Cookies().get('token'),
+                userID: this.props.userID,
                 type: this.state.type,
                 title: this.state.title,
                 recipient: [this.state.recipient],
@@ -142,7 +146,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if (data !== 'Unable to post') {
+                if(data === 'Auth failed') {
+                    this.setState({authFailed: true});
+                }else if (data !== 'Unable to post') {
                     this.setState({ currentStep: 5, finished: true });
                 }
             })
@@ -153,6 +159,8 @@ class StartForm extends Component {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
+                jwtToken: new Cookies().get('token'),
+                userID: this.props.userID,
                 id: this.state.id,
                 recipient: [this.state.recipient],
                 date_end: this.getEndDate(),
@@ -165,7 +173,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if (data === this.state.id) { //success 
+                if(data === 'Auth failed') {
+                    this.setState({authFailed: true});
+                } else if (data === this.state.id) { //success 
                     this.setState({ currentStep: 5, finished: true });
                 }
             }).catch(err => {
@@ -181,7 +191,10 @@ class StartForm extends Component {
         }
         else if (!this.state.loading && !this.state.canStart) { //cannot start
             return <ExceedStartLimit/>
-        } else {
+        } else if (this.state.authFailed) {
+            return <AuthFailed/>
+        }        
+        else {
             return (	 //acts as a card list here
                 <div id="formContainer" className="flex flex-column items-center mv4">
                     {!this.state.finished &&

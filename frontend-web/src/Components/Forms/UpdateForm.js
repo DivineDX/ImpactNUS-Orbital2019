@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { Button, Form } from "semantic-ui-react";
 import InputErrorLabel from '../Label/InputErrorLabel';
 
-const UpdateForm = ({ submitUpdate, updatePosted }) => (
+const UpdateForm = ({ submitUpdate, updatePosted, authFailed }) => (
     <Formik
         initialValues={{
             title: "",
@@ -54,6 +54,12 @@ const UpdateForm = ({ submitUpdate, updatePosted }) => (
                         ? <h3>Update posted! Click anywhere out of the modal to exit</h3>
                         : <div></div>
                     }
+                    
+                    {authFailed
+                        ? <h3 className = 'red'>User Authentication Error</h3>
+                        : <div></div>
+                    }
+
                     <Button type="submit" onClick={handleSubmit} disabled={isSubmitting}>
                         Submit
                     </Button>

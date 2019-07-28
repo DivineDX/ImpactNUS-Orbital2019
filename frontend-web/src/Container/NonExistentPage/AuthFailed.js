@@ -7,7 +7,7 @@ const AuthFailed = () => {
         <div className='mt7 flex flex-column items-center'>
             <Header icon>
                 <Icon size = 'massive' name='ban' />
-                Login authentication failed
+                Authentication Credentials failed
             </Header>
             <Link to='/'>
                 <Button size = 'large'>Back to Homepage</Button>

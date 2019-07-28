@@ -17,6 +17,7 @@ class LandingPage extends Component {
         this.state = {
             notFound: true,
             id: '',
+            userID: '',
             loadedData: {},
             loadedUpdateData: [],
             loadedSupportData: [],
@@ -60,7 +61,7 @@ class LandingPage extends Component {
 
     render() {
         //unused consts: date-end, tags, numFollowing, finished
-        const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;
+        const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;        
         if (this.state.notFound) {
             return (
                 <NonExistentPage />
