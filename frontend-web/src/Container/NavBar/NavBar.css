@@ -57,7 +57,12 @@
     cursor: pointer;
 } 
 
-.HeaderFS {
+.ui.active.button {
+	background-color: white;
+
+} 
+
+#BulletinFS, #DashboardFS {
 	font-size: 20px;
 }
 

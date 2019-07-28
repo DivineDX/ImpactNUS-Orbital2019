@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
-import SearchBar from "../../Components/SearchBar/SearchBar";
 
 //old modal: <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
 class NavBar extends Component {
@@ -36,13 +35,13 @@ class NavBar extends Component {
 
                 <div className=" dib flex items-center pa9 fw9">
                     <div id='HeaderWord'>
-                        <Button name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
+                        <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
                             <Link to="/bulletin">
                                 <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Bulletin</div>
                             </Link>
                         </Button>
 
-                        <Button name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
+                        <Button  className='HeaderBut' name='My Dashboard' active={activeItem === 'My Dashboard'} onClick={this.handleItemClick}>
                             <Link to="/dashboard">
                                 <div className="link dib dim mr0 mr1-ns" id='BulletinFS'>Dashboard</div>
                             </Link>
