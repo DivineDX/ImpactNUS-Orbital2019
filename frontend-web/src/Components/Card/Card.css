@@ -14,7 +14,7 @@
 }
 
 /* Large Screens */
-@media(min-width: 846px) {
+@media(min-width: 955px) {
     .card-container {
         height: auto;
         display: flex;

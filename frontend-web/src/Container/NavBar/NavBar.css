@@ -37,10 +37,6 @@
 	margin-top: 0px;
 }
 
-.ui.button {
-	background-color: white;
-}
-
 #Navbar {
 	margin: 0;
 	position: fixed;
@@ -52,11 +48,17 @@
 	display: none;
 }
 
+.HeaderBut {
+	background-color: white !important;
+	transition: all .2s ease-in-out; 
+}
+
 .HeaderBut :hover {
-    background-color: grey;
     color: #4183C4;
-    cursor: pointer;
+	cursor: pointer;
+	transform: scale(1.1); 
 } 
+
 
 .ui.active.button {
 	background-color: white;
