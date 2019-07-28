@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const BannerPage = ({ isSignedIn }) => {
     return (
         <article className="banner center ph3 ph5-ns tc br2 pv5 white flex flex-column justify-center">
-            <h1 className="fw9 f-headline lh-title mt0 mb3">
-                DiagNUS
+            <h1 className="fw9 f-headline lh-title mt0 mb3" id='OrbitronF'>
+                ImpactNUS
             </h1>
             <h2 className="fw5 f1 lh-copy mt0 mb3">
                 Mobilize your peers | Make the difference

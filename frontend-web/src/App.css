@@ -13,6 +13,11 @@ button:disabled {
     width: 100px;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
+#OrbitronF {
+	font-family: 'Orbitron';
+}
+ 
 
 /* Edit below to standardize how all the input boxes look
 .ui.form .field  {
