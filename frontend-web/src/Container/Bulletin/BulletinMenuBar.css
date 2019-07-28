@@ -1,0 +1,22 @@
+.ui.secondary.pointing.menu.item {
+    margin-left: 0px;
+}
+
+#NotOg {
+    display: none;
+}
+
+@media screen and (max-width: 555px) {
+    .ui.massive.menu {
+        font-size: 14px;
+    } 
+
+    #Og {
+        display: none;
+    }
+
+    #NotOg {
+        display: flex;
+        padding-top: 13px;
+    }
+}
