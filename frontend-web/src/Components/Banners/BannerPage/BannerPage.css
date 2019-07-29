@@ -23,9 +23,36 @@
     border-color: #41a3b9;
     padding: 2rem 1rem;
     display: inline-block;
-    margin-left: 1px;
+    margin-left: 20px;
 }
 
 .pillButton:hover {
     color: white;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Gabriela&display=swap');
+#GabriellaF {
+    font-family: 'Gabriela';
+    margin: 0px;
+    font-size: 125px;
+    color: #8f8f8f;
+    padding-top: 5px;
+}
+ 
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+#FrederickaF {
+    font-family: 'Fredericka the Great';
+    margin: 0px;
+    font-size: 130px;
+    color: #e78200;
+}
+ 
+#LogoT {
+    display: inline-flex; 
+    justify-content: center;
+}
+
+#tagline {
+    color: #7e7e7e;
+    font-size: 42px;
 }

@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 const BannerPage = ({ isSignedIn }) => {
     return (
         <article className="banner center ph3 ph5-ns tc br2 pv5 white flex flex-column justify-center">
-            <h1 className="fw9 f-headline lh-title mt0 mb3" id='OrbitronF'>
-                ImpactNUS
-            </h1>
-            <h2 className="fw5 f1 lh-copy mt0 mb3 tc">
+            <div id='LogoT' className="fw9 f-headline lh-title mt0 mb0">
+                <h1 id='GabriellaF'>Impact</h1>
+                <h1 id='FrederickaF'>NUS</h1>
+            </div>
+            <h2 className="fw5 f1 lh-copy mt0 mb3 tc" id='tagline'>
                 Mobilize your peers | Make the change
             </h2>
             <div>
