@@ -29,7 +29,7 @@ class NavBar extends Component {
                     <img src={Logo} id='Logo' />
                 </Link>
 
-                <div className=" dib flex items-left ">
+                <div className=" dib flex items-left">
                     <Menu id='HeaderWord'>
                         <Menu.Item>
                             <Button className='HeaderBut' name='Bulletin' active={activeItem === 'Bulletin'} onClick={this.handleItemClick}>
@@ -48,7 +48,7 @@ class NavBar extends Component {
                         </Menu.Item>
                     </Menu>
 
-                    <Menu.Menu position='right' id='right'>
+                    <Menu.Menu id='NormalD'>
                         {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
                         <Menu.Item id='SignInOut'>
                             <div>
@@ -59,11 +59,32 @@ class NavBar extends Component {
 
                                 {isSignedIn === false //conditional
                                     ? <Link to="/login">
-                                        <Button>Login</Button>
+                                        <Button className="SIObut">Login</Button>
                                     </Link>
                                     : <Link to="/">
-                                        <Button id='LoginButSize' onClick={() => loginProp()}>Sign Out</Button>
+                                        <Button className="SIObut" onClick={() => loginProp()}>Sign Out</Button>
                                     </Link>
+                                }
+                            </div>
+                        </Menu.Item>
+                    </Menu.Menu>
+
+                    <Menu.Menu id='SmallerD'>
+                        {/* <SearchBar searchChange={this.onSearchChange} className='search' /> */}
+                        <Menu.Item id='SignInOut'>
+                            <div>
+                                {isSignedIn === false //conditional
+                                    ? <Link to="/login">
+                                        <Button className="SIObut">Login</Button>
+                                    </Link>
+                                    : <Link to="/">
+                                        <Button className="SIObut" onClick={() => loginProp()}>Sign Out</Button>
+                                    </Link>
+                                }
+
+                                {isSignedIn
+                                    ? <i className='underline'>Logged in as {name}</i>
+                                    : null
                                 }
                             </div>
                         </Menu.Item>

@@ -10,10 +10,6 @@
 	height: 60px;
 } 
 
-#Diagnus {
-	background-color: white;
-}
-
 #HeaderWord {
 	display: flex;
 	justify-content: flex-start;
@@ -42,10 +38,6 @@
 	z-index: 4;
 }
 
-#Mobileeee {
-	display: none;
-}
-
 .HeaderBut {
 	background-color: white !important;
 	transition: all .2s ease-in-out; 
@@ -57,13 +49,12 @@
 	transform: scale(1.1); 
 } 
 
-
-.ui.active.button {
-	background-color: white;
-} 
-
 #BulletinFS, #DashboardFS {
 	font-size: 18px;
+}
+
+#SmallerD {
+	display: none; 
 }
 
 .ui.menu {
@@ -76,26 +67,19 @@
 	border-left: 0px;
 }
 
-/* if you do this, the search bar is strange */
+.SIObut {
+	margin-left: 3px !important;
+}
 
-@media screen and (max-width: 600px) {
-	#Mobileeee {
-		display: block;
-		/* margin-top: 18px;
-		font-size: 15px;
-		float: left; */
+@media screen and (max-width: 700px) {
+	#Logo {
+		margin-left: 3px;
 	}
-
-	/* .headerWord {
-	display: grid;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-	} */
 
 	#Navbar {
 		display: flex;
 		flex-direction: column;
+		padding-bottom: 43px;
 	}
 
 	#HeaderWord {
@@ -108,5 +92,19 @@
 
 	.ui.button.HeaderBut  {
 		padding-left: 0px;
+	}
+
+	#SignInOut {
+		margin-top: 105px !important;
+		position: fixed;
+		left: 0px;
+	}
+
+	#SmallerD {
+		display: block;
+	}
+
+	#NormalD {
+		display: none;
 	}
 }
