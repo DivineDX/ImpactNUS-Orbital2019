@@ -24,6 +24,7 @@
     padding: 2rem 1rem;
     display: inline-block;
     margin-left: 20px;
+    margin-bottom: 5px;
 }
 
 .pillButton:hover {
@@ -34,7 +35,7 @@
 #GabriellaF {
     font-family: 'Gabriela';
     margin: 0px;
-    font-size: 125px;
+    font-size: 1.5em;
     color: #8f8f8f;
     padding-top: 5px;
 }
@@ -43,7 +44,7 @@
 #FrederickaF {
     font-family: 'Fredericka the Great';
     margin: 0px;
-    font-size: 130px;
+    font-size: 1.55em;
     color: #e78200;
 }
  
@@ -54,5 +55,25 @@
 
 #tagline {
     color: #7e7e7e;
-    font-size: 42px;
+    font-size: 3em;
+}
+
+@media screen and (max-width: 814px) {
+    #FrederickaF {
+        font-size: 1em;
+    }
+    
+    #GabriellaF {
+        font-size: 0.95em;
+    }
+}
+
+@media screen and (max-width: 606px) {
+    #FrederickaF {
+        font-size: 0.75em;
+    }
+    
+    #GabriellaF {
+        font-size: 0.7em;
+    }
 }
