@@ -8,10 +8,6 @@
     background-size: cover;   
 }
 
-.header {
-    font-size: 4rem;
-}
-
 /* f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3 */
 .pillButton {
     font-size: 40px;

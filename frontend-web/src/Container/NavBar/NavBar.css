@@ -8,6 +8,7 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 #Logo {
 	height: 60px;
+	border-bottom: none !important;
 } 
 
 #HeaderWord {
