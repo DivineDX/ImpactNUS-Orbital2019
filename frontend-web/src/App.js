@@ -30,6 +30,7 @@ class App extends Component {
 	}
 
 	componentWillMount() {
+		console.log("Mounting");
 		const jwtToken = new Cookies().get('token');
 		if (jwtToken) {
 			attemptLogin(this.loginUser);

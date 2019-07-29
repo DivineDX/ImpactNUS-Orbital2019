@@ -184,19 +184,22 @@ app.post('/dashboarddata', (req, res) => {
 
 //For Anti-Spam: Limit of 5/Month. Response True = pass spam check
 app.post('/checkStart', (req, res) => {
+    const limit = 5;
     db('pnc')
         .select('date_started')
         .where('organizer_id', '=', req.body.userID)
         .orderBy('date_started', 'desc')
-        .limit(5) //<-- This numbrer is the limit per month
+        .limit(limit) //<-- This numbrer is the limit per month
         .then(data => { //data is an array
             const currTime = Date.now();
             const earliestPast5 = data.slice(-1)[0]; //last element in array
-            if (earliestPast5 === undefined) { //no past started pnc
+            console.log(earliestPast5);
+            if (earliestPast5 === undefined || data.length < limit) { //no past started pnc or did not start more than 5
                 res.json(true);
             } else {
                 const earliestPast5Time = earliestPast5.date_started.getTime();
                 const dayDiff = (currTime - earliestPast5Time) / 86400000; //convert to days
+                console.log(dayDiff);
                 if (dayDiff >= 30) {
                     res.json(true); //can post
                 } else {
