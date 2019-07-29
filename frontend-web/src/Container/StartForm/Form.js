@@ -22,7 +22,6 @@ class StartForm extends Component {
             authFailed: false,
             finished: false,
             loading: true,
-            userID: props.userID,
             id: '',
             currentStep: 1,
             type: '',
@@ -38,13 +37,14 @@ class StartForm extends Component {
     }
 
     componentDidMount() {
-        const { predefinedType, editing, id } = this.props.location.state;
-        this.setState({ type: predefinedType, id: id });
-        if (editing) {
-            this.setState({ canStart: true });
-            this.loadData(id);
-        } else { //checks through anti-spam system
-            this.checkStart();
+        setTimeout(this.checkStart, 1500); //anti-spam
+        if (this.props.location.state !== undefined) {
+            const { predefinedType, editing, id } = this.props.location.state;
+            this.setState({ type: predefinedType, id: id });
+            if (editing) {
+                this.setState({ canStart: true });
+                this.loadData(id);
+            }
         }
     }
 
@@ -53,11 +53,12 @@ class StartForm extends Component {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                userID: this.state.userID,
+                userID: this.props.userID,
             })
         })
             .then(resp => resp.json())
             .then(data => {
+                console.log("Checking start", data);
                 if (data) { //not exceed
                     this.setState({ canStart: true });
                 }
@@ -146,9 +147,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if(data === 'Auth failed') {
-                    this.setState({authFailed: true});
-                }else if (data !== 'Unable to post') {
+                if (data === 'Auth failed') {
+                    this.setState({ authFailed: true });
+                } else if (data !== 'Unable to post') {
                     this.setState({ currentStep: 5, finished: true });
                 }
             })
@@ -173,8 +174,8 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                if(data === 'Auth failed') {
-                    this.setState({authFailed: true});
+                if (data === 'Auth failed') {
+                    this.setState({ authFailed: true });
                 } else if (data === this.state.id) { //success 
                     this.setState({ currentStep: 5, finished: true });
                 }
@@ -190,10 +191,10 @@ class StartForm extends Component {
             </div>
         }
         else if (!this.state.loading && !this.state.canStart) { //cannot start
-            return <ExceedStartLimit/>
+            return <ExceedStartLimit />
         } else if (this.state.authFailed) {
-            return <AuthFailed/>
-        }        
+            return <AuthFailed />
+        }
         else {
             return (	 //acts as a card list here
                 <div id="formContainer" className="flex flex-column items-center mv4">

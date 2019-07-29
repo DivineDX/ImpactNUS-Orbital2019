@@ -15,11 +15,11 @@ const ReasonSupportBulletin = ({ reasonData }) => {
         return (
             <div>
                 <div id='RSB' className=''>
-                    {reasonData.map((data) => {
+                    {reasonData.slice(0, 8).map((data) => { //8 is the maximum number to be displayed
                         return <SupportCard name={data.name} desc={data.poster_description} reason={data.content} date={data.dateposted} anonymity={data.anonymity} />
                     })}
                 </div>
-                <button className="landing-button">See All</button>
+                {/* <button className="landing-button">See All</button> */}
             </div>
 
         );
