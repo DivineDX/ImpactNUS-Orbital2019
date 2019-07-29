@@ -6,14 +6,10 @@
     display: none;
 }
 
-#two:hover ~ hr {
-    margin-left: 25%;
+.seeMore {
+    background-color: #41a3c4 !important;
+    color: white !important;
 }
-  
-#three:hover ~ hr {
-    margin-left: 50%;
-}
-
 
 @media screen and (max-width: 555px) {
     .ui.massive.menu {

@@ -13,6 +13,8 @@
 
 #NormalDisplay {
     float: right;
+    background-color: #41a3c4 !important;
+    color: white !important;
 }
 
 @media screen and (max-width: 846px) {

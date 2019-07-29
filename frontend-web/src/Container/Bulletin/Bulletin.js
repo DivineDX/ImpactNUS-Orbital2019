@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import { Button } from 'semantic-ui-react'
+import './BulletinMenuBar.css';
 
 class Bulletin extends Component {
 	constructor() {
@@ -74,7 +75,7 @@ class Bulletin extends Component {
 
 				{displayedData.slice(0, this.state.visible).map((data) => {
 					return <Card
-						loadedData={data}>
+						loadedData={data}> 
 					</Card>
 				})}
 
@@ -82,7 +83,7 @@ class Bulletin extends Component {
 					<div className='flex justify-center'>
 						<Button
 							onClick={() => this.loadMore()}
-							size='large' color='blue' className='w-40 f5'>
+							size='large' className='w-40 f5 seeMore'> 
 							See More
 						</Button>
 					</div>
