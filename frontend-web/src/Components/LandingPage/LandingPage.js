@@ -92,12 +92,12 @@ class LandingPage extends Component {
                                     <nobr className='tc'>By: <b>{anonymity ? "Anonymous" : name}</b></nobr>
                                     <p id='testtest'>Created on: {DateToString(date_started)}</p>
                                 </div>
-                                <div className='ml0' id='SignButton'>
+                                {/* <div className='ml0' id='SignButton'>
                                     {type === 'petition'
                                         ? <Button id='PetitionBut' color='orange' floated='right' circular>Sign Petition</Button>
                                         : <Button id='CampaignBut' color='orange' floated='right' circular>Support Campaign</Button>
                                     }
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
