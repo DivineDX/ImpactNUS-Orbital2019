@@ -6,6 +6,15 @@
     display: none;
 }
 
+#two:hover ~ hr {
+    margin-left: 25%;
+}
+  
+#three:hover ~ hr {
+    margin-left: 50%;
+}
+
+
 @media screen and (max-width: 555px) {
     .ui.massive.menu {
         font-size: 14px;

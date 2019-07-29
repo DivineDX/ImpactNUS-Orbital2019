@@ -34,11 +34,13 @@ export default class BulletinMenuBar extends Component {
                         name="Recent"
                         active={activeItem === "Recent"}
                         onClick={this.handleItemClick}
+                        id='two'
                     />
                     <Menu.Item
                         name="Victories"
                         active={activeItem === "Victories"}
                         onClick={this.handleItemClick}
+                        id='three'
                     />
 
                     <Dropdown item text='Filter' id ="Og">

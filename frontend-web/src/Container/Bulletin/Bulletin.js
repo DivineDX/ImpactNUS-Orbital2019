@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
-import FollowButton from '../../Components/Buttons/FollowButton';
 import { Button } from 'semantic-ui-react'
 
 class Bulletin extends Component {
@@ -76,7 +75,6 @@ class Bulletin extends Component {
 				{displayedData.slice(0, this.state.visible).map((data) => {
 					return <Card
 						loadedData={data}>
-						<FollowButton />
 					</Card>
 				})}
 
