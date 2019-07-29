@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import FollowButton from '../../Components/Buttons/FollowButton';
-import { DateSort } from '../../Components/DateConverter/DateSort';
 import { Button } from 'semantic-ui-react'
 
 class Bulletin extends Component {
@@ -46,9 +45,9 @@ class Bulletin extends Component {
 
 	selectCategory = (arr, cat) => {
 		if (cat === 'Popular') {
-			return arr.sort((a, b) => b.numSupporters - a.numSupporters);
+			return arr.sort((a, b) => b.currnumsupporters - a.currnumsupporters);
 		} else if (cat === 'Recent') {
-			return arr.sort((a, b) => DateSort(a.date_started, b.date_started));
+			return arr.sort((a, b) => new Date(b.date_started) - new Date(a.date_started));
 		} else if (cat === 'Victories') {
 			return arr.filter(data => data.finished === true);
 		}

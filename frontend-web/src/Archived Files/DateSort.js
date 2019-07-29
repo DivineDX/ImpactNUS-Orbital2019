@@ -1,6 +1,6 @@
 export const DateSort = (dateA, dateB) => {
-    console.log(dateA);
-    console.log(dateB);
+    // console.log(dateA);
+    // console.log(dateB);
     const dateAArray = dateA.slice(0, 10).split('-').map(str => Number(str)); //YY-MM-DD format
     const dateBArray = dateB.slice(0, 10).split('-').map(str => Number(str)); //YY-MM-DD format
 
