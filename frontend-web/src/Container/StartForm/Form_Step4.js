@@ -84,8 +84,8 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
             }
 
             <Button.Group>
-                <Button labelPosition='left' icon='left chevron' onClick={() => navButton(3)} content='Previous' />
-                <Button labelPosition='right' icon='check' onClick={() => onSubmitForm()} content='Confirm and Post' />
+                <Button labelPosition='left' icon='left chevron' onClick={() => navButton(3)} className='formButton' content='Previous' />
+                <Button labelPosition='right' icon='check' onClick={() => onSubmitForm()} className='formButton' content='Confirm and Post' />
             </Button.Group>
         </div>
     );

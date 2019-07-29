@@ -14,6 +14,10 @@ button:disabled {
 	font-family: 'Orbitron';
 }
  
+.formButton {
+    background-color: #41a3c4 !important; 
+    color: white !important;
+}
 
 /* Edit below to standardize how all the input boxes look
 .ui.form .field  {

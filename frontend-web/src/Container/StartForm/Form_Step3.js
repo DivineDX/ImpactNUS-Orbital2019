@@ -53,11 +53,13 @@ const Form_Step3 = ({ navButton, currState }) => (
                             labelPosition='left'
                             icon='left chevron'
                             onClick={() => navButton(2, values)}
+                            className='formButton'
                             content='Previous' />
                         <Button
                             labelPosition='right' icon='right chevron'
                             onClick={handleSubmit}
                             content='Next'
+                            className='formButton'
                             type='submit' />
                     </Button.Group>
                 </Form>

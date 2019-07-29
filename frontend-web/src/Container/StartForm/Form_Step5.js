@@ -8,10 +8,10 @@ const Form_Step5 = ({ type }) => { //final step
             <h3 className='tc f2'>Congrats on your submission!</h3>
             <div>
                 <Link to="/">
-                    <Button circular size='huge' color='green'>Go back to Homepage</Button>
+                    <Button circular size='huge' className='formButton' >Go back to Homepage</Button>
                 </Link>
                 <Link to="/">
-                    <Button circular size='huge' color='orange'>View your {type}</Button>
+                    <Button circular size='huge' className='formButton' >View your {type}</Button>
 
                 </Link>
             </div>

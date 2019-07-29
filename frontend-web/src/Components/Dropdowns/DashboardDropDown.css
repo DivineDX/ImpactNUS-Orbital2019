@@ -9,6 +9,8 @@
 
 #MobileDisplay {
     display: none; 
+    background-color: #41a3c4 !important;
+    color: white !important;
 }
 
 #NormalDisplay {

@@ -53,6 +53,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
                         onClick={handleSubmit}
                         content='Next'
                         type='submit'
+                        className='formButton'
                     />
                 </Form>
             );

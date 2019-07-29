@@ -97,11 +97,14 @@ class Form_Step2 extends Component {
                                     labelPosition='left'
                                     icon='left chevron'
                                     onClick={() => navButton(1, values)}
+                                    className='formButton'
                                     content='Previous' />
+                                    
                                 <Button
                                     labelPosition='right' icon='right chevron'
                                     onClick={handleSubmit}
                                     content='Next'
+                                    className='formButton'
                                     type='submit' />
                             </Button.Group>
                         </Form>
