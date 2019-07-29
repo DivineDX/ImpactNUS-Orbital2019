@@ -53,7 +53,7 @@ class NavBar extends Component {
                         <Menu.Item id='SignInOut'>
                             <div>
                                 {isSignedIn
-                                    ? <i className='underline'>Logged in as {name}</i>
+                                    ? <i className='underline LogInText'>Logged in as {name}</i>
                                     : null
                                 }
 
@@ -83,7 +83,7 @@ class NavBar extends Component {
                                 }
 
                                 {isSignedIn
-                                    ? <i className='underline'>Logged in as {name}</i>
+                                    ? <i className='underline LogInText'>Logged in as {name}</i>
                                     : null
                                 }
                             </div>

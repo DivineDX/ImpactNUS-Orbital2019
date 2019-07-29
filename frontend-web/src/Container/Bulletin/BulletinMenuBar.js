@@ -24,7 +24,7 @@ export default class BulletinMenuBar extends Component {
 
         return (
             <div>
-                <Menu size='massive' pointing secondary id='LineMenu'>
+                <Menu size='massive' pointing secondary>
                     <Menu.Item
                         name="Popular"
                         active={activeItem === "Popular"}
