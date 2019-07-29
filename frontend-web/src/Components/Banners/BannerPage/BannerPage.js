@@ -8,8 +8,8 @@ const BannerPage = ({ isSignedIn }) => {
             <h1 className="fw9 f-headline lh-title mt0 mb3" id='OrbitronF'>
                 ImpactNUS
             </h1>
-            <h2 className="fw5 f1 lh-copy mt0 mb3">
-                Mobilize your peers | Make the difference
+            <h2 className="fw5 f1 lh-copy mt0 mb3 tc">
+                Mobilize your peers | Make the change
             </h2>
             <div>
                 {isSignedIn === false

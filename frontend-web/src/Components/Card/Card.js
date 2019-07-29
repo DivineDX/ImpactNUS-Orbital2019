@@ -45,7 +45,7 @@ const Card = (props) => {
                     <div className="w-20">{props.children}</div>
                 </div>
                 <div id="descriptionWrap">
-                    <p className="i pt3">{sub}</p>
+                    <p className="i pt2">{sub}</p>
                     <p className="b"> Initiated by: {displayedOrganizer}</p>
                     <Progress color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
                     <p>{footer}</p>

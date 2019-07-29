@@ -18,5 +18,6 @@
     #NotOg {
         display: flex;
         padding-top: 13px;
+        background-color: white; 
     }
 }
