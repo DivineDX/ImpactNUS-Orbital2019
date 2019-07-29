@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
+import Logo from '../../Images/Logo.png'; 
 
 //old modal: <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
 class NavBar extends Component {
@@ -24,13 +25,9 @@ class NavBar extends Component {
 
         return (
             <Menu borderless id="Navbar">
-                <Button id='Diagnus'>
-                    <Link to="/" className="link no-underline flex items-center pa2">
-                        <div id="Logo">
-                            ImpactNUS
-                        </div>
-                    </Link>
-                </Button>
+                <Link to="/" className="link no-underline flex items-center pl3">
+                    <img src={Logo} id='Logo' />
+                </Link>
 
                 <div className=" dib flex items-left ">
                     <Menu id='HeaderWord'>

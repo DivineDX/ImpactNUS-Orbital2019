@@ -7,10 +7,8 @@
 
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 #Logo {
-	font-family: 'Orbitron';
-	font-size: 25px;
-	/* color: ; */
-}
+	height: 60px;
+} 
 
 #Diagnus {
 	background-color: white;
