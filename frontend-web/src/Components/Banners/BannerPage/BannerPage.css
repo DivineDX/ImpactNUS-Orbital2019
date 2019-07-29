@@ -14,16 +14,16 @@
 
 /* f3 br-pill bg-dark-green no-underline white ba b--dark-green grow pv3 ph2 dib mr3 */
 .pillButton {
-    font-size: 3em;
+    font-size: 40px;
     border-radius: 4px;
-    background-color: #0067ee;
+    background-color: #41a3c4;
     color: white;
     border-style: solid;
     border-width: 1px;
-    border-color: #0067ee;
+    border-color: #41a3b9;
     padding: 2rem 1rem;
     display: inline-block;
-    margin-right: 1rem;
+    margin-left: 1px;
 }
 
 .pillButton:hover {

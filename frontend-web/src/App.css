@@ -1,5 +1,6 @@
 .body {
     padding-top: 50px;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
 
 button:disabled {
