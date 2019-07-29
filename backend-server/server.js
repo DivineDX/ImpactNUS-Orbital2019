@@ -376,8 +376,8 @@ app.delete('/delete', (req, res) => {
 })
 
 app.delete('/withdrawsupport', (req, res) => {
-    const { id, poster_id, jwtToken } = req.body;
-    const auth = authUser(organizerID, jwtToken);
+    const { id, poster_id, jwtToken} = req.body;
+    const auth = authUser(poster_id, jwtToken);
 
     if (auth) {
         db('support').where({

@@ -30,7 +30,6 @@ const Card = (props) => {
         <div className="avenir card-container shadow-4">
             <Image
                 fluid
-                label={{ as: 'a', color: 'black', content: 'Hotel', icon: 'hotel', ribbon: true }}
                 src={imageurl}
                 onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
                 alt="Error" className="w-100" id="cardImage"
