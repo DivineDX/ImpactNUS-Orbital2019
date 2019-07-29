@@ -11,8 +11,8 @@ const db = knex({
     client: 'pg',
     connection: {
         host: '127.0.0.1',
-        user: '', //change accordingly to your local computer!
-        password: '',
+        user: 'postgres', //change accordingly to your local computer!
+        password: 'test',
         database: 'orbital'
     }
 });
