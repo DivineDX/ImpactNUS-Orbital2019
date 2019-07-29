@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Checkbox, Form, Label } from 'semantic-ui-react'
-import './SupportForm.css';
 import { Formik } from "formik";
 import * as yup from "yup";
 import InputErrorLabel from '../Label/InputErrorLabel';
@@ -13,6 +12,7 @@ class SupportForm extends Component {
             alreadySigned: false,
             anonymity: false,
             authFailed: false,
+            supportWithdrawDone: false,
         }
     }
 
@@ -65,6 +65,29 @@ class SupportForm extends Component {
             .then(data => {
                 if (data === 'Success') {
                     this.setState({ alreadySigned: true });
+                    this.props.refresh();
+                } else if (data === 'Auth failed') {
+                    this.setState({ authFailed: true })
+                } else { //Auth failed
+                    throw new Error(); //unable to support
+                }
+            })
+    }
+
+    withdrawSupport = () => {
+        fetch('http://localhost:3001/withdrawsupport', {
+            method: 'delete',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                id: this.props.id,
+                poster_id: this.props.userID,
+                jwtToken: new Cookies().get('token'),
+            })
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data === 'Success') {
+                    this.setState({supportWithdrawDone: true});
                     this.props.refresh();
                 } else if (data === 'Auth failed') {
                     this.setState({ authFailed: true })
@@ -129,16 +152,26 @@ class SupportForm extends Component {
                             </Form.Field>
 
                             <div className='flex flex-column items-center'>
-                                <button
-                                    className='landing-button'
-                                    type="submit"
-                                    onClick={handleSubmit}
-                                    disabled={this.props.userID === '' || isSubmitting || this.state.alreadySigned || this.state.authFailed}>
-                                    Submit
-                                </button>
                                 {this.state.alreadySigned
-                                    ? <Label basic color='red' pointing>
-                                        You have already signed!
+                                    ? <button
+                                        className='landing-button bg-orange'
+                                        type="submit"
+                                        onClick={() => this.withdrawSupport()}
+                                        >
+                                        Withdraw Support
+                                        </button>
+                                    : <button
+                                        className='landing-button'
+                                        type="submit"
+                                        onClick={handleSubmit}
+                                        disabled={this.props.userID === '' || isSubmitting || this.state.authFailed}>
+                                        Submit
+                                        </button>
+                                }
+
+                                { this.state.supportWithdrawDone
+                                    ?<Label basic color='red' pointing>
+                                        Your support has been withdrawn
                                         </Label>
                                     : null
                                 }
