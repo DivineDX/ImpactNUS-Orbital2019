@@ -11,8 +11,8 @@ const db = knex({
     client: 'pg',
     connection: {
         host: '127.0.0.1',
-        user: 'postgres', //change accordingly to your local computer!
-        password: 'test',
+        user: '', //change accordingly to your local computer!
+        password: '',
         database: 'orbital'
     }
 });
@@ -184,7 +184,7 @@ app.post('/dashboarddata', (req, res) => {
 
 //For Anti-Spam: Limit of 5/Month. Response True = pass spam check
 app.post('/checkStart', (req, res) => {
-    const limit = 5;
+    const limit = 2;
     db('pnc')
         .select('date_started')
         .where('organizer_id', '=', req.body.userID)
@@ -199,7 +199,7 @@ app.post('/checkStart', (req, res) => {
             } else {
                 const earliestPast5Time = earliestPast5.date_started.getTime();
                 const dayDiff = (currTime - earliestPast5Time) / 86400000; //convert to days
-                console.log(dayDiff);
+                // console.log(dayDiff);
                 if (dayDiff >= 30) {
                     res.json(true); //can post
                 } else {
