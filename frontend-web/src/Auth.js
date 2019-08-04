@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export const authUser = (nusNetID) => {
-    fetch('http://fathomless-ocean-65423.herokuapp.com/isAuth', {
+    fetch('http://impactnus-api.herokuapp.com/isAuth', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -27,7 +27,7 @@ export const authUser = (nusNetID) => {
 // }
 
 export const attemptLogin = (login) => { //login is a function
-    fetch('http://fathomless-ocean-65423.herokuapp.com/loginNUS', {
+    fetch('http://impactnus-api.herokuapp.com/loginNUS', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({

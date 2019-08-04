@@ -19,7 +19,7 @@ class Dashboard extends Component {
     }
 
     fetchData() {
-        fetch('http://fathomless-ocean-65423.herokuapp.com/dashboarddata', {
+        fetch('http://impactnus-api.herokuapp.com/dashboarddata', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

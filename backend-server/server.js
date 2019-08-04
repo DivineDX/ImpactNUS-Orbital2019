@@ -62,7 +62,7 @@ const findOrCreate = (profile, func) => {
 }
 
 passport.use(new nusStrategy({
-    returnURL: 'http://fathomless-ocean-65423.herokuapp.com/auth/nus/return', //redirects here
+    returnURL: 'http://impactnus-api.herokuapp.com/auth/nus/return', //redirects here
     realm: 'http://localhost:3000/',
     profile: true,
 },

@@ -27,7 +27,7 @@ class LandingPage extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.setState({ id: id });
-        fetch(`http://fathomless-ocean-65423.herokuapp.com/retrieve/${id}`)
+        fetch(`http://impactnus-api.herokuapp.com/retrieve/${id}`)
             .then(resp => {
                 if (resp.status === 200) { //data is loaded
                     this.setState({ notFound: false });
@@ -38,7 +38,7 @@ class LandingPage extends Component {
                 this.setState({ loadedData: data });
             });
 
-        fetch(`http://fathomless-ocean-65423.herokuapp.com/updatesdata/${id}`)
+        fetch(`http://impactnus-api.herokuapp.com/updatesdata/${id}`)
             .then(resp => {
                 return resp.json();
             })
@@ -50,7 +50,7 @@ class LandingPage extends Component {
     }
 
     fetchSupportData(id) {
-        fetch(`http://fathomless-ocean-65423.herokuapp.com/reasonssupport/${id}`)
+        fetch(`http://impactnus-api.herokuapp.com/reasonssupport/${id}`)
             .then(resp => {
                 return resp.json();
             })
