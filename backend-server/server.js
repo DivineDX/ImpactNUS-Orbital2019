@@ -120,6 +120,9 @@ app.post('/loginNUS', (req, res) => {
     }
 })
 
+app.get('/', (req, res) => {
+    res.send('ImpactNUS Server is working')
+});
 app.get('/retrieveall', (req, res) => { retrieve.getAll(req, res, db) });
 app.get('/retrieve/:id', (req, res) => { retrieve.getOne(req, res, db) });
 app.get('/updatesdata/:id', (req, res) => { retrieve.updates(req, res, db) });
