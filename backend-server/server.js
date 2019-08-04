@@ -63,7 +63,7 @@ const findOrCreate = (profile, func) => {
 
 passport.use(new nusStrategy({
     returnURL: 'http://impactnus-api.herokuapp.com/auth/nus/return', //redirects here
-    realm: 'http://localhost:3000/',
+    realm: 'https://impactnus-api.herokuapp.com/',
     profile: true,
 },
     function (identifier, profile, done) {
@@ -94,7 +94,7 @@ app.get('/auth/nus/return',
             };
             const token = jwt.sign(payload, "secret", { expiresIn: 60 * 60 * 24 }); //modify secret value
             res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
-            res.redirect('http://localhost:3000/');
+            res.redirect('https://impactnus-api.herokuapp.com/');
         })(req, res, next)
     });
 
