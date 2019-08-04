@@ -151,4 +151,4 @@ app.post('/signin', (req, res) => {
         }).catch(err => res.status(400).json('Failed login'))
 });
 
-app.listen(3001); //port number - 3000 is used for our frontend web
+app.listen(process.env.PORT || 3001); //port number - 3000 is used for our frontend web
