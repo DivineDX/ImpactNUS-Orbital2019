@@ -49,7 +49,7 @@ class StartForm extends Component {
     }
 
     checkStart = () => {
-        fetch('http://localhost:3001/checkStart', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/checkStart', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -75,7 +75,7 @@ class StartForm extends Component {
     }
 
     loadData = (id) => { // fetch data to be able to edit later on
-        fetch(`http://localhost:3001/retrieve/${id}`)
+        fetch(`http://fathomless-ocean-65423.herokuapp.com/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
                 this.setState({
@@ -128,7 +128,7 @@ class StartForm extends Component {
     }
 
     submitForm = () => {
-        fetch('http://localhost:3001/submitform', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/submitform', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -156,7 +156,7 @@ class StartForm extends Component {
     }
 
     updateForm = () => {
-        fetch('http://localhost:3001/updateform', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/updateform', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

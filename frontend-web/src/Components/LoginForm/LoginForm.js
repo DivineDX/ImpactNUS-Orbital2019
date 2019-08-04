@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
     }
 
     onSignIn = () => { //modify this after database is coded
-        fetch('http://localhost:3001/signin', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/signin', {
             method: 'post',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

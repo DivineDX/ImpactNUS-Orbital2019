@@ -15,11 +15,15 @@ const support = require('./controllers/support');
 
 const db = knex({
     client: 'pg',
+    // connection: {
+    //     host: '127.0.0.1',
+    //     user: '', //change accordingly to your local computer!
+    //     password: '',
+    //     database: 'orbital'
+    // }
     connection: {
-        host: '127.0.0.1',
-        user: '', //change accordingly to your local computer!
-        password: '',
-        database: 'orbital'
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
     }
 });
 
@@ -58,7 +62,7 @@ const findOrCreate = (profile, func) => {
 }
 
 passport.use(new nusStrategy({
-    returnURL: 'http://localhost:3001/auth/nus/return', //redirects here
+    returnURL: 'http://fathomless-ocean-65423.herokuapp.com/auth/nus/return', //redirects here
     realm: 'http://localhost:3000/',
     profile: true,
 },

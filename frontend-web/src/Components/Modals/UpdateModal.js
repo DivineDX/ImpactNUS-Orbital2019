@@ -13,7 +13,7 @@ class UpdateModal extends Component {
     }
 
     submitUpdate = (values) => { //modify this after database is coded
-        fetch('http://localhost:3001/postupdate', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/postupdate', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

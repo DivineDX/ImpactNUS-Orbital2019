@@ -16,7 +16,7 @@ class Bulletin extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3001/retrieveall")
+		fetch("http://fathomless-ocean-65423.herokuapp.com/retrieveall")
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({

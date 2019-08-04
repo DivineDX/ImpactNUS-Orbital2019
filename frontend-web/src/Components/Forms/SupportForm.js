@@ -21,7 +21,7 @@ class SupportForm extends Component {
     }
 
     checkIfSigned = () => {
-        fetch('http://localhost:3001/checkifsigned', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/checkifsigned', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ class SupportForm extends Component {
     }
 
     submitSupport = (values) => { //modify this after database is coded
-        fetch('http://localhost:3001/signsupport', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/signsupport', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -75,7 +75,7 @@ class SupportForm extends Component {
     }
 
     withdrawSupport = () => {
-        fetch('http://localhost:3001/withdrawsupport', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/withdrawsupport', {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

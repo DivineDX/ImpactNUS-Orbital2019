@@ -12,7 +12,7 @@ class DeleteModal extends Component {
     }
 
     clickDelete = () => { //modify this after database is coded
-        fetch('http://localhost:3001/delete', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/delete', {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

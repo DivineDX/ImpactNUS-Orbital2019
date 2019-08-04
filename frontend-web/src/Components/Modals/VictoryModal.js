@@ -17,7 +17,7 @@ class VictoryModal extends Component {
     }
 
     clickVictory = () => { //modify this after database is coded
-        fetch('http://localhost:3001/victory', {
+        fetch('http://fathomless-ocean-65423.herokuapp.com/victory', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
