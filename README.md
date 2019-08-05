@@ -55,7 +55,7 @@ npm install or yarn install
 
 6. Restore a PostgreSQL database using the ImpactNUS_DB.sql file in this folder. <a href="http://www.postgresqltutorial.com/postgresql-restore-database/">You may follow this guide for reference</a>
 
-7. Ensure that your PostgreSQL server is running. Then, modify lines 10-18 of server.js according to your local PostgresSQL configuration.
+7. Ensure that your PostgreSQL server is running. Then, navigate to ./backend-server/config/database.js and modify lines 6-10 according to your local PostgresSQL configuration.
 
 8. Start the backend server 
 ```sh
