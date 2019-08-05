@@ -15,7 +15,7 @@ const fakeData = [
 		updateTitle: "Update 1: We appreciate the support we are having!",
 		content: "Porta convallis. Integer magna orci, consequat ac nisl vel, tristique dictum sapien. Nam iaculis sit amet sem a porttitor. Cras vestibulum tempor ligula eu vehicula. Nam sed purus augue. Donec non semper arcu.",
 		datePosted: new Date(2019, 6, 30),
-		imageURL: "http://www.rlafoundation.org.sg/Resources/EnrichingLives/Local-and-Overseas-Projects-Main-Page.aspx?width=716&height=475",
+		imageURL: "https://www.rlafoundation.org.sg/Resources/EnrichingLives/Local-and-Overseas-Projects-Main-Page.aspx?width=716&height=475",
 	},
 ]
 class Feed extends Component {

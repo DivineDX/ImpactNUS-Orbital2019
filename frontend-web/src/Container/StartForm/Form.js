@@ -50,7 +50,7 @@ class StartForm extends Component {
     }
 
     checkStart = () => {
-        fetch(`http://${url.fetchURL}/checkStart`, {
+        fetch(`https://${url.fetchURL}/checkStart`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -76,7 +76,7 @@ class StartForm extends Component {
     }
 
     loadData = (id) => { // fetch data to be able to edit later on
-        fetch(`http://${url.fetchURL}/retrieve/${id}`)
+        fetch(`https://${url.fetchURL}/retrieve/${id}`)
             .then(resp => resp.json())
             .then(data => {
                 this.setState({
@@ -129,7 +129,7 @@ class StartForm extends Component {
     }
 
     submitForm = () => {
-        fetch(`http://${url.fetchURL}/submitform`, {
+        fetch(`https://${url.fetchURL}/submitform`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -157,7 +157,7 @@ class StartForm extends Component {
     }
 
     updateForm = () => {
-        fetch(`http://${url.fetchURL}/updateform`, {
+        fetch(`https://${url.fetchURL}/updateform`, {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

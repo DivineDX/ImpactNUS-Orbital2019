@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
     }
 
     onSignIn = () => { //modify this after database is coded
-        fetch(`http://${url.fetchURL}/signin`, {
+        fetch(`https://${url.fetchURL}/signin`, {
             method: 'post',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

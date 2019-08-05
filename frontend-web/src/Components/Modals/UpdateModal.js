@@ -14,7 +14,7 @@ class UpdateModal extends Component {
     }
 
     submitUpdate = (values) => { //modify this after database is coded
-        fetch(`http://${url.fetchURL}/postupdate`, {
+        fetch(`https://${url.fetchURL}/postupdate`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

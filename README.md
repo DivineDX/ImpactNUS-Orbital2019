@@ -1,7 +1,7 @@
 # Project ImpactNUS
 NUS Orbital (CP2106 Independent Software Development Project)<br>
-<i>By Chia De Xun and Phaedra Tan Yee Joo</i>
-
+<i>By Chia De Xun and Phaedra Tan Yee Joo</i><br>
+<b>Demo of App: https://impactnus.herokuapp.com/</b>
 ## Table of contents
 * [General info](#general-info)
 * [Tech Stack](#tech-stack)

@@ -5,7 +5,7 @@ import './LoginPage.css';
 import url from '../../Configs/url';
 
 const LoginPage = (props) => {
-    const hrefURL = `http://${url.fetchURL}/auth/nus`;
+    const hrefURL = `https://${url.fetchURL}/auth/nus`;
     return (
         <div className='' id=''>
             <div className="w-75 pt5 flex flex-column items-center center">

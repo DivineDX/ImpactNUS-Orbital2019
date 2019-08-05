@@ -18,7 +18,7 @@ class VictoryModal extends Component {
     }
 
     clickVictory = () => { //modify this after database is coded
-        fetch(`http://${url.fetchURL}/victory`, {
+        fetch(`https://${url.fetchURL}/victory`, {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
