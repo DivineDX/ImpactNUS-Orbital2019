@@ -1,4 +1,4 @@
-	import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
@@ -16,7 +16,7 @@ import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
 import NonExistentPage from './Container/NonExistentPage/NonExistentPage';
 import ProtectedRoute from './ProtectedRoute';
-import {attemptLogin} from './Auth'; 
+import { attemptLogin } from './Auth';
 import Cookies from 'universal-cookie';
 
 class App extends Component {
@@ -30,8 +30,12 @@ class App extends Component {
 	}
 
 	componentWillMount() {
+		const authTokenStr = new URLSearchParams(window.location.search).get('authToken');
+		if(authTokenStr != null) { //create the JWT Token
+			new Cookies().set('token', authTokenStr, {maxAge: 1209600});
+		}
 		const jwtToken = new Cookies().get('token');
-		if (jwtToken) {
+		if (jwtToken) { //token exists
 			attemptLogin(this.loginUser);
 		}
 	}
@@ -56,7 +60,7 @@ class App extends Component {
 	getUserID = () => {
 		return this.state.userID;
 	}
-	
+
 	render() {
 		const isSignedIn = this.state.isSignedIn;
 		let loginProp =
@@ -65,10 +69,10 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} name = {this.state.name}/>
+					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} name={this.state.name} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser = {this.loginUser}/>} />
+							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" exact component={Bulletin} />
 							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />

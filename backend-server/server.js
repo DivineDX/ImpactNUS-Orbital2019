@@ -82,8 +82,8 @@ app.get('/auth/nus/return',
                 name: user.displayName, //literal full name
             };
             const token = jwt.sign(payload, "secret", { expiresIn: 60 * 60 * 24 }); //modify secret value
-            res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
-            res.redirect(urls.frontendURL);
+            // res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
+            res.redirect(urls.frontendURL + `?authToken=${token}`);
         })(req, res, next)
     });
 
