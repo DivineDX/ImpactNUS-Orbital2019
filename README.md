@@ -51,13 +51,11 @@ npm start or yarn start
 npm install or yarn install
 ```
 
-5. The folder contains a zipped file 'passport-nus-openid.zip'. Extract the contents of this file and replace the folder passport-nus-openid in ./backend-server/node_modules
+5. Restore a PostgreSQL database using the ImpactNUS_DB.sql file in this folder. <a href="http://www.postgresqltutorial.com/postgresql-restore-database/">You may follow this guide for reference</a>
 
-6. Restore a PostgreSQL database using the ImpactNUS_DB.sql file in this folder. <a href="http://www.postgresqltutorial.com/postgresql-restore-database/">You may follow this guide for reference</a>
+6. Ensure that your PostgreSQL server is running. Then, modify lines 10-18 of server.js according to your local PostgresSQL configuration.
 
-7. Ensure that your PostgreSQL server is running. Then, modify lines 10-18 of server.js according to your local PostgresSQL configuration.
-
-8. Start the backend server 
+7. Start the backend server 
 ```sh
 npm start or yarn start
 ```

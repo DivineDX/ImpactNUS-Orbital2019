@@ -22,8 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.18.3",
     "passport": "^0.4.0",
-    "passport-nus-openid": "^0.0.3",
     "passport-openid": "^0.4.0",
+    "passportnext-nus-openid": "^1.0.0",
     "pg": "^7.11.0"
   }
 }

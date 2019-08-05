@@ -1861,11 +1861,6 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
-openid@0.5.x:
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/openid/-/openid-0.5.13.tgz#1b8eb6ca8c7aee6dd6264b69dafb9ad7852c2a4d"
-  integrity sha1-G462yox67m3WJktp2vua14UsKk0=
-
 openid@1.x.x:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/openid/-/openid-1.0.4.tgz#df39012ed525ace3aa1e87da8772e40fbb675462"
@@ -1942,23 +1937,6 @@ pascalcase@^0.1.1:
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
 
-passport-nus-openid@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/passport-nus-openid/-/passport-nus-openid-0.0.3.tgz#bdc9689c2b0e0368c1e7e4522aa812678e7e9d85"
-  integrity sha1-vclonCsOA2jB5+RSKqgSZ45+nYU=
-  dependencies:
-    passport-openid "0.3.x"
-    pkginfo "0.2.x"
-
-passport-openid@0.3.x:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/passport-openid/-/passport-openid-0.3.1.tgz#e64de04859fa51b6529480174122621e08fa22cb"
-  integrity sha1-5k3gSFn6UbZSlIAXQSJiHgj6Iss=
-  dependencies:
-    openid "0.5.x"
-    passport "~0.1.3"
-    pkginfo "0.2.x"
-
 passport-openid@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/passport-openid/-/passport-openid-0.4.0.tgz#c2b58f5ff4a28f285700250712d8ea5677405cd6"
@@ -1980,12 +1958,13 @@ passport@^0.4.0:
     passport-strategy "1.x.x"
     pause "0.0.1"
 
-passport@~0.1.3:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/passport/-/passport-0.1.18.tgz#c8264479dcb6414cadbb66752d12b37e0b6525a1"
-  integrity sha1-yCZEedy2QUytu2Z1LRKzfgtlJaE=
+passportnext-nus-openid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/passportnext-nus-openid/-/passportnext-nus-openid-1.0.0.tgz#a383580f35b1f0aa33f4a5695cb75bc5c3770483"
+  integrity sha512-SIrSz1Bv8ARM8aImOSkan8YmzZgCO6CoTW+D7hAEYTO+++RUA96AtmHVkvodlOTxeP/tppgld1IMK+3Y8REr1A==
   dependencies:
-    pause "0.0.1"
+    "@passport-next/passport" "^3.0.0"
+    "@passport-next/passport-openid" "^1.0.0"
     pkginfo "0.2.x"
 
 path-dirname@^1.0.0:

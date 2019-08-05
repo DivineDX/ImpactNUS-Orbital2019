@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const passport = require('@passport-next/passport');
-const nusStrategy = require('passport-nus-openid').Strategy;
+const nusStrategy = require('passportnext-nus-openid').Strategy;
 const jwt = require('jsonwebtoken');
 
 //imports of controllers
