@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Progress } from 'semantic-ui-react'
+import { Progress } from 'semantic-ui-react'
 import { Markup } from 'interweave';
 import TargetCard from './TargetCard';
 import SupportForm from '../Forms/SupportForm';
@@ -9,6 +9,7 @@ import NonExistentPage from '../../Container/NonExistentPage/NonExistentPage';
 import { DateToString } from '../DateConverter/DateToString';
 import LandingPageHeading from '../Headers/LandingPageHeading';
 import wireframeImage from '../../Images/wireframeImage.png';
+import url from '../../Configs/url';
 import './LandingPage.css';
 
 class LandingPage extends Component {
@@ -27,7 +28,7 @@ class LandingPage extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.setState({ id: id });
-        fetch(`http://impactnus-api.herokuapp.com/retrieve/${id}`)
+        fetch(`http://${url.fetchURL}/retrieve/${id}`)
             .then(resp => {
                 if (resp.status === 200) { //data is loaded
                     this.setState({ notFound: false });
@@ -38,7 +39,7 @@ class LandingPage extends Component {
                 this.setState({ loadedData: data });
             });
 
-        fetch(`http://impactnus-api.herokuapp.com/updatesdata/${id}`)
+        fetch(`http://${url.fetchURL}/updatesdata/${id}`)
             .then(resp => {
                 return resp.json();
             })
@@ -50,7 +51,7 @@ class LandingPage extends Component {
     }
 
     fetchSupportData(id) {
-        fetch(`http://impactnus-api.herokuapp.com/reasonssupport/${id}`)
+        fetch(`http://${url.fetchURL}/reasonssupport/${id}`)
             .then(resp => {
                 return resp.json();
             })

@@ -4,6 +4,7 @@ import DashboardDropDown from '../../Components/Dropdowns/DashboardDropDown';
 import Cookies from 'universal-cookie';
 import AuthFailed from '../NonExistentPage/AuthFailed';
 import EmptyDashboard from '../../Components/EmptyFillers/EmptyDashboard';
+import url from '../../Configs/url';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Dashboard extends Component {
     }
 
     fetchData() {
-        fetch('http://impactnus-api.herokuapp.com/dashboarddata', {
+        fetch(`http://${url.fetchURL}/dashboarddata`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

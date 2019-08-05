@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, Modal} from 'semantic-ui-react';
 import UpdateForm from '../Forms/UpdateForm';
 import Cookies from 'universal-cookie';
+import url from '../../Configs/url';
 
 class UpdateModal extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class UpdateModal extends Component {
     }
 
     submitUpdate = (values) => { //modify this after database is coded
-        fetch('http://impactnus-api.herokuapp.com/postupdate', {
+        fetch(`http://${url.fetchURL}/postupdate`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

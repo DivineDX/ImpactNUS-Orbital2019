@@ -7,7 +7,6 @@ import Logo from '../../Images/Logo.png';
 //old modal: <LoginModal loginProp={loginProp} buttonWord={"Login"} /> //loginUser function
 class NavBar extends Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
     constructor() {
         super()
         this.state = {
@@ -26,7 +25,7 @@ class NavBar extends Component {
         return (
             <Menu borderless id="Navbar">
                 <Link to="/" className="link no-underline flex items-center pl3">
-                    <img src={Logo} id='Logo' />
+                    <img src={Logo} id='Logo' alt = 'logo'/>
                 </Link>
 
                 <div className=" dib flex items-left">

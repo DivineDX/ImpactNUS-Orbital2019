@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
 import Cookies from 'universal-cookie';
+import url from '../../Configs/url';
 
 const keywords = {
     petition: ["Declare Victory", "declare victory", "Victory Declared!"],
@@ -17,7 +18,7 @@ class VictoryModal extends Component {
     }
 
     clickVictory = () => { //modify this after database is coded
-        fetch('http://impactnus-api.herokuapp.com/victory', {
+        fetch(`http://${url.fetchURL}/victory`, {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

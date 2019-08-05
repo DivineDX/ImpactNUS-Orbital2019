@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
+import url from '../../Configs/url';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class LoginForm extends React.Component {
     }
 
     onSignIn = () => { //modify this after database is coded
-        fetch('http://impactnus-api.herokuapp.com/signin', {
+        fetch(`http://${url.fetchURL}/signin`, {
             method: 'post',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

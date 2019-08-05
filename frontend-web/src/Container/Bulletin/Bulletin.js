@@ -3,6 +3,7 @@ import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import { Button } from 'semantic-ui-react'
 import './BulletinMenuBar.css';
+import url from '../../Configs/url';
 
 class Bulletin extends Component {
 	constructor() {
@@ -16,7 +17,7 @@ class Bulletin extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://impactnus-api.herokuapp.com/retrieveall")
+		fetch(`http://${url.fetchURL}/retrieveall`)
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({

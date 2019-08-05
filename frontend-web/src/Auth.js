@@ -1,8 +1,10 @@
 import Cookies from 'universal-cookie';
+import url from './Configs/url';
+
 const cookies = new Cookies();
 
 export const authUser = (nusNetID) => {
-    fetch('http://impactnus-api.herokuapp.com/isAuth', {
+    fetch(`http://${url.fetchURL}/isAuth`, {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -27,7 +29,7 @@ export const authUser = (nusNetID) => {
 // }
 
 export const attemptLogin = (login) => { //login is a function
-    fetch('http://impactnus-api.herokuapp.com/loginNUS', {
+    fetch(`http://${url.fetchURL}/loginNUS`, {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({

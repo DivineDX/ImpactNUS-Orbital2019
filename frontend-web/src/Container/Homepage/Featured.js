@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FeaturedCard from '../../Components/Card/FeaturedCard';
 import './Featured.css'
+import url from '../../Configs/url';
 
 class Featured extends Component {
 	constructor(props) {
@@ -11,7 +12,7 @@ class Featured extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://impactnus-api.herokuapp.com/retrieveall")
+		fetch(`http://${url.fetchURL}/retrieveall`)
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({ displayData: data })

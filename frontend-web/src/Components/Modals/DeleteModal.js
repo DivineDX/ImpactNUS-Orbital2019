@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
 import Cookies from 'universal-cookie';
+import url from '../../Configs/url';
 
 class DeleteModal extends Component {
     constructor() {
@@ -12,7 +13,7 @@ class DeleteModal extends Component {
     }
 
     clickDelete = () => { //modify this after database is coded
-        fetch('http://impactnus-api.herokuapp.com/delete', {
+        fetch(`http://${url.fetchURL}/delete`, {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

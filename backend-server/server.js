@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const knex = require('knex');
 const passport = require('@passport-next/passport');
 const nusStrategy = require('passport-nus-openid').Strategy;
 const jwt = require('jsonwebtoken');
@@ -13,19 +12,9 @@ const dashboard = require('./controllers/dashboard');
 const pncForm = require('./controllers/pncForm');
 const support = require('./controllers/support');
 
-const db = knex({
-    client: 'pg',
-    // connection: {
-    //     host: '127.0.0.1',
-    //     user: '', //change accordingly to your local computer!
-    //     password: '',
-    //     database: 'orbital'
-    // }
-    connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
-    }
-});
+//configs
+const urls = require('./config/urls');
+const db = require('./config/database');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -62,8 +51,8 @@ const findOrCreate = (profile, func) => {
 }
 
 passport.use(new nusStrategy({
-    returnURL: 'http://impactnus-api.herokuapp.com/auth/nus/return', //redirects here
-    realm: 'https://impactnus-api.herokuapp.com/',
+    returnURL: `http://${urls.apiServerURL}/auth/nus/return`,
+    realm: urls.frontendURL,
     profile: true,
 },
     function (identifier, profile, done) {
@@ -94,7 +83,7 @@ app.get('/auth/nus/return',
             };
             const token = jwt.sign(payload, "secret", { expiresIn: 60 * 60 * 24 }); //modify secret value
             res.cookie('token', token, { httpOnly: false /* TODO: Set secure: true */ });
-            res.redirect('https://impactnus-api.herokuapp.com/');
+            res.redirect(urls.frontendURL);
         })(req, res, next)
     });
 
