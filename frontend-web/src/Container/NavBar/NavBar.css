@@ -85,8 +85,8 @@
 
 	#Navbar {
 		display: flex;
-		flex-direction: column;
-		padding-bottom: 43px;
+		flex-direction: row;
+		padding-bottom: 45px;
 	}
 
 	#HeaderWord {
@@ -102,7 +102,7 @@
 	}
 
 	#SignInOut {
-		margin-top: 105px !important;
+		margin-top: 50px !important;
 		position: fixed;
 		left: 0px;
 	}

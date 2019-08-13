@@ -10,7 +10,7 @@ const BannerPage = ({ isSignedIn }) => {
                 <h1 id='FrederickaF'>NUS</h1>
             </div>
             <h2 className="fw5 f1 lh-copy mt0 mb3 tc" id='tagline'>
-                Mobilize your peers | Make the change
+                Be the Change from Within 
             </h2>
             <div>
                 {isSignedIn === false
