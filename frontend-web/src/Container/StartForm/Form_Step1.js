@@ -35,7 +35,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
                     </Form.Field>
 
                     <Form.Field>
-                        <h1>State the title of your petition/campaign</h1>
+                        <h1 className='sizingg'>Title your petition/campaign</h1>
                         <Input
                             type='text'
                             placeholder="Use a simple & concise title that will effectively convey your message"

@@ -57,7 +57,7 @@ class Form_Step2 extends Component {
                             </Form.Field>
 
                             <Form.Field>
-                                <h1 className='sizingg'>State your target number of supporters</h1>
+                                <h1 className='sizingg'>Target number of supporters</h1>
                                 <NumberSlider
                                     min={10}
                                     max={2000}
@@ -77,7 +77,7 @@ class Form_Step2 extends Component {
 
                                 {currType === 'campaign' &&
                                     <div>
-                                        <h1>Select a target end date for your campaign</h1>
+                                        <h1>Target end date for your campaign</h1>
                                         <Flatpickr
                                             options={{ minDate: 'today', maxDate: new Date().fp_incr(365) }}
                                             placeholder="YYYY/MM/DD"

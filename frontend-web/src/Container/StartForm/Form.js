@@ -24,7 +24,7 @@ class StartForm extends Component {
             finished: false,
             loading: true,
             id: '',
-            currentStep: 1,
+            currentStep: 4,
             type: '',
             title: '',
             recipient: [],
@@ -198,10 +198,10 @@ class StartForm extends Component {
         }
         else {
             return (	 //acts as a card list here
-                <div id="formContainer" className="flex flex-column items-center mv4">
+                <div id="formContainer" className="mv4">
                     {!this.state.finished &&
-                        <div className="pb3 pl1">
-                            <MultistepMenu currentStep={this.state.currentStep} />
+                        <div className="pb3 pl1 stepContainer">
+                            <MultistepMenu currentStep={this.state.currentStep}/>
                         </div>}
 
                     <div >

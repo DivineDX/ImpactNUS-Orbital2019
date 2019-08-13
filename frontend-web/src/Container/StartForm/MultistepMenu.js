@@ -30,26 +30,26 @@ export default class MultistepMenu extends Component {
     render() {
         const {currentStep} = this.props;
         return (
-            <Step.Group>
-                <Step active = {currentStep === 1}>
+            <Step.Group unstackable>
+                <Step active = {currentStep === 1} className='stepTitle'>
                     <Icon name='pencil alternate' />
                     <Step.Content>
-                        <Step.Title>State</Step.Title>
+                        <Step.Title >State</Step.Title>
                     </Step.Content>
                 </Step>
-                <Step active = {currentStep === 2}>
+                <Step active = {currentStep === 2} className='stepTitle'>
                     <Icon name='tasks' />
                     <Step.Content>
                         <Step.Title>Specify</Step.Title>
                     </Step.Content>
                 </Step>
-                <Step active = {currentStep === 3}>
+                <Step active = {currentStep === 3} className='stepTitle'>
                     <Icon name='keyboard' />
                     <Step.Content>
                         <Step.Title>Describe</Step.Title>
                     </Step.Content>
                 </Step>
-                <Step active = {currentStep === 4}>
+                <Step active = {currentStep === 4} className='stepTitle'>
                     <Icon name='upload' />
                     <Step.Content>
                         <Step.Title>Preview</Step.Title>
