@@ -12,23 +12,10 @@
     color:  #446CB3;
 }
 
-.ui.progress {
-    margin-top: 0px;
-}
-
-#Signature {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-}
-
 #pageImage {
     height: 350px;
     width: 57%;
     margin-left: 20%
-}
-
-#SignButton {
-    margin-top: 30px;
 }
 
 #PetitionBut, #CampaignBut {
@@ -38,29 +25,10 @@
     float: left;
 }
 
-#Extras {
-    font-size: 1.2em;
-}
-
-#ProgressBar {
-    width: 120%;
-}
-
 #Title {
     margin-bottom: 10px;
     margin-top: 10px;
     font-size: 3em;
-}
-
-#description {
-    width: 30%;
-    margin-left: 20%;
-}
-
-#subHeader {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
 }
 
 #subContainer{
@@ -76,14 +44,12 @@
     margin: 3%;
 }
 
-#SupportForm {
-    padding: 0% 7%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+.ui.progress {
+    margin-bottom: 1em;
 }
 
-/* Desktop Screens */
-@media screen and (max-width: 500px) {
+/* Mobile Screens */
+@media screen and (max-width: 700px) {
     #Title {
         margin: 0px;
         padding: 0px;
@@ -95,21 +61,26 @@
         padding: 0px;
     }
 
-    #subHeader {
-        display: block;
+    #lpBody{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-left: 0%;
+        margin-right: 0%;
+        margin-bottom: 0;
     }
 
     #description {
-        width: 70%;
-        margin-left: 15%;
+        width: 80%;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 
     #bigSection {
-        margin-left: 18%;
+        width: 80%;
     }
     
     #SignButton {
         margin-bottom: 20px;
     }
-
 }

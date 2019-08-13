@@ -33,7 +33,6 @@ class SupportForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log("Support form data", data);
                 if (data === true) { //already signed
                     this.setState({ alreadySigned: true });
                 }

@@ -81,26 +81,26 @@ class LandingPage extends Component {
                         src={imageurl}
                         onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
                         alt="Error" />
-                    <div id="subHeader" className='pv2 flex flex-column'>
-                        <div id="description" className='pa3 mv3 tl'>
+                    <div id="lpBody" className='flex flex-row justify-center mh7 mb4'>
+                        <div id="description" className = 'w-60'>
                             <Markup content={description} />
                         </div>
-                        <div className='mt3 ml4 w-25' id='bigSection'>
-                            <p className="i" id='Signature'>Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b></p>
+
+                        <div className='ml4 w-40' id='bigSection'>
+                            <p className="i f3 fw4">
+                                Signatures: <b id='targNum'>{currnumsupporters}</b> of <b>{targetnumsupporters}</b>
+                            </p>
+
                             <Progress id='ProgressBar' color='teal' size='small' value={currnumsupporters} total={targetnumsupporters} />
                             <div>
-                                <div className='w-60 tl' id='Extras'>
+                                <div className='w-60 tl f4'>
                                     <nobr className='tc'>By: <b>{anonymity ? "Anonymous" : name}</b></nobr>
                                     <p id='testtest'>Created on: {DateToString(date_started)}</p>
                                 </div>
-                                {/* <div className='ml0' id='SignButton'>
-                                    {type === 'petition'
-                                        ? <Button id='PetitionBut' color='orange' floated='right' circular>Sign Petition</Button>
-                                        : <Button id='CampaignBut' color='orange' floated='right' circular>Support Campaign</Button>
-                                    }
-                                </div> */}
                             </div>
                         </div>
+
+
                     </div>
 
                     {type === 'petition' &&
@@ -120,7 +120,7 @@ class LandingPage extends Component {
                         <ReasonSupportBulletin reasonData={this.state.loadedSupportData} />
                     </div>
 
-                    <div id="SupportForm" className='pv3 ph2 bg-washed-green'>
+                    <div id="SupportForm" className='pv3  bg-washed-green'>
                         <LandingPageHeading text={type === 'petition' ? "Sign this petition" : "Support this campaign"} />
                         <SupportForm refresh={this.fetchSupportData.bind(this)} userID={this.props.userID} id={this.state.id} />
                     </div>
