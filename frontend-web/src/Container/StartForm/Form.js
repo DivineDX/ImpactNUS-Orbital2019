@@ -24,7 +24,7 @@ class StartForm extends Component {
             finished: false,
             loading: true,
             id: '',
-            currentStep: 4,
+            currentStep: 1,
             type: '',
             title: '',
             recipient: [],

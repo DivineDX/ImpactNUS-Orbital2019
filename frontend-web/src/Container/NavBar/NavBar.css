@@ -45,7 +45,7 @@
 }
 
 .HeaderBut :hover {
-    color: #4183C4;
+    color: black;
 	cursor: pointer;
 	transform: scale(1.1); 
 } 
@@ -86,7 +86,6 @@
 	#Navbar {
 		display: flex;
 		flex-direction: row;
-		padding-bottom: 45px;
 	}
 
 	#HeaderWord {
@@ -109,9 +108,39 @@
 
 	#SmallerD {
 		display: block;
+		position: fixed;
+		top: 20px;
+		right: 10px;
+		height: 20px;
 	}
 
 	#NormalD {
 		display: none;
+	}
+
+	.SIObut {
+		margin-left: 0px !important;
+		background-color: white !important;
+		color: black !important;
+		font-weight: normal !important;
+		font-size: 16px !important;
+	}
+
+	.DropdownBut {
+		background-color: white !important;
+		transition: all .2s ease-in-out !important; 
+		padding: 0px !important;
+	}
+
+	/* .DropdownBut :hover {
+		color: black !important;
+		cursor: pointer;
+		transform: scale(1.1); 
+	}  */
+	
+	#BulletinFS, #DashboardFS {
+		font-size: 16px;
+		color: black;
+		font-weight: normal !important;
 	}
 }
