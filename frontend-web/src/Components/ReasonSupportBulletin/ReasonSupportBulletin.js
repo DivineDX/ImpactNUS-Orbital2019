@@ -1,29 +1,22 @@
 import React from 'react';
-import SupportCard from './SupportCard';
-import './ReasonSupportBulletin.css';
-import EmptySupportSegment from '../EmptyFillers/EmptySupportSegment';
+import { DateToString } from '../DateConverter/DateToString';
 
-const ReasonSupportBulletin = ({ reasonData }) => {
-    if (reasonData.length === 0) {
-        return (
-            <EmptySupportSegment />
-        );
-    }
+const SupportCard = ({ name, desc, reason, date, anonymity }) => (
+    <article className="w-100 center mh4 mv3 br3 hidden ba b--black-10">
+        <div className="bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+            <h4 className='f4 b'>
+                {anonymity ? "Anoymous" : name}
+            </h4>
+            <p className='i'>{desc}</p>
+        </div>
+        <div className="pa3">
+            <p className="f6 lh-copy">
+                {reason}
+            </p>
+            <p className='i'>{DateToString(date)}</p>
 
-    else {
-        return (
-            <div>
-                <div id='RSB' className=''>
-                    {reasonData.slice(0, 8).map((data) => { //8 is the maximum number to be displayed
-                        return <SupportCard name={data.name} desc={data.poster_description} reason={data.content} date={data.dateposted} anonymity={data.anonymity} />
-                    })}
-                </div>
-                {/* <button className="landing-button">See All</button> */}
-            </div>
+        </div>
+    </article>
+);
 
-        );
-    }
-
-};
-
-export default ReasonSupportBulletin;
+export default SupportCard;

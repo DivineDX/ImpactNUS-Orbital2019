@@ -14,7 +14,6 @@ export const authUser = (nusNetID) => {
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
         }).catch(err => console.log("Cannot check", err));
 }
 
