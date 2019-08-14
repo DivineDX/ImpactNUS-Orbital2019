@@ -200,7 +200,7 @@ class StartForm extends Component {
             return (
                 <div className="mv4 flex flex-column items-center">
                     {!this.state.finished &&
-                        <div className="pb3 pl1">
+                        <div className="pb3">
                             <MultistepMenu currentStep={this.state.currentStep} />
                         </div>}
 

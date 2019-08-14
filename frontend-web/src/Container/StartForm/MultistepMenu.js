@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Step } from 'semantic-ui-react'
+import { Icon, Step, Responsive } from 'semantic-ui-react'
 
 export default class MultistepMenu extends Component {
     constructor(props) {
@@ -28,32 +28,43 @@ export default class MultistepMenu extends Component {
     }
 
     render() {
-        const {currentStep} = this.props;
+        const { currentStep } = this.props;
         return (
             <Step.Group unstackable>
-                <Step active = {currentStep === 1} className='stepTitle'>
+                <Step active={currentStep === 1} className='stepTitle'>
                     <Icon name='pencil alternate' />
-                    <Step.Content>
-                        <Step.Title >State</Step.Title>
-                    </Step.Content>
+                    <Responsive minWidth={700}>
+                        <Step.Content>
+                            <Step.Title>State</Step.Title>
+                        </Step.Content>
+                    </Responsive>
                 </Step>
-                <Step active = {currentStep === 2} className='stepTitle'>
+                <Step active={currentStep === 2} className='stepTitle'>
                     <Icon name='tasks' />
-                    <Step.Content>
-                        <Step.Title>Specify</Step.Title>
-                    </Step.Content>
+                    <Responsive minWidth={700}>
+                        <Step.Content>
+                            <Step.Title>Specify</Step.Title>
+                        </Step.Content>
+                    </Responsive>
+
                 </Step>
-                <Step active = {currentStep === 3} className='stepTitle'>
+                <Step active={currentStep === 3} className='stepTitle'>
                     <Icon name='keyboard' />
-                    <Step.Content>
-                        <Step.Title>Describe</Step.Title>
-                    </Step.Content>
+                    <Responsive minWidth={700}>
+                        <Step.Content>
+                            <Step.Title>Describe</Step.Title>
+                        </Step.Content>
+                    </Responsive>
+
                 </Step>
-                <Step active = {currentStep === 4} className='stepTitle'>
+                <Step active={currentStep === 4} className='stepTitle'>
                     <Icon name='upload' />
-                    <Step.Content>
-                        <Step.Title>Preview</Step.Title>
-                    </Step.Content>
+                    <Responsive minWidth={700}>
+                        <Step.Content>
+                            <Step.Title>Preview</Step.Title>
+                        </Step.Content>
+                    </Responsive>
+
                 </Step>
             </Step.Group>
         );
