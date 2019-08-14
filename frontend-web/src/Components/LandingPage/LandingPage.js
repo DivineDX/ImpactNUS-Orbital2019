@@ -82,7 +82,7 @@ class LandingPage extends Component {
                         onError={(e) => { e.target.onerror = null; e.target.src = wireframeImage }}
                         alt="Error" />
                     <div id="lpBody" className='flex flex-row justify-center mh7 mb4'>
-                        <div id="description" className = 'w-60'>
+                        <div id="description" className='w-60'>
                             <Markup content={description} />
                         </div>
 

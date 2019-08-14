@@ -10,7 +10,7 @@ class NavBar extends Component {
     constructor() {
         super()
         this.state = {
-            activeItem: 'DiagNus',
+            activeItem: '',
         }
     }
 

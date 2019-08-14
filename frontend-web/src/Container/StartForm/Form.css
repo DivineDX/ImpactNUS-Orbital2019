@@ -10,7 +10,7 @@
 } */
 
 .sizingg {
-    width: 80rem !important;
+    width: 50rem !important;
 }
 
 #HeaderNote {
@@ -19,7 +19,6 @@
 
 .textEditorFix {
     word-wrap: break-word;
-    width: 60rem;
 }
 
 #formContainer {

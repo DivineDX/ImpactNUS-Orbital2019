@@ -1,22 +1,27 @@
 import React from 'react';
-import { DateToString } from '../DateConverter/DateToString';
+import SupportCard from './SupportCard';
+import './ReasonSupportBulletin.css';
+import EmptySupportSegment from '../EmptyFillers/EmptySupportSegment';
 
-const SupportCard = ({ name, desc, reason, date, anonymity }) => (
-    <article className="w-100 center mh4 mv3 br3 hidden ba b--black-10">
-        <div className="bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-            <h4 className='f4 b'>
-                {anonymity ? "Anoymous" : name}
-            </h4>
-            <p className='i'>{desc}</p>
-        </div>
-        <div className="pa3">
-            <p className="f6 lh-copy">
-                {reason}
-            </p>
-            <p className='i'>{DateToString(date)}</p>
+const ReasonSupportBulletin = ({ reasonData }) => {
+    if (reasonData.length === 0) {
+        return (
+            <EmptySupportSegment />
+        );
+    }
 
-        </div>
-    </article>
-);
+    else {
+        return (
+            <div>
+                <div id='RSB' className=''>
+                    {reasonData.slice(0, 8).map((data) => {
+                        //8 is the maximum number to be displayed
+                        return <SupportCard name={data.name} desc={data.poster_description} reason={data.content} date={data.dateposted} anonymity={data.anonymity} />
+                    })}
+                </div>
+            </div>
+        );
+    }
+};
 
-export default SupportCard;
+export default ReasonSupportBulletin;
