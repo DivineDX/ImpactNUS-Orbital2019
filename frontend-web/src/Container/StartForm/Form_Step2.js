@@ -45,7 +45,7 @@ class Form_Step2 extends Component {
                     return (
                         <Form size='huge'>
                             <Form.Field >
-                                <h1 className='sizingg'>{target}</h1>
+                                <h1 className='f2'>{target}</h1>
                                 <Input
                                     type='text'
                                     name="recipient"
@@ -57,7 +57,7 @@ class Form_Step2 extends Component {
                             </Form.Field>
 
                             <Form.Field>
-                                <h1 className='sizingg'>Target number of supporters</h1>
+                                <h1 className='f2'>Target number of supporters</h1>
                                 <NumberSlider
                                     min={10}
                                     max={2000}
@@ -77,7 +77,7 @@ class Form_Step2 extends Component {
 
                                 {currType === 'campaign' &&
                                     <div>
-                                        <h1>Target end date for your campaign</h1>
+                                        <h1 className='f2'>Target end date for your campaign</h1>
                                         <Flatpickr
                                             options={{ minDate: 'today', maxDate: new Date().fp_incr(365) }}
                                             placeholder="YYYY/MM/DD"
@@ -99,7 +99,7 @@ class Form_Step2 extends Component {
                                     onClick={() => navButton(1, values)}
                                     className='formButton'
                                     content='Previous' />
-                                    
+
                                 <Button
                                     labelPosition='right' icon='right chevron'
                                     onClick={handleSubmit}

@@ -197,14 +197,14 @@ class StartForm extends Component {
             return <AuthFailed />
         }
         else {
-            return (	 //acts as a card list here
-                <div id="formContainer" className="mv4">
+            return (
+                <div className="mv4 flex flex-column items-center">
                     {!this.state.finished &&
-                        <div className="pb3 pl1 stepContainer">
-                            <MultistepMenu currentStep={this.state.currentStep}/>
+                        <div className="pb3 pl1">
+                            <MultistepMenu currentStep={this.state.currentStep} />
                         </div>}
 
-                    <div >
+                    <div id="formContainer">
                         {this.state.currentStep === 1 &&
                             <FormStep1
                                 navButton={this.changeStep}

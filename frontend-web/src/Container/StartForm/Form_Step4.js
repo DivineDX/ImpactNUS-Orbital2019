@@ -10,7 +10,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
 
     return (
         <div>
-            <h1 id='HeaderNote'>Please confirm your {currType} details</h1>
+            <h1 className='f2'>Please confirm your {currType} details</h1>
             {currType === 'petition' &&
                 <Segment.Group>
                     <Segment attached>

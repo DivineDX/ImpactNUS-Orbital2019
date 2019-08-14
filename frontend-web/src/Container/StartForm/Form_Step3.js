@@ -24,7 +24,7 @@ const Form_Step3 = ({ navButton, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field>
-                        <h1 className='sizingg'>Image (Optional but highly recommended)</h1>
+                        <h1 className='f2'>Image (Optional but highly recommended)</h1>
                         <Input
                             type='text'
                             placeholder="Link to an image hosting site"
@@ -37,7 +37,7 @@ const Form_Step3 = ({ navButton, currState }) => (
                     </Form.Field>
 
                     <Form.Field >
-                        <h1 className='sizingg'>Detailed description of your {currState.type}</h1>
+                        <h1 className='f2'>Detailed description of your {currState.type}</h1>
                         <div className="field" rows="3">
                             <TextEditor
                                 placeholder="Tell your story..."
@@ -45,7 +45,7 @@ const Form_Step3 = ({ navButton, currState }) => (
                                 onChange={e => setFieldValue('description', e)}
                                 value={values.description}
                             />
-                        </div>      
+                        </div>
                     </Form.Field>
 
                     <Button.Group>

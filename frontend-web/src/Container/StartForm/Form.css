@@ -1,78 +1,19 @@
-/* :root {
-    --spacing-none: 0;
-    --spacing-extra-small: .25rem;
-    --spacing-small: .5rem;
-    --spacing-medium: 1rem;
-    --spacing-large: 2rem;
-    --spacing-extra-large: 4rem;
-    --spacing-extra-extra-large: 8rem;
-    --spacing-extra-extra-extra-large: 16rem;
-} */
-
-.sizingg {
-    width: 50rem !important;
-}
-
-#HeaderNote {
-    font-size: 40px;
-}
-
 .textEditorFix {
     word-wrap: break-word;
 }
 
 #formContainer {
-    display: flex !important; 
-    flex-direction: column !important; 
-    align-items: center !important;
+    width: 50%;
 }
+
 
 /* Mobile screens */
 @media only screen and (max-width: 700px) {
-    .sizingg {  
-        width: 20rem !important;
-        white-space: nowrap !important;
-        display: flex;
-        align-items: center;
-    }
-
-    .stepContainer {
-        display: flex;
-        margin-top: 10px;
+    #formContainer {
+        width: 90%;
     }
 
     .stepTitle {
         padding: 16px !important; 
     }
-
-    h1 { 
-        font-size: 30px !important; 
-    }
-
-    #formContainer {
-        margin-top: 10px;
-    }
-
-    /* #formContainer {
-        height: 700px;
-        display: flex;
-        flex-direction: row;
-        margin-top: 16rem;
-        margin-bottom: 4rem;
-    }
-
-    #stepContainer {
-        width: 20%;
-        margin-right: 5rem;
-    }
-
-    #inputContainer {
-        width: 80%;
-    } */
 }
-
-/* @media only screen and (max-width: 700px) {
-    #formContainer {
-        margin-top: 10px;
-    }
-} */

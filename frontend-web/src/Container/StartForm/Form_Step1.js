@@ -24,7 +24,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
             return (
                 <Form size='huge'>
                     <Form.Field >
-                        <h1 className='sizingg'>State your option</h1>
+                        <h1 className = 'f2'>State your option</h1>
                         <Button.Group size='massive' >
                             <Button disabled={currState.isEditing} toggle active={currState.type === 'petition'} onClick={() => toggleType('petition')}>
                                 Petition
@@ -35,7 +35,7 @@ const Form_Step1 = ({ navButton, toggleType, currState }) => (
                     </Form.Field>
 
                     <Form.Field>
-                        <h1 className='sizingg'>Title your petition/campaign</h1>
+                        <h1 className = 'f2'>Title your petition/campaign</h1>
                         <Input
                             type='text'
                             placeholder="Use a simple & concise title that will effectively convey your message"
