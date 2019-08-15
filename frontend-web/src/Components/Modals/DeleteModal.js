@@ -13,7 +13,7 @@ class DeleteModal extends Component {
     }
 
     clickDelete = () => { //modify this after database is coded
-        fetch(`http://${url.fetchURL}/delete`, {
+        fetch(`https://${url.fetchURL}/delete`, {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

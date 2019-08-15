@@ -30,8 +30,12 @@ class App extends Component {
 	}
 
 	componentWillMount() {
+		const authTokenStr = new URLSearchParams(window.location.search).get('authToken');
+		if(authTokenStr != null) { //create the JWT Token
+			new Cookies().set('token', authTokenStr, {maxAge: 1209600});
+		}
 		const jwtToken = new Cookies().get('token');
-		if (jwtToken) {
+		if (jwtToken) { //token exists
 			attemptLogin(this.loginUser);
 		}
 	}

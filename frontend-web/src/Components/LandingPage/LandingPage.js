@@ -28,7 +28,7 @@ class LandingPage extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.setState({ id: id });
-        fetch(`http://${url.fetchURL}/retrieve/${id}`)
+        fetch(`https://${url.fetchURL}/retrieve/${id}`)
             .then(resp => {
                 if (resp.status === 200) { //data is loaded
                     this.setState({ notFound: false });
@@ -39,7 +39,7 @@ class LandingPage extends Component {
                 this.setState({ loadedData: data });
             });
 
-        fetch(`http://${url.fetchURL}/updatesdata/${id}`)
+        fetch(`https://${url.fetchURL}/updatesdata/${id}`)
             .then(resp => {
                 return resp.json();
             })
@@ -51,7 +51,7 @@ class LandingPage extends Component {
     }
 
     fetchSupportData(id) {
-        fetch(`http://${url.fetchURL}/reasonssupport/${id}`)
+        fetch(`https://${url.fetchURL}/reasonssupport/${id}`)
             .then(resp => {
                 return resp.json();
             })
