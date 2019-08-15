@@ -4,7 +4,7 @@ import url from './Configs/url';
 const cookies = new Cookies();
 
 export const authUser = (nusNetID) => {
-    fetch(`https://${url.fetchURL}/isAuth`, {
+    fetch(`${url.fetchURL}/isAuth`, {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -28,7 +28,7 @@ export const authUser = (nusNetID) => {
 // }
 
 export const attemptLogin = (login) => { //login is a function
-    fetch(`https://${url.fetchURL}/loginNUS`, {
+    fetch(`${url.fetchURL}/loginNUS`, {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({

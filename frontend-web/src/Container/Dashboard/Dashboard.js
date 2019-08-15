@@ -21,7 +21,7 @@ class Dashboard extends Component {
     }
 
     fetchData() {
-        fetch(`https://${url.fetchURL}/dashboarddata`, {
+        fetch(`${url.fetchURL}/dashboarddata`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

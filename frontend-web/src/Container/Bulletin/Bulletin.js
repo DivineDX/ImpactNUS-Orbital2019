@@ -18,7 +18,7 @@ class Bulletin extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`https://${url.fetchURL}/retrieveall`)
+		fetch(`${url.fetchURL}/retrieveall`)
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({

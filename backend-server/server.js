@@ -51,7 +51,7 @@ const findOrCreate = (profile, func) => {
 }
 
 passport.use(new nusStrategy({
-    returnURL: `https://${urls.apiServerURL}/auth/nus/return`,
+    returnURL: `${urls.apiServerURL}/auth/nus/return`,
     realm: urls.frontendURL,
     profile: true,
 },

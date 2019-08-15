@@ -22,7 +22,7 @@ class SupportForm extends Component {
     }
 
     checkIfSigned = () => {
-        fetch(`https://${url.fetchURL}/checkifsigned`, {
+        fetch(`${url.fetchURL}/checkifsigned`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ class SupportForm extends Component {
     }
 
     submitSupport = (values) => { //modify this after database is coded
-        fetch(`https://${url.fetchURL}/signsupport`, {
+        fetch(`${url.fetchURL}/signsupport`, {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -75,7 +75,7 @@ class SupportForm extends Component {
     }
 
     withdrawSupport = () => {
-        fetch(`https://${url.fetchURL}/withdrawsupport`, {
+        fetch(`${url.fetchURL}/withdrawsupport`, {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

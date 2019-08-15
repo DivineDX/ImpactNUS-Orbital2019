@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
-// import Footer from './Container/Footer/Footer';
 import LoginPage from './Container/LoginPage/LoginPage';
 import Bulletin from './Container/Bulletin/Bulletin';
 import Dashboard from './Container/Dashboard/Dashboard';
@@ -77,7 +76,6 @@ class App extends Component {
 							<Route path="/bulletin" exact component={Bulletin} />
 							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />
 							<ProtectedRoute path="/feed" component={Feed} isSignedIn={isSignedIn} />
-							{/* <Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} />} /> */}
 							<ProtectedRoute path="/startform" component={Form} isEditing={false} userID={this.state.userID} isSignedIn={isSignedIn}/>
 							<Route path="/about" component={About} />
 							<Route path="/howitworks" component={HowItWorks} />
@@ -87,7 +85,6 @@ class App extends Component {
 							<Route path="*" component={NonExistentPage} />
 						</Switch>
 					</div>
-					{/* <Footer/> */}
 				</div>
 			</BrowserRouter>
 		);
