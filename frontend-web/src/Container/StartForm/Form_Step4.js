@@ -42,7 +42,7 @@ const Form_Step4 = ({ navButton, currState, onSubmitForm }) => {
 
                     <Segment attached>
                         <h2>Description</h2>
-                        <p className='textEditorFix'>{descHTML}</p>
+                        <div className='textEditorFix'>{descHTML}</div>
                     </Segment>
                 </Segment.Group>
             }

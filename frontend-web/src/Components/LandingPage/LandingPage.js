@@ -71,7 +71,7 @@ class LandingPage extends Component {
             )
         } else {
             return (
-                <article id='landingPage' className=''>
+                <article id='landingPage'>
                     <div className="pv3">
                         <h1 className='f2 tc' id='Title'> {title}</h1>
                     </div>

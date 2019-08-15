@@ -9,9 +9,6 @@ class Homepage extends Component {
         return ( //acts as a card list here
             <div>
                 <BannerPage isSignedIn = {isSignedIn}/>
-                {/* <BannerPage2/> */}
-                {/* <Featured/> */}
-                {/* <Footer/> */}
             </div>
         );
     }

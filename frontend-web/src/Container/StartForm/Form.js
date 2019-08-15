@@ -148,11 +148,9 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => { //id of completed petition/campaign
-                console.log("Data received after submission", data);
                 if (data === 'Auth failed') {
                     this.setState({ authFailed: true });
                 } else if (data !== 'Unable to post') {
-                    console.log("Submitted!");
                     this.setState({ currentStep: 5, finished: true, completedID: data });
                 }
             })

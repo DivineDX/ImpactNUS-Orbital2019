@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import shortid from 'shortid';
 import {DateToString} from '../DateConverter/DateToString';
 import EmptyUpdates from '../EmptyFillers/EmptyUpdates';
 
@@ -21,7 +22,7 @@ const UpdatesSlider = ({ updateData }) => {
                 className = 'ma2'
             >
                 {updateData.map((data) => {
-                    return <div className = 'mb2'>
+                    return <div className = 'mb2' key = {shortid.generate()}>
                         <p className = 'f4 b'>{data.title}</p>
                         <p>{data.content}</p>
                         <p className = 'i'>{DateToString(data.dateposted)}</p>

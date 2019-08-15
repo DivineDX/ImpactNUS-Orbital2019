@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
 import { Button } from 'semantic-ui-react'
+import shortid from 'shortid';
 import './BulletinMenuBar.css';
 import url from '../../Configs/url';
 
@@ -76,6 +77,7 @@ class Bulletin extends Component {
 
 				{displayedData.slice(0, this.state.visible).map((data) => {
 					return <Card
+						key = {shortid.generate()}
 						loadedData={data}> 
 					</Card>
 				})}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shortid from 'shortid';
 import Card from '../../Components/Card/Card';
 import DashboardDropDown from '../../Components/Dropdowns/DashboardDropDown';
 import Cookies from 'universal-cookie';
@@ -55,6 +56,7 @@ class Dashboard extends Component {
 
                 {this.state.displayedData.map((data) => {
                     return <Card
+                        key = {shortid.generate()}
                         loadedData={data}
                     >
                         <DashboardDropDown
