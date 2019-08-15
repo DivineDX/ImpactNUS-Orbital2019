@@ -34,6 +34,7 @@ class StartForm extends Component {
             // tags: [],
             description: RichTextEditor.createEmptyValue(),
             imageURL: '',
+            completedID: '0',
         }
     }
 
@@ -59,7 +60,6 @@ class StartForm extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log("Checking start", data);
                 if (data) { //not exceed
                     this.setState({ canStart: true });
                 }
@@ -147,11 +147,13 @@ class StartForm extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(data => {
+            .then(data => { //id of completed petition/campaign
+                console.log("Data received after submission", data);
                 if (data === 'Auth failed') {
                     this.setState({ authFailed: true });
                 } else if (data !== 'Unable to post') {
-                    this.setState({ currentStep: 5, finished: true });
+                    console.log("Submitted!");
+                    this.setState({ currentStep: 5, finished: true, completedID: data });
                 }
             })
     }
@@ -178,7 +180,7 @@ class StartForm extends Component {
                 if (data === 'Auth failed') {
                     this.setState({ authFailed: true });
                 } else if (data === this.state.id) { //success 
-                    this.setState({ currentStep: 5, finished: true });
+                    this.setState({ currentStep: 5, finished: true, completedID: data });
                 }
             }).catch(err => {
                 alert('Form submission failed');
@@ -233,7 +235,9 @@ class StartForm extends Component {
                             />}
                         {this.state.finished && //all steps completed
                             <FormStep5
+                                update = {this.state.isEditing}
                                 type={this.state.type}
+                                completedID = {this.state.completedID}
                             />}
                     </div>
                 </div>

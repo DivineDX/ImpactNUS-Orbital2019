@@ -15,7 +15,6 @@ class NavBar extends Component {
     }
 
     onSearchChange(event) {
-        console.log(event);
     }
 
     render() {
@@ -86,13 +85,13 @@ class NavBar extends Component {
                             </Button>
                         </Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item classname='tl'>
+                        <Dropdown.Item className='tl'>
                             {isSignedIn
                                 ? <i className='LogInText'> {name}</i>
                                 : null
                             }
                         </Dropdown.Item>
-                        <Dropdown.Item classname='tl'>
+                        <Dropdown.Item className='tl'>
                             {isSignedIn === false //conditional
                                 ? <Link to="/login">
                                     <Button className="SIObut DropdownBut">Login</Button>
