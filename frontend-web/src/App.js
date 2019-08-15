@@ -1,4 +1,4 @@
-	import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import NavBar from './Container/NavBar/NavBar';
@@ -16,7 +16,7 @@ import Form from './Container/StartForm/Form';
 import LandingPage from './Components/LandingPage/LandingPage';
 import NonExistentPage from './Container/NonExistentPage/NonExistentPage';
 import ProtectedRoute from './ProtectedRoute';
-import {attemptLogin} from './Auth'; 
+import { attemptLogin } from './Auth';
 import Cookies from 'universal-cookie';
 
 class App extends Component {
@@ -56,7 +56,7 @@ class App extends Component {
 	getUserID = () => {
 		return this.state.userID;
 	}
-	
+
 	render() {
 		const isSignedIn = this.state.isSignedIn;
 		let loginProp =
@@ -65,15 +65,16 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} name = {this.state.name}/>
+					<NavBar loginProp={loginProp} isSignedIn={isSignedIn} name={this.state.name} />
 					<div className="body">
 						<Switch>
-							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser = {this.loginUser}/>} />
+							<Route path="/" exact render={(props) => <Homepage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/login" exact render={(props) => <LoginPage {...props} isSignedIn={isSignedIn} loginUser={this.loginUser} />} />
 							<Route path="/bulletin" exact component={Bulletin} />
 							<ProtectedRoute path="/dashboard" component={Dashboard} userID={this.state.userID} isSignedIn={isSignedIn} />
 							<ProtectedRoute path="/feed" component={Feed} isSignedIn={isSignedIn} />
-							<Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} />} />
+							{/* <Route path="/startform" render={(props) => <Form {...props} isEditing={false} userID={this.state.userID} />} /> */}
+							<ProtectedRoute path="/startform" component={Form} isEditing={false} userID={this.state.userID} isSignedIn={isSignedIn}/>
 							<Route path="/about" component={About} />
 							<Route path="/howitworks" component={HowItWorks} />
 							<Route path="/faq" component={FAQ} />
