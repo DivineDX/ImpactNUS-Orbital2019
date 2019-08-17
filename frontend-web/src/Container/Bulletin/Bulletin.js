@@ -84,7 +84,7 @@ class Bulletin extends Component {
 
 				{displayedData.slice(0, this.state.visible).map((data) => {
 					return <Card
-						key = {shortid.generate()}
+						key = {data.title + data.date_started}
 						loadedData={data}> 
 					</Card>
 				})}
