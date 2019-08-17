@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from '../../Components/Card/Card';
 import BulletinMenuBar from './BulletinMenuBar';
+import LoadingSubComp from '../../Components/Loader/LoadingSubComp';
 import { Button } from 'semantic-ui-react'
 import shortid from 'shortid';
 import './BulletinMenuBar.css';
@@ -14,6 +15,7 @@ class Bulletin extends Component {
 			category: 'Popular', //Popular, Recent and Victories
 			origData: [],
 			visible: 3,
+			loading: true,
 		}
 	}
 
@@ -23,6 +25,7 @@ class Bulletin extends Component {
 			.then(data => {
 				this.setState({
 					origData: data,
+					loading: false,
 				});
 			}).catch(error => {
 				console.log(error);
@@ -74,6 +77,10 @@ class Bulletin extends Component {
 						handleCategoryClick={this.handleCategoryClick}
 					/>
 				</div>
+
+				{
+					this.state.loading && <LoadingSubComp/>
+				}
 
 				{displayedData.slice(0, this.state.visible).map((data) => {
 					return <Card

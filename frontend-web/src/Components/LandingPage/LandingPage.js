@@ -11,6 +11,7 @@ import LandingPageHeading from '../Headers/LandingPageHeading';
 import wireframeImage from '../../Images/wireframeImage.png';
 import url from '../../Configs/url';
 import './LandingPage.css';
+import Loading from '../Loader/Loading';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class LandingPage extends Component {
             loadedData: {},
             loadedUpdateData: [],
             loadedSupportData: [],
+            loading: true,
         }
     }
 
@@ -36,7 +38,7 @@ class LandingPage extends Component {
                 return resp.json();
             })
             .then(data => {
-                this.setState({ loadedData: data });
+                this.setState({ loadedData: data, loading: false });
             });
 
         fetch(`${url.fetchURL}/updatesdata/${id}`)
@@ -65,7 +67,14 @@ class LandingPage extends Component {
     render() {
         //unused consts: date-end, tags, numFollowing, finished
         const { type, title, recipient, name, anonymity, date_started, description, imageurl, targetnumsupporters, currnumsupporters } = this.state.loadedData;
-        if (this.state.notFound) {
+
+        if (this.state.loading) {
+            return (
+                <div className='mt7'>
+                    <Loading />
+                </div>
+            )
+        } else if (this.state.notFound) {
             return (
                 <NonExistentPage />
             )

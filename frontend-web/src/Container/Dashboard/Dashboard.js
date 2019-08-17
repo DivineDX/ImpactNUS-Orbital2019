@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import AuthFailed from '../NonExistentPage/AuthFailed';
 import EmptyDashboard from '../../Components/EmptyFillers/EmptyDashboard';
 import url from '../../Configs/url';
+import Loading from '../../Components/Loader/Loading';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Dashboard extends Component {
         this.state = {
             displayedData: [],
             authFailed: false,
+            loading: true,
         }
     }
 
@@ -34,7 +36,7 @@ class Dashboard extends Component {
                 if (data === 'Auth failed') {
                     this.setState({ authFailed: true })
                 } else {
-                    this.setState({ displayedData: data });
+                    this.setState({ displayedData: data, loading: false });
                 }
             });
     }
@@ -44,6 +46,14 @@ class Dashboard extends Component {
             return (
                 <AuthFailed />
             )
+        }
+
+        else if (this.state.loading) {
+            return (
+                <div className='mt7'>
+                    <Loading />
+                </div>
+            );
         }
         else if (this.state.displayedData.length === 0) {
             return (<EmptyDashboard />);
@@ -56,7 +66,7 @@ class Dashboard extends Component {
 
                 {this.state.displayedData.map((data) => {
                     return <Card
-                        key = {shortid.generate()}
+                        key={shortid.generate()}
                         loadedData={data}
                     >
                         <DashboardDropDown
