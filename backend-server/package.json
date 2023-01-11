@@ -20,7 +20,7 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.19.5",
+    "knex": "^2.4.0",
     "passport": "^0.4.0",
     "passport-openid": "^0.4.0",
     "passportnext-nus-openid": "^1.0.0",
